@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pushing Capital — Data Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #080c14;
+    --surface: #0f1520;
+    --surface2: #151d2e;
+    --border: rgba(255,255,255,0.07);
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --purple: #8b5cf6;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+  header {
+    padding: 2rem 2.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 0.75rem; }
+  .logo-mark {
+    width: 36px; height: 36px; background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem; color: white;
+  }
+  .logo-text { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; }
+  .header-meta { font-size: 0.75rem; color: var(--muted); }
+
+  .stats-bar {
+    display: flex; gap: 1.5rem; padding: 1.25rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .stat {
+    display: flex; flex-direction: column; gap: 0.2rem; min-width: fit-content;
+  }
+  .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+  .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .main { padding: 2rem 2.5rem; display: flex; flex-direction: column; gap: 2rem; }
+
+  .domain {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .domain:hover { border-color: rgba(59,130,246,0.3); }
+
+  .domain-header {
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .domain-icon { font-size: 1.1rem; }
+  .domain-name { font-weight: 600; font-size: 0.9rem; flex: 1; }
+  .domain-count {
+    font-size: 0.75rem; color: var(--muted);
+    background: var(--surface2); padding: 0.2rem 0.6rem; border-radius: 999px;
+  }
+  .domain-total {
+    font-size: 0.8rem; font-weight: 600;
+  }
+
+  .table-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px; background: var(--border);
+  }
+  .table-cell {
+    background: var(--surface); padding: 0.8rem 1rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+    transition: background 0.15s;
+  }
+  .table-cell:hover { background: var(--surface2); }
+  .table-name { font-size: 0.75rem; color: var(--muted); font-family: monospace; }
+  .table-rows { font-size: 1rem; font-weight: 600; }
+  .table-rows.empty { color: var(--muted); font-weight: 400; }
+  .table-rows.small { color: var(--text); }
+  .table-rows.medium { color: var(--accent2); }
+  .table-rows.large { color: var(--green); }
+  .table-rows.huge { color: var(--yellow); }
+
+  .source-badge {
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.15rem 0.4rem; border-radius: 3px; width: fit-content;
+  }
+  .source-d1 { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .source-ops { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .source-bq { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .source-vm { background: rgba(16,185,129,0.15); color: #34d399; }
+
+  .system-cards {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+  }
+  .system-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .system-header { display: flex; align-items: center; gap: 0.6rem; }
+  .system-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-live { background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .dot-ready { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .dot-external { background: var(--yellow); }
+  .system-name { font-weight: 600; font-size: 0.85rem; }
+  .system-meta { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+  .system-stats { display: flex; gap: 1rem; }
+  .sys-stat { display: flex; flex-direction: column; gap: 0.1rem; }
+  .sys-stat-val { font-size: 0.9rem; font-weight: 600; }
+  .sys-stat-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; }
+
+  h2 { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">P</div>
+    <div>
+      <div style="font-weight:700;font-size:1rem;">Pushing Capital</div>
+      <div class="logo-text">Data Map</div>
+    </div>
+  </div>
+  <div class="header-meta">Generated April 8, 2026 · pc_core@127.0.0.1:5432</div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val">180</div><div class="stat-label">Total Tables</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--green)">55,861</div><div class="stat-label">D1 Rows (migrated)</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--accent)">12</div><div class="stat-label">Ops Schemas (empty, ready)</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--yellow)">263</div><div class="stat-label">API Endpoints (live CRM)</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--purple)">25</div><div class="stat-label">GitHub Repos</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--accent2)">4</div><div class="stat-label">RunPod Endpoints</div></div>
+</div>
+
+<div class="main">
+
+  <div>
+    <h2>Systems</h2>
+    <div class="system-cards">
+      <div class="system-card">
+        <div class="system-header"><div class="system-dot dot-live"></div><div class="system-name">Postgres — pc_core</div></div>
+        <div class="system-meta">127.0.0.1:5432 · pc_admin · Docker<br>Single source of truth. All D1 data migrated here.</div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--green)">180</div><div class="sys-stat-label">Tables</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--green)">55K+</div><div class="sys-stat-label">Rows</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--green)">Live</div><div class="sys-stat-label">Status</div></div>
+        </div>
+      </div>
+      <div class="system-card">
+        <div class="system-header"><div class="system-dot dot-live"></div><div class="system-name">platform.pushingcap.com</div></div>
+        <div class="system-meta">FastAPI + Vite · pcrm-api on VM<br>263 endpoints · SQLite security.db · needs migration</div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--yellow)">26</div><div class="sys-stat-label">Modules</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--yellow)">263</div><div class="sys-stat-label">Endpoints</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--green)">Live</div><div class="sys-stat-label">Status</div></div>
+        </div>
+      </div>
+      <div class="system-card" style="grid-column: span 2;">
+        <div class="system-header"><div class="system-dot dot-external"></div><div class="system-name">Brain — brain-481809 / GCP Org: pushingcap.com</div></div>
+        <div class="system-meta">
+          <strong style="color:var(--text)">identity:</strong> BRAIN · pc-id-shared · coo-agent-uploader · autoparts-brain · erudite-wind-486406-r4 &nbsp;|&nbsp;
+          <strong style="color:var(--text)">brain-prod:</strong> pushingcapintegrations &nbsp;|&nbsp;
+          <strong style="color:var(--text)">platform:</strong> gen-lang-client-0419470766 (hubspot) · manny-backup-20250804 &nbsp;|&nbsp;
+          <strong style="color:var(--text)">archive:</strong> credit-monitoring · pushingcap-webhooks · gmail-automations · pushing-capital-automation &nbsp;|&nbsp;
+          <strong style="color:var(--text)">loose:</strong> exec-assistant-084195 · gen-lang-client-0398962416 · pushing-capital-platform
+        </div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--accent2)">16</div><div class="sys-stat-label">GCP Projects</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--accent2)">30+</div><div class="sys-stat-label">Artifact Sets</div></div>
+          <div class="sys-stat"><div class="sys-stat-val">∞</div><div class="sys-stat-label">BQ Queryable</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--yellow)">Pending Auth</div><div class="sys-stat-label">Status</div></div>
+        </div>
+      </div>
+      <div class="system-card">
+        <div class="system-header"><div class="system-dot dot-external"></div><div class="system-name">Google Drive</div></div>
+        <div class="system-meta">manny@pushingcap.com · documents, exports, shared files<br>Not yet inventoried — contents unknown</div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--muted)">?</div><div class="sys-stat-label">Files</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--muted)">Pending</div><div class="sys-stat-label">Status</div></div>
+        </div>
+      </div>
+      <div class="system-card">
+        <div class="system-header"><div class="system-dot dot-external"></div><div class="system-name">NotebookLM</div></div>
+        <div class="system-meta">Google NotebookLM · US region · 2 notebooks<br>Research, documents, source analysis — not yet synced</div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--accent2)">2</div><div class="sys-stat-label">Notebooks</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--yellow)">US</div><div class="sys-stat-label">Region</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--muted)">Pending</div><div class="sys-stat-label">Status</div></div>
+        </div>
+      </div>
+      <div class="system-card">
+        <div class="system-header"><div class="system-dot dot-external"></div><div class="system-name">Wasabi S3</div></div>
+        <div class="system-meta">corp-data-gold · LanceDB vectors (enterprise_knowledge, legacy_history)<br>system_artifacts · bronze document storage</div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--accent2)">5</div><div class="sys-stat-label">Tables</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--green)">Live</div><div class="sys-stat-label">Status</div></div>
+        </div>
+      </div>
+      <div class="system-card">
+        <div class="system-header"><div class="system-dot dot-ready"></div><div class="system-name">RunPod Fleet</div></div>
+        <div class="system-meta">4 serverless endpoints · $0.43/hr burn<br>amateur_amber_wolverine (8 min workers!) · pc-reasoning-v1</div>
+        <div class="system-stats">
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--accent)">4</div><div class="sys-stat-label">Endpoints</div></div>
+          <div class="sys-stat"><div class="sys-stat-val" style="color:var(--red)">$14.50</div><div class="sys-stat-label">Balance</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Data Domains</h2>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+
+      <!-- People & Contacts -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">👥</span>
+          <span class="domain-name">People & Contacts</span>
+          <span class="domain-count">7 tables</span>
+          <span class="domain-total" style="color:var(--accent2)">9,816 rows</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_contact_profiles</div><div class="table-rows medium">208</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_hubspot_contacts</div><div class="table-rows small">6</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_contacts</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_deal_participants</div><div class="table-rows small">3</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_personnel_nodes</div><div class="table-rows small">4</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_relationship_intelligence</div><div class="table-rows small">6</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">party (ops)</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+        </div>
+      </div>
+
+      <!-- Deals & Finance -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">💰</span>
+          <span class="domain-name">Deals & Finance</span>
+          <span class="domain-count">10 tables</span>
+          <span class="domain-total" style="color:var(--green)">2,885 rows</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_commitments</div><div class="table-rows large">2,599</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_obligations</div><div class="table-rows small">380</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_financing_deals</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_deal_flows</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_finance_products</div><div class="table-rows small">28</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_finance_service_categories</div><div class="table-rows small">7</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_credit_applications</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_underwriting_calculations</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_programs</div><div class="table-rows medium">256</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_loan_types</div><div class="table-rows small">10</div><span class="source-badge source-d1">d1</span></div>
+        </div>
+      </div>
+
+      <!-- Communications -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">💬</span>
+          <span class="domain-name">Communications</span>
+          <span class="domain-count">5 tables</span>
+          <span class="domain-total" style="color:var(--huge)">16,467 rows</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_message_history</div><div class="table-rows large">9,237</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_message_sync</div><div class="table-rows large">5,200</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_wispr_transcripts</div><div class="table-rows medium">1,015</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_agent_mailbox</div><div class="table-rows small">3</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_mesh_mailbox</div><div class="table-rows small">20</div><span class="source-badge source-d1">d1</span></div>
+        </div>
+      </div>
+
+      <!-- AI / Knowledge -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">🧠</span>
+          <span class="domain-name">AI & Knowledge</span>
+          <span class="domain-count">10 tables</span>
+          <span class="domain-total" style="color:var(--yellow)">18,014 rows</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_memory_context</div><div class="table-rows huge">9,573</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_truth_log</div><div class="table-rows large">8,091</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_knowledge_documents</div><div class="table-rows medium">239</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_memory</div><div class="table-rows small">67</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_llm_entity_registry</div><div class="table-rows small">13</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_llm_relationship_map</div><div class="table-rows small">10</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_llm_business_knowledge</div><div class="table-rows small">4</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_llm_technical_knowledge</div><div class="table-rows small">6</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_llm_context_rules</div><div class="table-rows small">4</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_golden_records</div><div class="table-rows small">2</div><span class="source-badge source-d1">d1</span></div>
+        </div>
+      </div>
+
+      <!-- Events & Orchestration -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">⚡</span>
+          <span class="domain-name">Events & Orchestration</span>
+          <span class="domain-count">8 tables</span>
+          <span class="domain-total" style="color:var(--yellow)">17,539 rows</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_event_stream</div><div class="table-rows huge">15,445</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_workflow_micro_steps</div><div class="table-rows medium">1,665</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_orchestration_log</div><div class="table-rows small">159</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_orchestrator_hands</div><div class="table-rows small">47</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_workflow_definitions</div><div class="table-rows small">11</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_agent_tasks</div><div class="table-rows small">104</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_automation_log</div><div class="table-rows small">53</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_audit_log</div><div class="table-rows small">324</div><span class="source-badge source-d1">d1</span></div>
+        </div>
+      </div>
+
+      <!-- Vehicles -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">🚗</span>
+          <span class="domain-name">Vehicles & Assets</span>
+          <span class="domain-count">6 tables</span>
+          <span class="domain-total" style="color:var(--muted)">22 rows + ops ready</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_vehicle_profiles</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_vehicle_profiles_extended</div><div class="table-rows small">1</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_fleet_nodes</div><div class="table-rows small">13</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_fleet_bootstrap_assets</div><div class="table-rows small">10</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">asset_vehicle (ops)</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+          <div class="table-cell"><div class="table-name">inspection_session (ops)</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+        </div>
+      </div>
+
+      <!-- Infrastructure -->
+      <div class="domain">
+        <div class="domain-header">
+          <span class="domain-icon">🖥️</span>
+          <span class="domain-name">Infrastructure & RunPod</span>
+          <span class="domain-count">8 tables</span>
+          <span class="domain-total" style="color:var(--accent)">ops ready</span>
+        </div>
+        <div class="table-grid">
+          <div class="table-cell"><div class="table-name">d1_fleet_commands</div><div class="table-rows small">61</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_fleet_status</div><div class="table-rows small">3</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_tailscale_nodes</div><div class="table-rows small">3</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">d1_mesh_registry</div><div class="table-rows small">62</div><span class="source-badge source-d1">d1</span></div>
+          <div class="table-cell"><div class="table-name">semantic_learning_jobs</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+          <div class="table-cell"><div class="table-name">agent_tasks</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+          <div class="table-cell"><div class="table-name">pod_health_snapshots</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+          <div class="table-cell"><div class="table-name">cost_guard_events</div><div class="table-rows empty">0 — ready</div><span class="source-badge source-ops">ops</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
