@@ -1,0 +1,252 @@
+{
+  "ticket_id": "235912606402",
+  "subject": "Workflow: Transport phases \u2192 Tickets + Tasks",
+  "obj": "tickets",
+  "generated_at": "2026-04-03",
+  "intent": "Prepare exact PCRM property payloads for the transport workflow-design anchor ticket without applying them live yet.",
+  "record_snapshot": {
+    "current_priority": "MEDIUM",
+    "current_stage": "1",
+    "current_content": "Translate the transport phases doc into a ticket-driven execution workflow in HubSpot.\n\nai_memory: https://app-na2.hubspot.com/contacts/242835887/record/2-223170801/236664282811"
+  },
+  "safe_now_updates": [
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "issue_priority_level",
+        "value": "p2_high"
+      },
+      "why": "This is a core workflow-design anchor for the transport lane."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "ticket_type",
+        "value": "platform_support"
+      },
+      "why": "The ticket is about internal platform workflow translation, not a customer complaint or payment dispute."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "tkt_service_line",
+        "value": "vehicle_transport"
+      },
+      "why": "Primary service line is transport."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "tkt_category",
+        "value": "change_request"
+      },
+      "why": "This ticket requests a system/workflow design change."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "tkt_subcategory",
+        "value": "vt_dispatch"
+      },
+      "why": "Closest current schema option to the transport phase-routing problem."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "tkt_source",
+        "value": "internal"
+      },
+      "why": "This design anchor is internal operator work."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "tkt_impact",
+        "value": "high"
+      },
+      "why": "Transport routing affects downstream task/ticket orchestration and fulfillment."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "tkt_urgency",
+        "value": "high"
+      },
+      "why": "This is a high-leverage workflow-definition ticket."
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "content",
+        "value": "Translate the transport phases doc into a ticket-driven execution workflow in HubSpot.\n\nai_memory: https://app-na2.hubspot.com/contacts/242835887/record/2-223170801/236664282811\n\n---\nPCRM PROPERTY ATTACHMENT v1\nprimary_domain=automotive_operations\nprimary_lane=transport_logistics\nworkflow_role=workflow_design_anchor\ncontrol_plane_class=task_ticket_pipeline_translation\nbusiness_tier=core_automotive\nprimary_worker_profile=pushingcap_orchestrator\nsecondary_worker_profiles=google_run_brain_ingestion|pushingcap_sick_memory_dude|postman_api|ops_health|google_run_pc_paygate_bridge|bigquery_memory_hub|bigquery_schema_warehouse|bigquery_message_backfill\nautomation_family=transport_workflow_design\nautomation_units=transport_intake_normalization|transport_phase_to_ticket_translation|transport_task_spawn_from_phase|transport_quote_and_authorization_gate|transport_carrier_assignment_gate|transport_dispatch_platform_sync|transport_bol_document_capture|transport_gps_or_location_update|transport_delivery_confirmation|transport_payout_closeout|transport_memory_writeback|transport_exception_repair\nexternal_platforms=central_dispatch|super_dispatch|google_maps|gps_location|sms|email|document_storage|payments\nbusiness_dependencies=car_sales|dmv|inspections|parts|finance|taxes|subcontractor_ops|payments\ndata_support_workers=bigquery_memory_hub|bigquery_schema_warehouse|bigquery_message_backfill|bigquery_customer_dossiers|bigquery_deal_dossiers|bigquery_message_associations\ndata_support_programs=talk_to_p_bigquery_client|p_tools_impl_query_bigquery|mdm_query_gold|mdm_demo_gold_report|pc_credit_processor_parser|pc_credit_analytics_parser\nsource_of_truth_docs=pushing_capital_products_services_context_2026-03-10.md|Pushing_Capital_Book_REDESIGNED.md|Pushing_Capital_All_README_Files.md|pushing_transport_workflow_pipeline_spec.md|pushing_transport_bundle_contract.md|transport_end_to_end_map.md\nmemory_priority=high\nmini_deliverable_count=10"
+      },
+      "why": "Stores the granular worker, automation, platform, and business-context labels immediately using a real existing property."
+    }
+  ],
+  "needs_new_schema_property_defs": [
+    {
+      "object": "tickets",
+      "property_name": "pc_primary_worker_profile",
+      "property_label": "PC Primary Worker Profile",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "text",
+      "description": "Primary worker owner for this ticket's orchestration."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_secondary_worker_profiles",
+      "property_label": "PC Secondary Worker Profiles",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "textarea",
+      "description": "Pipe-separated or JSON list of secondary worker profiles involved."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_automation_family",
+      "property_label": "PC Automation Family",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "text",
+      "description": "Canonical automation family for this ticket."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_automation_units",
+      "property_label": "PC Automation Units",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "textarea",
+      "description": "Granular automation slices or mini deliverables for this ticket."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_external_platforms",
+      "property_label": "PC External Platforms",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "textarea",
+      "description": "External software or platforms this ticket depends on."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_business_dependencies",
+      "property_label": "PC Business Dependencies",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "textarea",
+      "description": "Cross-lane business dependencies such as sales, finance, taxes, DMV, and parts."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_data_support_programs",
+      "property_label": "PC Data Support Programs",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "textarea",
+      "description": "Parser, checker, or BigQuery support programs for the ticket."
+    },
+    {
+      "object": "tickets",
+      "property_name": "pc_source_of_truth_docs",
+      "property_label": "PC Source Of Truth Docs",
+      "property_group": "pc_control_plane",
+      "property_type": "string",
+      "field_type": "textarea",
+      "description": "Important doctrine and business-plan documents grounding this ticket."
+    }
+  ],
+  "future_updates_after_schema": [
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_primary_worker_profile",
+        "value": "pushingcap_orchestrator"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_secondary_worker_profiles",
+        "value": "google_run_brain_ingestion|pushingcap_sick_memory_dude|postman_api|ops_health|google_run_pc_paygate_bridge|bigquery_memory_hub|bigquery_schema_warehouse|bigquery_message_backfill"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_automation_family",
+        "value": "transport_workflow_design"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_automation_units",
+        "value": "transport_intake_normalization|transport_phase_to_ticket_translation|transport_task_spawn_from_phase|transport_quote_and_authorization_gate|transport_carrier_assignment_gate|transport_dispatch_platform_sync|transport_bol_document_capture|transport_gps_or_location_update|transport_delivery_confirmation|transport_payout_closeout|transport_memory_writeback|transport_exception_repair"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_external_platforms",
+        "value": "central_dispatch|super_dispatch|google_maps|gps_location|sms|email|document_storage|payments"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_business_dependencies",
+        "value": "car_sales|dmv|inspections|parts|finance|taxes|subcontractor_ops|payments"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_data_support_programs",
+        "value": "talk_to_p_bigquery_client|p_tools_impl_query_bigquery|mdm_query_gold|mdm_demo_gold_report|pc_credit_processor_parser|pc_credit_analytics_parser"
+      }
+    },
+    {
+      "tool": "pcrm_update_record",
+      "args": {
+        "obj": "tickets",
+        "id": "235912606402",
+        "field": "pc_source_of_truth_docs",
+        "value": "pushing_capital_products_services_context_2026-03-10.md|Pushing_Capital_Book_REDESIGNED.md|Pushing_Capital_All_README_Files.md|pushing_transport_workflow_pipeline_spec.md|pushing_transport_bundle_contract.md|transport_end_to_end_map.md"
+      }
+    }
+  ]
+}

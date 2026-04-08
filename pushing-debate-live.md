@@ -1,0 +1,3643 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - img "PCRM logo" [ref=e6]
+    - generic [ref=e7]: Pushing Capital A relations management platform
+    - generic [ref=e8]:
+      - text: Signed in as
+      - strong [ref=e9]: manny
+    - generic [ref=e10]:
+      - generic [ref=e11]: Primary Surfaces
+      - link "The Whiteboard Command center" [ref=e12] [cursor=pointer]:
+        - /url: "#/whiteboard"
+        - generic [ref=e13]: The Whiteboard
+        - generic [ref=e14]: Command center
+      - link "Tasks" [ref=e15] [cursor=pointer]:
+        - /url: "#/whiteboard/tasks"
+      - link "Chat" [ref=e16] [cursor=pointer]:
+        - /url: "#/whiteboard/chat"
+      - link "Orchestration Execution grid" [ref=e17] [cursor=pointer]:
+        - /url: "#/orchestration"
+        - generic [ref=e18]: Orchestration
+        - generic [ref=e19]: Execution grid
+      - link "Assets Multimedia Creative + governed media" [ref=e20] [cursor=pointer]:
+        - /url: "#/asset-library"
+        - generic [ref=e21]: Assets Multimedia
+        - generic [ref=e22]: Creative + governed media
+      - link "Postman API catalog" [ref=e23] [cursor=pointer]:
+        - /url: "#/postman"
+        - generic [ref=e24]: Postman
+        - generic [ref=e25]: API catalog
+      - link "Actions Agent command lane" [ref=e26] [cursor=pointer]:
+        - /url: "#/actions"
+        - generic [ref=e27]: Actions
+        - generic [ref=e28]: Agent command lane
+      - link "AGENTS A2A CHATBOX Live worker bus" [ref=e29] [cursor=pointer]:
+        - /url: "#/agents-a2a"
+        - generic [ref=e30]: AGENTS A2A CHATBOX
+        - generic [ref=e31]: Live worker bus
+      - link "Workflow Studio Pipelines, stages, logic" [ref=e32] [cursor=pointer]:
+        - /url: "#/workflow-studio"
+        - generic [ref=e33]: Workflow Studio
+        - generic [ref=e34]: Pipelines, stages, logic
+      - link "PushingDebate Studio Idea, debate, visual learning" [ref=e35] [cursor=pointer]:
+        - /url: "#/pushing-debate-studio"
+        - generic [ref=e36]: PushingDebate Studio
+        - generic [ref=e37]: Idea, debate, visual learning
+    - navigation [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]: Relationship Core
+        - generic [ref=e43]: People, companies, and live deals.
+        - generic [ref=e44]:
+          - link "Contacts Client identities, owners, and relationship anchors." [ref=e45] [cursor=pointer]:
+            - /url: "#/contacts"
+            - generic [ref=e46]: Contacts
+            - generic [ref=e47]: Client identities, owners, and relationship anchors.
+          - link "Companies Business entities, ownership context, and associated records." [ref=e48] [cursor=pointer]:
+            - /url: "#/companies"
+            - generic [ref=e49]: Companies
+            - generic [ref=e50]: Business entities, ownership context, and associated records.
+          - link "Deals Live cases, revenue, stage, and attached execution." [ref=e51] [cursor=pointer]:
+            - /url: "#/deals"
+            - generic [ref=e52]: Deals
+            - generic [ref=e53]: Live cases, revenue, stage, and attached execution.
+          - link "Desired Vehicles Client demand, sourcing intent, and target inventory." [ref=e54] [cursor=pointer]:
+            - /url: "#/desired_vehicles"
+            - generic [ref=e55]: Desired Vehicles
+            - generic [ref=e56]: Client demand, sourcing intent, and target inventory.
+      - generic [ref=e57]:
+        - generic [ref=e58]: Automotive Ops
+        - generic [ref=e59]: Assets, inspections, parts, transport, and field execution.
+        - generic [ref=e60]:
+          - link "Vehicles Vehicle truth, inspections, and asset-state records." [ref=e61] [cursor=pointer]:
+            - /url: "#/p242835887_vehicles"
+            - generic [ref=e62]: Vehicles
+            - generic [ref=e63]: Vehicle truth, inspections, and asset-state records.
+          - link "Vehicle Inspections Inspection evidence, issues, and mechanical truth." [ref=e64] [cursor=pointer]:
+            - /url: "#/p242835887_vehicle_inspections"
+            - generic [ref=e65]: Vehicle Inspections
+            - generic [ref=e66]: Inspection evidence, issues, and mechanical truth.
+          - link "Transport Carrier routing, delivery state, and movement logistics." [ref=e67] [cursor=pointer]:
+            - /url: "#/p242835887_transport"
+            - generic [ref=e68]: Transport
+            - generic [ref=e69]: Carrier routing, delivery state, and movement logistics.
+          - link "Service Requests Execution requests that bridge client need to field work." [ref=e70] [cursor=pointer]:
+            - /url: "#/p242835887_service_requests"
+            - generic [ref=e71]: Service Requests
+            - generic [ref=e72]: Execution requests that bridge client need to field work.
+          - link "Subcontractor Job Assigned external work, state, and evidence of completion." [ref=e73] [cursor=pointer]:
+            - /url: "#/p242835887_subcontractor_job"
+            - generic [ref=e74]: Subcontractor Job
+            - generic [ref=e75]: Assigned external work, state, and evidence of completion.
+          - link "Subcontractors Verified operators and vendor execution records." [ref=e76] [cursor=pointer]:
+            - /url: "#/p242835887_subcontractors"
+            - generic [ref=e77]: Subcontractors
+            - generic [ref=e78]: Verified operators and vendor execution records.
+          - link "Inspection Items Assets, inspections, parts, transport, and field execution." [ref=e79] [cursor=pointer]:
+            - /url: "#/p242835887_inspection_items"
+            - generic [ref=e80]: Inspection Items
+            - generic [ref=e81]: Assets, inspections, parts, transport, and field execution.
+          - link "Part Types Assets, inspections, parts, transport, and field execution." [ref=e82] [cursor=pointer]:
+            - /url: "#/p242835887_part_types"
+            - generic [ref=e83]: Part Types
+            - generic [ref=e84]: Assets, inspections, parts, transport, and field execution.
+          - link "Parttype Relationships Assets, inspections, parts, transport, and field execution." [ref=e85] [cursor=pointer]:
+            - /url: "#/p242835887_parttype_relationships"
+            - generic [ref=e86]: Parttype Relationships
+            - generic [ref=e87]: Assets, inspections, parts, transport, and field execution.
+          - link "Skus Assets, inspections, parts, transport, and field execution." [ref=e88] [cursor=pointer]:
+            - /url: "#/p242835887_skus"
+            - generic [ref=e89]: Skus
+            - generic [ref=e90]: Assets, inspections, parts, transport, and field execution.
+          - link "Sku Assets Assets, inspections, parts, transport, and field execution." [ref=e91] [cursor=pointer]:
+            - /url: "#/p242835887_sku_assets"
+            - generic [ref=e92]: Sku Assets
+            - generic [ref=e93]: Assets, inspections, parts, transport, and field execution.
+          - link "Sku Attributes Assets, inspections, parts, transport, and field execution." [ref=e94] [cursor=pointer]:
+            - /url: "#/p242835887_sku_attributes"
+            - generic [ref=e95]: Sku Attributes
+            - generic [ref=e96]: Assets, inspections, parts, transport, and field execution.
+          - link "Brands Assets, inspections, parts, transport, and field execution." [ref=e97] [cursor=pointer]:
+            - /url: "#/p242835887_brands"
+            - generic [ref=e98]: Brands
+            - generic [ref=e99]: Assets, inspections, parts, transport, and field execution.
+      - generic [ref=e100]:
+        - generic [ref=e101]: Financial Intelligence
+        - generic [ref=e102]: Credit, income, payout, and lender-facing paper.
+        - generic [ref=e103]:
+          - link "Financial Profiles Income, liabilities, DTI, and lender-facing readiness." [ref=e104] [cursor=pointer]:
+            - /url: "#/p242835887_financial_profiles"
+            - generic [ref=e105]: Financial Profiles
+            - generic [ref=e106]: Income, liabilities, DTI, and lender-facing readiness.
+          - link "Credit Reports Credit pulls, bureau state, and supporting evidence." [ref=e107] [cursor=pointer]:
+            - /url: "#/p242835887_credit_reports"
+            - generic [ref=e108]: Credit Reports
+            - generic [ref=e109]: Credit pulls, bureau state, and supporting evidence.
+          - link "Credit Tradelines Tradeline-level exposure and repayment history." [ref=e110] [cursor=pointer]:
+            - /url: "#/p242835887_credit_tradelines"
+            - generic [ref=e111]: Credit Tradelines
+            - generic [ref=e112]: Tradeline-level exposure and repayment history.
+          - link "Credit Inspections Credit review findings and qualification context." [ref=e113] [cursor=pointer]:
+            - /url: "#/p242835887_credit_inspections"
+            - generic [ref=e114]: Credit Inspections
+            - generic [ref=e115]: Credit review findings and qualification context.
+          - link "Payouts Money movement, disposition, and partner settlement state." [ref=e116] [cursor=pointer]:
+            - /url: "#/p242835887_payouts"
+            - generic [ref=e117]: Payouts
+            - generic [ref=e118]: Money movement, disposition, and partner settlement state.
+      - generic [ref=e119]:
+        - generic [ref=e120]: Communications
+        - generic [ref=e121]: Calls, email, notes, meetings, and commercial objects.
+        - generic [ref=e122]:
+          - link "Calls Calls, email, notes, meetings, and commercial objects." [ref=e123] [cursor=pointer]:
+            - /url: "#/calls"
+            - generic [ref=e124]: Calls
+            - generic [ref=e125]: Calls, email, notes, meetings, and commercial objects.
+          - link "Emails Calls, email, notes, meetings, and commercial objects." [ref=e126] [cursor=pointer]:
+            - /url: "#/emails"
+            - generic [ref=e127]: Emails
+            - generic [ref=e128]: Calls, email, notes, meetings, and commercial objects.
+          - link "Meetings Calls, email, notes, meetings, and commercial objects." [ref=e129] [cursor=pointer]:
+            - /url: "#/meetings"
+            - generic [ref=e130]: Meetings
+            - generic [ref=e131]: Calls, email, notes, meetings, and commercial objects.
+          - link "Notes Calls, email, notes, meetings, and commercial objects." [ref=e132] [cursor=pointer]:
+            - /url: "#/notes"
+            - generic [ref=e133]: Notes
+            - generic [ref=e134]: Calls, email, notes, meetings, and commercial objects.
+          - link "Line Items Calls, email, notes, meetings, and commercial objects." [ref=e135] [cursor=pointer]:
+            - /url: "#/line_items"
+            - generic [ref=e136]: Line Items
+            - generic [ref=e137]: Calls, email, notes, meetings, and commercial objects.
+          - link "Products Calls, email, notes, meetings, and commercial objects." [ref=e138] [cursor=pointer]:
+            - /url: "#/products"
+            - generic [ref=e139]: Products
+            - generic [ref=e140]: Calls, email, notes, meetings, and commercial objects.
+          - link "Quotes Calls, email, notes, meetings, and commercial objects." [ref=e141] [cursor=pointer]:
+            - /url: "#/quotes"
+            - generic [ref=e142]: Quotes
+            - generic [ref=e143]: Calls, email, notes, meetings, and commercial objects.
+          - link "Tasks Calls, email, notes, meetings, and commercial objects." [ref=e144] [cursor=pointer]:
+            - /url: "#/tasks"
+            - generic [ref=e145]: Tasks
+            - generic [ref=e146]: Calls, email, notes, meetings, and commercial objects.
+          - link "Tickets Calls, email, notes, meetings, and commercial objects." [ref=e147] [cursor=pointer]:
+            - /url: "#/tickets"
+            - generic [ref=e148]: Tickets
+            - generic [ref=e149]: Calls, email, notes, meetings, and commercial objects.
+      - generic [ref=e150]:
+        - generic [ref=e151]: Workflow Control
+        - generic [ref=e152]: Workflow design, pipeline stages, routing logic, and handoff contracts.
+        - generic [ref=e153]:
+          - link "Workflow Definitions Top-level workflow contracts for tasks, tickets, products, and custom execution lanes." [ref=e154] [cursor=pointer]:
+            - /url: "#/workflow_definitions"
+            - generic [ref=e155]: Workflow Definitions
+            - generic [ref=e156]: Top-level workflow contracts for tasks, tickets, products, and custom execution lanes.
+          - link "Workflow Pipelines Pipeline families with ordered stages and linked product or workflow context." [ref=e157] [cursor=pointer]:
+            - /url: "#/workflow_pipelines"
+            - generic [ref=e158]: Workflow Pipelines
+            - generic [ref=e159]: Pipeline families with ordered stages and linked product or workflow context.
+          - link "Workflow Stages Stage-by-stage execution states used in the live Mermaid workflow charts." [ref=e160] [cursor=pointer]:
+            - /url: "#/workflow_stages"
+            - generic [ref=e161]: Workflow Stages
+            - generic [ref=e162]: Stage-by-stage execution states used in the live Mermaid workflow charts.
+          - link "Workflow Logic Transition rules, conditions, and automation steps between workflow stages." [ref=e163] [cursor=pointer]:
+            - /url: "#/workflow_logic"
+            - generic [ref=e164]: Workflow Logic
+            - generic [ref=e165]: Transition rules, conditions, and automation steps between workflow stages.
+          - link "Workflow Handoffs Worker, system, or review handoffs tied to specific stage transitions." [ref=e166] [cursor=pointer]:
+            - /url: "#/workflow_handoffs"
+            - generic [ref=e167]: Workflow Handoffs
+            - generic [ref=e168]: Worker, system, or review handoffs tied to specific stage transitions.
+          - link "Tool Definitions First-class tool arsenal records linked to workers, workflows, notebook scopes, and database surfaces." [ref=e169] [cursor=pointer]:
+            - /url: "#/tool_definitions"
+            - generic [ref=e170]: Tool Definitions
+            - generic [ref=e171]: First-class tool arsenal records linked to workers, workflows, notebook scopes, and database surfaces.
+          - link "Tool Insertion Review Runs Persisted pre-insertion review runs that consult workers before a new tool or worker is inserted live." [ref=e172] [cursor=pointer]:
+            - /url: "#/tool_insertion_review_runs"
+            - generic [ref=e173]: Tool Insertion Review Runs
+            - generic [ref=e174]: Persisted pre-insertion review runs that consult workers before a new tool or worker is inserted live.
+          - link "Tool Insertion Feedback Normalized worker feedback captured during pre-insertion consultation runs for tools and workers." [ref=e175] [cursor=pointer]:
+            - /url: "#/tool_insertion_feedback"
+            - generic [ref=e176]: Tool Insertion Feedback
+            - generic [ref=e177]: Normalized worker feedback captured during pre-insertion consultation runs for tools and workers.
+      - generic [ref=e178]:
+        - generic [ref=e179]: Intelligence Memory
+        - generic [ref=e180]: AI memory, attributes, referral logic, and relationship maps.
+        - generic [ref=e181]:
+          - link "Ai Commitment Promise and obligation tracking tied back to conversations and owners." [ref=e182] [cursor=pointer]:
+            - /url: "#/ai_commitment"
+            - generic [ref=e183]: Ai Commitment
+            - generic [ref=e184]: Promise and obligation tracking tied back to conversations and owners.
+          - link "Ai Conversation Thread history, participants, intent, and conversation outcomes." [ref=e185] [cursor=pointer]:
+            - /url: "#/ai_conversation"
+            - generic [ref=e186]: Ai Conversation
+            - generic [ref=e187]: Thread history, participants, intent, and conversation outcomes.
+          - link "Ai Memory Persistent operating memory tied to people, deals, and tasks." [ref=e188] [cursor=pointer]:
+            - /url: "#/ai_memory"
+            - generic [ref=e189]: Ai Memory
+            - generic [ref=e190]: Persistent operating memory tied to people, deals, and tasks.
+          - link "Attributes Typed entity attributes with origin, confidence, and target context." [ref=e191] [cursor=pointer]:
+            - /url: "#/attributes"
+            - generic [ref=e192]: Attributes
+            - generic [ref=e193]: Typed entity attributes with origin, confidence, and target context.
+          - link "Pc Company Vision Strategic directives, themes, and operating horizons for the company." [ref=e194] [cursor=pointer]:
+            - /url: "#/pc_company_vision"
+            - generic [ref=e195]: Pc Company Vision
+            - generic [ref=e196]: Strategic directives, themes, and operating horizons for the company.
+          - link "Pc Relationship Structured relationships and projections that also map into associations." [ref=e197] [cursor=pointer]:
+            - /url: "#/pc_relationship"
+            - generic [ref=e198]: Pc Relationship
+            - generic [ref=e199]: Structured relationships and projections that also map into associations.
+          - link "Principals Named principals, roles, trust context, and contact paths." [ref=e200] [cursor=pointer]:
+            - /url: "#/principals"
+            - generic [ref=e201]: Principals
+            - generic [ref=e202]: Named principals, roles, trust context, and contact paths.
+          - link "Referral Partners Referral logic, partner attribution, and commission structure." [ref=e203] [cursor=pointer]:
+            - /url: "#/referral_partners"
+            - generic [ref=e204]: Referral Partners
+            - generic [ref=e205]: Referral logic, partner attribution, and commission structure.
+          - link "Memory Route Lineage Who placed information, where it came from, and how it traveled." [ref=e206] [cursor=pointer]:
+            - /url: "#/memory_route_lineage"
+            - generic [ref=e207]: Memory Route Lineage
+            - generic [ref=e208]: Who placed information, where it came from, and how it traveled.
+          - link "Memory Ingest Batch One discovery or ingest run across BigQuery, docs, Lucid, and NotebookLM." [ref=e209] [cursor=pointer]:
+            - /url: "#/memory_ingest_batch"
+            - generic [ref=e210]: Memory Ingest Batch
+            - generic [ref=e211]: One discovery or ingest run across BigQuery, docs, Lucid, and NotebookLM.
+          - link "Memory Session Registry Hot-tier session registry for cross-interface working memory, provider state, and recent events." [ref=e212] [cursor=pointer]:
+            - /url: "#/memory_session_registry"
+            - generic [ref=e213]: Memory Session Registry
+            - generic [ref=e214]: Hot-tier session registry for cross-interface working memory, provider state, and recent events.
+          - link "Memory Scope Registry Warm-tier semantic memory scopes keyed by tenant, user, worker, workflow, or pipeline." [ref=e215] [cursor=pointer]:
+            - /url: "#/memory_scope_registry"
+            - generic [ref=e216]: Memory Scope Registry
+            - generic [ref=e217]: Warm-tier semantic memory scopes keyed by tenant, user, worker, workflow, or pipeline.
+          - link "Notebook Registry Curated NotebookLM dossier registry linked to entities, workflows, and scopes." [ref=e218] [cursor=pointer]:
+            - /url: "#/notebook_registry"
+            - generic [ref=e219]: Notebook Registry
+            - generic [ref=e220]: Curated NotebookLM dossier registry linked to entities, workflows, and scopes.
+          - link "Worker Learning Feedback Prompt, outcome, failure, and lesson records used to improve worker decision quality." [ref=e221] [cursor=pointer]:
+            - /url: "#/worker_learning_feedback"
+            - generic [ref=e222]: Worker Learning Feedback
+            - generic [ref=e223]: Prompt, outcome, failure, and lesson records used to improve worker decision quality.
+      - generic [ref=e224]:
+        - generic [ref=e225]: Databases and Their Associations
+        - generic [ref=e226]: Database, store, object, and listener coverage mapped back to workers.
+        - generic [ref=e227]:
+          - link "Data Surface Registry Databases, stores, indexes, and platform objects with listener and access coverage." [ref=e228] [cursor=pointer]:
+            - /url: "#/data_surface_registry"
+            - generic [ref=e229]: Data Surface Registry
+            - generic [ref=e230]: Databases, stores, indexes, and platform objects with listener and access coverage.
+          - link "Worker Data Surface Associations Per-worker read, write, delete, and listener contracts for each data surface." [ref=e231] [cursor=pointer]:
+            - /url: "#/worker_data_surface_associations"
+            - generic [ref=e232]: Worker Data Surface Associations
+            - generic [ref=e233]: Per-worker read, write, delete, and listener contracts for each data surface.
+      - generic [ref=e234]:
+        - generic [ref=e235]: Additional Objects
+        - generic [ref=e236]: Secondary records still available inside the same data plane.
+        - generic [ref=e237]:
+          - link "Connection Registry" [ref=e238] [cursor=pointer]:
+            - /url: "#/connection_registry"
+            - generic [ref=e239]: Connection Registry
+          - link "Current State" [ref=e240] [cursor=pointer]:
+            - /url: "#/current_state"
+            - generic [ref=e241]: Current State
+          - link "Generated Assets" [ref=e242] [cursor=pointer]:
+            - /url: "#/generated_assets"
+            - generic [ref=e243]: Generated Assets
+          - link "Ai Commitment" [ref=e244] [cursor=pointer]:
+            - /url: "#/p242835887_ai_commitment"
+            - generic [ref=e245]: Ai Commitment
+          - link "Ai Conversation" [ref=e246] [cursor=pointer]:
+            - /url: "#/p242835887_ai_conversation"
+            - generic [ref=e247]: Ai Conversation
+          - link "Ai Memory" [ref=e248] [cursor=pointer]:
+            - /url: "#/p242835887_ai_memory"
+            - generic [ref=e249]: Ai Memory
+          - link "Attributes" [ref=e250] [cursor=pointer]:
+            - /url: "#/p242835887_attributes"
+            - generic [ref=e251]: Attributes
+          - link "Pc Company Vision" [ref=e252] [cursor=pointer]:
+            - /url: "#/p242835887_pc_company_vision"
+            - generic [ref=e253]: Pc Company Vision
+          - link "Pc Relationship" [ref=e254] [cursor=pointer]:
+            - /url: "#/p242835887_pc_relationship"
+            - generic [ref=e255]: Pc Relationship
+          - link "Principals" [ref=e256] [cursor=pointer]:
+            - /url: "#/p242835887_principals"
+            - generic [ref=e257]: Principals
+          - link "Referral Partners" [ref=e258] [cursor=pointer]:
+            - /url: "#/p242835887_referral_partners"
+            - generic [ref=e259]: Referral Partners
+          - link "Worker Profiles" [ref=e260] [cursor=pointer]:
+            - /url: "#/worker_profiles"
+            - generic [ref=e261]: Worker Profiles
+          - link "Workflow Discovery Runs" [ref=e262] [cursor=pointer]:
+            - /url: "#/workflow_discovery_runs"
+            - generic [ref=e263]: Workflow Discovery Runs
+    - generic [ref=e264]:
+      - generic [ref=e265]: Archives
+      - link "View Archived Records" [ref=e266] [cursor=pointer]:
+        - /url: "#/archives"
+      - link "Invoices" [ref=e268] [cursor=pointer]:
+        - /url: "#/invoices"
+      - link "Assets Multimedia" [ref=e269] [cursor=pointer]:
+        - /url: "#/asset-library"
+      - link "Postman" [ref=e270] [cursor=pointer]:
+        - /url: "#/postman"
+      - link "Actions" [ref=e271] [cursor=pointer]:
+        - /url: "#/actions"
+      - link "Settings & Backend" [ref=e272] [cursor=pointer]:
+        - /url: "#/settings"
+      - link "Object Tools" [ref=e273] [cursor=pointer]:
+        - /url: "#/object-tools"
+      - button "Logout" [ref=e274] [cursor=pointer]
+  - main [ref=e275]:
+    - generic [ref=e276]:
+      - generic [ref=e277]:
+        - generic [ref=e278]: Debate Plane
+        - heading "PushingDebate Studio" [level=1] [ref=e279]
+        - paragraph [ref=e280]: Start with one idea, define its route, debate it with memory-aware context, plan the visual teaching aids, and hand the approved version into implementation.
+      - generic [ref=e281]:
+        - generic [ref=e282]:
+          - text: Signed in
+          - strong [ref=e283]: manny
+        - generic [ref=e284]:
+          - text: Route
+          - strong [ref=e285]: PushingDebate Studio
+    - generic [ref=e286]:
+      - generic [ref=e287]:
+        - generic [ref=e288]:
+          - generic [ref=e289]:
+            - generic [ref=e290]: PushingDebate Studio
+            - heading "Idea definition, route debate, and implementation handoff in one surface" [level=2] [ref=e291]
+            - generic [ref=e292]: This studio starts with audio or text, asks the first clarifying question, pulls helpful history, opens the relevant workflows, debates the idea in plain language on GPT-5.4, clarifies visually, then turns the approved version into executable work.
+          - generic [ref=e293]:
+            - link "Open Workflow Studio" [ref=e294] [cursor=pointer]:
+              - /url: "#/workflow-studio"
+            - link "Open AGENTS A2A" [ref=e295] [cursor=pointer]:
+              - /url: "#/agents-a2a"
+        - generic [ref=e296]:
+          - generic [ref=e297]:
+            - generic [ref=e298]: Operator
+            - generic [ref=e299]: manny
+          - generic [ref=e300]:
+            - generic [ref=e301]: Workflow
+            - generic [ref=e302]: Seeded
+            - generic [ref=e303]: PushingDebate Studio
+          - generic [ref=e304]:
+            - generic [ref=e305]: Stages
+            - generic [ref=e306]: "11"
+            - generic [ref=e307]: PushingDebate Studio
+          - generic [ref=e308]:
+            - generic [ref=e309]: Tasks
+            - generic [ref=e310]: "10"
+            - generic [ref=e311]: Audio, history, debate, visuals, Codex
+          - generic [ref=e312]:
+            - generic [ref=e313]: Tickets
+            - generic [ref=e314]: "1"
+            - generic [ref=e315]: Dependencies + runtime lanes
+          - generic [ref=e316]:
+            - generic [ref=e317]: Discussion seats
+            - generic [ref=e318]: GPT-5.4
+            - generic [ref=e319]: Memory + Codex
+      - generic [ref=e320]:
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - heading "Draft studio contract control panel" [level=3] [ref=e323]
+            - generic [ref=e324]: This is the draft review surface. It shows the exact order we need to go over in the studio before any side-effecting implementation path is allowed.
+          - document [ref=e327]:
+            - generic [ref=e330]:
+              - paragraph [ref=e337]: 1. Idea
+              - paragraph [ref=e344]: 2. Contract
+              - paragraph [ref=e351]: 3. Workflow
+              - paragraph [ref=e358]: 4. Automation
+              - paragraph [ref=e365]: 5. Failures
+              - paragraph [ref=e372]: 6. Approval
+          - generic [ref=e373]:
+            - generic [ref=e374]: Draft-only rule
+            - generic [ref=e375]: Debate, memory reads, diagrams, and research are allowed while this contract is still draft. Record creates, automation firing, durable truth writes, and side-effecting worker calls stay blocked until approval is explicit.
+        - generic [ref=e376]:
+          - generic [ref=e377]:
+            - heading "Required fields by block" [level=3] [ref=e378]
+            - generic [ref=e379]: This is the exact shape the studio should force us through. Every field below is required before the contract can move to approved.
+          - generic [ref=e380]:
+            - generic [ref=e381]:
+              - generic [ref=e382]: Fields
+              - generic [ref=e383]: "35"
+              - generic [ref=e384]: Total required
+            - generic [ref=e385]:
+              - generic [ref=e386]: Missing
+              - generic [ref=e387]: "35"
+              - generic [ref=e388]: Still blank
+            - generic [ref=e389]:
+              - generic [ref=e390]: Drafting
+              - generic [ref=e391]: "0"
+              - generic [ref=e392]: Has content
+            - generic [ref=e393]:
+              - generic [ref=e394]: Approved
+              - generic [ref=e395]: "0"
+              - generic [ref=e396]: Marked ready
+          - generic [ref=e397]:
+            - generic [ref=e398]:
+              - generic [ref=e399]:
+                - generic [ref=e400]:
+                  - generic [ref=e401]: 1. Idea
+                  - generic [ref=e402]: Missing
+                - generic [ref=e403]: Define what the studio session is actually trying to produce before any routing or automation choice is made.
+              - generic [ref=e404]:
+                - generic [ref=e405]:
+                  - generic [ref=e406]:
+                    - generic [ref=e407]: Idea Title
+                    - generic [ref=e408]:
+                      - generic [ref=e409]: Missing
+                      - generic [ref=e410]: idea_title
+                  - generic [ref=e411]: Short operating name for the thing being defined.
+                  - textbox "Define idea title..." [ref=e412]
+                  - generic [ref=e413]:
+                    - button "Mark approved" [disabled] [ref=e414]
+                    - button "Keep drafting" [disabled] [ref=e415]
+                    - button "Clear" [ref=e416] [cursor=pointer]
+                - generic [ref=e417]:
+                  - generic [ref=e418]:
+                    - generic [ref=e419]: Idea Summary
+                    - generic [ref=e420]:
+                      - generic [ref=e421]: Missing
+                      - generic [ref=e422]: idea_summary
+                  - generic [ref=e423]: One plain-language description of what it should do.
+                  - textbox "Define idea summary..." [ref=e424]
+                  - generic [ref=e425]:
+                    - button "Mark approved" [disabled] [ref=e426]
+                    - button "Keep drafting" [disabled] [ref=e427]
+                    - button "Clear" [ref=e428] [cursor=pointer]
+                - generic [ref=e429]:
+                  - generic [ref=e430]:
+                    - generic [ref=e431]: Desired Outcome
+                    - generic [ref=e432]:
+                      - generic [ref=e433]: Missing
+                      - generic [ref=e434]: desired_outcome
+                  - generic [ref=e435]: What success looks like when this is finished.
+                  - textbox "Define desired outcome..." [ref=e436]
+                  - generic [ref=e437]:
+                    - button "Mark approved" [disabled] [ref=e438]
+                    - button "Keep drafting" [disabled] [ref=e439]
+                    - button "Clear" [ref=e440] [cursor=pointer]
+                - generic [ref=e441]:
+                  - generic [ref=e442]:
+                    - generic [ref=e443]: Primary User
+                    - generic [ref=e444]:
+                      - generic [ref=e445]: Missing
+                      - generic [ref=e446]: primary_user
+                  - generic [ref=e447]: Who this is for and who will feel the benefit first.
+                  - textbox "Define primary user..." [ref=e448]
+                  - generic [ref=e449]:
+                    - button "Mark approved" [disabled] [ref=e450]
+                    - button "Keep drafting" [disabled] [ref=e451]
+                    - button "Clear" [ref=e452] [cursor=pointer]
+                - generic [ref=e453]:
+                  - generic [ref=e454]:
+                    - generic [ref=e455]: Problem Statement
+                    - generic [ref=e456]:
+                      - generic [ref=e457]: Missing
+                      - generic [ref=e458]: problem_statement
+                  - generic [ref=e459]: What pain or gap this solves.
+                  - textbox "Define problem statement..." [ref=e460]
+                  - generic [ref=e461]:
+                    - button "Mark approved" [disabled] [ref=e462]
+                    - button "Keep drafting" [disabled] [ref=e463]
+                    - button "Clear" [ref=e464] [cursor=pointer]
+            - generic [ref=e465]:
+              - generic [ref=e466]:
+                - generic [ref=e467]:
+                  - generic [ref=e468]: 2. Contract
+                  - generic [ref=e469]: Missing
+                - generic [ref=e470]: Define who is speaking, what the studio can touch, and what remains blocked until approval.
+              - generic [ref=e471]:
+                - generic [ref=e472]:
+                  - generic [ref=e473]:
+                    - generic [ref=e474]: Operator-Facing Worker
+                    - generic [ref=e475]:
+                      - generic [ref=e476]: Missing
+                      - generic [ref=e477]: operator_facing_worker
+                  - generic [ref=e478]: "The worker you are actually talking to. For this studio: PushingDebateDude."
+                  - textbox "Define operator-facing worker..." [ref=e479]
+                  - generic [ref=e480]:
+                    - button "Mark approved" [disabled] [ref=e481]
+                    - button "Keep drafting" [disabled] [ref=e482]
+                    - button "Clear" [ref=e483] [cursor=pointer]
+                - generic [ref=e484]:
+                  - generic [ref=e485]:
+                    - generic [ref=e486]: Backing Workers
+                    - generic [ref=e487]:
+                      - generic [ref=e488]: Missing
+                      - generic [ref=e489]: backing_workers
+                  - generic [ref=e490]: Supporting workers that read, reason, or write behind the scene.
+                  - textbox "Define backing workers..." [ref=e491]
+                  - generic [ref=e492]:
+                    - button "Mark approved" [disabled] [ref=e493]
+                    - button "Keep drafting" [disabled] [ref=e494]
+                    - button "Clear" [ref=e495] [cursor=pointer]
+                - generic [ref=e496]:
+                  - generic [ref=e497]:
+                    - generic [ref=e498]: Read Surfaces
+                    - generic [ref=e499]:
+                      - generic [ref=e500]: Missing
+                      - generic [ref=e501]: read_surfaces
+                  - generic [ref=e502]: What databases, records, and memory the studio may read.
+                  - textbox "Define read surfaces..." [ref=e503]
+                  - generic [ref=e504]:
+                    - button "Mark approved" [disabled] [ref=e505]
+                    - button "Keep drafting" [disabled] [ref=e506]
+                    - button "Clear" [ref=e507] [cursor=pointer]
+                - generic [ref=e508]:
+                  - generic [ref=e509]:
+                    - generic [ref=e510]: Write Surfaces After Approval
+                    - generic [ref=e511]:
+                      - generic [ref=e512]: Missing
+                      - generic [ref=e513]: write_surfaces_after_approval
+                  - generic [ref=e514]: What it may create or update once the contract is approved.
+                  - textbox "Define write surfaces after approval..." [ref=e515]
+                  - generic [ref=e516]:
+                    - button "Mark approved" [disabled] [ref=e517]
+                    - button "Keep drafting" [disabled] [ref=e518]
+                    - button "Clear" [ref=e519] [cursor=pointer]
+                - generic [ref=e520]:
+                  - generic [ref=e521]:
+                    - generic [ref=e522]: Blocked Actions Before Approval
+                    - generic [ref=e523]:
+                      - generic [ref=e524]: Missing
+                      - generic [ref=e525]: blocked_actions_before_approval
+                  - generic [ref=e526]: What must remain draft-only until you explicitly approve the contract.
+                  - textbox "Define blocked actions before approval..." [ref=e527]
+                  - generic [ref=e528]:
+                    - button "Mark approved" [disabled] [ref=e529]
+                    - button "Keep drafting" [disabled] [ref=e530]
+                    - button "Clear" [ref=e531] [cursor=pointer]
+                - generic [ref=e532]:
+                  - generic [ref=e533]:
+                    - generic [ref=e534]: Association Research Scope
+                    - generic [ref=e535]:
+                      - generic [ref=e536]: Missing
+                      - generic [ref=e537]: association_research_scope
+                  - generic [ref=e538]: Which records, histories, and related entities must be researched before association wiring is trusted.
+                  - textbox "Define association research scope..." [ref=e539]
+                  - generic [ref=e540]:
+                    - button "Mark approved" [disabled] [ref=e541]
+                    - button "Keep drafting" [disabled] [ref=e542]
+                    - button "Clear" [ref=e543] [cursor=pointer]
+                - generic [ref=e544]:
+                  - generic [ref=e545]:
+                    - generic [ref=e546]: Memory Rule
+                    - generic [ref=e547]:
+                      - generic [ref=e548]: Missing
+                      - generic [ref=e549]: memory_rule
+                  - generic [ref=e550]: What prior rules, lessons, and mistakes must always load first.
+                  - textbox "Define memory rule..." [ref=e551]
+                  - generic [ref=e552]:
+                    - button "Mark approved" [disabled] [ref=e553]
+                    - button "Keep drafting" [disabled] [ref=e554]
+                    - button "Clear" [ref=e555] [cursor=pointer]
+            - generic [ref=e556]:
+              - generic [ref=e557]:
+                - generic [ref=e558]:
+                  - generic [ref=e559]: 3. Workflow
+                  - generic [ref=e560]: Missing
+                - generic [ref=e561]: Define the route from intake to implementation so the studio is not improvising stages or handoffs.
+              - generic [ref=e562]:
+                - generic [ref=e563]:
+                  - generic [ref=e564]:
+                    - generic [ref=e565]: Workflow Family
+                    - generic [ref=e566]:
+                      - generic [ref=e567]: Missing
+                      - generic [ref=e568]: workflow_family
+                  - generic [ref=e569]: Which workflow owns this discussion and execution path.
+                  - textbox "Define workflow family..." [ref=e570]
+                  - generic [ref=e571]:
+                    - button "Mark approved" [disabled] [ref=e572]
+                    - button "Keep drafting" [disabled] [ref=e573]
+                    - button "Clear" [ref=e574] [cursor=pointer]
+                - generic [ref=e575]:
+                  - generic [ref=e576]:
+                    - generic [ref=e577]: Pipeline
+                    - generic [ref=e578]:
+                      - generic [ref=e579]: Missing
+                      - generic [ref=e580]: pipeline
+                  - generic [ref=e581]: Which pipeline the work should move through.
+                  - textbox "Define pipeline..." [ref=e582]
+                  - generic [ref=e583]:
+                    - button "Mark approved" [disabled] [ref=e584]
+                    - button "Keep drafting" [disabled] [ref=e585]
+                    - button "Clear" [ref=e586] [cursor=pointer]
+                - generic [ref=e587]:
+                  - generic [ref=e588]:
+                    - generic [ref=e589]: Stage Sequence
+                    - generic [ref=e590]:
+                      - generic [ref=e591]: Missing
+                      - generic [ref=e592]: stage_sequence
+                  - generic [ref=e593]: Ordered stages from discovery through implementation.
+                  - textbox "Define stage sequence..." [ref=e594]
+                  - generic [ref=e595]:
+                    - button "Mark approved" [disabled] [ref=e596]
+                    - button "Keep drafting" [disabled] [ref=e597]
+                    - button "Clear" [ref=e598] [cursor=pointer]
+                - generic [ref=e599]:
+                  - generic [ref=e600]:
+                    - generic [ref=e601]: Association Rules
+                    - generic [ref=e602]:
+                      - generic [ref=e603]: Missing
+                      - generic [ref=e604]: association_rules
+                  - generic [ref=e605]: What records get linked, when they get linked, and what labels should be used.
+                  - textbox "Define association rules..." [ref=e606]
+                  - generic [ref=e607]:
+                    - button "Mark approved" [disabled] [ref=e608]
+                    - button "Keep drafting" [disabled] [ref=e609]
+                    - button "Clear" [ref=e610] [cursor=pointer]
+                - generic [ref=e611]:
+                  - generic [ref=e612]:
+                    - generic [ref=e613]: Handoff Rules
+                    - generic [ref=e614]:
+                      - generic [ref=e615]: Missing
+                      - generic [ref=e616]: handoff_rules
+                  - generic [ref=e617]: When the work stays local and when it moves to another worker or room.
+                  - textbox "Define handoff rules..." [ref=e618]
+                  - generic [ref=e619]:
+                    - button "Mark approved" [disabled] [ref=e620]
+                    - button "Keep drafting" [disabled] [ref=e621]
+                    - button "Clear" [ref=e622] [cursor=pointer]
+                - generic [ref=e623]:
+                  - generic [ref=e624]:
+                    - generic [ref=e625]: Task Rules
+                    - generic [ref=e626]:
+                      - generic [ref=e627]: Missing
+                      - generic [ref=e628]: task_rules
+                  - generic [ref=e629]: What tasks must exist as the workflow advances.
+                  - textbox "Define task rules..." [ref=e630]
+                  - generic [ref=e631]:
+                    - button "Mark approved" [disabled] [ref=e632]
+                    - button "Keep drafting" [disabled] [ref=e633]
+                    - button "Clear" [ref=e634] [cursor=pointer]
+                - generic [ref=e635]:
+                  - generic [ref=e636]:
+                    - generic [ref=e637]: Ticket Rules
+                    - generic [ref=e638]:
+                      - generic [ref=e639]: Missing
+                      - generic [ref=e640]: ticket_rules
+                  - generic [ref=e641]: What blocker or exception tickets must open automatically.
+                  - textbox "Define ticket rules..." [ref=e642]
+                  - generic [ref=e643]:
+                    - button "Mark approved" [disabled] [ref=e644]
+                    - button "Keep drafting" [disabled] [ref=e645]
+                    - button "Clear" [ref=e646] [cursor=pointer]
+            - generic [ref=e647]:
+              - generic [ref=e648]:
+                - generic [ref=e649]:
+                  - generic [ref=e650]: 4. Automation
+                  - generic [ref=e651]: Missing
+                - generic [ref=e652]: Define the exact API, MCP, trigger, listener, and callback behavior before side effects are allowed.
+              - generic [ref=e653]:
+                - generic [ref=e654]:
+                  - generic [ref=e655]:
+                    - generic [ref=e656]: Trigger Points
+                    - generic [ref=e657]:
+                      - generic [ref=e658]: Missing
+                      - generic [ref=e659]: trigger_points
+                  - generic [ref=e660]: Exactly when automations should fire.
+                  - textbox "Define trigger points..." [ref=e661]
+                  - generic [ref=e662]:
+                    - button "Mark approved" [disabled] [ref=e663]
+                    - button "Keep drafting" [disabled] [ref=e664]
+                    - button "Clear" [ref=e665] [cursor=pointer]
+                - generic [ref=e666]:
+                  - generic [ref=e667]:
+                    - generic [ref=e668]: Automation Calls
+                    - generic [ref=e669]:
+                      - generic [ref=e670]: Missing
+                      - generic [ref=e671]: automation_calls
+                  - generic [ref=e672]: The concrete commands, APIs, and MCP lanes used by the route.
+                  - textbox "Define automation calls..." [ref=e673]
+                  - generic [ref=e674]:
+                    - button "Mark approved" [disabled] [ref=e675]
+                    - button "Keep drafting" [disabled] [ref=e676]
+                    - button "Clear" [ref=e677] [cursor=pointer]
+                - generic [ref=e678]:
+                  - generic [ref=e679]:
+                    - generic [ref=e680]: Research Plan Before Create
+                    - generic [ref=e681]:
+                      - generic [ref=e682]: Missing
+                      - generic [ref=e683]: research_plan_before_create
+                  - generic [ref=e684]: What research, lookups, or context pulls must happen before create or association wiring is allowed.
+                  - textbox "Define research plan before create..." [ref=e685]
+                  - generic [ref=e686]:
+                    - button "Mark approved" [disabled] [ref=e687]
+                    - button "Keep drafting" [disabled] [ref=e688]
+                    - button "Clear" [ref=e689] [cursor=pointer]
+                - generic [ref=e690]:
+                  - generic [ref=e691]:
+                    - generic [ref=e692]: Listeners
+                    - generic [ref=e693]:
+                      - generic [ref=e694]: Missing
+                      - generic [ref=e695]: listeners
+                  - generic [ref=e696]: Who or what must observe the route while it is running.
+                  - textbox "Define listeners..." [ref=e697]
+                  - generic [ref=e698]:
+                    - button "Mark approved" [disabled] [ref=e699]
+                    - button "Keep drafting" [disabled] [ref=e700]
+                    - button "Clear" [ref=e701] [cursor=pointer]
+                - generic [ref=e702]:
+                  - generic [ref=e703]:
+                    - generic [ref=e704]: Callbacks Required
+                    - generic [ref=e705]:
+                      - generic [ref=e706]: Missing
+                      - generic [ref=e707]: callbacks_required
+                  - generic [ref=e708]: What acknowledgements must come back before the route is considered healthy.
+                  - textbox "Define callbacks required..." [ref=e709]
+                  - generic [ref=e710]:
+                    - button "Mark approved" [disabled] [ref=e711]
+                    - button "Keep drafting" [disabled] [ref=e712]
+                    - button "Clear" [ref=e713] [cursor=pointer]
+                - generic [ref=e714]:
+                  - generic [ref=e715]:
+                    - generic [ref=e716]: SLA Targets
+                    - generic [ref=e717]:
+                      - generic [ref=e718]: Missing
+                      - generic [ref=e719]: sla_targets
+                  - generic [ref=e720]: Time bounds for create, callback, ticket, and memory lanes.
+                  - textbox "Define sla targets..." [ref=e721]
+                  - generic [ref=e722]:
+                    - button "Mark approved" [disabled] [ref=e723]
+                    - button "Keep drafting" [disabled] [ref=e724]
+                    - button "Clear" [ref=e725] [cursor=pointer]
+            - generic [ref=e726]:
+              - generic [ref=e727]:
+                - generic [ref=e728]:
+                  - generic [ref=e729]: 5. Failures
+                  - generic [ref=e730]: Missing
+                - generic [ref=e731]: Define how the studio behaves under mismatch, partial success, timeout, or missing memory so it never fails silently.
+              - generic [ref=e732]:
+                - generic [ref=e733]:
+                  - generic [ref=e734]:
+                    - generic [ref=e735]: Schema Mismatch Policy
+                    - generic [ref=e736]:
+                      - generic [ref=e737]: Missing
+                      - generic [ref=e738]: schema_mismatch_policy
+                  - generic [ref=e739]: What happens when the requested record does not match a valid object or shape.
+                  - textbox "Define schema mismatch policy..." [ref=e740]
+                  - generic [ref=e741]:
+                    - button "Mark approved" [disabled] [ref=e742]
+                    - button "Keep drafting" [disabled] [ref=e743]
+                    - button "Clear" [ref=e744] [cursor=pointer]
+                - generic [ref=e745]:
+                  - generic [ref=e746]:
+                    - generic [ref=e747]: Create Failure Policy
+                    - generic [ref=e748]:
+                      - generic [ref=e749]: Missing
+                      - generic [ref=e750]: create_failure_policy
+                  - generic [ref=e751]: What happens when POST create fails.
+                  - textbox "Define create failure policy..." [ref=e752]
+                  - generic [ref=e753]:
+                    - button "Mark approved" [disabled] [ref=e754]
+                    - button "Keep drafting" [disabled] [ref=e755]
+                    - button "Clear" [ref=e756] [cursor=pointer]
+                - generic [ref=e757]:
+                  - generic [ref=e758]:
+                    - generic [ref=e759]: Callback Timeout Policy
+                    - generic [ref=e760]:
+                      - generic [ref=e761]: Missing
+                      - generic [ref=e762]: callback_timeout_policy
+                  - generic [ref=e763]: What happens when acknowledgements do not come back in time.
+                  - textbox "Define callback timeout policy..." [ref=e764]
+                  - generic [ref=e765]:
+                    - button "Mark approved" [disabled] [ref=e766]
+                    - button "Keep drafting" [disabled] [ref=e767]
+                    - button "Clear" [ref=e768] [cursor=pointer]
+                - generic [ref=e769]:
+                  - generic [ref=e770]:
+                    - generic [ref=e771]: Memory Failure Policy
+                    - generic [ref=e772]:
+                      - generic [ref=e773]: Missing
+                      - generic [ref=e774]: memory_failure_policy
+                  - generic [ref=e775]: What happens when the durable writeback lane fails.
+                  - textbox "Define memory failure policy..." [ref=e776]
+                  - generic [ref=e777]:
+                    - button "Mark approved" [disabled] [ref=e778]
+                    - button "Keep drafting" [disabled] [ref=e779]
+                    - button "Clear" [ref=e780] [cursor=pointer]
+                - generic [ref=e781]:
+                  - generic [ref=e782]:
+                    - generic [ref=e783]: Escalation Owner
+                    - generic [ref=e784]:
+                      - generic [ref=e785]: Missing
+                      - generic [ref=e786]: escalation_owner
+                  - generic [ref=e787]: Who owns recovery when the route is no longer safe to continue automatically.
+                  - textbox "Define escalation owner..." [ref=e788]
+                  - generic [ref=e789]:
+                    - button "Mark approved" [disabled] [ref=e790]
+                    - button "Keep drafting" [disabled] [ref=e791]
+                    - button "Clear" [ref=e792] [cursor=pointer]
+            - generic [ref=e793]:
+              - generic [ref=e794]:
+                - generic [ref=e795]:
+                  - generic [ref=e796]: 6. Approval
+                  - generic [ref=e797]: Missing
+                - generic [ref=e798]: Freeze the contract before anything creates records or fires side effects.
+              - generic [ref=e799]:
+                - generic [ref=e800]:
+                  - generic [ref=e801]:
+                    - generic [ref=e802]: Approval Status
+                    - generic [ref=e803]:
+                      - generic [ref=e804]: Missing
+                      - generic [ref=e805]: approval_status
+                  - generic [ref=e806]: Draft, debating, approved, or rejected.
+                  - textbox "Define approval status..." [ref=e807]
+                  - generic [ref=e808]:
+                    - button "Mark approved" [disabled] [ref=e809]
+                    - button "Keep drafting" [disabled] [ref=e810]
+                    - button "Clear" [ref=e811] [cursor=pointer]
+                - generic [ref=e812]:
+                  - generic [ref=e813]:
+                    - generic [ref=e814]: Approved By
+                    - generic [ref=e815]:
+                      - generic [ref=e816]: Missing
+                      - generic [ref=e817]: approved_by
+                  - generic [ref=e818]: Who gave the decision to move from discussion into action.
+                  - textbox "Define approved by..." [ref=e819]
+                  - generic [ref=e820]:
+                    - button "Mark approved" [disabled] [ref=e821]
+                    - button "Keep drafting" [disabled] [ref=e822]
+                    - button "Clear" [ref=e823] [cursor=pointer]
+                - generic [ref=e824]:
+                  - generic [ref=e825]:
+                    - generic [ref=e826]: Approval Notes
+                    - generic [ref=e827]:
+                      - generic [ref=e828]: Missing
+                      - generic [ref=e829]: approval_notes
+                  - generic [ref=e830]: What was accepted and what is explicitly out of scope.
+                  - textbox "Define approval notes..." [ref=e831]
+                  - generic [ref=e832]:
+                    - button "Mark approved" [disabled] [ref=e833]
+                    - button "Keep drafting" [disabled] [ref=e834]
+                    - button "Clear" [ref=e835] [cursor=pointer]
+                - generic [ref=e836]:
+                  - generic [ref=e837]:
+                    - generic [ref=e838]: Implementation Ready
+                    - generic [ref=e839]:
+                      - generic [ref=e840]: Missing
+                      - generic [ref=e841]: implementation_ready
+                  - generic [ref=e842]: Whether enough is defined to let create, write, and trigger routes turn on.
+                  - textbox "Define implementation ready..." [ref=e843]
+                  - generic [ref=e844]:
+                    - button "Mark approved" [disabled] [ref=e845]
+                    - button "Keep drafting" [disabled] [ref=e846]
+                    - button "Clear" [ref=e847] [cursor=pointer]
+                - generic [ref=e848]:
+                  - generic [ref=e849]:
+                    - generic [ref=e850]: Next Step
+                    - generic [ref=e851]:
+                      - generic [ref=e852]: Missing
+                      - generic [ref=e853]: next_step
+                  - generic [ref=e854]: The immediate next action after approval.
+                  - textbox "Define next step..." [ref=e855]
+                  - generic [ref=e856]:
+                    - button "Mark approved" [disabled] [ref=e857]
+                    - button "Keep drafting" [disabled] [ref=e858]
+                    - button "Clear" [ref=e859] [cursor=pointer]
+      - generic [ref=e860]:
+        - generic [ref=e861]:
+          - generic [ref=e862]:
+            - heading "Research Topic 1 draft package" [level=3] [ref=e863]
+            - generic [ref=e864]: "This is the exact planned route for the first research topic: AI automation failure taxonomy. It stays draft-only until the contract and approval gates are clear."
+          - generic [ref=e865]:
+            - generic [ref=e866]:
+              - generic [ref=e867]: Workflow
+              - generic [ref=e868]: Draft pending
+              - generic [ref=e869]: "Research: AI Automation Failure Taxonomy"
+            - generic [ref=e870]:
+              - generic [ref=e871]: Stages
+              - generic [ref=e872]: "0"
+              - generic [ref=e873]: AI Automation Failure Taxonomy
+            - generic [ref=e874]:
+              - generic [ref=e875]: Tasks
+              - generic [ref=e876]: "0"
+              - generic [ref=e877]: Internal, external, synthesis, debate, notebook, memory
+            - generic [ref=e878]:
+              - generic [ref=e879]: Tickets
+              - generic [ref=e880]: "0"
+              - generic [ref=e881]: Source, quota, conflict, ingest
+          - document [ref=e884]:
+            - generic [ref=e886]:
+              - generic [ref=e891]:
+                - paragraph [ref=e897]: "No"
+                - paragraph [ref=e903]: "Yes"
+              - generic [ref=e904]:
+                - paragraph [ref=e911]:
+                  - text: Pick one research topic
+                  - text: AI automation failure taxonomy
+                - paragraph [ref=e918]:
+                  - text: Harvest internal memory
+                  - text: AI Memory, PC Company Vision, learning feedback, notebooks, lineage
+                - paragraph [ref=e925]:
+                  - text: Run external deep research
+                  - text: one topic at a time
+                - paragraph [ref=e932]:
+                  - text: Normalize findings
+                  - text: map failure categories and contradictions
+                - paragraph [ref=e939]: Draft failure + SLA contract
+                - paragraph [ref=e946]: Debate in PushingDebate Studio
+                - paragraph [ref=e953]: Approved?
+                - paragraph [ref=e960]:
+                  - text: Curate NotebookLM dossier
+                  - text: approved synthesis only
+                - paragraph [ref=e967]:
+                  - text: Write durable memory
+                  - text: AI Memory, learning feedback, current state
+                - paragraph [ref=e974]:
+                  - text: Expose reusable guidance
+                  - text: workers, tasks, tickets, routes
+          - generic [ref=e975]:
+            - generic [ref=e976]: Stages
+            - generic [ref=e977]: The research stages will appear here once the draft workflow summary is loaded.
+          - generic [ref=e978]:
+            - generic [ref=e979]: NotebookLM dossier convention
+            - generic [ref=e980]:
+              - generic [ref=e981]:
+                - generic [ref=e982]:
+                  - generic [ref=e983]: Notebook title
+                  - generic [ref=e984]: Research · AI Automation Failure Taxonomy · <YYYY-MM-DD>
+                - generic [ref=e985]: One curated notebook per approved research domain, not one notebook per noisy sub-run.
+              - generic [ref=e986]:
+                - generic [ref=e987]:
+                  - generic [ref=e988]: "Source pack: internal"
+                  - generic [ref=e989]: internal-memory-harvest
+                - generic [ref=e990]: AI Memory, PC Company Vision, worker learning feedback, current state, lineage, and notebook registry pointers.
+              - generic [ref=e991]:
+                - generic [ref=e992]:
+                  - generic [ref=e993]: "Source pack: external"
+                  - generic [ref=e994]: external-authority
+                - generic [ref=e995]: Official docs and approved outside evidence collected one topic at a time.
+              - generic [ref=e996]:
+                - generic [ref=e997]:
+                  - generic [ref=e998]: "Source pack: contract"
+                  - generic [ref=e999]: draft-contract-and-approval
+                - generic [ref=e1000]: Debated summaries, failure categories, SLA rules, and approval decisions that survived review.
+        - generic [ref=e1001]:
+          - generic [ref=e1002]:
+            - heading "Research tasks, blockers, worker lanes, and approval gates" [level=3] [ref=e1003]
+            - generic [ref=e1004]: This is the exact planned work package before any deep research fan-out or notebook ingestion happens.
+          - generic [ref=e1005]:
+            - generic [ref=e1006]: Tasks
+            - generic [ref=e1007]: Draft research tasks are pending the workflow summary load.
+          - generic [ref=e1008]:
+            - generic [ref=e1009]: Blocker tickets
+            - generic [ref=e1010]: Draft research blocker tickets will appear here once the workflow summary is loaded.
+          - generic [ref=e1011]:
+            - generic [ref=e1012]: Worker lanes
+            - generic [ref=e1013]:
+              - generic [ref=e1014]:
+                - generic [ref=e1015]:
+                  - generic [ref=e1016]: PushingCapSickMemoryDude
+                  - generic [ref=e1017]: Internal research librarian
+                - generic [ref=e1018]: Harvests AI Memory, PC Company Vision, learning feedback, notebooks, and route lineage before any outside search starts.
+              - generic [ref=e1019]:
+                - generic [ref=e1020]:
+                  - generic [ref=e1021]: PushingDebateDude
+                  - generic [ref=e1022]: Front-of-house debate seat
+                - generic [ref=e1023]: Explains the findings in plain language, resolves contradictions with Manny, and turns them into contract language.
+              - generic [ref=e1024]:
+                - generic [ref=e1025]:
+                  - generic [ref=e1026]: postman_api
+                  - generic [ref=e1027]: API and MCP verifier
+                - generic [ref=e1028]: Checks callback expectations, route travel, and API/MCP contracts that are implicated by the researched failures.
+              - generic [ref=e1029]:
+                - generic [ref=e1030]:
+                  - generic [ref=e1031]: codex_design
+                  - generic [ref=e1032]: Visual explainer lane
+                - generic [ref=e1033]: Turns the researched failure model into Mermaid diagrams and teaching visuals.
+          - generic [ref=e1034]:
+            - generic [ref=e1035]:
+              - generic [ref=e1036]: Failure categories
+              - generic [ref=e1037]:
+                - generic [ref=e1038]: "- Schema mismatch"
+                - generic [ref=e1039]: "- Duplicate side effect"
+                - generic [ref=e1040]: "- Callback timeout"
+                - generic [ref=e1041]: "- Partial association write"
+                - generic [ref=e1042]: "- Missing listener or trace"
+                - generic [ref=e1043]: "- Stale session or wrong memory scope"
+                - generic [ref=e1044]: "- Prompt injection or memory poisoning"
+                - generic [ref=e1045]: "- Quota or credential failure"
+                - generic [ref=e1046]: "- External research inconsistency"
+                - generic [ref=e1047]: "- Approval bypass"
+            - generic [ref=e1048]:
+              - generic [ref=e1049]: Approval gates
+              - generic [ref=e1050]:
+                - generic [ref=e1051]: "- Internal memory has been harvested first."
+                - generic [ref=e1052]: "- External research is authoritative and scoped to one topic."
+                - generic [ref=e1053]: "- Contradictions are called out explicitly."
+                - generic [ref=e1054]: "- Raw evidence stays in PCRM memory and lineage."
+                - generic [ref=e1055]: "- Only curated approved synthesis goes to NotebookLM."
+                - generic [ref=e1056]: "- Promotion to company vision or gold still requires explicit approval."
+      - generic [ref=e1057]:
+        - generic [ref=e1058]:
+          - generic [ref=e1059]:
+            - heading "Live memory maps up top" [level=3] [ref=e1060]
+            - generic [ref=e1061]: "This is the live memory picture the studio is using right now: session scope, durable memory hits, notebooks, current state, and the listener coverage behind the selected worker and the memory lane."
+          - generic [ref=e1062]:
+            - generic [ref=e1063]:
+              - generic [ref=e1064]: Scope + session
+              - generic [ref=e1065]: Local fallback
+              - generic [ref=e1066]: Session pending
+            - generic [ref=e1067]:
+              - generic [ref=e1068]: History matches
+              - generic [ref=e1069]: "0"
+              - generic [ref=e1070]: No durable memory matches yet
+            - generic [ref=e1071]:
+              - generic [ref=e1072]: Notebook records
+              - generic [ref=e1073]: "0"
+              - generic [ref=e1074]: No notebooks in play yet
+            - generic [ref=e1075]:
+              - generic [ref=e1076]: Current state
+              - generic [ref=e1077]: Pending
+              - generic [ref=e1078]: No current state record yet
+            - generic [ref=e1079]:
+              - generic [ref=e1080]: Selected worker listeners
+              - generic [ref=e1081]: "8"
+              - generic [ref=e1082]: Live listener coverage loaded.
+            - generic [ref=e1083]:
+              - generic [ref=e1084]: Memory lane listeners
+              - generic [ref=e1085]: "11"
+              - generic [ref=e1086]: PushingCapSickMemoryDude listener map loaded.
+          - generic [ref=e1087]:
+            - generic [ref=e1088]:
+              - generic [ref=e1089]: Live memory source breakdown
+              - generic [ref=e1090]: No durable memory hits have been pulled into this turn yet.
+            - generic [ref=e1091]:
+              - generic [ref=e1092]: Listener surfaces in play
+              - generic [ref=e1093]:
+                - generic [ref=e1094]: Selected worker
+                - generic [ref=e1095]:
+                  - generic [ref=e1096]: Products
+                  - generic [ref=e1097]: Tasks
+                  - generic [ref=e1098]: Tickets
+                  - generic [ref=e1099]: Workflow Definitions
+                  - generic [ref=e1100]: Workflow Handoffs
+                  - generic [ref=e1101]: Workflow Logic
+                  - generic [ref=e1102]: Workflow Pipelines
+                  - generic [ref=e1103]: Workflow Stages
+                - generic [ref=e1104]: Memory lane
+                - generic [ref=e1105]:
+                  - generic [ref=e1106]: Memory Scope Registry
+                  - generic [ref=e1107]: Memory Session Registry
+                  - generic [ref=e1108]: Notebook Registry
+                  - generic [ref=e1109]: Worker Learning Feedback
+                  - generic [ref=e1110]: Products
+                  - generic [ref=e1111]: Tool Definitions
+                  - generic [ref=e1112]: Workflow Definitions
+                  - generic [ref=e1113]: Workflow Handoffs
+                  - generic [ref=e1114]: Workflow Logic
+                  - generic [ref=e1115]: Workflow Pipelines
+          - generic [ref=e1116]:
+            - generic [ref=e1117]:
+              - generic [ref=e1118]: Durable memory route
+              - document [ref=e1120]:
+                - generic [ref=e1136]:
+                  - paragraph [ref=e1143]: Manny in PushingDebate Studio
+                  - paragraph [ref=e1150]:
+                    - text: Directive
+                    - text: Waiting for the next directive.
+                  - paragraph [ref=e1157]: PushingDebateDude
+                  - paragraph [ref=e1164]: pushingcap_sick_memory_dude
+                  - paragraph [ref=e1171]:
+                    - text: POST /memory/ingest
+                    - text: pending
+                  - paragraph [ref=e1178]: AI Memory
+                  - paragraph [ref=e1185]: PC Company Vision
+                  - paragraph [ref=e1192]: Worker Learning Feedback
+                  - paragraph [ref=e1199]: Memory Route Lineage
+                  - paragraph [ref=e1206]: Memory Ingest Batch
+                  - paragraph [ref=e1213]:
+                    - text: Current State
+                    - text: pending
+                  - paragraph [ref=e1220]:
+                    - text: Scope
+                    - text: local_fallback
+            - generic [ref=e1221]:
+              - generic [ref=e1222]: Live ingest and redraw map
+              - document [ref=e1224]:
+                - generic [ref=e1238]:
+                  - paragraph [ref=e1245]: "Live input: Waiting for input"
+                  - paragraph [ref=e1252]: "History hits: No history hits yet"
+                  - paragraph [ref=e1259]: "Notebooks: Notebook context pending"
+                  - paragraph [ref=e1266]: "Workflow cues: No workflow cues yet"
+                  - paragraph [ref=e1273]: "Task cues: No task cues yet"
+                  - paragraph [ref=e1280]: "Agent seat: PushingDebateDude"
+                  - paragraph [ref=e1287]: Regenerated Mermaid
+                  - paragraph [ref=e1294]: Waiting for next GPT-5.4 reply
+        - generic [ref=e1295]:
+          - generic [ref=e1296]:
+            - heading "Workflow, pipeline, and stage registry" [level=3] [ref=e1297]
+            - generic [ref=e1298]: "This is the front-of-house route registry for the studio: what workflow family is active, which pipelines are involved, which stages are visible, and what tasks and ticket are already on the table."
+          - generic [ref=e1299]:
+            - generic [ref=e1300]:
+              - generic [ref=e1301]:
+                - generic [ref=e1302]: PushingDebate Studio
+                - generic [ref=e1303]: Active
+              - generic [ref=e1304]: Turn spoken or typed intent into a GPT-5.4-guided debate surface that clarifies the idea, pulls helpful history, opens relevant workflows, teaches visually, and then implements th...
+            - generic [ref=e1305]:
+              - generic [ref=e1306]:
+                - generic [ref=e1307]: Ticket Resolution
+                - generic [ref=e1308]: Planned
+              - generic [ref=e1309]: Route tickets through triage, active work, waiting states, and resolution without losing ownership.
+          - generic [ref=e1310]:
+            - generic [ref=e1311]:
+              - generic [ref=e1312]: PushingDebate Studio
+              - generic [ref=e1313]: "Workflow: PushingDebate Studio"
+              - generic [ref=e1314]: "Source object: tasks"
+            - generic [ref=e1315]:
+              - generic [ref=e1316]: Processor Pipeline - Credit Repair
+              - generic [ref=e1317]: "Workflow: Ticket Resolution"
+              - generic [ref=e1318]: "Source object: tickets"
+          - generic [ref=e1319]:
+            - generic [ref=e1320]: Audio to Text
+            - generic [ref=e1321]: First Question
+            - generic [ref=e1322]: Describe Idea
+            - generic [ref=e1323]: Pull Helpful History
+            - generic [ref=e1324]: Open Relevant Workflows
+            - generic [ref=e1325]: Debate in Plain Language
+            - generic [ref=e1326]: Visual Clarification
+            - generic [ref=e1327]: Granular Breakdown
+            - generic [ref=e1328]: GPT-5.4 Codex Embed
+            - generic [ref=e1329]: Implement in Worker Studio
+            - generic [ref=e1330]: Live
+            - generic [ref=e1331]: Assigned
+            - generic [ref=e1332]: Docs Received
+            - generic [ref=e1333]: In Review
+            - generic [ref=e1334]: In Processing
+            - generic [ref=e1335]: In Monitoring
+            - generic [ref=e1336]: Blocked
+            - generic [ref=e1337]: Completed
+      - generic [ref=e1338]:
+        - generic [ref=e1339]:
+          - generic [ref=e1340]:
+            - heading "Tasks, ticket, SLAs, and failure contracts" [level=3] [ref=e1341]
+            - generic [ref=e1342]: These are the tasks and dependency ticket the studio is working through, plus the SLA target, owning worker, route, listeners, and the failure policy for each lane.
+          - generic [ref=e1343]:
+            - generic [ref=e1344]:
+              - generic [ref=e1345]:
+                - generic [ref=e1346]: Break down PushingDebate into granular stages
+                - generic [ref=e1347]: Not Started
+              - generic [ref=e1348]: Turn the debated idea into granular stages, actors, pipelines, tickets, tasks, use cases, and implementation steps once the direction is clear.
+              - generic [ref=e1349]: "Stage: Granular Breakdown"
+              - generic [ref=e1350]: "Owner: pushingcap_orchestrator · SLA: 4h · Route: route.debate.platform_wire"
+              - generic [ref=e1351]:
+                - generic [ref=e1352]: workflow_plane
+                - generic [ref=e1353]: tasks
+                - generic [ref=e1354]: tickets
+                - generic [ref=e1355]: handoff graph
+              - generic [ref=e1356]: "Failure contract: If the route is not granular enough, keep breaking it into stages instead of jumping to code."
+            - generic [ref=e1357]:
+              - generic [ref=e1358]:
+                - generic [ref=e1359]: Build PushingDebate visual teaching pack
+                - generic [ref=e1360]: Not Started
+              - generic [ref=e1361]: Use Mermaid, drawings, renders, RunPod media, and voice aids to clarify what the system understood after each new input.
+              - generic [ref=e1362]: "Stage: Visual Clarification"
+              - generic [ref=e1363]: "Owner: codex_design · SLA: 4h · Route: route.debate.derive_intelligence"
+              - generic [ref=e1364]:
+                - generic [ref=e1365]: mermaid redraw
+                - generic [ref=e1366]: runpod_media lane
+                - generic [ref=e1367]: generated_assets
+              - generic [ref=e1368]: "Failure contract: If media generation is unavailable, keep Mermaid and structured breakdowns as the teaching fallback."
+            - generic [ref=e1369]:
+              - generic [ref=e1370]:
+                - generic [ref=e1371]: Capture PushingDebate audio intake
+                - generic [ref=e1372]: Not Started
+              - generic [ref=e1373]: Start the studio with audio-to-text or text intake so the first idea arrives in one normalized discussion lane.
+              - generic [ref=e1374]: "Stage: Audio to Text"
+              - generic [ref=e1375]: "Owner: pushing_debate_dude · SLA: 1h · Route: POST /orchestration/backend/media/transcribe"
+              - generic [ref=e1376]:
+                - generic [ref=e1377]: microphone chunk queue
+                - generic [ref=e1378]: live research refresh
+                - generic [ref=e1379]: local session fallback
+              - generic [ref=e1380]: "Failure contract: If microphone capture fails, fall back to typed input and keep the debate lane active."
+            - generic [ref=e1381]:
+              - generic [ref=e1382]:
+                - generic [ref=e1383]: Define PushingDebate Studio idea
+                - generic [ref=e1384]: In Progress
+              - generic [ref=e1385]: Ask the first clarifying question, capture the idea in the operator's own words, and define what the studio should help the operator understand.
+              - generic [ref=e1386]: "Stage: First Question"
+              - generic [ref=e1387]: "Owner: pushing_debate_dude · SLA: 2h · Route: route.debate.derive_intelligence"
+              - generic [ref=e1388]:
+                - generic [ref=e1389]: ai_memory
+                - generic [ref=e1390]: pc_company_vision
+                - generic [ref=e1391]: worker_learning_feedback
+              - generic [ref=e1392]: "Failure contract: If the intent is still ambiguous, ask one narrower question instead of moving to implementation."
+            - generic [ref=e1393]:
+              - generic [ref=e1394]:
+                - generic [ref=e1395]: Embed GPT-5.4 Codex app in PushingDebate Studio
+                - generic [ref=e1396]: Not Started
+              - generic [ref=e1397]: Define the embedded GPT-5.4 Codex or OpenAI application surface, where it reads from, what it writes to, and how it helps the operator and system understand each other before implementation.
+              - generic [ref=e1398]: "Stage: GPT-5.4 Codex Embed"
+              - generic [ref=e1399]: "Owner: codex_design · SLA: 8h · Route: route.debate.api_mcp"
+              - generic [ref=e1400]:
+                - generic [ref=e1401]: embedded app surface
+                - generic [ref=e1402]: actions catalog
+                - generic [ref=e1403]: postman_api
+              - generic [ref=e1404]: "Failure contract: If embed runtime is blocked, preserve the contract and dependencies as visible tasks and ticket work."
+            - generic [ref=e1405]:
+              - generic [ref=e1406]:
+                - generic [ref=e1407]: Move PushingDebate conversation into PCRM flow
+                - generic [ref=e1408]: In Progress
+              - generic [ref=e1409]: "Turn the current PushingDebate conversation into live PCRM work. Selected worker: PushingDebateDude Workflow: PushingDebate Studio Pipeline: PushingDebate Studio Linked state: current_state_pushing_debate_dude_20260326201250_b14a11 Conversation digest: Route this conversation into PCRM with a task and ticket, link it to PushingDebate Studio, test the API MCP communication path, and show the derived intelligence while the work is moving."
+              - generic [ref=e1410]: "Stage: Implement in Worker Studio"
+            - generic [ref=e1411]:
+              - generic [ref=e1412]:
+                - generic [ref=e1413]: Pull helpful history for PushingDebate Studio
+                - generic [ref=e1414]: Not Started
+              - generic [ref=e1415]: Search previous history, notebooks, current state, and memory surfaces for context that can clarify the idea before debating it.
+              - generic [ref=e1416]: "Stage: Pull Helpful History"
+              - generic [ref=e1417]: "Owner: pushingcap_sick_memory_dude · SLA: 1h · Route: cmd.memory.scope.search"
+              - generic [ref=e1418]:
+                - generic [ref=e1419]: memory scope
+                - generic [ref=e1420]: ai_memory
+                - generic [ref=e1421]: pc_company_vision
+                - generic [ref=e1422]: notebook_registry
+              - generic [ref=e1423]: "Failure contract: If scoped memory is unavailable, fall back to durable records and keep the route visible."
+            - generic [ref=e1424]:
+              - generic [ref=e1425]:
+                - generic [ref=e1426]: Record PushingDebate gold rules and lessons
+                - generic [ref=e1427]: In Progress
+              - generic [ref=e1428]: Persist operator-authored directives, clarifications, and mistakes into PC Company Vision, AI Memory, and worker learning feedback so future studio sessions start with the same rules already loaded.
+              - generic [ref=e1429]: "Stage: Pull Helpful History"
+              - generic [ref=e1430]: "Owner: pushingcap_sick_memory_dude · SLA: 1h · Route: route.debate.memory_forever"
+              - generic [ref=e1431]:
+                - generic [ref=e1432]: ai_memory
+                - generic [ref=e1433]: pc_company_vision
+                - generic [ref=e1434]: worker_learning_feedback
+                - generic [ref=e1435]: current_state
+              - generic [ref=e1436]: "Failure contract: If batch ingest fails, write to the durable fallback records individually and keep lineage visible."
+            - generic [ref=e1437]:
+              - generic [ref=e1438]:
+                - generic [ref=e1439]: Route PushingDebate Studio workflow
+                - generic [ref=e1440]: Not Started
+              - generic [ref=e1441]: Open the relevant workflows, pipelines, tasks, tickets, and workers that can help explain or implement the idea.
+              - generic [ref=e1442]: "Stage: Open Relevant Workflows"
+              - generic [ref=e1443]: "Owner: pushingcap_orchestrator · SLA: 2h · Route: route.debate.platform_wire"
+              - generic [ref=e1444]:
+                - generic [ref=e1445]: workflow_plane
+                - generic [ref=e1446]: a2a room
+                - generic [ref=e1447]: task/ticket associations
+              - generic [ref=e1448]: "Failure contract: If one workflow match is weak, show the pulled routes anyway and ask the operator to pick the lane."
+            - generic [ref=e1449]:
+              - generic [ref=e1450]:
+                - generic [ref=e1451]: Run PushingDebate GPT-5.4 discussion loop
+                - generic [ref=e1452]: Not Started
+              - generic [ref=e1453]: Use PushingDebateDude as the operator-facing GPT-5.4 discussion seat, with PushingCapSickMemoryDude supplying backing memory, notebooks, and prior lessons, so the idea gets debated in plain language without losing context.
+              - generic [ref=e1454]: "Stage: Debate in Plain Language"
+              - generic [ref=e1455]: "Owner: pushing_debate_dude · SLA: 2h · Route: POST /orchestration/backend/worker-profiles/{worker_profile}/command"
+              - generic [ref=e1456]:
+                - generic [ref=e1457]: selected worker context
+                - generic [ref=e1458]: current_state
+                - generic [ref=e1459]: live reply lane
+              - generic [ref=e1460]: "Failure contract: If worker dispatch stalls, return the assembled prompt and routing path instead of hiding the failure."
+          - generic [ref=e1461]:
+            - generic [ref=e1462]:
+              - generic [ref=e1463]: Enable audio transcription, RunPod media, GPT-5.4 app, and Codex dependencies for PushingDebate Studio
+              - generic [ref=e1464]: Not Started
+            - generic [ref=e1465]: Provision audio-to-text, visual-learning, RunPod media, GPT-5.4 discussion, and Codex embed/runtime dependencies required to move the studio from concept to implementation.
+            - generic [ref=e1466]: "Owner: pushingcap_orchestrator · SLA: 8h · Route: cmd.ticket.create"
+            - generic [ref=e1467]:
+              - generic [ref=e1468]: ticket exception pipeline
+              - generic [ref=e1469]: dependency callbacks
+              - generic [ref=e1470]: ops escalation lane
+            - generic [ref=e1471]: "Failure contract: If a runtime dependency remains blocked, keep the studio usable and surface the blocker through the ticket lane."
+          - generic [ref=e1472]:
+            - generic [ref=e1473]:
+              - generic [ref=e1474]: Record intent + schema match
+              - generic [ref=e1475]: 1h
+              - generic [ref=e1476]: PushingDebateDude
+              - generic [ref=e1477]: Normalize what record should be created, validate the schema, and confirm the correct workflow, stage, and owner before the create call fires.
+            - generic [ref=e1478]:
+              - generic [ref=e1479]: Record create + association wiring
+              - generic [ref=e1480]: 2h
+              - generic [ref=e1481]: PushingCap Orchestrator
+              - generic [ref=e1482]: Create the record, wire workflow and worker associations, and make the route visible to listeners immediately.
+            - generic [ref=e1483]:
+              - generic [ref=e1484]: Task, ticket, and failure contracts
+              - generic [ref=e1485]: 4h
+              - generic [ref=e1486]: PushingCap Orchestrator
+              - generic [ref=e1487]: Open the follow-on task and blocker ticket contracts, assign SLAs, and document failure handling and escalation.
+            - generic [ref=e1488]:
+              - generic [ref=e1489]: API MCP and callback acknowledgement
+              - generic [ref=e1490]: 1h
+              - generic [ref=e1491]: Postman API
+              - generic [ref=e1492]: Confirm the API and MCP travel path, trigger dispatch, acknowledgements, callbacks, and retry notes.
+            - generic [ref=e1493]:
+              - generic [ref=e1494]: Derived intelligence writeback
+              - generic [ref=e1495]: 2h
+              - generic [ref=e1496]: PushingCap Sick Memory Dude
+              - generic [ref=e1497]: Turn the conversation, trigger output, and probe evidence into memory-ready intelligence.
+        - generic [ref=e1498]:
+          - generic [ref=e1499]:
+            - heading "Automation calls, listeners, callbacks, and error bounds" [level=3] [ref=e1500]
+            - generic [ref=e1501]: "This is the exact operating registry the studio uses to move fast: command codes, firing routes, listener surfaces, callback expectations, and bounded error behavior."
+          - document [ref=e1504]:
+            - generic [ref=e1512]:
+              - paragraph [ref=e1519]: Operator request
+              - paragraph [ref=e1526]: route.debate.platform_wire
+              - paragraph [ref=e1533]: route.debate.memory_forever
+              - paragraph [ref=e1540]: route.debate.api_mcp
+              - paragraph [ref=e1547]: route.debate.derive_intelligence
+              - paragraph [ref=e1554]: Tasks + Tickets + Associations
+              - paragraph [ref=e1561]: AI Memory + Company Vision + Learning Feedback
+              - paragraph [ref=e1568]: Actions Catalog + Postman
+              - paragraph [ref=e1575]: Derived intelligence + next route
+          - generic [ref=e1576]:
+            - generic [ref=e1577]:
+              - generic [ref=e1578]:
+                - generic [ref=e1579]: cmd.task.create
+                - generic [ref=e1580]: POST
+              - generic [ref=e1581]: Create a live task from the active debate turn.
+              - generic [ref=e1582]: task.create(subject, body, pipeline, stage, sla)
+              - generic [ref=e1583]: /data/create
+            - generic [ref=e1584]:
+              - generic [ref=e1585]:
+                - generic [ref=e1586]: cmd.ticket.create
+                - generic [ref=e1587]: POST
+              - generic [ref=e1588]: Create the dependency or blocker ticket tied to the same debate turn.
+              - generic [ref=e1589]: ticket.create(subject, body, pipeline, stage, sla)
+              - generic [ref=e1590]: /data/create
+            - generic [ref=e1591]:
+              - generic [ref=e1592]:
+                - generic [ref=e1593]: cmd.assoc.link
+                - generic [ref=e1594]: POST
+              - generic [ref=e1595]: Link task, ticket, worker, workflow, pipeline, tool, state, and room records.
+              - generic [ref=e1596]: assoc.link(from_obj, from_id, to_obj, to_id, label)
+              - generic [ref=e1597]: /data/associations/add
+            - generic [ref=e1598]:
+              - generic [ref=e1599]:
+                - generic [ref=e1600]: cmd.trace.log
+                - generic [ref=e1601]: POST
+              - generic [ref=e1602]: Log a route event, callback, or error into the worker plane trace ledger.
+              - generic [ref=e1603]: trace.log(worker, event, target, summary)
+              - generic [ref=e1604]: /orchestration/backend/a2a/traces
+            - generic [ref=e1605]:
+              - generic [ref=e1606]:
+                - generic [ref=e1607]: cmd.route.a2a.dispatch
+                - generic [ref=e1608]: POST
+              - generic [ref=e1609]: Fire the worker-plane route through master room and target workers.
+              - generic [ref=e1610]: route.fire(room, targets, body, audit_id)
+              - generic [ref=e1611]: /orchestration/backend/a2a/messages
+            - generic [ref=e1612]:
+              - generic [ref=e1613]:
+                - generic [ref=e1614]: cmd.actions.catalog.get
+                - generic [ref=e1615]: GET
+              - generic [ref=e1616]: Load the API and action-plane surface before firing MCP or provider work.
+              - generic [ref=e1617]: catalog.get()
+              - generic [ref=e1618]: /orchestration/backend/actions/catalog
+            - generic [ref=e1619]:
+              - generic [ref=e1620]:
+                - generic [ref=e1621]: cmd.postman.summary.get
+                - generic [ref=e1622]: GET
+              - generic [ref=e1623]: Inspect the Postman/API MCP lane before or after route dispatch.
+              - generic [ref=e1624]: postman.summary()
+              - generic [ref=e1625]: /orchestration/backend/postman/summary
+            - generic [ref=e1626]:
+              - generic [ref=e1627]:
+                - generic [ref=e1628]: cmd.research.google
+                - generic [ref=e1629]: POST
+              - generic [ref=e1630]: Run optional Google deep research when platform memory and workflow context are not enough.
+              - generic [ref=e1631]: research.google(query, site, limit)
+              - generic [ref=e1632]: /orchestration/backend/google/deep-research
+            - generic [ref=e1633]:
+              - generic [ref=e1634]:
+                - generic [ref=e1635]: cmd.media.image.generate
+                - generic [ref=e1636]: POST
+              - generic [ref=e1637]: Generate a visual explainer and bind it back to the studio workflow record.
+              - generic [ref=e1638]: media.image(prompt, target_obj, target_id, profile_key)
+              - generic [ref=e1639]: /orchestration/backend/runpod/generate-image
+            - generic [ref=e1640]:
+              - generic [ref=e1641]:
+                - generic [ref=e1642]: cmd.media.video.generate
+                - generic [ref=e1643]: POST
+              - generic [ref=e1644]: Generate a motion explainer and bind it back to the studio workflow record.
+              - generic [ref=e1645]: media.video(prompt, target_obj, target_id, profile_key)
+              - generic [ref=e1646]: /orchestration/backend/runpod/generate-video
+            - generic [ref=e1647]:
+              - generic [ref=e1648]:
+                - generic [ref=e1649]: cmd.memory.log
+                - generic [ref=e1650]: POST
+              - generic [ref=e1651]: Send durable lessons, operator rules, and route outcomes into memory surfaces.
+              - generic [ref=e1652]: memory.log(records, summary, batch_name)
+              - generic [ref=e1653]: /orchestration/backend/memory/ingest
+            - generic [ref=e1654]:
+              - generic [ref=e1655]:
+                - generic [ref=e1656]: cmd.memory.scope.search
+                - generic [ref=e1657]: POST
+              - generic [ref=e1658]: Load scoped memory before deciding the next question or next route.
+              - generic [ref=e1659]: memory.search(scope_id, query, limit)
+              - generic [ref=e1660]: "/orchestration/backend/memory/scopes/{scope_id}/search"
+            - generic [ref=e1661]:
+              - generic [ref=e1662]:
+                - generic [ref=e1663]: cmd.current_state.advertise
+                - generic [ref=e1664]: POST
+              - generic [ref=e1665]: Persist the new route summary and active request state for later workers.
+              - generic [ref=e1666]: state.advertise(worker, summary, fields)
+              - generic [ref=e1667]: /orchestration/backend/current-state/advertise
+          - generic [ref=e1668]:
+            - generic [ref=e1669]:
+              - generic [ref=e1670]: route.debate.platform_wire
+              - generic [ref=e1671]: Turn the current conversation into task, ticket, associations, trace, and readback evidence.
+              - generic [ref=e1672]: "Insert: route.debate.platform_wire(source_text)"
+              - generic [ref=e1673]:
+                - generic [ref=e1674]: cmd.task.create
+                - generic [ref=e1675]: cmd.ticket.create
+                - generic [ref=e1676]: cmd.assoc.link
+                - generic [ref=e1677]: cmd.trace.log
+                - generic [ref=e1678]: cmd.route.a2a.dispatch
+              - generic [ref=e1679]: "Reads: workflow_plane, a2a, record_readback"
+              - generic [ref=e1680]: "Writes: tasks, tickets, associations, a2a_traces"
+              - generic [ref=e1681]: "Callbacks: cb.records.created, cb.associations.wired, cb.trigger.completed_or_timed_out"
+              - generic [ref=e1682]: "Error bound: If dispatch exceeds the timeout window, continue and mark the trigger as timed out instead of freezing the studio."
+            - generic [ref=e1683]:
+              - generic [ref=e1684]: route.debate.memory_forever
+              - generic [ref=e1685]: Persist approved rules, corrections, and mistakes so the next studio session starts with them already loaded.
+              - generic [ref=e1686]: "Insert: route.debate.memory_forever(rule_text)"
+              - generic [ref=e1687]:
+                - generic [ref=e1688]: cmd.memory.log
+                - generic [ref=e1689]: cmd.current_state.advertise
+              - generic [ref=e1690]: "Reads: memory_scope_registry, ai_memory, worker_learning_feedback"
+              - generic [ref=e1691]: "Writes: ai_memory, pc_company_vision, worker_learning_feedback, memory_route_lineage, memory_ingest_batch, current_state"
+              - generic [ref=e1692]: "Callbacks: cb.memory.persisted, cb.state.advertised"
+              - generic [ref=e1693]: "Error bound: If memory write fails, fall back to AI Memory, PC Company Vision, and worker learning feedback records."
+            - generic [ref=e1694]:
+              - generic [ref=e1695]: route.debate.api_mcp
+              - generic [ref=e1696]: Hand the route to postman_api and action-plane surfaces for API and MCP travel.
+              - generic [ref=e1697]: "Insert: route.debate.api_mcp(targets, body)"
+              - generic [ref=e1698]:
+                - generic [ref=e1699]: cmd.actions.catalog.get
+                - generic [ref=e1700]: cmd.postman.summary.get
+                - generic [ref=e1701]: cmd.route.a2a.dispatch
+              - generic [ref=e1702]: "Reads: actions_catalog, postman_summary"
+              - generic [ref=e1703]: "Writes: a2a_messages, a2a_traces"
+              - generic [ref=e1704]: "Callbacks: cb.api_surface.loaded, cb.postman.ready, cb.route.explained"
+              - generic [ref=e1705]: "Error bound: If Postman or actions are unavailable, keep the trace and association records so the retry path is obvious."
+            - generic [ref=e1706]:
+              - generic [ref=e1707]: route.debate.media_explain
+              - generic [ref=e1708]: Generate an image or video deliverable that teaches the current workflow, route, or decision visually.
+              - generic [ref=e1709]: "Insert: route.debate.media_explain(prompt)"
+              - generic [ref=e1710]:
+                - generic [ref=e1711]: cmd.media.image.generate
+                - generic [ref=e1712]: cmd.media.video.generate
+                - generic [ref=e1713]: cmd.trace.log
+              - generic [ref=e1714]: "Reads: runpod_profiles, workflow_definitions, current_question"
+              - generic [ref=e1715]: "Writes: generated_assets, attachments, a2a_traces"
+              - generic [ref=e1716]: "Callbacks: cb.media.created, cb.next_route.suggested"
+              - generic [ref=e1717]: "Error bound: If media generation fails, keep the prompt and trace so the same explainer can be retried without reconstructing intent."
+            - generic [ref=e1718]:
+              - generic [ref=e1719]: route.debate.deep_research_google
+              - generic [ref=e1720]: Use Google deep research when the studio needs live outside evidence beyond platform memory and worker context.
+              - generic [ref=e1721]: "Insert: route.debate.deep_research_google(query)"
+              - generic [ref=e1722]:
+                - generic [ref=e1723]: cmd.research.google
+                - generic [ref=e1724]: cmd.trace.log
+              - generic [ref=e1725]: "Reads: google_custom_search, workflow_plane, memory_scope_registry"
+              - generic [ref=e1726]: "Writes: a2a_traces"
+              - generic [ref=e1727]: "Callbacks: cb.research.loaded, cb.next_route.suggested"
+              - generic [ref=e1728]: "Error bound: If the Google research lane is unconfigured or unavailable, keep working from internal memory and show the missing dependency explicitly."
+            - generic [ref=e1729]:
+              - generic [ref=e1730]: route.debate.derive_intelligence
+              - generic [ref=e1731]: Read the records, traces, state, and memory hits back into a concise intelligence summary while work is moving.
+              - generic [ref=e1732]: "Insert: route.debate.derive_intelligence(scope_id, probes)"
+              - generic [ref=e1733]:
+                - generic [ref=e1734]: cmd.memory.scope.search
+                - generic [ref=e1735]: cmd.actions.catalog.get
+                - generic [ref=e1736]: cmd.trace.log
+              - generic [ref=e1737]: "Reads: memory_scope_registry, workflow_plane, actions_catalog, records, current_state"
+              - generic [ref=e1738]: "Writes: a2a_traces"
+              - generic [ref=e1739]: "Callbacks: cb.intelligence.derived, cb.next_route.suggested"
+              - generic [ref=e1740]: "Error bound: If any GET probe fails, capture the failed route in the trace and continue with the successful signals."
+          - generic [ref=e1741]:
+            - generic [ref=e1742]:
+              - generic [ref=e1743]: Callback registry
+              - generic [ref=e1744]:
+                - generic [ref=e1745]: cb.records.created
+                - generic [ref=e1746]: Task and ticket were created and are safe to associate and probe.
+              - generic [ref=e1747]:
+                - generic [ref=e1748]: cb.associations.wired
+                - generic [ref=e1749]: The record graph is connected and downstream workers can inspect it.
+              - generic [ref=e1750]:
+                - generic [ref=e1751]: cb.trigger.completed_or_timed_out
+                - generic [ref=e1752]: A2A dispatch either produced replies or returned a bounded timeout result.
+              - generic [ref=e1753]:
+                - generic [ref=e1754]: cb.memory.persisted
+                - generic [ref=e1755]: Operator rules landed in durable memory surfaces and have lineage.
+              - generic [ref=e1756]:
+                - generic [ref=e1757]: cb.state.advertised
+                - generic [ref=e1758]: Current state bus now exposes the latest rule or route summary.
+              - generic [ref=e1759]:
+                - generic [ref=e1760]: cb.api_surface.loaded
+                - generic [ref=e1761]: Action plane and MCP surfaces are known before the route is fired.
+              - generic [ref=e1762]:
+                - generic [ref=e1763]: cb.media.created
+                - generic [ref=e1764]: A visual or motion deliverable was generated and linked to the studio workflow record.
+              - generic [ref=e1765]:
+                - generic [ref=e1766]: cb.research.loaded
+                - generic [ref=e1767]: Google deep research returned live outside context for the current debate.
+              - generic [ref=e1768]:
+                - generic [ref=e1769]: cb.intelligence.derived
+                - generic [ref=e1770]: Readback and memory hits were collapsed into a concise intelligence summary.
+              - generic [ref=e1771]:
+                - generic [ref=e1772]: cb.next_route.suggested
+                - generic [ref=e1773]: The studio can recommend the next route instead of asking the operator to guess.
+            - generic [ref=e1774]:
+              - generic [ref=e1775]: Durable memory targets
+              - generic [ref=e1776]:
+                - generic [ref=e1777]: mem.ai_memory.forever
+                - generic [ref=e1778]: ai_memory · append
+                - generic [ref=e1779]: Operator rules, approved language, and durable debate lessons.
+              - generic [ref=e1780]:
+                - generic [ref=e1781]: mem.company_vision.forever
+                - generic [ref=e1782]: pc_company_vision · append_or_update
+                - generic [ref=e1783]: Company directives and gold rules that must survive across sessions.
+              - generic [ref=e1784]:
+                - generic [ref=e1785]: mem.learning_feedback.forever
+                - generic [ref=e1786]: worker_learning_feedback · append
+                - generic [ref=e1787]: Mistakes, callbacks, next-prompt adjustments, and retry lessons.
+              - generic [ref=e1788]:
+                - generic [ref=e1789]: mem.notebook_registry.curate
+                - generic [ref=e1790]: notebook_registry · create_attach_update
+                - generic [ref=e1791]: Notebook references for people, deals, workers, workflows, and pipelines.
+              - generic [ref=e1792]:
+                - generic [ref=e1793]: mem.route_lineage.log
+                - generic [ref=e1794]: memory_route_lineage · append
+                - generic [ref=e1795]: Where the information came from, who placed it, and where it traveled next.
+              - generic [ref=e1796]:
+                - generic [ref=e1797]: mem.ingest_batch.log
+                - generic [ref=e1798]: memory_ingest_batch · append
+                - generic [ref=e1799]: Batch-level ingest telemetry for discovery, compaction, and replay.
+      - generic [ref=e1800]:
+        - generic [ref=e1801]:
+          - generic [ref=e1802]:
+            - generic [ref=e1803]:
+              - heading "Live debate lane" [level=3] [ref=e1804]
+              - generic [ref=e1806]: Planned
+            - generic [ref=e1807]: Talk or type naturally. The studio keeps fetching memory and workflow context, redraws the working Mermaid, and routes the turn through the selected GPT-5.4 worker.
+          - generic [ref=e1808]:
+            - generic [ref=e1809]:
+              - generic [ref=e1810]: Current question
+              - generic [ref=e1811]: What do you have in mind?
+            - generic [ref=e1812]:
+              - generic [ref=e1813]: Selected agent
+              - generic [ref=e1814]: PushingDebateDude
+              - generic [ref=e1815]: Product and Platform
+            - generic [ref=e1816]:
+              - generic [ref=e1817]: Current screen
+              - generic [ref=e1818]: PushingDebate Studio
+              - generic [ref=e1819]: "#/pushing-debate-studio"
+            - generic [ref=e1820]:
+              - generic [ref=e1821]: Speech target
+              - generic [ref=e1822]: Codex application
+              - generic [ref=e1823]: Aim the response at code edits, runtime behavior, API contracts, and implementation steps.
+            - generic [ref=e1824]:
+              - generic [ref=e1825]: Memory session
+              - generic [ref=e1826]: Initializing...
+              - generic [ref=e1827]: Waiting for scope
+            - generic [ref=e1828]:
+              - generic [ref=e1829]: Autosave
+              - generic [ref=e1830]: Saved 6:38:00 PM
+              - generic [ref=e1831]: Saved to browser snapshot.
+          - generic [ref=e1832]:
+            - generic [ref=e1833]:
+              - combobox [ref=e1834]:
+                - option "Codex Design"
+                - option "Postman API"
+                - option "PushingCapSickMemoryDude"
+                - option "PushingDebateDude" [selected]
+                - option "PushingCap Orchestrator"
+                - option "RunPod Media"
+              - combobox [ref=e1835]:
+                - option "Codex application" [selected]
+                - option "Stitch design"
+              - button "Start Mic" [ref=e1836] [cursor=pointer]
+              - button "Start Screen" [ref=e1837] [cursor=pointer]
+              - button "Stop Voice" [ref=e1838] [cursor=pointer]
+              - button "Save Checkpoint" [ref=e1839] [cursor=pointer]
+              - generic [ref=e1840]:
+                - checkbox "Auto speak" [checked] [ref=e1841]
+                - text: Auto speak
+            - generic [ref=e1842]: Start with the microphone or type your idea below. Autosave is writing the draft, messages, worker selection, the active screen target, and latest outputs into the browser snapshot continuously, and Save & Logout now flushes a final checkpoint before auth is cleared.
+            - generic [ref=e1843]:
+              - generic [ref=e1844]:
+                - generic [ref=e1845]: Screen + microphone capture
+                - generic [ref=e1846]: Idle
+              - generic [ref=e1847]: Capture the active screen with system audio and microphone, then bind the recording to the studio workflow record.
+              - generic [ref=e1848]:
+                - generic [ref=e1849]:
+                  - generic [ref=e1850]: Capture screen
+                  - generic [ref=e1851]: PushingDebate Studio
+                  - generic [ref=e1852]: "#/pushing-debate-studio"
+                - generic [ref=e1853]:
+                  - generic [ref=e1854]: Mic audio
+                  - generic [ref=e1855]: "Off"
+                  - generic [ref=e1856]: Mixed into the recording when available
+                - generic [ref=e1857]:
+                  - generic [ref=e1858]: System audio
+                  - generic [ref=e1859]: "Off"
+                  - generic [ref=e1860]: Captured from the shared screen when available
+                - generic [ref=e1861]:
+                  - generic [ref=e1862]: Bound attachment
+                  - generic [ref=e1863]: Pending
+                  - generic [ref=e1864]: Upload after stop
+            - textbox "Describe the idea, keep talking, or answer the current question. The studio will keep fetching context and redrawing while you go." [ref=e1865]
+            - generic [ref=e1866]:
+              - button "Clear" [ref=e1867] [cursor=pointer]
+              - button "Send Debate Prompt" [disabled] [ref=e1868] [cursor=pointer]
+        - generic [ref=e1869]:
+          - generic [ref=e1870]:
+            - heading "Live research lane" [level=3] [ref=e1871]
+            - generic [ref=e1872]: While you speak, the studio looks at scope memory, notebooks, the selected worker contract, current state, and matching workflow records.
+          - generic [ref=e1873]:
+            - generic [ref=e1874]:
+              - generic [ref=e1875]: Query
+              - generic [ref=e1876]: Idle
+              - generic [ref=e1877]: Waiting for input
+            - generic [ref=e1878]:
+              - generic [ref=e1879]: History Hits
+              - generic [ref=e1880]: "0"
+              - generic [ref=e1881]: Scope search
+            - generic [ref=e1882]:
+              - generic [ref=e1883]: Notebooks
+              - generic [ref=e1884]: "0"
+              - generic [ref=e1885]: NotebookLM registry
+            - generic [ref=e1886]:
+              - generic [ref=e1887]: Room
+              - generic [ref=e1888]: Pending
+              - generic [ref=e1889]: Worker room will bind after first command
+          - generic [ref=e1890]:
+            - generic [ref=e1891]: Live working map
+            - document [ref=e1893]:
+              - generic [ref=e1907]:
+                - paragraph [ref=e1914]: "Live input: Waiting for input"
+                - paragraph [ref=e1921]: "History hits: No history hits yet"
+                - paragraph [ref=e1928]: "Notebooks: Notebook context pending"
+                - paragraph [ref=e1935]: "Workflow cues: No workflow cues yet"
+                - paragraph [ref=e1942]: "Task cues: No task cues yet"
+                - paragraph [ref=e1949]: "Agent seat: PushingDebateDude"
+                - paragraph [ref=e1956]: Regenerated Mermaid
+                - paragraph [ref=e1963]: Waiting for next GPT-5.4 reply
+          - generic [ref=e1964]:
+            - generic [ref=e1965]: Latest agent diagram
+            - generic [ref=e1966]: When the agent returns a Mermaid diagram in the conversation, it will appear here.
+          - generic [ref=e1967]:
+            - generic [ref=e1968]:
+              - generic [ref=e1969]: Selected worker contract
+              - generic [ref=e1970]: Worker context will load as soon as the research lane runs.
+            - generic [ref=e1971]:
+              - generic [ref=e1972]: Helpful history
+              - generic [ref=e1974]: No scope matches yet. Start speaking or type a few concrete nouns and verbs.
+            - generic [ref=e1975]:
+              - generic [ref=e1976]: Workflow cues
+              - generic [ref=e1978]: Workflow, task, and stage hints will appear here once the idea has enough detail to match seeded records.
+            - generic [ref=e1979]:
+              - generic [ref=e1980]:
+                - generic [ref=e1981]:
+                  - generic [ref=e1982]: Media deliverables
+                  - generic [ref=e1983]: Generate a visual or motion deliverable tied to this studio so the explanation is not only text.
+                - generic [ref=e1985]: Planned
+              - textbox "Describe the explainer image or video the studio should generate." [ref=e1986]: "Create a clean visual explainer for PushingDebate Studio. Current question: What do you have in mind? Show the workflow, memory flow, and next step so a visual learner can understand it immediately."
+              - generic [ref=e1987]:
+                - combobox [ref=e1988]:
+                  - option "Image profile"
+                  - option "Seedream 4.0 T2I" [selected]
+                  - option "Qwen Image"
+                  - option "P-Image T2I"
+                - combobox [ref=e1989]:
+                  - option "Video profile"
+                  - option "Seedance 1.0 Pro" [selected]
+                  - option "Pruna Video"
+                  - option "WAN 2.6 T2V"
+              - generic [ref=e1990]:
+                - button "Generate explainer image" [ref=e1991] [cursor=pointer]
+                - button "Generate explainer video" [ref=e1992] [cursor=pointer]
+                - button "Refresh media" [ref=e1993] [cursor=pointer]
+              - generic [ref=e1994]: Media outputs are attached back to the PushingDebate Studio workflow record and kept in generated assets.
+              - generic [ref=e1995]: No media deliverable yet. Generate an explainer image or video and it will stay visible here.
+            - generic [ref=e1996]:
+              - generic [ref=e1997]:
+                - generic [ref=e1998]:
+                  - generic [ref=e1999]: Google deep research
+                  - generic [ref=e2000]: Optional external research lane for when platform memory and worker context are not enough.
+                - generic [ref=e2001]: Planned
+              - generic [ref=e2002]:
+                - textbox "Optional site filter" [ref=e2003]: platform.pushingcap.com
+                - button "Run Google deep research" [disabled] [ref=e2004]
+              - generic [ref=e2005]: Google deep research is not configured yet. Add the search API key and engine id to the google-deep-research provider.
+              - generic [ref=e2006]: When you run deep research, the returned sources and snippets will appear here.
+      - generic [ref=e2007]:
+        - generic [ref=e2008]:
+          - generic [ref=e2009]:
+            - heading "Prompt and ingestion in front of you" [level=3] [ref=e2010]
+            - generic [ref=e2011]: This is the prompt being assembled for the selected worker and the exact ingestion path the studio is using before it answers.
+          - generic [ref=e2012]:
+            - generic [ref=e2013]: Prompt preview
+            - generic [ref=e2014]: Start talking or typing and the live worker prompt will assemble here before dispatch.
+          - generic [ref=e2015]:
+            - generic [ref=e2016]:
+              - generic [ref=e2017]:
+                - generic [ref=e2018]: Operator draft
+                - generic [ref=e2019]: Planned
+              - generic [ref=e2020]: Waiting for microphone or text input.
+            - generic [ref=e2021]:
+              - generic [ref=e2022]:
+                - generic [ref=e2023]: History ingest
+                - generic [ref=e2024]: Planned
+              - generic [ref=e2025]: 0 records matched from scoped memory, AI Memory, PC Company Vision, or worker learning feedback.
+            - generic [ref=e2026]:
+              - generic [ref=e2027]:
+                - generic [ref=e2028]: Notebook ingest
+                - generic [ref=e2029]: Planned
+              - generic [ref=e2030]: 0 notebook records in play.
+            - generic [ref=e2031]:
+              - generic [ref=e2032]:
+                - generic [ref=e2033]: Workflow ingest
+                - generic [ref=e2034]: Planned
+              - generic [ref=e2035]: PushingDebate Studio
+            - generic [ref=e2036]:
+              - generic [ref=e2037]:
+                - generic [ref=e2038]: Agent selection
+                - generic [ref=e2039]: Completed
+              - generic [ref=e2040]: PushingDebateDude
+            - generic [ref=e2041]:
+              - generic [ref=e2042]:
+                - generic [ref=e2043]: Dispatch route
+                - generic [ref=e2044]: Planned
+              - generic [ref=e2045]: No worker dispatch yet.
+            - generic [ref=e2046]:
+              - generic [ref=e2047]:
+                - generic [ref=e2048]: Agent reply
+                - generic [ref=e2049]: Planned
+              - generic [ref=e2050]: Waiting for the next worker reply.
+        - generic [ref=e2051]:
+          - generic [ref=e2052]:
+            - heading "Agents, routing, and where they go" [level=3] [ref=e2053]
+            - generic [ref=e2054]: This map shows which agents are being pulled in, which ingestion sources are active, and which room the live worker dispatch is using.
+          - document [ref=e2057]:
+            - generic [ref=e2071]:
+              - paragraph [ref=e2078]: Operator mic + text
+              - paragraph [ref=e2085]: "Prompt draft: waiting"
+              - paragraph [ref=e2092]: "History ingest: No history matches yet"
+              - paragraph [ref=e2099]: "Notebook ingest: No notebook records yet"
+              - paragraph [ref=e2106]: "Workflow ingest: PushingDebate Studio"
+              - paragraph [ref=e2113]: "Matched agents: No matched side agents yet"
+              - paragraph [ref=e2120]: "Current state: pending"
+              - paragraph [ref=e2127]: "Selected worker: PushingDebateDude"
+              - paragraph [ref=e2134]: "Room route: Room pending"
+              - paragraph [ref=e2141]: "Reply: waiting"
+              - paragraph [ref=e2148]: Flowchart refresh
+          - generic [ref=e2149]:
+            - generic [ref=e2150]:
+              - generic [ref=e2151]: Selected agent
+              - generic [ref=e2152]: PushingDebateDude
+              - generic [ref=e2153]: Product and Platform
+            - generic [ref=e2154]:
+              - generic [ref=e2155]: Matched side agents
+              - generic [ref=e2156]: No side agents matched yet.
+            - generic [ref=e2157]:
+              - generic [ref=e2158]: Dispatch room
+              - generic [ref=e2159]: Pending first dispatch
+              - generic [ref=e2160]: Room binds after the first successful worker command.
+          - generic [ref=e2161]:
+            - generic [ref=e2162]: Last dispatched prompt
+            - generic [ref=e2163]: After the first send, the exact dispatched worker prompt will stay visible here.
+          - generic [ref=e2164]:
+            - generic [ref=e2165]: Pulled workflows and labels
+            - generic [ref=e2167]:
+              - generic [ref=e2168]:
+                - generic [ref=e2169]: PushingDebate Studio
+                - generic [ref=e2171]: Primary studio workflow
+              - generic [ref=e2172]: Turn spoken or typed intent into a GPT-5.4-guided debate surface that clarifies the idea, pulls helpful history, opens relevant workflows, teaches visually, and then implements the approved version inside PCRM.
+              - generic [ref=e2173]: "Pipelines: PushingDebate Studio"
+      - generic [ref=e2174]:
+        - generic [ref=e2175]:
+          - generic [ref=e2176]:
+            - heading "Post-discovery record workflow" [level=3] [ref=e2177]
+            - generic [ref=e2178]: This is the route that starts after discovery. When you hit or try to add a new record, the platform should move through intent, schema match, validation, create, associations, task and ticket contracts, callbacks, and memory writeback in this order.
+          - document [ref=e2181]:
+            - generic [ref=e2192]:
+              - paragraph [ref=e2199]:
+                - text: Discovery complete
+                - text: PushingDebate Studio
+              - paragraph [ref=e2206]:
+                - text: Record intent
+                - text: operator clicks add record
+              - paragraph [ref=e2213]: Schema match
+              - paragraph [ref=e2220]: Preflight validation
+              - paragraph [ref=e2227]:
+                - text: POST /data/create
+                - text: task_pending
+              - paragraph [ref=e2234]: Association wiring
+              - paragraph [ref=e2241]:
+                - text: Task + ticket contracts
+                - text: ticket_pending
+              - paragraph [ref=e2248]:
+                - text: Automation dispatch
+                - text: agents-a2a-master
+              - paragraph [ref=e2255]:
+                - text: Callback review
+                - text: 9 live lanes
+              - paragraph [ref=e2262]:
+                - text: Failure contracts
+                - text: 4 bounds
+              - paragraph [ref=e2269]:
+                - text: Memory writeback
+                - text: state_pending
+              - paragraph [ref=e2276]:
+                - text: Live route
+                - text: PushingDebate Studio
+              - paragraph [ref=e2283]:
+                - text: Owner
+                - text: PushingDebateDude
+          - generic [ref=e2284]:
+            - generic [ref=e2285]: Stages
+            - generic [ref=e2286]: Post-discovery stages will appear here after the workflow summary sync loads them.
+        - generic [ref=e2287]:
+          - generic [ref=e2288]:
+            - heading "Tasks, SLAs, tickets, and failure contracts" [level=3] [ref=e2289]
+            - generic [ref=e2290]: These are the contracts that should already exist before create fires. They define who owns the route, how long each lane has, what automation calls run, and what happens when something fails.
+          - generic [ref=e2292]: No post-discovery tasks are loaded yet.
+          - generic [ref=e2293]:
+            - generic [ref=e2294]: SLAs
+            - generic [ref=e2295]:
+              - generic [ref=e2296]:
+                - generic [ref=e2297]: Record intent + schema match
+                - generic [ref=e2298]: 1h
+              - generic [ref=e2299]: Normalize what record should be created, validate the schema, and confirm the correct workflow, stage, and owner before the create call fires.
+              - generic [ref=e2300]: "Owner: PushingDebateDude"
+            - generic [ref=e2301]:
+              - generic [ref=e2302]:
+                - generic [ref=e2303]: Record create + association wiring
+                - generic [ref=e2304]: 2h
+              - generic [ref=e2305]: Create the record, wire workflow and worker associations, and make the route visible to listeners immediately.
+              - generic [ref=e2306]: "Owner: PushingCap Orchestrator"
+            - generic [ref=e2307]:
+              - generic [ref=e2308]:
+                - generic [ref=e2309]: Task, ticket, and failure contracts
+                - generic [ref=e2310]: 4h
+              - generic [ref=e2311]: Open the follow-on task and blocker ticket contracts, assign SLAs, and document failure handling and escalation.
+              - generic [ref=e2312]: "Owner: PushingCap Orchestrator"
+            - generic [ref=e2313]:
+              - generic [ref=e2314]:
+                - generic [ref=e2315]: API MCP and callback acknowledgement
+                - generic [ref=e2316]: 1h
+              - generic [ref=e2317]: Confirm the API and MCP travel path, trigger dispatch, acknowledgements, callbacks, and retry notes.
+              - generic [ref=e2318]: "Owner: Postman API"
+            - generic [ref=e2319]:
+              - generic [ref=e2320]:
+                - generic [ref=e2321]: Derived intelligence writeback
+                - generic [ref=e2322]: 2h
+              - generic [ref=e2323]: Turn the conversation, trigger output, and probe evidence into memory-ready intelligence.
+              - generic [ref=e2324]: "Owner: PushingCap Sick Memory Dude"
+          - generic [ref=e2325]:
+            - generic [ref=e2326]: Failure contracts
+            - generic [ref=e2327]:
+              - generic [ref=e2328]:
+                - generic [ref=e2329]: Schema mismatch
+                - generic [ref=e2330]: route.record.schema_match
+              - generic [ref=e2331]: Do not fire create. Route back to intent clarification and open the blocker ticket if required fields or object choice are unclear.
+              - generic [ref=e2332]: "Owner: PushingDebateDude"
+            - generic [ref=e2333]:
+              - generic [ref=e2334]:
+                - generic [ref=e2335]: Create call failure
+                - generic [ref=e2336]: route.record.create_retry
+              - generic [ref=e2337]: Log the trace, preserve the payload, and keep the record request in the post-discovery pipeline instead of silently dropping it.
+              - generic [ref=e2338]: "Owner: PushingCap Orchestrator"
+            - generic [ref=e2339]:
+              - generic [ref=e2340]:
+                - generic [ref=e2341]: Association or trigger failure
+                - generic [ref=e2342]: route.record.callback_review
+              - generic [ref=e2343]: Mark the callback review stage, publish retry notes, and keep the ticket active until acknowledgements are visible.
+              - generic [ref=e2344]: "Owner: Postman API"
+            - generic [ref=e2345]:
+              - generic [ref=e2346]:
+                - generic [ref=e2347]: Memory writeback failure
+                - generic [ref=e2348]: route.record.memory_writeback
+              - generic [ref=e2349]: Persist the route evidence locally, reopen memory writeback, and do not mark the route complete until durable memory is updated.
+              - generic [ref=e2350]: "Owner: PushingCap Sick Memory Dude"
+          - generic [ref=e2351]:
+            - generic [ref=e2352]: Automation calls
+            - generic [ref=e2353]:
+              - generic [ref=e2354]:
+                - generic [ref=e2355]:
+                  - generic [ref=e2356]: cmd.task.create
+                  - generic [ref=e2357]: POST
+                - generic [ref=e2358]: Create a live task from the active debate turn.
+                - generic [ref=e2359]: /data/create
+              - generic [ref=e2360]:
+                - generic [ref=e2361]:
+                  - generic [ref=e2362]: cmd.ticket.create
+                  - generic [ref=e2363]: POST
+                - generic [ref=e2364]: Create the dependency or blocker ticket tied to the same debate turn.
+                - generic [ref=e2365]: /data/create
+              - generic [ref=e2366]:
+                - generic [ref=e2367]:
+                  - generic [ref=e2368]: cmd.assoc.link
+                  - generic [ref=e2369]: POST
+                - generic [ref=e2370]: Link task, ticket, worker, workflow, pipeline, tool, state, and room records.
+                - generic [ref=e2371]: /data/associations/add
+              - generic [ref=e2372]:
+                - generic [ref=e2373]:
+                  - generic [ref=e2374]: cmd.trace.log
+                  - generic [ref=e2375]: POST
+                - generic [ref=e2376]: Log a route event, callback, or error into the worker plane trace ledger.
+                - generic [ref=e2377]: /orchestration/backend/a2a/traces
+              - generic [ref=e2378]:
+                - generic [ref=e2379]:
+                  - generic [ref=e2380]: cmd.route.a2a.dispatch
+                  - generic [ref=e2381]: POST
+                - generic [ref=e2382]: Fire the worker-plane route through master room and target workers.
+                - generic [ref=e2383]: /orchestration/backend/a2a/messages
+              - generic [ref=e2384]:
+                - generic [ref=e2385]:
+                  - generic [ref=e2386]: cmd.actions.catalog.get
+                  - generic [ref=e2387]: GET
+                - generic [ref=e2388]: Load the API and action-plane surface before firing MCP or provider work.
+                - generic [ref=e2389]: /orchestration/backend/actions/catalog
+              - generic [ref=e2390]:
+                - generic [ref=e2391]:
+                  - generic [ref=e2392]: cmd.postman.summary.get
+                  - generic [ref=e2393]: GET
+                - generic [ref=e2394]: Inspect the Postman/API MCP lane before or after route dispatch.
+                - generic [ref=e2395]: /orchestration/backend/postman/summary
+              - generic [ref=e2396]:
+                - generic [ref=e2397]:
+                  - generic [ref=e2398]: cmd.memory.log
+                  - generic [ref=e2399]: POST
+                - generic [ref=e2400]: Send durable lessons, operator rules, and route outcomes into memory surfaces.
+                - generic [ref=e2401]: /orchestration/backend/memory/ingest
+              - generic [ref=e2402]:
+                - generic [ref=e2403]:
+                  - generic [ref=e2404]: cmd.current_state.advertise
+                  - generic [ref=e2405]: POST
+                - generic [ref=e2406]: Persist the new route summary and active request state for later workers.
+                - generic [ref=e2407]: /orchestration/backend/current-state/advertise
+      - generic [ref=e2408]:
+        - generic [ref=e2409]:
+          - generic [ref=e2410]:
+            - heading "Move this conversation into PCRM" [level=3] [ref=e2411]
+            - generic [ref=e2412]: This creates a live task and ticket from the active debate, routes them into the post-discovery workflow, adds record associations, fires internal trigger traffic, and then runs a parallel 15-call readback so you can see what the platform understood.
+          - generic [ref=e2413]:
+            - generic [ref=e2414]:
+              - generic [ref=e2415]: Parallel GETs
+              - generic [ref=e2416]: "15"
+              - generic [ref=e2417]: One Promise.all sweep
+            - generic [ref=e2418]:
+              - generic [ref=e2419]: Creates
+              - generic [ref=e2420]: "2"
+              - generic [ref=e2421]: Task + ticket
+            - generic [ref=e2422]:
+              - generic [ref=e2423]: Associations
+              - generic [ref=e2424]: "0"
+              - generic [ref=e2425]: Workflow, worker, tool, state, room
+            - generic [ref=e2426]:
+              - generic [ref=e2427]: Trigger targets
+              - generic [ref=e2428]: "3"
+              - generic [ref=e2429]: API MCP + memory + orchestrator
+          - generic [ref=e2430]:
+            - generic [ref=e2431]: Conversation digest to route
+            - generic [ref=e2432]: Talk to the studio first. The latest operator input and conversation snapshot will appear here before record creation.
+          - generic [ref=e2433]:
+            - button "Create Task, Ticket, Associations, Triggers, and GET Sweep" [disabled] [ref=e2434] [cursor=pointer]
+            - generic [ref=e2435]: This will POST creates, POST associations, POST traces, POST an A2A trigger, and then run 15 GET probes in parallel.
+          - generic [ref=e2436]:
+            - generic [ref=e2437]: SLAs
+            - generic [ref=e2438]:
+              - generic [ref=e2439]:
+                - generic [ref=e2440]: Record intent + schema match
+                - generic [ref=e2441]: 1h
+              - generic [ref=e2442]: Normalize what record should be created, validate the schema, and confirm the correct workflow, stage, and owner before the create call fires.
+              - generic [ref=e2443]: "Owner: PushingDebateDude"
+            - generic [ref=e2444]:
+              - generic [ref=e2445]:
+                - generic [ref=e2446]: Record create + association wiring
+                - generic [ref=e2447]: 2h
+              - generic [ref=e2448]: Create the record, wire workflow and worker associations, and make the route visible to listeners immediately.
+              - generic [ref=e2449]: "Owner: PushingCap Orchestrator"
+            - generic [ref=e2450]:
+              - generic [ref=e2451]:
+                - generic [ref=e2452]: Task, ticket, and failure contracts
+                - generic [ref=e2453]: 4h
+              - generic [ref=e2454]: Open the follow-on task and blocker ticket contracts, assign SLAs, and document failure handling and escalation.
+              - generic [ref=e2455]: "Owner: PushingCap Orchestrator"
+            - generic [ref=e2456]:
+              - generic [ref=e2457]:
+                - generic [ref=e2458]: API MCP and callback acknowledgement
+                - generic [ref=e2459]: 1h
+              - generic [ref=e2460]: Confirm the API and MCP travel path, trigger dispatch, acknowledgements, callbacks, and retry notes.
+              - generic [ref=e2461]: "Owner: Postman API"
+            - generic [ref=e2462]:
+              - generic [ref=e2463]:
+                - generic [ref=e2464]: Derived intelligence writeback
+                - generic [ref=e2465]: 2h
+              - generic [ref=e2466]: Turn the conversation, trigger output, and probe evidence into memory-ready intelligence.
+              - generic [ref=e2467]: "Owner: PushingCap Sick Memory Dude"
+          - generic [ref=e2468]:
+            - generic [ref=e2469]: Created records
+            - generic [ref=e2470]: Run the platform wiring once and the live task and ticket created from this conversation will appear here.
+        - generic [ref=e2471]:
+          - generic [ref=e2472]:
+            - heading "API MCP travel and derived intelligence" [level=3] [ref=e2473]
+            - generic [ref=e2474]: This is the route the conversation takes through record creation, associations, traces, A2A dispatch, API MCP, memory, and readback. The probe list underneath is the actual evidence returned by the platform.
+          - document [ref=e2477]:
+            - generic [ref=e2488]:
+              - paragraph [ref=e2495]:
+                - text: Discovery complete
+                - text: PushingDebate Studio
+              - paragraph [ref=e2502]:
+                - text: Record intent
+                - text: operator clicks add record
+              - paragraph [ref=e2509]: Schema match
+              - paragraph [ref=e2516]: Preflight validation
+              - paragraph [ref=e2523]:
+                - text: POST /data/create
+                - text: task_pending
+              - paragraph [ref=e2530]: Association wiring
+              - paragraph [ref=e2537]:
+                - text: Task + ticket contracts
+                - text: ticket_pending
+              - paragraph [ref=e2544]:
+                - text: Automation dispatch
+                - text: agents-a2a-master
+              - paragraph [ref=e2551]:
+                - text: Callback review
+                - text: 9 live lanes
+              - paragraph [ref=e2558]:
+                - text: Failure contracts
+                - text: 4 bounds
+              - paragraph [ref=e2565]:
+                - text: Memory writeback
+                - text: state_pending
+              - paragraph [ref=e2572]:
+                - text: Live route
+                - text: PushingDebate Studio
+              - paragraph [ref=e2579]:
+                - text: Owner
+                - text: PushingDebateDude
+          - generic [ref=e2580]:
+            - generic [ref=e2581]: Associations and trigger trail
+            - generic [ref=e2582]: The association and trigger trail will populate after the first platform wiring run.
+          - generic [ref=e2583]:
+            - generic [ref=e2584]: Parallel platform probes
+            - generic [ref=e2585]: No platform readback yet. The first run will fire 15 GETs in parallel and show the route-specific results here.
+          - generic [ref=e2586]:
+            - generic [ref=e2587]: Derived intelligence while we work
+            - generic [ref=e2588]: After the run, this panel will summarize what the platform inferred from the created records, associations, traces, and worker communication.
+      - generic [ref=e2589]:
+        - generic [ref=e2590]:
+          - generic [ref=e2591]:
+            - heading "Command glossary" [level=3] [ref=e2592]
+            - generic [ref=e2593]: These are the reusable command codes the studio should insert instead of rebuilding long scripts. The point is to fire routes quickly, with stable names, payload shapes, and callback expectations.
+          - generic [ref=e2594]:
+            - generic [ref=e2595]:
+              - generic [ref=e2596]:
+                - generic [ref=e2597]: cmd.task.create
+                - generic [ref=e2598]:
+                  - generic [ref=e2599]: Post
+                  - generic [ref=e2600]: Platform records
+              - generic [ref=e2601]: Create a live task from the active debate turn.
+              - generic [ref=e2602]: task.create(subject, body, pipeline, stage, sla)
+              - generic [ref=e2603]: /data/create
+              - generic [ref=e2604]:
+                - generic [ref=e2605]: obj
+                - generic [ref=e2606]: id
+                - generic [ref=e2607]: pc_task_subject
+                - generic [ref=e2608]: pc_task_body
+                - generic [ref=e2609]: pc_pipeline
+                - generic [ref=e2610]: pc_pipeline_stage
+                - generic [ref=e2611]: sla_target_hours
+            - generic [ref=e2612]:
+              - generic [ref=e2613]:
+                - generic [ref=e2614]: cmd.ticket.create
+                - generic [ref=e2615]:
+                  - generic [ref=e2616]: Post
+                  - generic [ref=e2617]: Platform records
+              - generic [ref=e2618]: Create the dependency or blocker ticket tied to the same debate turn.
+              - generic [ref=e2619]: ticket.create(subject, body, pipeline, stage, sla)
+              - generic [ref=e2620]: /data/create
+              - generic [ref=e2621]:
+                - generic [ref=e2622]: obj
+                - generic [ref=e2623]: id
+                - generic [ref=e2624]: pc_task_subject
+                - generic [ref=e2625]: pc_task_body
+                - generic [ref=e2626]: pc_pipeline
+                - generic [ref=e2627]: pc_pipeline_stage
+                - generic [ref=e2628]: sla_target_hours
+            - generic [ref=e2629]:
+              - generic [ref=e2630]:
+                - generic [ref=e2631]: cmd.assoc.link
+                - generic [ref=e2632]:
+                  - generic [ref=e2633]: Post
+                  - generic [ref=e2634]: Record associations
+              - generic [ref=e2635]: Link task, ticket, worker, workflow, pipeline, tool, state, and room records.
+              - generic [ref=e2636]: assoc.link(from_obj, from_id, to_obj, to_id, label)
+              - generic [ref=e2637]: /data/associations/add
+              - generic [ref=e2638]:
+                - generic [ref=e2639]: from_obj
+                - generic [ref=e2640]: from_id
+                - generic [ref=e2641]: to_obj
+                - generic [ref=e2642]: to_id
+                - generic [ref=e2643]: label
+            - generic [ref=e2644]:
+              - generic [ref=e2645]:
+                - generic [ref=e2646]: cmd.trace.log
+                - generic [ref=e2647]:
+                  - generic [ref=e2648]: Post
+                  - generic [ref=e2649]: Trace ledger
+              - generic [ref=e2650]: Log a route event, callback, or error into the worker plane trace ledger.
+              - generic [ref=e2651]: trace.log(worker, event, target, summary)
+              - generic [ref=e2652]: /orchestration/backend/a2a/traces
+              - generic [ref=e2653]:
+                - generic [ref=e2654]: source_worker
+                - generic [ref=e2655]: event_type
+                - generic [ref=e2656]: channel
+                - generic [ref=e2657]: target_type
+                - generic [ref=e2658]: target_id
+                - generic [ref=e2659]: linked_state_id
+                - generic [ref=e2660]: summary
+            - generic [ref=e2661]:
+              - generic [ref=e2662]:
+                - generic [ref=e2663]: cmd.route.a2a.dispatch
+                - generic [ref=e2664]:
+                  - generic [ref=e2665]: Post
+                  - generic [ref=e2666]: Worker routing
+              - generic [ref=e2667]: Fire the worker-plane route through master room and target workers.
+              - generic [ref=e2668]: route.fire(room, targets, body, audit_id)
+              - generic [ref=e2669]: /orchestration/backend/a2a/messages
+              - generic [ref=e2670]:
+                - generic [ref=e2671]: chat_id
+                - generic [ref=e2672]: sender_worker
+                - generic [ref=e2673]: target_workers
+                - generic [ref=e2674]: body
+                - generic [ref=e2675]: linked_state_id
+                - generic [ref=e2676]: dispatch
+                - generic [ref=e2677]: audit_id
+            - generic [ref=e2678]:
+              - generic [ref=e2679]:
+                - generic [ref=e2680]: cmd.actions.catalog.get
+                - generic [ref=e2681]:
+                  - generic [ref=e2682]: Get
+                  - generic [ref=e2683]: Action plane
+              - generic [ref=e2684]: Load the API and action-plane surface before firing MCP or provider work.
+              - generic [ref=e2685]: catalog.get()
+              - generic [ref=e2686]: /orchestration/backend/actions/catalog
+            - generic [ref=e2687]:
+              - generic [ref=e2688]:
+                - generic [ref=e2689]: cmd.postman.summary.get
+                - generic [ref=e2690]:
+                  - generic [ref=e2691]: Get
+                  - generic [ref=e2692]: API MCP
+              - generic [ref=e2693]: Inspect the Postman/API MCP lane before or after route dispatch.
+              - generic [ref=e2694]: postman.summary()
+              - generic [ref=e2695]: /orchestration/backend/postman/summary
+            - generic [ref=e2696]:
+              - generic [ref=e2697]:
+                - generic [ref=e2698]: cmd.research.google
+                - generic [ref=e2699]:
+                  - generic [ref=e2700]: Post
+                  - generic [ref=e2701]: External research
+              - generic [ref=e2702]: Run optional Google deep research when platform memory and workflow context are not enough.
+              - generic [ref=e2703]: research.google(query, site, limit)
+              - generic [ref=e2704]: /orchestration/backend/google/deep-research
+              - generic [ref=e2705]:
+                - generic [ref=e2706]: query
+                - generic [ref=e2707]: site
+                - generic [ref=e2708]: limit
+            - generic [ref=e2709]:
+              - generic [ref=e2710]:
+                - generic [ref=e2711]: cmd.media.image.generate
+                - generic [ref=e2712]:
+                  - generic [ref=e2713]: Post
+                  - generic [ref=e2714]: Media deliverables
+              - generic [ref=e2715]: Generate a visual explainer and bind it back to the studio workflow record.
+              - generic [ref=e2716]: media.image(prompt, target_obj, target_id, profile_key)
+              - generic [ref=e2717]: /orchestration/backend/runpod/generate-image
+              - generic [ref=e2718]:
+                - generic [ref=e2719]: target_obj
+                - generic [ref=e2720]: target_id
+                - generic [ref=e2721]: prompt
+                - generic [ref=e2722]: profile_key
+                - generic [ref=e2723]: output_name
+            - generic [ref=e2724]:
+              - generic [ref=e2725]:
+                - generic [ref=e2726]: cmd.media.video.generate
+                - generic [ref=e2727]:
+                  - generic [ref=e2728]: Post
+                  - generic [ref=e2729]: Media deliverables
+              - generic [ref=e2730]: Generate a motion explainer and bind it back to the studio workflow record.
+              - generic [ref=e2731]: media.video(prompt, target_obj, target_id, profile_key)
+              - generic [ref=e2732]: /orchestration/backend/runpod/generate-video
+              - generic [ref=e2733]:
+                - generic [ref=e2734]: target_obj
+                - generic [ref=e2735]: target_id
+                - generic [ref=e2736]: prompt
+                - generic [ref=e2737]: profile_key
+                - generic [ref=e2738]: output_name
+            - generic [ref=e2739]:
+              - generic [ref=e2740]:
+                - generic [ref=e2741]: cmd.memory.log
+                - generic [ref=e2742]:
+                  - generic [ref=e2743]: Post
+                  - generic [ref=e2744]: Durable memory
+              - generic [ref=e2745]: Send durable lessons, operator rules, and route outcomes into memory surfaces.
+              - generic [ref=e2746]: memory.log(records, summary, batch_name)
+              - generic [ref=e2747]: /orchestration/backend/memory/ingest
+              - generic [ref=e2748]:
+                - generic [ref=e2749]: source_worker
+                - generic [ref=e2750]: records
+                - generic [ref=e2751]: route
+                - generic [ref=e2752]: linked_state_id
+            - generic [ref=e2753]:
+              - generic [ref=e2754]:
+                - generic [ref=e2755]: cmd.memory.scope.search
+                - generic [ref=e2756]:
+                  - generic [ref=e2757]: Post
+                  - generic [ref=e2758]: Durable memory
+              - generic [ref=e2759]: Load scoped memory before deciding the next question or next route.
+              - generic [ref=e2760]: memory.search(scope_id, query, limit)
+              - generic [ref=e2761]: "/orchestration/backend/memory/scopes/{scope_id}/search"
+              - generic [ref=e2762]:
+                - generic [ref=e2763]: query
+                - generic [ref=e2764]: limit
+            - generic [ref=e2765]:
+              - generic [ref=e2766]:
+                - generic [ref=e2767]: cmd.current_state.advertise
+                - generic [ref=e2768]:
+                  - generic [ref=e2769]: Post
+                  - generic [ref=e2770]: Current state bus
+              - generic [ref=e2771]: Persist the new route summary and active request state for later workers.
+              - generic [ref=e2772]: state.advertise(worker, summary, fields)
+              - generic [ref=e2773]: /orchestration/backend/current-state/advertise
+              - generic [ref=e2774]:
+                - generic [ref=e2775]: worker_profile
+                - generic [ref=e2776]: state_summary
+                - generic [ref=e2777]: fields
+                - generic [ref=e2778]: source_worker
+                - generic [ref=e2779]: audit_id
+        - generic [ref=e2780]:
+          - generic [ref=e2781]:
+            - heading "Firing routes, callbacks, and error policy" [level=3] [ref=e2782]
+            - generic [ref=e2783]: This is the operating registry for the routes the studio will keep using. Each route has a stable insert code, a command stack, read/write surfaces, callback expectations, and a bounded error policy.
+          - document [ref=e2786]:
+            - generic [ref=e2794]:
+              - paragraph [ref=e2801]: Operator request
+              - paragraph [ref=e2808]: route.debate.platform_wire
+              - paragraph [ref=e2815]: route.debate.memory_forever
+              - paragraph [ref=e2822]: route.debate.api_mcp
+              - paragraph [ref=e2829]: route.debate.derive_intelligence
+              - paragraph [ref=e2836]: Tasks + Tickets + Associations
+              - paragraph [ref=e2843]: AI Memory + Company Vision + Learning Feedback
+              - paragraph [ref=e2850]: Actions Catalog + Postman
+              - paragraph [ref=e2857]: Derived intelligence + next route
+          - generic [ref=e2858]:
+            - generic [ref=e2859]:
+              - generic [ref=e2860]:
+                - generic [ref=e2861]: route.debate.platform_wire
+                - generic [ref=e2862]: route.debate.platform_wire(source_text)
+              - generic [ref=e2863]: Turn the current conversation into task, ticket, associations, trace, and readback evidence.
+              - generic [ref=e2864]: "Commands: cmd.task.create, cmd.ticket.create, cmd.assoc.link, cmd.trace.log, cmd.route.a2a.dispatch"
+              - generic [ref=e2865]: "Reads: workflow_plane, a2a, record_readback"
+              - generic [ref=e2866]: "Writes: tasks, tickets, associations, a2a_traces"
+              - generic [ref=e2867]: "Error policy: If dispatch exceeds the timeout window, continue and mark the trigger as timed out instead of freezing the studio."
+            - generic [ref=e2868]:
+              - generic [ref=e2869]:
+                - generic [ref=e2870]: route.debate.memory_forever
+                - generic [ref=e2871]: route.debate.memory_forever(rule_text)
+              - generic [ref=e2872]: Persist approved rules, corrections, and mistakes so the next studio session starts with them already loaded.
+              - generic [ref=e2873]: "Commands: cmd.memory.log, cmd.current_state.advertise"
+              - generic [ref=e2874]: "Reads: memory_scope_registry, ai_memory, worker_learning_feedback"
+              - generic [ref=e2875]: "Writes: ai_memory, pc_company_vision, worker_learning_feedback, memory_route_lineage, memory_ingest_batch, current_state"
+              - generic [ref=e2876]: "Error policy: If memory write fails, fall back to AI Memory, PC Company Vision, and worker learning feedback records."
+            - generic [ref=e2877]:
+              - generic [ref=e2878]:
+                - generic [ref=e2879]: route.debate.api_mcp
+                - generic [ref=e2880]: route.debate.api_mcp(targets, body)
+              - generic [ref=e2881]: Hand the route to postman_api and action-plane surfaces for API and MCP travel.
+              - generic [ref=e2882]: "Commands: cmd.actions.catalog.get, cmd.postman.summary.get, cmd.route.a2a.dispatch"
+              - generic [ref=e2883]: "Reads: actions_catalog, postman_summary"
+              - generic [ref=e2884]: "Writes: a2a_messages, a2a_traces"
+              - generic [ref=e2885]: "Error policy: If Postman or actions are unavailable, keep the trace and association records so the retry path is obvious."
+            - generic [ref=e2886]:
+              - generic [ref=e2887]:
+                - generic [ref=e2888]: route.debate.media_explain
+                - generic [ref=e2889]: route.debate.media_explain(prompt)
+              - generic [ref=e2890]: Generate an image or video deliverable that teaches the current workflow, route, or decision visually.
+              - generic [ref=e2891]: "Commands: cmd.media.image.generate, cmd.media.video.generate, cmd.trace.log"
+              - generic [ref=e2892]: "Reads: runpod_profiles, workflow_definitions, current_question"
+              - generic [ref=e2893]: "Writes: generated_assets, attachments, a2a_traces"
+              - generic [ref=e2894]: "Error policy: If media generation fails, keep the prompt and trace so the same explainer can be retried without reconstructing intent."
+            - generic [ref=e2895]:
+              - generic [ref=e2896]:
+                - generic [ref=e2897]: route.debate.deep_research_google
+                - generic [ref=e2898]: route.debate.deep_research_google(query)
+              - generic [ref=e2899]: Use Google deep research when the studio needs live outside evidence beyond platform memory and worker context.
+              - generic [ref=e2900]: "Commands: cmd.research.google, cmd.trace.log"
+              - generic [ref=e2901]: "Reads: google_custom_search, workflow_plane, memory_scope_registry"
+              - generic [ref=e2902]: "Writes: a2a_traces"
+              - generic [ref=e2903]: "Error policy: If the Google research lane is unconfigured or unavailable, keep working from internal memory and show the missing dependency explicitly."
+            - generic [ref=e2904]:
+              - generic [ref=e2905]:
+                - generic [ref=e2906]: route.debate.derive_intelligence
+                - generic [ref=e2907]: route.debate.derive_intelligence(scope_id, probes)
+              - generic [ref=e2908]: Read the records, traces, state, and memory hits back into a concise intelligence summary while work is moving.
+              - generic [ref=e2909]: "Commands: cmd.memory.scope.search, cmd.actions.catalog.get, cmd.trace.log"
+              - generic [ref=e2910]: "Reads: memory_scope_registry, workflow_plane, actions_catalog, records, current_state"
+              - generic [ref=e2911]: "Writes: a2a_traces"
+              - generic [ref=e2912]: "Error policy: If any GET probe fails, capture the failed route in the trace and continue with the successful signals."
+          - generic [ref=e2913]:
+            - generic [ref=e2914]: Callback registry
+            - generic [ref=e2915]:
+              - generic [ref=e2916]: cb.records.created
+              - generic [ref=e2917]: Task and ticket were created and are safe to associate and probe.
+              - generic [ref=e2918]: "Next: Link workflow, pipeline, worker, state, and room records."
+            - generic [ref=e2919]:
+              - generic [ref=e2920]: cb.associations.wired
+              - generic [ref=e2921]: The record graph is connected and downstream workers can inspect it.
+              - generic [ref=e2922]: "Next: Dispatch worker traffic or run readback probes."
+            - generic [ref=e2923]:
+              - generic [ref=e2924]: cb.trigger.completed_or_timed_out
+              - generic [ref=e2925]: A2A dispatch either produced replies or returned a bounded timeout result.
+              - generic [ref=e2926]: "Next: Continue with probes instead of blocking the studio."
+            - generic [ref=e2927]:
+              - generic [ref=e2928]: cb.memory.persisted
+              - generic [ref=e2929]: Operator rules landed in durable memory surfaces and have lineage.
+              - generic [ref=e2930]: "Next: Advertise current state so the next worker loads the rule without re-reading the full chat."
+            - generic [ref=e2931]:
+              - generic [ref=e2932]: cb.state.advertised
+              - generic [ref=e2933]: Current state bus now exposes the latest rule or route summary.
+              - generic [ref=e2934]: "Next: Workers can load the new state during the next turn."
+            - generic [ref=e2935]:
+              - generic [ref=e2936]: cb.api_surface.loaded
+              - generic [ref=e2937]: Action plane and MCP surfaces are known before the route is fired.
+              - generic [ref=e2938]: "Next: Route to postman_api or another worker with the correct contract."
+            - generic [ref=e2939]:
+              - generic [ref=e2940]: cb.media.created
+              - generic [ref=e2941]: A visual or motion deliverable was generated and linked to the studio workflow record.
+              - generic [ref=e2942]: "Next: Use the asset to teach the idea or refine the next media prompt."
+            - generic [ref=e2943]:
+              - generic [ref=e2944]: cb.research.loaded
+              - generic [ref=e2945]: Google deep research returned live outside context for the current debate.
+              - generic [ref=e2946]: "Next: Blend the outside evidence with workflow cues and propose the next route."
+            - generic [ref=e2947]:
+              - generic [ref=e2948]: cb.intelligence.derived
+              - generic [ref=e2949]: Readback and memory hits were collapsed into a concise intelligence summary.
+              - generic [ref=e2950]: "Next: Write the useful part back to memory or create follow-up tasks."
+            - generic [ref=e2951]:
+              - generic [ref=e2952]: cb.next_route.suggested
+              - generic [ref=e2953]: The studio can recommend the next route instead of asking the operator to guess.
+              - generic [ref=e2954]: "Next: Offer the next quick-fire insert or execute it."
+      - generic [ref=e2955]:
+        - generic [ref=e2956]:
+          - generic [ref=e2957]:
+            - heading "Memory Dude durable targets" [level=3] [ref=e2958]
+            - generic [ref=e2959]: This is the durable-write contract for PushingCapSickMemoryDude. Use it when a rule, correction, lesson, or approved route should survive beyond the current chat and reload automatically next session.
+          - generic [ref=e2960]:
+            - generic [ref=e2961]:
+              - generic [ref=e2962]: Memory surfaces
+              - generic [ref=e2963]: "6"
+              - generic [ref=e2964]: Durable targets
+            - generic [ref=e2965]:
+              - generic [ref=e2966]: Recommended routes
+              - generic [ref=e2967]: "4"
+              - generic [ref=e2968]: Fast fire registry
+            - generic [ref=e2969]:
+              - generic [ref=e2970]: Last durable batch
+              - generic [ref=e2971]: Pending
+              - generic [ref=e2972]: No memory batch yet
+          - generic [ref=e2973]:
+            - button "Log Current Rule Into Durable Memory" [disabled] [ref=e2974] [cursor=pointer]
+            - generic [ref=e2975]: This will POST a canonical memory ingest, create learning feedback, and advertise current state.
+          - document [ref=e2978]:
+            - generic [ref=e2994]:
+              - paragraph [ref=e3001]: Manny in PushingDebate Studio
+              - paragraph [ref=e3008]:
+                - text: Directive
+                - text: No directive captured yet
+              - paragraph [ref=e3015]: PushingDebateDude
+              - paragraph [ref=e3022]: pushingcap_sick_memory_dude
+              - paragraph [ref=e3029]:
+                - text: POST /memory/ingest
+                - text: pending
+              - paragraph [ref=e3036]: AI Memory
+              - paragraph [ref=e3043]: PC Company Vision
+              - paragraph [ref=e3050]: Worker Learning Feedback
+              - paragraph [ref=e3057]: Memory Route Lineage
+              - paragraph [ref=e3064]: Memory Ingest Batch
+              - paragraph [ref=e3071]:
+                - text: Current State
+                - text: pending
+              - paragraph [ref=e3078]:
+                - text: Scope
+                - text: local_fallback
+          - generic [ref=e3079]:
+            - generic [ref=e3080]:
+              - generic [ref=e3081]:
+                - generic [ref=e3082]: ai_memory
+                - generic [ref=e3083]: Append
+              - generic [ref=e3084]: mem.ai_memory.forever
+              - generic [ref=e3085]: Operator rules, approved language, and durable debate lessons.
+            - generic [ref=e3086]:
+              - generic [ref=e3087]:
+                - generic [ref=e3088]: pc_company_vision
+                - generic [ref=e3089]: Append Or Update
+              - generic [ref=e3090]: mem.company_vision.forever
+              - generic [ref=e3091]: Company directives and gold rules that must survive across sessions.
+            - generic [ref=e3092]:
+              - generic [ref=e3093]:
+                - generic [ref=e3094]: worker_learning_feedback
+                - generic [ref=e3095]: Append
+              - generic [ref=e3096]: mem.learning_feedback.forever
+              - generic [ref=e3097]: Mistakes, callbacks, next-prompt adjustments, and retry lessons.
+            - generic [ref=e3098]:
+              - generic [ref=e3099]:
+                - generic [ref=e3100]: notebook_registry
+                - generic [ref=e3101]: Create Attach Update
+              - generic [ref=e3102]: mem.notebook_registry.curate
+              - generic [ref=e3103]: Notebook references for people, deals, workers, workflows, and pipelines.
+            - generic [ref=e3104]:
+              - generic [ref=e3105]:
+                - generic [ref=e3106]: memory_route_lineage
+                - generic [ref=e3107]: Append
+              - generic [ref=e3108]: mem.route_lineage.log
+              - generic [ref=e3109]: Where the information came from, who placed it, and where it traveled next.
+            - generic [ref=e3110]:
+              - generic [ref=e3111]:
+                - generic [ref=e3112]: memory_ingest_batch
+                - generic [ref=e3113]: Append
+              - generic [ref=e3114]: mem.ingest_batch.log
+              - generic [ref=e3115]: Batch-level ingest telemetry for discovery, compaction, and replay.
+          - generic [ref=e3116]:
+            - generic [ref=e3117]: Last durable write evidence
+            - generic [ref=e3118]: No durable-memory commit yet. Once you log one, the batch id, created records, lineage, and learning-feedback record will appear here.
+        - generic [ref=e3119]:
+          - generic [ref=e3120]:
+            - heading "Studios to agree on first" [level=3] [ref=e3121]
+            - generic [ref=e3122]: "Not all of the `Pushing*` names should become top-level workflows immediately. This groups them into operating categories and highlights the first wave I would use first because they directly support debate, memory, routing, and fast execution."
+          - generic [ref=e3123]:
+            - generic [ref=e3124]: PushingEstimates
+            - generic [ref=e3125]: PushingResearch
+            - generic [ref=e3126]: PushingAPI
+            - generic [ref=e3127]: PushingTools
+            - generic [ref=e3128]: PushingWorkers
+            - generic [ref=e3129]: PushingAutomations
+            - generic [ref=e3130]: PushingTasks
+            - generic [ref=e3131]: PushingTriggers
+            - generic [ref=e3132]: PushingWorkflowDebate
+            - generic [ref=e3133]: PushingWorkflowDesign
+          - generic [ref=e3134]:
+            - generic [ref=e3135]:
+              - generic [ref=e3136]:
+                - generic [ref=e3137]: Intelligence and reasoning
+                - generic [ref=e3138]: 13 studios
+              - generic [ref=e3139]:
+                - generic [ref=e3140]:
+                  - generic [ref=e3141]:
+                    - generic [ref=e3142]: PushingEstimates
+                    - generic [ref=e3143]:
+                      - generic [ref=e3144]: Recommended First
+                      - generic [ref=e3145]: Studio
+                  - generic [ref=e3146]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3147]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3148]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3149]:
+                    - generic [ref=e3150]: ai_memory
+                    - generic [ref=e3151]: worker_learning_feedback
+                    - generic [ref=e3152]: notebook_registry
+                - generic [ref=e3153]:
+                  - generic [ref=e3154]:
+                    - generic [ref=e3155]: PushingResearch
+                    - generic [ref=e3156]:
+                      - generic [ref=e3157]: Recommended First
+                      - generic [ref=e3158]: Studio
+                  - generic [ref=e3159]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3160]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3161]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3162]:
+                    - generic [ref=e3163]: ai_memory
+                    - generic [ref=e3164]: worker_learning_feedback
+                    - generic [ref=e3165]: notebook_registry
+                - generic [ref=e3166]:
+                  - generic [ref=e3167]:
+                    - generic [ref=e3168]: Derive Formulas
+                    - generic [ref=e3170]: Derivation Lens
+                  - generic [ref=e3171]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3172]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3173]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3174]:
+                    - generic [ref=e3175]: ai_memory
+                    - generic [ref=e3176]: worker_learning_feedback
+                    - generic [ref=e3177]: notebook_registry
+                - generic [ref=e3178]:
+                  - generic [ref=e3179]:
+                    - generic [ref=e3180]: Derive Time Evaluation
+                    - generic [ref=e3182]: Derivation Lens
+                  - generic [ref=e3183]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3184]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3185]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3186]:
+                    - generic [ref=e3187]: ai_memory
+                    - generic [ref=e3188]: worker_learning_feedback
+                    - generic [ref=e3189]: notebook_registry
+                - generic [ref=e3190]:
+                  - generic [ref=e3191]:
+                    - generic [ref=e3192]: Derive Token Consumptions
+                    - generic [ref=e3194]: Derivation Lens
+                  - generic [ref=e3195]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3196]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3197]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3198]:
+                    - generic [ref=e3199]: ai_memory
+                    - generic [ref=e3200]: worker_learning_feedback
+                    - generic [ref=e3201]: notebook_registry
+                - generic [ref=e3202]:
+                  - generic [ref=e3203]:
+                    - generic [ref=e3204]: PushingDictionary
+                    - generic [ref=e3206]: Studio
+                  - generic [ref=e3207]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3208]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3209]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3210]:
+                    - generic [ref=e3211]: ai_memory
+                    - generic [ref=e3212]: worker_learning_feedback
+                    - generic [ref=e3213]: notebook_registry
+                - generic [ref=e3214]:
+                  - generic [ref=e3215]:
+                    - generic [ref=e3216]: PushingExperiments
+                    - generic [ref=e3218]: Studio
+                  - generic [ref=e3219]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3220]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3221]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3222]:
+                    - generic [ref=e3223]: ai_memory
+                    - generic [ref=e3224]: worker_learning_feedback
+                    - generic [ref=e3225]: notebook_registry
+                - generic [ref=e3226]:
+                  - generic [ref=e3227]:
+                    - generic [ref=e3228]: PushingFear
+                    - generic [ref=e3230]: Studio
+                  - generic [ref=e3231]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3232]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3233]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3234]:
+                    - generic [ref=e3235]: ai_memory
+                    - generic [ref=e3236]: worker_learning_feedback
+                    - generic [ref=e3237]: notebook_registry
+                - generic [ref=e3238]:
+                  - generic [ref=e3239]:
+                    - generic [ref=e3240]: PushingLast
+                    - generic [ref=e3242]: Studio
+                  - generic [ref=e3243]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3244]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3245]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3246]:
+                    - generic [ref=e3247]: ai_memory
+                    - generic [ref=e3248]: worker_learning_feedback
+                    - generic [ref=e3249]: notebook_registry
+                - generic [ref=e3250]:
+                  - generic [ref=e3251]:
+                    - generic [ref=e3252]: PushingLove
+                    - generic [ref=e3254]: Studio
+                  - generic [ref=e3255]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3256]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3257]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3258]:
+                    - generic [ref=e3259]: ai_memory
+                    - generic [ref=e3260]: worker_learning_feedback
+                    - generic [ref=e3261]: notebook_registry
+                - generic [ref=e3262]:
+                  - generic [ref=e3263]:
+                    - generic [ref=e3264]: PushingTime
+                    - generic [ref=e3266]: Studio
+                  - generic [ref=e3267]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3268]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3269]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3270]:
+                    - generic [ref=e3271]: ai_memory
+                    - generic [ref=e3272]: worker_learning_feedback
+                    - generic [ref=e3273]: notebook_registry
+                - generic [ref=e3274]:
+                  - generic [ref=e3275]:
+                    - generic [ref=e3276]: PushingWarnings
+                    - generic [ref=e3278]: Studio
+                  - generic [ref=e3279]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3280]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3281]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3282]:
+                    - generic [ref=e3283]: ai_memory
+                    - generic [ref=e3284]: worker_learning_feedback
+                    - generic [ref=e3285]: notebook_registry
+                - generic [ref=e3286]:
+                  - generic [ref=e3287]:
+                    - generic [ref=e3288]: PushingYou
+                    - generic [ref=e3290]: Studio
+                  - generic [ref=e3291]: Derives explanations, estimates, formulas, or decision framing from the current route and historical memory.
+                  - generic [ref=e3292]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3293]: "Intelligence focus: Understanding, estimation, retrieval, and debate clarity."
+                  - generic [ref=e3294]:
+                    - generic [ref=e3295]: ai_memory
+                    - generic [ref=e3296]: worker_learning_feedback
+                    - generic [ref=e3297]: notebook_registry
+            - generic [ref=e3298]:
+              - generic [ref=e3299]:
+                - generic [ref=e3300]: Platform and worker plane
+                - generic [ref=e3301]: 11 studios
+              - generic [ref=e3302]:
+                - generic [ref=e3303]:
+                  - generic [ref=e3304]:
+                    - generic [ref=e3305]: PushingAPI
+                    - generic [ref=e3306]:
+                      - generic [ref=e3307]: Recommended First
+                      - generic [ref=e3308]: Studio
+                  - generic [ref=e3309]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3310]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3311]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3312]:
+                    - generic [ref=e3313]: current_state
+                    - generic [ref=e3314]: memory_route_lineage
+                    - generic [ref=e3315]: worker_learning_feedback
+                    - generic [ref=e3316]: notebook_registry
+                - generic [ref=e3317]:
+                  - generic [ref=e3318]:
+                    - generic [ref=e3319]: PushingTools
+                    - generic [ref=e3320]:
+                      - generic [ref=e3321]: Recommended First
+                      - generic [ref=e3322]: Studio
+                  - generic [ref=e3323]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3324]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3325]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3326]:
+                    - generic [ref=e3327]: current_state
+                    - generic [ref=e3328]: memory_route_lineage
+                    - generic [ref=e3329]: worker_learning_feedback
+                    - generic [ref=e3330]: notebook_registry
+                - generic [ref=e3331]:
+                  - generic [ref=e3332]:
+                    - generic [ref=e3333]: PushingWorkers
+                    - generic [ref=e3334]:
+                      - generic [ref=e3335]: Recommended First
+                      - generic [ref=e3336]: Studio
+                  - generic [ref=e3337]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3338]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3339]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3340]:
+                    - generic [ref=e3341]: current_state
+                    - generic [ref=e3342]: memory_route_lineage
+                    - generic [ref=e3343]: worker_learning_feedback
+                    - generic [ref=e3344]: notebook_registry
+                - generic [ref=e3345]:
+                  - generic [ref=e3346]:
+                    - generic [ref=e3347]: PushingAgentContracts
+                    - generic [ref=e3349]: Studio
+                  - generic [ref=e3350]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3351]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3352]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3353]:
+                    - generic [ref=e3354]: current_state
+                    - generic [ref=e3355]: memory_route_lineage
+                    - generic [ref=e3356]: worker_learning_feedback
+                    - generic [ref=e3357]: notebook_registry
+                - generic [ref=e3358]:
+                  - generic [ref=e3359]:
+                    - generic [ref=e3360]: PushingCapabilities
+                    - generic [ref=e3362]: Studio
+                  - generic [ref=e3363]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3364]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3365]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3366]:
+                    - generic [ref=e3367]: current_state
+                    - generic [ref=e3368]: memory_route_lineage
+                    - generic [ref=e3369]: worker_learning_feedback
+                    - generic [ref=e3370]: notebook_registry
+                - generic [ref=e3371]:
+                  - generic [ref=e3372]:
+                    - generic [ref=e3373]: PushingConnections
+                    - generic [ref=e3375]: Studio
+                  - generic [ref=e3376]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3377]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3378]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3379]:
+                    - generic [ref=e3380]: current_state
+                    - generic [ref=e3381]: memory_route_lineage
+                    - generic [ref=e3382]: worker_learning_feedback
+                    - generic [ref=e3383]: notebook_registry
+                - generic [ref=e3384]:
+                  - generic [ref=e3385]:
+                    - generic [ref=e3386]: PushingIdentity
+                    - generic [ref=e3388]: Studio
+                  - generic [ref=e3389]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3390]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3391]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3392]:
+                    - generic [ref=e3393]: current_state
+                    - generic [ref=e3394]: memory_route_lineage
+                    - generic [ref=e3395]: worker_learning_feedback
+                    - generic [ref=e3396]: notebook_registry
+                - generic [ref=e3397]:
+                  - generic [ref=e3398]:
+                    - generic [ref=e3399]: PushingSecrets
+                    - generic [ref=e3401]: Studio
+                  - generic [ref=e3402]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3403]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3404]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3405]:
+                    - generic [ref=e3406]: current_state
+                    - generic [ref=e3407]: memory_route_lineage
+                    - generic [ref=e3408]: worker_learning_feedback
+                    - generic [ref=e3409]: notebook_registry
+                - generic [ref=e3410]:
+                  - generic [ref=e3411]:
+                    - generic [ref=e3412]: PushingServers
+                    - generic [ref=e3414]: Studio
+                  - generic [ref=e3415]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3416]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3417]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3418]:
+                    - generic [ref=e3419]: current_state
+                    - generic [ref=e3420]: memory_route_lineage
+                    - generic [ref=e3421]: worker_learning_feedback
+                    - generic [ref=e3422]: notebook_registry
+                - generic [ref=e3423]:
+                  - generic [ref=e3424]:
+                    - generic [ref=e3425]: PushingSettings
+                    - generic [ref=e3427]: Studio
+                  - generic [ref=e3428]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3429]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3430]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3431]:
+                    - generic [ref=e3432]: current_state
+                    - generic [ref=e3433]: memory_route_lineage
+                    - generic [ref=e3434]: worker_learning_feedback
+                    - generic [ref=e3435]: notebook_registry
+                - generic [ref=e3436]:
+                  - generic [ref=e3437]:
+                    - generic [ref=e3438]: PushingTokens
+                    - generic [ref=e3440]: Studio
+                  - generic [ref=e3441]: Defines worker identity, contracts, tools, settings, APIs, and the surfaces each worker can read or write.
+                  - generic [ref=e3442]: "Owner lane: worker_coordinator"
+                  - generic [ref=e3443]: "Intelligence focus: Capability routing, permissioning, and system understanding."
+                  - generic [ref=e3444]:
+                    - generic [ref=e3445]: current_state
+                    - generic [ref=e3446]: memory_route_lineage
+                    - generic [ref=e3447]: worker_learning_feedback
+                    - generic [ref=e3448]: notebook_registry
+            - generic [ref=e3449]:
+              - generic [ref=e3450]:
+                - generic [ref=e3451]: Workflow and orchestration
+                - generic [ref=e3452]: 9 studios
+              - generic [ref=e3453]:
+                - generic [ref=e3454]:
+                  - generic [ref=e3455]:
+                    - generic [ref=e3456]: PushingAutomations
+                    - generic [ref=e3457]:
+                      - generic [ref=e3458]: Recommended First
+                      - generic [ref=e3459]: Studio
+                  - generic [ref=e3460]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3461]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3462]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3463]:
+                    - generic [ref=e3464]: memory_route_lineage
+                    - generic [ref=e3465]: memory_ingest_batch
+                    - generic [ref=e3466]: current_state
+                    - generic [ref=e3467]: worker_learning_feedback
+                - generic [ref=e3468]:
+                  - generic [ref=e3469]:
+                    - generic [ref=e3470]: PushingTasks
+                    - generic [ref=e3471]:
+                      - generic [ref=e3472]: Recommended First
+                      - generic [ref=e3473]: Studio
+                  - generic [ref=e3474]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3475]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3476]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3477]:
+                    - generic [ref=e3478]: memory_route_lineage
+                    - generic [ref=e3479]: memory_ingest_batch
+                    - generic [ref=e3480]: current_state
+                    - generic [ref=e3481]: worker_learning_feedback
+                - generic [ref=e3482]:
+                  - generic [ref=e3483]:
+                    - generic [ref=e3484]: PushingTriggers
+                    - generic [ref=e3485]:
+                      - generic [ref=e3486]: Recommended First
+                      - generic [ref=e3487]: Studio
+                  - generic [ref=e3488]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3489]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3490]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3491]:
+                    - generic [ref=e3492]: memory_route_lineage
+                    - generic [ref=e3493]: memory_ingest_batch
+                    - generic [ref=e3494]: current_state
+                    - generic [ref=e3495]: worker_learning_feedback
+                - generic [ref=e3496]:
+                  - generic [ref=e3497]:
+                    - generic [ref=e3498]: PushingWorkflowDebate
+                    - generic [ref=e3499]:
+                      - generic [ref=e3500]: Recommended First
+                      - generic [ref=e3501]: Studio
+                  - generic [ref=e3502]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3503]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3504]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3505]:
+                    - generic [ref=e3506]: memory_route_lineage
+                    - generic [ref=e3507]: memory_ingest_batch
+                    - generic [ref=e3508]: current_state
+                    - generic [ref=e3509]: worker_learning_feedback
+                - generic [ref=e3510]:
+                  - generic [ref=e3511]:
+                    - generic [ref=e3512]: PushingWorkflowDesign
+                    - generic [ref=e3513]:
+                      - generic [ref=e3514]: Recommended First
+                      - generic [ref=e3515]: Studio
+                  - generic [ref=e3516]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3517]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3518]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3519]:
+                    - generic [ref=e3520]: memory_route_lineage
+                    - generic [ref=e3521]: memory_ingest_batch
+                    - generic [ref=e3522]: current_state
+                    - generic [ref=e3523]: worker_learning_feedback
+                - generic [ref=e3524]:
+                  - generic [ref=e3525]:
+                    - generic [ref=e3526]: PushingDecisions
+                    - generic [ref=e3528]: Studio
+                  - generic [ref=e3529]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3530]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3531]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3532]:
+                    - generic [ref=e3533]: memory_route_lineage
+                    - generic [ref=e3534]: memory_ingest_batch
+                    - generic [ref=e3535]: current_state
+                    - generic [ref=e3536]: worker_learning_feedback
+                - generic [ref=e3537]:
+                  - generic [ref=e3538]:
+                    - generic [ref=e3539]: PushingPipelines
+                    - generic [ref=e3541]: Studio
+                  - generic [ref=e3542]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3543]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3544]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3545]:
+                    - generic [ref=e3546]: memory_route_lineage
+                    - generic [ref=e3547]: memory_ingest_batch
+                    - generic [ref=e3548]: current_state
+                    - generic [ref=e3549]: worker_learning_feedback
+                - generic [ref=e3550]:
+                  - generic [ref=e3551]:
+                    - generic [ref=e3552]: PushingSpawns
+                    - generic [ref=e3554]: Studio
+                  - generic [ref=e3555]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3556]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3557]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3558]:
+                    - generic [ref=e3559]: memory_route_lineage
+                    - generic [ref=e3560]: memory_ingest_batch
+                    - generic [ref=e3561]: current_state
+                    - generic [ref=e3562]: worker_learning_feedback
+                - generic [ref=e3563]:
+                  - generic [ref=e3564]:
+                    - generic [ref=e3565]: PushingWorkflows
+                    - generic [ref=e3567]: Studio
+                  - generic [ref=e3568]: Designs routes, stages, triggers, handoffs, and automation paths so requests can be inserted quickly.
+                  - generic [ref=e3569]: "Owner lane: pushingcap_orchestrator"
+                  - generic [ref=e3570]: "Intelligence focus: Route integrity, handoff clarity, and execution readiness."
+                  - generic [ref=e3571]:
+                    - generic [ref=e3572]: memory_route_lineage
+                    - generic [ref=e3573]: memory_ingest_batch
+                    - generic [ref=e3574]: current_state
+                    - generic [ref=e3575]: worker_learning_feedback
+            - generic [ref=e3576]:
+              - generic [ref=e3577]:
+                - generic [ref=e3578]: Commercial and finance
+                - generic [ref=e3579]: 8 studios
+              - generic [ref=e3580]:
+                - generic [ref=e3581]:
+                  - generic [ref=e3582]:
+                    - generic [ref=e3583]: PushingDealContracts
+                    - generic [ref=e3585]: Studio
+                  - generic [ref=e3586]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3587]: "Owner lane: postman_api"
+                  - generic [ref=e3588]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3589]:
+                    - generic [ref=e3590]: ai_memory
+                    - generic [ref=e3591]: pc_relationship
+                    - generic [ref=e3592]: attributes
+                    - generic [ref=e3593]: memory_route_lineage
+                - generic [ref=e3594]:
+                  - generic [ref=e3595]:
+                    - generic [ref=e3596]: PushingFinance
+                    - generic [ref=e3598]: Studio
+                  - generic [ref=e3599]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3600]: "Owner lane: postman_api"
+                  - generic [ref=e3601]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3602]:
+                    - generic [ref=e3603]: ai_memory
+                    - generic [ref=e3604]: pc_relationship
+                    - generic [ref=e3605]: attributes
+                    - generic [ref=e3606]: memory_route_lineage
+                - generic [ref=e3607]:
+                  - generic [ref=e3608]:
+                    - generic [ref=e3609]: PushingFinancialProfiles
+                    - generic [ref=e3611]: Studio
+                  - generic [ref=e3612]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3613]: "Owner lane: postman_api"
+                  - generic [ref=e3614]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3615]:
+                    - generic [ref=e3616]: ai_memory
+                    - generic [ref=e3617]: pc_relationship
+                    - generic [ref=e3618]: attributes
+                    - generic [ref=e3619]: memory_route_lineage
+                - generic [ref=e3620]:
+                  - generic [ref=e3621]:
+                    - generic [ref=e3622]: PushingLawsuits
+                    - generic [ref=e3624]: Studio
+                  - generic [ref=e3625]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3626]: "Owner lane: postman_api"
+                  - generic [ref=e3627]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3628]:
+                    - generic [ref=e3629]: ai_memory
+                    - generic [ref=e3630]: pc_relationship
+                    - generic [ref=e3631]: attributes
+                    - generic [ref=e3632]: memory_route_lineage
+                - generic [ref=e3633]:
+                  - generic [ref=e3634]:
+                    - generic [ref=e3635]: PushingPay
+                    - generic [ref=e3637]: Studio
+                  - generic [ref=e3638]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3639]: "Owner lane: postman_api"
+                  - generic [ref=e3640]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3641]:
+                    - generic [ref=e3642]: ai_memory
+                    - generic [ref=e3643]: pc_relationship
+                    - generic [ref=e3644]: attributes
+                    - generic [ref=e3645]: memory_route_lineage
+                - generic [ref=e3646]:
+                  - generic [ref=e3647]:
+                    - generic [ref=e3648]: PushingPaygates
+                    - generic [ref=e3650]: Studio
+                  - generic [ref=e3651]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3652]: "Owner lane: postman_api"
+                  - generic [ref=e3653]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3654]:
+                    - generic [ref=e3655]: ai_memory
+                    - generic [ref=e3656]: pc_relationship
+                    - generic [ref=e3657]: attributes
+                    - generic [ref=e3658]: memory_route_lineage
+                - generic [ref=e3659]:
+                  - generic [ref=e3660]:
+                    - generic [ref=e3661]: PushingProfit
+                    - generic [ref=e3663]: Studio
+                  - generic [ref=e3664]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3665]: "Owner lane: postman_api"
+                  - generic [ref=e3666]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3667]:
+                    - generic [ref=e3668]: ai_memory
+                    - generic [ref=e3669]: pc_relationship
+                    - generic [ref=e3670]: attributes
+                    - generic [ref=e3671]: memory_route_lineage
+                - generic [ref=e3672]:
+                  - generic [ref=e3673]:
+                    - generic [ref=e3674]: PushingSales
+                    - generic [ref=e3676]: Studio
+                  - generic [ref=e3677]: Brings finance, sales, payouts, contracts, and legal/commercial flows into one routed operating lane.
+                  - generic [ref=e3678]: "Owner lane: postman_api"
+                  - generic [ref=e3679]: "Intelligence focus: Commercial exposure, approvals, and revenue-sensitive decisions."
+                  - generic [ref=e3680]:
+                    - generic [ref=e3681]: ai_memory
+                    - generic [ref=e3682]: pc_relationship
+                    - generic [ref=e3683]: attributes
+                    - generic [ref=e3684]: memory_route_lineage
+            - generic [ref=e3685]:
+              - generic [ref=e3686]:
+                - generic [ref=e3687]: Media and external operations
+                - generic [ref=e3688]: 10 studios
+              - generic [ref=e3689]:
+                - generic [ref=e3690]:
+                  - generic [ref=e3691]:
+                    - generic [ref=e3692]: PushingForms
+                    - generic [ref=e3694]: Studio
+                  - generic [ref=e3695]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3696]: "Owner lane: runpod_media"
+                  - generic [ref=e3697]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3698]:
+                    - generic [ref=e3699]: ai_memory
+                    - generic [ref=e3700]: notebook_registry
+                    - generic [ref=e3701]: memory_route_lineage
+                - generic [ref=e3702]:
+                  - generic [ref=e3703]:
+                    - generic [ref=e3704]: PushingLocation
+                    - generic [ref=e3706]: Studio
+                  - generic [ref=e3707]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3708]: "Owner lane: runpod_media"
+                  - generic [ref=e3709]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3710]:
+                    - generic [ref=e3711]: ai_memory
+                    - generic [ref=e3712]: notebook_registry
+                    - generic [ref=e3713]: memory_route_lineage
+                - generic [ref=e3714]:
+                  - generic [ref=e3715]:
+                    - generic [ref=e3716]: PushingMail
+                    - generic [ref=e3718]: Studio
+                  - generic [ref=e3719]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3720]: "Owner lane: runpod_media"
+                  - generic [ref=e3721]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3722]:
+                    - generic [ref=e3723]: ai_memory
+                    - generic [ref=e3724]: notebook_registry
+                    - generic [ref=e3725]: memory_route_lineage
+                - generic [ref=e3726]:
+                  - generic [ref=e3727]:
+                    - generic [ref=e3728]: PushingMarketing
+                    - generic [ref=e3730]: Studio
+                  - generic [ref=e3731]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3732]: "Owner lane: runpod_media"
+                  - generic [ref=e3733]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3734]:
+                    - generic [ref=e3735]: ai_memory
+                    - generic [ref=e3736]: notebook_registry
+                    - generic [ref=e3737]: memory_route_lineage
+                - generic [ref=e3738]:
+                  - generic [ref=e3739]:
+                    - generic [ref=e3740]: PushingPictures
+                    - generic [ref=e3742]: Studio
+                  - generic [ref=e3743]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3744]: "Owner lane: runpod_media"
+                  - generic [ref=e3745]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3746]:
+                    - generic [ref=e3747]: ai_memory
+                    - generic [ref=e3748]: notebook_registry
+                    - generic [ref=e3749]: memory_route_lineage
+                - generic [ref=e3750]:
+                  - generic [ref=e3751]:
+                    - generic [ref=e3752]: PushingPrint
+                    - generic [ref=e3754]: Studio
+                  - generic [ref=e3755]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3756]: "Owner lane: runpod_media"
+                  - generic [ref=e3757]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3758]:
+                    - generic [ref=e3759]: ai_memory
+                    - generic [ref=e3760]: notebook_registry
+                    - generic [ref=e3761]: memory_route_lineage
+                - generic [ref=e3762]:
+                  - generic [ref=e3763]:
+                    - generic [ref=e3764]: PushingTransport
+                    - generic [ref=e3766]: Studio
+                  - generic [ref=e3767]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3768]: "Owner lane: runpod_media"
+                  - generic [ref=e3769]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3770]:
+                    - generic [ref=e3771]: ai_memory
+                    - generic [ref=e3772]: notebook_registry
+                    - generic [ref=e3773]: memory_route_lineage
+                - generic [ref=e3774]:
+                  - generic [ref=e3775]:
+                    - generic [ref=e3776]: PushingUber
+                    - generic [ref=e3778]: Studio
+                  - generic [ref=e3779]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3780]: "Owner lane: runpod_media"
+                  - generic [ref=e3781]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3782]:
+                    - generic [ref=e3783]: ai_memory
+                    - generic [ref=e3784]: notebook_registry
+                    - generic [ref=e3785]: memory_route_lineage
+                - generic [ref=e3786]:
+                  - generic [ref=e3787]:
+                    - generic [ref=e3788]: PushingUPS
+                    - generic [ref=e3790]: Studio
+                  - generic [ref=e3791]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3792]: "Owner lane: runpod_media"
+                  - generic [ref=e3793]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3794]:
+                    - generic [ref=e3795]: ai_memory
+                    - generic [ref=e3796]: notebook_registry
+                    - generic [ref=e3797]: memory_route_lineage
+                - generic [ref=e3798]:
+                  - generic [ref=e3799]:
+                    - generic [ref=e3800]: PushingVideos
+                    - generic [ref=e3802]: Studio
+                  - generic [ref=e3803]: Handles operator-facing assets, outbound channels, media generation, and external transport or delivery lanes.
+                  - generic [ref=e3804]: "Owner lane: runpod_media"
+                  - generic [ref=e3805]: "Intelligence focus: Visual teaching, delivery status, and external-channel coordination."
+                  - generic [ref=e3806]:
+                    - generic [ref=e3807]: ai_memory
+                    - generic [ref=e3808]: notebook_registry
+                    - generic [ref=e3809]: memory_route_lineage
+            - generic [ref=e3810]:
+              - generic [ref=e3811]:
+                - generic [ref=e3812]: Needs naming decision
+                - generic [ref=e3813]: 2 studios
+              - generic [ref=e3814]:
+                - generic [ref=e3815]:
+                  - generic [ref=e3816]:
+                    - generic [ref=e3817]: PushingBack
+                    - generic [ref=e3819]: Undecided
+                  - generic [ref=e3820]: This name is too ambiguous to seed cleanly. Rename it before it becomes a workflow or tool record.
+                  - generic [ref=e3821]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3822]: "Intelligence focus: Resolve naming ambiguity before implementation."
+                  - generic [ref=e3824]: worker_learning_feedback
+                - generic [ref=e3825]:
+                  - generic [ref=e3826]:
+                    - generic [ref=e3827]: PushingP
+                    - generic [ref=e3829]: Undecided
+                  - generic [ref=e3830]: This name is too ambiguous to seed cleanly. Rename it before it becomes a workflow or tool record.
+                  - generic [ref=e3831]: "Owner lane: pushing_debate_dude"
+                  - generic [ref=e3832]: "Intelligence focus: Resolve naming ambiguity before implementation."
+                  - generic [ref=e3834]: worker_learning_feedback
+      - generic [ref=e3835]:
+        - generic [ref=e3836]:
+          - generic [ref=e3837]:
+            - heading "Idea brief" [level=3] [ref=e3838]
+            - generic [ref=e3839]: Start with the goal, what must be understood, and what gets debated before code is written.
+          - generic [ref=e3840]:
+            - generic [ref=e3841]:
+              - generic [ref=e3842]: Current objective
+              - generic [ref=e3843]: Build a studio where the operator speaks to PushingDebateDude, gets one strong first question, pulls useful history and workflow context, debates the design in plain language, and carries forward approved rules and mistakes as durable platform memory before implementation starts.
+            - generic [ref=e3844]:
+              - generic [ref=e3845]: Debate participants
+              - generic [ref=e3846]:
+                - generic [ref=e3847]:
+                  - strong [ref=e3848]: "Operator:"
+                  - text: describes the idea in natural language and decides when the studio understood it.
+                - generic [ref=e3849]:
+                  - strong [ref=e3850]: "PushingDebateDude:"
+                  - text: operator-facing GPT-5.4 debate partner that asks the next question, explains the route, and keeps the discussion clean.
+                - generic [ref=e3851]:
+                  - strong [ref=e3852]: "PushingCapSickMemoryDude:"
+                  - text: backing memory lane for notebooks, history, workflow context, durable rules, and lesson capture.
+                - generic [ref=e3853]:
+                  - strong [ref=e3854]: "Codex embed:"
+                  - text: implementation seat once the debate settles and the gaps are known.
+            - generic [ref=e3855]:
+              - generic [ref=e3856]: Relevant workers
+              - generic [ref=e3857]:
+                - generic [ref=e3858]:
+                  - generic [ref=e3859]: Codex Design
+                  - generic [ref=e3860]: Product and Platform
+                - generic [ref=e3861]:
+                  - generic [ref=e3862]: Postman API
+                  - generic [ref=e3863]: Product and Platform
+                - generic [ref=e3864]:
+                  - generic [ref=e3865]: PushingCapSickMemoryDude
+                  - generic [ref=e3866]: Product and Platform
+                - generic [ref=e3867]:
+                  - generic [ref=e3868]: PushingDebateDude
+                  - generic [ref=e3869]: Product and Platform
+                - generic [ref=e3870]:
+                  - generic [ref=e3871]: PushingCap Orchestrator
+                  - generic [ref=e3872]: Orchestration
+                - generic [ref=e3873]:
+                  - generic [ref=e3874]: RunPod Media
+                  - generic [ref=e3875]: Media and Distribution
+            - generic [ref=e3876]:
+              - generic [ref=e3877]: Linked tool
+              - generic [ref=e3878]:
+                - generic [ref=e3879]: PushingDebate Studio
+                - generic [ref=e3880]: Studio surface where the operator talks to PushingDebateDude, pulls helpful history from the backing memory lane, debates in plain language on GPT-5.4, learns visually, and moves the approved version into implementation.
+                - generic [ref=e3882]: Active
+        - generic [ref=e3883]:
+          - generic [ref=e3884]:
+            - heading "Workflow route" [level=3] [ref=e3885]
+            - generic [ref=e3886]: This is the seeded workflow route from audio or text intake to implementation and live use.
+          - document [ref=e3888]:
+            - generic [ref=e3890]:
+              - generic [ref=e3894]:
+                - paragraph [ref=e3900]: sequential • operator
+                - paragraph [ref=e3906]: sequential • review
+                - paragraph [ref=e3912]: sequential • fulfillment
+                - paragraph [ref=e3918]: sequential • operator
+                - paragraph [ref=e3924]: sequential • operator
+                - paragraph [ref=e3930]: sequential • operator
+                - paragraph [ref=e3936]: sequential • fulfillment
+                - paragraph [ref=e3942]: sequential • review
+                - paragraph [ref=e3948]: sequential • operator
+                - paragraph [ref=e3954]: sequential • operator
+                - paragraph [ref=e3960]: sequential • operator
+                - paragraph [ref=e3966]: sequential • operator
+                - paragraph [ref=e3972]: sequential • review
+                - paragraph [ref=e3978]: sequential • operator
+                - paragraph [ref=e3984]: sequential • operator
+                - paragraph [ref=e3990]: sequential • operator
+                - paragraph [ref=e3996]: sequential • operator
+                - paragraph [ref=e4002]: sequential • operator
+                - paragraph [ref=e4008]: sequential • fulfillment
+                - paragraph [ref=e4014]: sequential • review
+                - paragraph [ref=e4020]: sequential • operator
+                - paragraph [ref=e4026]: sequential • operator
+                - paragraph [ref=e4032]: sequential • fulfillment
+                - paragraph [ref=e4038]: sequential • review
+                - paragraph [ref=e4044]: sequential • operator
+                - paragraph [ref=e4050]: sequential • operator
+                - paragraph [ref=e4056]: sequential • operator
+                - paragraph [ref=e4062]: sequential • operator
+                - paragraph [ref=e4068]: sequential • review
+                - paragraph [ref=e4074]: sequential • fulfillment
+                - paragraph [ref=e4080]: sequential • operator
+                - paragraph [ref=e4086]: sequential • operator
+                - paragraph [ref=e4092]: sequential • review
+                - paragraph [ref=e4098]: sequential • operator
+                - paragraph [ref=e4104]: sequential • operator
+                - paragraph [ref=e4110]: sequential • review
+                - paragraph [ref=e4116]: sequential • operator
+                - paragraph [ref=e4122]: sequential • operator
+                - paragraph [ref=e4128]: sequential • operator
+                - paragraph [ref=e4134]: sequential • operator
+                - paragraph [ref=e4140]: sequential • operator
+                - paragraph [ref=e4146]: sequential • fulfillment
+                - paragraph [ref=e4152]: sequential • operator
+                - paragraph [ref=e4158]: sequential • operator
+                - paragraph [ref=e4164]: sequential • fulfillment
+                - paragraph [ref=e4170]: sequential • escalation
+                - paragraph [ref=e4176]: sequential • fulfillment
+                - paragraph [ref=e4182]: sequential • operator
+                - paragraph [ref=e4188]: sequential • review
+                - paragraph [ref=e4194]: sequential • operator
+                - paragraph [ref=e4200]: sequential • operator
+                - paragraph [ref=e4206]: sequential • review
+                - paragraph [ref=e4212]: sequential • operator
+                - paragraph [ref=e4218]: sequential • fulfillment
+                - paragraph [ref=e4224]: sequential • escalation
+              - generic [ref=e4225]:
+                - paragraph [ref=e4232]: "Workflow: Product Lifecycle"
+                - paragraph [ref=e4239]: "Workflow: Agentic Memory Operations"
+                - paragraph [ref=e4246]: "Workflow: PushingDebate Studio"
+                - paragraph [ref=e4253]: "Workflow: Task Execution"
+                - paragraph [ref=e4260]: "Workflow: Tool Creation"
+                - paragraph [ref=e4267]: "Workflow: Worker Identity Grounding"
+                - paragraph [ref=e4274]: "Workflow: Worker Tool Onboarding"
+                - paragraph [ref=e4281]: "Workflow: Ticket Resolution"
+                - paragraph [ref=e4288]: "Pipeline: Products Lifecycle"
+                - paragraph [ref=e4295]: Backlog
+                - paragraph [ref=e4302]: Configuring
+                - paragraph [ref=e4309]: Review
+                - paragraph [ref=e4316]: Live
+                - paragraph [ref=e4323]: "Pipeline: Agentic Memory Operations"
+                - paragraph [ref=e4330]: Session Capture
+                - paragraph [ref=e4337]: Memory Extraction
+                - paragraph [ref=e4344]: Semantic Consolidation
+                - paragraph [ref=e4351]: Telemetry Persist
+                - paragraph [ref=e4358]: Backfill
+                - paragraph [ref=e4365]: Review
+                - paragraph [ref=e4372]: "Pipeline: PushingDebate Studio"
+                - paragraph [ref=e4379]: Audio to Text
+                - paragraph [ref=e4386]: First Question
+                - paragraph [ref=e4393]: Describe Idea
+                - paragraph [ref=e4400]: Pull Helpful History
+                - paragraph [ref=e4407]: Open Relevant Workflows
+                - paragraph [ref=e4414]: Debate in Plain Language
+                - paragraph [ref=e4421]: Visual Clarification
+                - paragraph [ref=e4428]: Granular Breakdown
+                - paragraph [ref=e4435]: GPT-5.4 Codex Embed
+                - paragraph [ref=e4442]: Implement in Worker Studio
+                - paragraph [ref=e4449]: Live
+                - paragraph [ref=e4456]: "Pipeline: Task Pipeline"
+                - paragraph [ref=e4463]: Not Started
+                - paragraph [ref=e4470]: In Progress
+                - paragraph [ref=e4477]: Waiting
+                - paragraph [ref=e4484]: Completed
+                - paragraph [ref=e4491]: Deferred
+                - paragraph [ref=e4498]: "Pipeline: Tool Creation"
+                - paragraph [ref=e4505]: Pre-Insertion Review
+                - paragraph [ref=e4512]: Intake
+                - paragraph [ref=e4519]: Capability Spec
+                - paragraph [ref=e4526]: Data Contract
+                - paragraph [ref=e4533]: Build
+                - paragraph [ref=e4540]: Verification
+                - paragraph [ref=e4547]: Arsenal Listing
+                - paragraph [ref=e4554]: Live
+                - paragraph [ref=e4561]: "Pipeline: Worker Identity Grounding"
+                - paragraph [ref=e4568]: Resolve Identity
+                - paragraph [ref=e4575]: Load Script
+                - paragraph [ref=e4582]: Load Capability Contract
+                - paragraph [ref=e4589]: Load Workflow Context
+                - paragraph [ref=e4596]: Read Prompt
+                - paragraph [ref=e4603]: Answer
+                - paragraph [ref=e4610]: Log State + Handoff
+                - paragraph [ref=e4617]: "Pipeline: Worker Tool Onboarding"
+                - paragraph [ref=e4624]: Pre-Insertion Review
+                - paragraph [ref=e4631]: Request
+                - paragraph [ref=e4638]: Identity and Scope
+                - paragraph [ref=e4645]: Secrets and Access
+                - paragraph [ref=e4652]: Provisioning
+                - paragraph [ref=e4659]: Bootstrap
+                - paragraph [ref=e4666]: Validation
+                - paragraph [ref=e4673]: Ready
+                - paragraph [ref=e4680]: "Pipeline: Processor Pipeline - Credit Repair"
+                - paragraph [ref=e4687]: Assigned
+                - paragraph [ref=e4694]: Docs Received
+                - paragraph [ref=e4701]: In Review
+                - paragraph [ref=e4708]: In Processing
+                - paragraph [ref=e4715]: In Monitoring
+                - paragraph [ref=e4722]: Blocked
+                - paragraph [ref=e4729]: Completed
+                - paragraph [ref=e4736]: "Pipeline: Ticket pipeline"
+                - paragraph [ref=e4743]: New
+                - paragraph [ref=e4750]: Waiting on contact
+                - paragraph [ref=e4757]: Waiting on us
+                - paragraph [ref=e4764]: Closed
+                - paragraph [ref=e4771]: "Pipeline: Worker Tool Exceptions"
+                - paragraph [ref=e4778]: New
+                - paragraph [ref=e4785]: Waiting on Credential
+                - paragraph [ref=e4792]: Blocked
+                - paragraph [ref=e4799]: Review
+                - paragraph [ref=e4806]: Resolved
+      - generic [ref=e4807]:
+        - generic [ref=e4808]:
+          - generic [ref=e4809]:
+            - heading "Conversation loop" [level=3] [ref=e4810]
+            - generic [ref=e4811]: This is the discussion loop the studio should follow every time you add a new input.
+          - document [ref=e4813]:
+            - generic [ref=e4815]:
+              - generic [ref=e4820]:
+                - paragraph [ref=e4826]: "No"
+                - paragraph [ref=e4832]: "Yes"
+              - generic [ref=e4833]:
+                - paragraph [ref=e4840]: Audio to Text
+                - paragraph [ref=e4847]: "First Question: What do you have in mind?"
+                - paragraph [ref=e4854]: Operator describes the idea
+                - paragraph [ref=e4861]: Pull helpful history and memory
+                - paragraph [ref=e4868]: Open relevant workflows, pipelines, tasks, tickets, and workers
+                - paragraph [ref=e4875]: Explain the tool in normal language
+                - paragraph [ref=e4882]: Debate
+                - paragraph [ref=e4889]: Organize each new input
+                - paragraph [ref=e4896]: Clarify with Mermaid, drawings, or renders
+                - paragraph [ref=e4903]: Break down stages, actors, pipelines, and use cases
+                - paragraph [ref=e4910]: Clear enough to implement?
+                - paragraph [ref=e4917]: Implement in Worker Studio
+                - paragraph [ref=e4924]: Fill gaps, tasks, and tickets
+                - paragraph [ref=e4931]: Live revision loop
+        - generic [ref=e4932]:
+          - generic [ref=e4933]:
+            - heading "Decision tree" [level=3] [ref=e4934]
+            - generic [ref=e4935]: This is the gate logic for when to clarify, when to pull history, when to render, and when to implement.
+          - document [ref=e4937]:
+            - generic [ref=e4939]:
+              - generic [ref=e4955]:
+                - paragraph [ref=e4961]: Audio
+                - paragraph [ref=e4967]: Text
+                - paragraph [ref=e4973]: "No"
+                - paragraph [ref=e4979]: "Yes"
+                - paragraph [ref=e4985]: "Yes"
+                - paragraph [ref=e4991]: "No"
+                - paragraph [ref=e4997]: "No"
+                - paragraph [ref=e5003]: "Yes"
+                - paragraph [ref=e5009]: "No"
+                - paragraph [ref=e5015]: "Yes"
+              - generic [ref=e5016]:
+                - paragraph [ref=e5023]: New idea input
+                - paragraph [ref=e5030]: Audio or text?
+                - paragraph [ref=e5037]: Transcribe audio
+                - paragraph [ref=e5044]: Capture text input
+                - paragraph [ref=e5051]: Enough detail to define intent?
+                - paragraph [ref=e5058]: Ask one clarifying question
+                - paragraph [ref=e5065]: Search history, notebooks, and memory
+                - paragraph [ref=e5072]: Open relevant workflows and workers
+                - paragraph [ref=e5079]: Debate in plain language on GPT-5.4
+                - paragraph [ref=e5086]: Need visual clarification?
+                - paragraph [ref=e5093]: Render Mermaid, drawings, or assets
+                - paragraph [ref=e5100]: Ready for granular breakdown?
+                - paragraph [ref=e5107]: Define stages, actors, pipelines, tickets, and use cases
+                - paragraph [ref=e5114]: Approved to implement?
+                - paragraph [ref=e5121]: Implement in Worker Studio
+                - paragraph [ref=e5128]: Update tasks, tickets, and records
+      - generic [ref=e5129]:
+        - generic [ref=e5130]:
+          - generic [ref=e5131]:
+            - heading "Pipeline stages" [level=3] [ref=e5132]
+            - generic [ref=e5133]: These are the granular stages the studio now expects before work is considered implementation-ready.
+          - generic [ref=e5134]:
+            - generic [ref=e5135]:
+              - generic [ref=e5136]:
+                - generic [ref=e5137]: Audio to Text
+                - generic [ref=e5138]: Intake
+              - generic [ref=e5139]: Order 10 · active stage
+            - generic [ref=e5140]:
+              - generic [ref=e5141]:
+                - generic [ref=e5142]: First Question
+                - generic [ref=e5143]: Review
+              - generic [ref=e5144]: Order 20 · active stage
+            - generic [ref=e5145]:
+              - generic [ref=e5146]:
+                - generic [ref=e5147]: Describe Idea
+                - generic [ref=e5148]: Work
+              - generic [ref=e5149]: Order 30 · active stage
+            - generic [ref=e5150]:
+              - generic [ref=e5151]:
+                - generic [ref=e5152]: Pull Helpful History
+                - generic [ref=e5153]: Work
+              - generic [ref=e5154]: Order 40 · active stage
+            - generic [ref=e5155]:
+              - generic [ref=e5156]:
+                - generic [ref=e5157]: Open Relevant Workflows
+                - generic [ref=e5158]: Work
+              - generic [ref=e5159]: Order 50 · active stage
+            - generic [ref=e5160]:
+              - generic [ref=e5161]:
+                - generic [ref=e5162]: Debate in Plain Language
+                - generic [ref=e5163]: Review
+              - generic [ref=e5164]: Order 60 · active stage
+            - generic [ref=e5165]:
+              - generic [ref=e5166]:
+                - generic [ref=e5167]: Visual Clarification
+                - generic [ref=e5168]: Work
+              - generic [ref=e5169]: Order 70 · active stage
+            - generic [ref=e5170]:
+              - generic [ref=e5171]:
+                - generic [ref=e5172]: Granular Breakdown
+                - generic [ref=e5173]: Work
+              - generic [ref=e5174]: Order 80 · active stage
+            - generic [ref=e5175]:
+              - generic [ref=e5176]:
+                - generic [ref=e5177]: GPT-5.4 Codex Embed
+                - generic [ref=e5178]: Work
+              - generic [ref=e5179]: Order 90 · active stage
+            - generic [ref=e5180]:
+              - generic [ref=e5181]:
+                - generic [ref=e5182]: Implement in Worker Studio
+                - generic [ref=e5183]: Work
+              - generic [ref=e5184]: Order 100 · active stage
+            - generic [ref=e5185]:
+              - generic [ref=e5186]:
+                - generic [ref=e5187]: Live
+                - generic [ref=e5188]: Completed
+              - generic [ref=e5189]: Order 110 · terminal
+        - generic [ref=e5190]:
+          - generic [ref=e5191]:
+            - heading "Tasks to execute" [level=3] [ref=e5192]
+            - generic [ref=e5193]: These are the concrete tasks seeded for the studio. They stay tied to the debate workflow, not lost in generic backlog space.
+          - generic [ref=e5194]:
+            - link "Break down PushingDebate into granular stages Not Started Turn the debated idea into granular stages, actors, pipelines, tickets, tasks, use cases, and implementation steps once the direction is clear." [ref=e5195] [cursor=pointer]:
+              - /url: "#/tasks/task_break_down_pushing_debate_granular_plan"
+              - generic [ref=e5196]:
+                - generic [ref=e5197]:
+                  - generic [ref=e5198]: Break down PushingDebate into granular stages
+                  - generic [ref=e5199]: Not Started
+                - generic [ref=e5200]: Turn the debated idea into granular stages, actors, pipelines, tickets, tasks, use cases, and implementation steps once the direction is clear.
+            - link "Build PushingDebate visual teaching pack Not Started Use Mermaid, drawings, renders, RunPod media, and voice aids to clarify what the system understood after each new input." [ref=e5201] [cursor=pointer]:
+              - /url: "#/tasks/task_build_pushing_debate_visual_teaching_pack"
+              - generic [ref=e5202]:
+                - generic [ref=e5203]:
+                  - generic [ref=e5204]: Build PushingDebate visual teaching pack
+                  - generic [ref=e5205]: Not Started
+                - generic [ref=e5206]: Use Mermaid, drawings, renders, RunPod media, and voice aids to clarify what the system understood after each new input.
+            - link "Capture PushingDebate audio intake Not Started Start the studio with audio-to-text or text intake so the first idea arrives in one normalized discussion lane." [ref=e5207] [cursor=pointer]:
+              - /url: "#/tasks/task_capture_pushing_debate_audio_intake"
+              - generic [ref=e5208]:
+                - generic [ref=e5209]:
+                  - generic [ref=e5210]: Capture PushingDebate audio intake
+                  - generic [ref=e5211]: Not Started
+                - generic [ref=e5212]: Start the studio with audio-to-text or text intake so the first idea arrives in one normalized discussion lane.
+            - link "Define PushingDebate Studio idea In Progress Ask the first clarifying question, capture the idea in the operator's own words, and define what the studio should help the operator understand." [ref=e5213] [cursor=pointer]:
+              - /url: "#/tasks/task_define_pushing_debate_studio_idea"
+              - generic [ref=e5214]:
+                - generic [ref=e5215]:
+                  - generic [ref=e5216]: Define PushingDebate Studio idea
+                  - generic [ref=e5217]: In Progress
+                - generic [ref=e5218]: Ask the first clarifying question, capture the idea in the operator's own words, and define what the studio should help the operator understand.
+            - link "Embed GPT-5.4 Codex app in PushingDebate Studio Not Started Define the embedded GPT-5.4 Codex or OpenAI application surface, where it reads from, what it writes to, and how it helps the operator and system understand each other before implementation." [ref=e5219] [cursor=pointer]:
+              - /url: "#/tasks/task_prototype_codex_in_pushing_debate_studio"
+              - generic [ref=e5220]:
+                - generic [ref=e5221]:
+                  - generic [ref=e5222]: Embed GPT-5.4 Codex app in PushingDebate Studio
+                  - generic [ref=e5223]: Not Started
+                - generic [ref=e5224]: Define the embedded GPT-5.4 Codex or OpenAI application surface, where it reads from, what it writes to, and how it helps the operator and system understand each other before implementation.
+            - 'link "Move PushingDebate conversation into PCRM flow In Progress Turn the current PushingDebate conversation into live PCRM work. Selected worker: PushingDebateDude Workflow: PushingDebate Studio Pipeline: PushingDebate Studio Linked state: current_state_pushing_debate_dude_20260326201250_b14a11 Conversation digest: Route this conversation into PCRM with a task and ticket, link it to PushingDebate Studio, test the API MCP communication path, and show the derived intelligence while the work is moving." [ref=e5225] [cursor=pointer]':
+              - /url: "#/tasks/task_pushing_debate_platform_1774557191314_vjpi"
+              - generic [ref=e5226]:
+                - generic [ref=e5227]:
+                  - generic [ref=e5228]: Move PushingDebate conversation into PCRM flow
+                  - generic [ref=e5229]: In Progress
+                - generic [ref=e5230]: "Turn the current PushingDebate conversation into live PCRM work. Selected worker: PushingDebateDude Workflow: PushingDebate Studio Pipeline: PushingDebate Studio Linked state: current_state_pushing_debate_dude_20260326201250_b14a11 Conversation digest: Route this conversation into PCRM with a task and ticket, link it to PushingDebate Studio, test the API MCP communication path, and show the derived intelligence while the work is moving."
+            - link "Pull helpful history for PushingDebate Studio Not Started Search previous history, notebooks, current state, and memory surfaces for context that can clarify the idea before debating it." [ref=e5231] [cursor=pointer]:
+              - /url: "#/tasks/task_pull_pushing_debate_history_context"
+              - generic [ref=e5232]:
+                - generic [ref=e5233]:
+                  - generic [ref=e5234]: Pull helpful history for PushingDebate Studio
+                  - generic [ref=e5235]: Not Started
+                - generic [ref=e5236]: Search previous history, notebooks, current state, and memory surfaces for context that can clarify the idea before debating it.
+            - link "Record PushingDebate gold rules and lessons In Progress Persist operator-authored directives, clarifications, and mistakes into PC Company Vision, AI Memory, and worker learning feedback so future studio sessions start with the same rules already loaded." [ref=e5237] [cursor=pointer]:
+              - /url: "#/tasks/task_record_pushing_debate_operator_rules"
+              - generic [ref=e5238]:
+                - generic [ref=e5239]:
+                  - generic [ref=e5240]: Record PushingDebate gold rules and lessons
+                  - generic [ref=e5241]: In Progress
+                - generic [ref=e5242]: Persist operator-authored directives, clarifications, and mistakes into PC Company Vision, AI Memory, and worker learning feedback so future studio sessions start with the same rules already loaded.
+            - link "Route PushingDebate Studio workflow Not Started Open the relevant workflows, pipelines, tasks, tickets, and workers that can help explain or implement the idea." [ref=e5243] [cursor=pointer]:
+              - /url: "#/tasks/task_route_pushing_debate_studio_workflow"
+              - generic [ref=e5244]:
+                - generic [ref=e5245]:
+                  - generic [ref=e5246]: Route PushingDebate Studio workflow
+                  - generic [ref=e5247]: Not Started
+                - generic [ref=e5248]: Open the relevant workflows, pipelines, tasks, tickets, and workers that can help explain or implement the idea.
+            - link "Run PushingDebate GPT-5.4 discussion loop Not Started Use PushingDebateDude as the operator-facing GPT-5.4 discussion seat, with PushingCapSickMemoryDude supplying backing memory, notebooks, and prior lessons, so the idea gets debated in plain language without losing context." [ref=e5249] [cursor=pointer]:
+              - /url: "#/tasks/task_run_pushing_debate_memory_comparison"
+              - generic [ref=e5250]:
+                - generic [ref=e5251]:
+                  - generic [ref=e5252]: Run PushingDebate GPT-5.4 discussion loop
+                  - generic [ref=e5253]: Not Started
+                - generic [ref=e5254]: Use PushingDebateDude as the operator-facing GPT-5.4 discussion seat, with PushingCapSickMemoryDude supplying backing memory, notebooks, and prior lessons, so the idea gets debated in plain language without losing context.
+        - generic [ref=e5255]:
+          - generic [ref=e5256]:
+            - heading "Planned abilities" [level=3] [ref=e5257]
+            - generic [ref=e5258]: These are the learning and runtime abilities the studio is expected to gain as the tasks close.
+          - generic [ref=e5259]:
+            - generic [ref=e5260]:
+              - generic [ref=e5261]:
+                - generic [ref=e5262]: Audio-to-text intake
+                - generic [ref=e5263]: Not Started
+              - generic [ref=e5264]: Start with spoken or typed input, normalize it into one debate lane, and ask the first clarifying question before any workflow decision is made.
+            - generic [ref=e5265]:
+              - generic [ref=e5266]:
+                - generic [ref=e5267]: Visual learning pack
+                - generic [ref=e5268]: Not Started
+              - generic [ref=e5269]: Use Mermaid, screenshots, generated images, renders, and guided diagrams so the route is visible before implementation starts.
+            - generic [ref=e5270]:
+              - generic [ref=e5271]:
+                - generic [ref=e5272]: Memory-backed GPT-5.4 debate
+                - generic [ref=e5273]: Not Started
+              - generic [ref=e5274]: Use PushingDebateDude as the operator-facing GPT-5.4 seat, with PushingCapSickMemoryDude behind it for memory retrieval, notebooks, and durable lesson capture.
+            - generic [ref=e5275]:
+              - generic [ref=e5276]:
+                - generic [ref=e5277]: Gold rules and company vision memory
+                - generic [ref=e5278]: In Progress
+              - generic [ref=e5279]: Write Manny-authored directives, decisions, and mistakes into PC Company Vision, AI Memory, and worker learning feedback so the next debate session reloads them before asking new questions.
+            - generic [ref=e5280]:
+              - generic [ref=e5281]:
+                - generic [ref=e5282]: Command glossary and fast-fire routes
+                - generic [ref=e5283]: Planned
+              - generic [ref=e5284]: Use stable command codes, route codes, callbacks, and error contracts so the studio can insert work quickly instead of rebuilding long scripts every time.
+            - generic [ref=e5285]:
+              - generic [ref=e5286]:
+                - generic [ref=e5287]: Memory Dude durable targets
+                - generic [ref=e5288]: Planned
+              - generic [ref=e5289]: Prepare AI Memory, Company Vision, worker learning feedback, lineage, and ingest batches so PushingCapSickMemoryDude can log durable lessons immediately.
+            - generic [ref=e5290]:
+              - generic [ref=e5291]:
+                - generic [ref=e5292]: Codex inside the studio
+                - generic [ref=e5293]: Not Started
+              - generic [ref=e5294]: Embed a GPT-5.4 Codex or OpenAI application surface inside the page so definition, debate, and implementation stay in one studio.
+            - generic [ref=e5295]:
+              - generic [ref=e5296]:
+                - generic [ref=e5297]: RunPod and voice lane
+                - generic [ref=e5298]: Not Started
+              - generic [ref=e5299]: Reserve the media/runtime lane for RunPod, images, and text-to-voice explainers when the operator needs a different teaching modality.
+          - generic [ref=e5300]:
+            - generic [ref=e5301]: Dependency ticket
+            - generic [ref=e5302]: Provision audio-to-text, visual-learning, RunPod media, GPT-5.4 discussion, and Codex embed/runtime dependencies required to move the studio from concept to implementation.
+            - generic [ref=e5304]: Not Started
+            - link "Open ticket" [ref=e5305] [cursor=pointer]:
+              - /url: "#/tickets/ticket_enable_pushing_debate_studio_dependencies"
+  - complementary [ref=e5306]:
+    - generic [ref=e5307]:
+      - generic [ref=e5308]:
+        - generic [ref=e5309]: Platform briefs
+        - generic [ref=e5310]: PushingDebate Studio
+        - generic [ref=e5311]: Saved 3/26/2026, 6:36:00 PM
+      - button "Collapse" [ref=e5312] [cursor=pointer]
+    - generic [ref=e5313]:
+      - generic [ref=e5314]:
+        - generic [ref=e5315]: Active lane
+        - generic [ref=e5316]:
+          - button "Codex" [ref=e5317] [cursor=pointer]
+          - button "Stitch" [ref=e5318] [cursor=pointer]
+          - button "Agent" [ref=e5319] [cursor=pointer]
+          - button "Media" [ref=e5320] [cursor=pointer]
+      - generic [ref=e5321]:
+        - generic [ref=e5322]: Agent lane
+        - generic [ref=e5323]: Use this when the current surface needs instructions routed from the page into a worker, workflow, or automation lane.
+      - generic [ref=e5324]:
+        - generic [ref=e5325]:
+          - generic [ref=e5326]: Codex
+          - generic [ref=e5327]: Empty
+        - generic [ref=e5328]:
+          - generic [ref=e5329]: Stitch
+          - generic [ref=e5330]: Empty
+        - generic [ref=e5331]:
+          - generic [ref=e5332]: Agent
+          - generic [ref=e5333]: Empty
+        - generic [ref=e5334]:
+          - generic [ref=e5335]: Media
+          - generic [ref=e5336]: Empty
+    - generic [ref=e5337]:
+      - generic [ref=e5338]:
+        - generic [ref=e5339]: Stitch brief
+        - generic [ref=e5340]: What the selected agent or workflow lane should do from this surface.
+      - textbox "Stitch brief What the selected agent or workflow lane should do from this surface." [active] [ref=e5341]:
+        - /placeholder: Describe the worker, workflow, automation, or page-to-worker instruction you want routed from this surface.
+    - generic [ref=e5342]:
+      - generic [ref=e5343]: Route context
+      - generic [ref=e5344]:
+        - text: "Active surface:"
+        - strong [ref=e5345]: PushingDebate Studio
+        - text: "Route: /pushing-debate-studio"
+    - generic [ref=e5346]:
+      - generic [ref=e5347]:
+        - generic [ref=e5348]: Mic dictation
+        - button "Start Mic" [ref=e5350] [cursor=pointer]
+      - generic [ref=e5351]: Requested device not found
+    - generic [ref=e5352]:
+      - button "Copy active bundle" [ref=e5353] [cursor=pointer]
+      - button "Copy both" [ref=e5354] [cursor=pointer]
+      - button "Clear active" [ref=e5355] [cursor=pointer]

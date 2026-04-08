@@ -1,0 +1,1624 @@
+{
+    "info": {
+        "name": "P NATIVE WORKER TOOLS (Orchestration)",
+        "description": "Auto-generated collection of P's internal Mac Studio orchestration bindings and gateway executions.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "const target = pm.iterationData.get(\"tool\");",
+                    "if (!target) return; // Allow manual execution",
+                    "",
+                    "// Normalize raw_payload (iteration data object -> JSON string)",
+                    "let rp = pm.iterationData.get(\"raw_payload\");",
+                    "if (typeof rp === \"object\") {",
+                    "  pm.variables.set(\"raw_payload\", JSON.stringify(rp));",
+                    "} else if (typeof rp === \"string\") {",
+                    "  pm.variables.set(\"raw_payload\", rp);",
+                    "}",
+                    "",
+                    "// Hard safety gates for mutation runs",
+                    "const allow = pm.environment.get(\"ALLOW_MUTATIONS\");",
+                    "const mutationIntent = pm.iterationData.get(\"mutation_intent\") === \"YES\";",
+                    "const destructive = new Set([",
+                    "  \"github_create_pr\",",
+                    "  \"github_commit_and_push\",",
+                    "  \"pcrm_delete_record\",",
+                    "  \"notebooklm_delete\",",
+                    "  \"notebooklm_write\",",
+                    "  \"run_bash_command\",",
+                    "  \"execute_local_shell\"",
+                    "]);",
+                    "",
+                    "if (destructive.has(target)) {",
+                    "  if (allow !== \"true\" || !mutationIntent) {",
+                    "    throw new Error(`[GUARD:READONLY_BLOCK] tool=${target} iter=\"${pm.iterationData.get(\"name\") || \"\"}\" -> mutation denied. Required: env.ALLOW_MUTATIONS=\"true\" AND data.mutation_intent=\"YES\". Observed: env.ALLOW_MUTATIONS=\"${pm.environment.get(\"ALLOW_MUTATIONS\")}\" data.mutation_intent=\"${pm.iterationData.get(\"mutation_intent\")}\".`);",
+                    "  }",
+                    "} else if (mutationIntent) {",
+                    "  throw new Error(`[GUARD:MUTATION_ALLOWLIST] tool=${target} iter=\"${pm.iterationData.get(\"name\") || \"\"}\" -> rejected. This lane only permits destructive tools. If this is intended to be read-only, move it to the canary data file. Allowed destructive tools: ${Array.from(destructive).join(\", \")}`);",
+                    "}",
+                    "",
+                    "const order = JSON.parse(pm.collectionVariables.get(\"request_order\") || \"[]\");",
+                    "if (!order.length) throw new Error(\"Collection variable `request_order` is missing/empty.\");",
+                    "",
+                    "const current = pm.info.requestName;",
+                    "const idx = order.indexOf(current);",
+                    "if (idx === -1) throw new Error(`Request \"${current}\" not found in request_order.`);",
+                    "",
+                    "const ranKey = `ran_${pm.info.iteration}`;",
+                    "const alreadyRan = pm.collectionVariables.get(ranKey) === \"true\";",
+                    "",
+                    "if (alreadyRan) {",
+                    "  postman.setNextRequest(pm.execution.location.current);",
+                    "  return;",
+                    "}",
+                    "",
+                    "if (current !== target) {",
+                    "  const nextName = order[idx + 1];",
+                    "  postman.setNextRequest(nextName || null);",
+                    "} else {",
+                    "  pm.collectionVariables.set(ranKey, \"true\");",
+                    "  postman.setNextRequest(null);",
+                    "}"
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "pm.test(\"Status is 200 OK\", function () {",
+                    "    pm.response.to.have.status(200);",
+                    "});",
+                    "pm.test(\"Response body is non-empty\", function () {",
+                    "    pm.expect(pm.response.text()).to.be.a(\"string\").and.not.eql(\"\");",
+                    "});",
+                    "pm.test(\"If JSON, it parses\", function () {",
+                    "    const ct = (pm.response.headers.get(\"Content-Type\") || \"\").toLowerCase();",
+                    "    if (ct.includes(\"application/json\") || ct.includes(\"+json\")) {",
+                    "        pm.response.json();",
+                    "    }",
+                    "});"
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "p_gateway_base_url",
+            "value": "http://localhost:8080",
+            "type": "string"
+        },
+        {
+            "key": "request_order",
+            "value": "[\"gcp_rest_proxy\", \"query_bigquery\", \"discover_platform_context\", \"orchestrate_platform\", \"open_browser\", \"antigravity_spawn\", \"antigravity_architect\", \"playwright_mcp\", \"playwright_vision\", \"execute_local_shell\", \"github_whoami\", \"github_clone_repo\", \"github_list_repos\", \"github_view_repo\", \"github_read_file\", \"github_repo_status\", \"github_checkout_branch\", \"github_commit_and_push\", \"github_create_pr\", \"github_comment_thread\", \"github_run_workflow\", \"pcrm_me\", \"pcrm_list_records\", \"pcrm_get_record\", \"pcrm_create_record\", \"pcrm_update_record\", \"pcrm_delete_record\", \"pcrm_archive_record\", \"pcrm_list_properties\", \"pcrm_list_associations\", \"pcrm_add_association\", \"pcrm_remove_association\", \"pcrm_get_orchestration_meta\", \"pcrm_discover_agents\", \"pcrm_list_backend_actions\", \"pcrm_list_social_channels\", \"upsert_working_plan\", \"append_working_note\", \"get_working_context\", \"answer_core_memory\", \"search_core_memory\", \"get_p_notebook_catalog\", \"ingest_permanent_memory\", \"pcrm_sql_execution\", \"gce_vm_orchestration\", \"notebooklm_read\", \"notebooklm_write\", \"notebooklm_edit\", \"notebooklm_delete\"]",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "gcp_rest_proxy",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/gcp_rest_proxy",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "gcp_rest_proxy"
+                    ]
+                },
+                "description": "Execute arbitrary Google Cloud REST APIs acting natively as the gcloud SDK. Use this for raw REST endpoints; use query_bigquery for BigQuery SQL."
+            }
+        },
+        {
+            "name": "query_bigquery",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/query_bigquery",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "query_bigquery"
+                    ]
+                },
+                "description": "Run SQL on Google BigQuery."
+            }
+        },
+        {
+            "name": "discover_platform_context",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/discover_platform_context",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "discover_platform_context"
+                    ]
+                },
+                "description": "Read the entire platform context."
+            }
+        },
+        {
+            "name": "orchestrate_platform",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/orchestrate_platform",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "orchestrate_platform"
+                    ]
+                },
+                "description": "Delegate a task to the Pushing Capital worker ecosystem."
+            }
+        },
+        {
+            "name": "open_browser",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/open_browser",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "open_browser"
+                    ]
+                },
+                "description": "Command Manny's specific client interface to immediately open a specific URL."
+            }
+        },
+        {
+            "name": "antigravity_spawn",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/antigravity_spawn",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "antigravity_spawn"
+                    ]
+                },
+                "description": "Spawn an Antigravity spatial logic node for a task or directive."
+            }
+        },
+        {
+            "name": "antigravity_architect",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/antigravity_architect",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "antigravity_architect"
+                    ]
+                },
+                "description": "Run Antigravity's autonomous architect pipeline to compile a structured blueprint from a payload."
+            }
+        },
+        {
+            "name": "playwright_mcp",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/playwright_mcp",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "playwright_mcp"
+                    ]
+                },
+                "description": "Drive Manny's persistent Playwright browser session to inspect and interact with webpages. Use snapshot to understand the current page before clicking or filling elements."
+            }
+        },
+        {
+            "name": "playwright_vision",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/playwright_vision",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "playwright_vision"
+                    ]
+                },
+                "description": "Capture the live browser view from Manny's Mac and answer a visual question using the screenshot as ground truth. Use this when Manny asks what you can see or what a page looks like."
+            }
+        },
+        {
+            "name": "execute_local_shell",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/execute_local_shell",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "execute_local_shell"
+                    ]
+                },
+                "description": "Execute a raw shell command directly on Manny's local Mac Studio."
+            }
+        },
+        {
+            "name": "github_whoami",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_whoami",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_whoami"
+                    ]
+                },
+                "description": "Return the authenticated GitHub CLI user and auth state on Manny's Mac."
+            }
+        },
+        {
+            "name": "github_clone_repo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_clone_repo",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_clone_repo"
+                    ]
+                },
+                "description": "Clone a GitHub repository onto Manny's Mac using the authenticated GitHub CLI."
+            }
+        },
+        {
+            "name": "github_list_repos",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_list_repos",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_list_repos"
+                    ]
+                },
+                "description": "List GitHub repositories for an owner or the authenticated account from Manny's Mac."
+            }
+        },
+        {
+            "name": "github_view_repo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_view_repo",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_view_repo"
+                    ]
+                },
+                "description": "Inspect a GitHub repository and list its root contents from Manny's Mac."
+            }
+        },
+        {
+            "name": "github_read_file",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_read_file",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_read_file"
+                    ]
+                },
+                "description": "Read a specific file from a GitHub repository on Manny's Mac."
+            }
+        },
+        {
+            "name": "github_repo_status",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_repo_status",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_repo_status"
+                    ]
+                },
+                "description": "Inspect a local git repository on Manny's Mac and return branch plus working tree status."
+            }
+        },
+        {
+            "name": "github_checkout_branch",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_checkout_branch",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_checkout_branch"
+                    ]
+                },
+                "description": "Create or switch to a branch in a local repository on Manny's Mac."
+            }
+        },
+        {
+            "name": "github_commit_and_push",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_commit_and_push",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_commit_and_push"
+                    ]
+                },
+                "description": "Stage all changes, commit them, and optionally push from a local repository on Manny's Mac."
+            }
+        },
+        {
+            "name": "github_create_pr",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_create_pr",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_create_pr"
+                    ]
+                },
+                "description": "Create a GitHub pull request from a local repository on Manny's Mac."
+            }
+        },
+        {
+            "name": "github_comment_thread",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_comment_thread",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_comment_thread"
+                    ]
+                },
+                "description": "Add a comment to a GitHub issue or pull request from a local repository on Manny's Mac."
+            }
+        },
+        {
+            "name": "github_run_workflow",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/github_run_workflow",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "github_run_workflow"
+                    ]
+                },
+                "description": "Trigger a GitHub Actions workflow from a local repository on Manny's Mac."
+            }
+        },
+        {
+            "name": "pcrm_me",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_me",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_me"
+                    ]
+                },
+                "description": "Return the authenticated PCRM principal attached to the worker's PCRM bearer token."
+            }
+        },
+        {
+            "name": "pcrm_list_records",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_list_records",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_list_records"
+                    ]
+                },
+                "description": "List PCRM records directly from platform.pushingcap.com. Use for contacts, companies, deals, tasks, tickets, invoices, current_state, and similar objects."
+            }
+        },
+        {
+            "name": "pcrm_get_record",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_get_record",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_get_record"
+                    ]
+                },
+                "description": "Fetch a single PCRM record by object and id."
+            }
+        },
+        {
+            "name": "pcrm_create_record",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_create_record",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_create_record"
+                    ]
+                },
+                "description": "Create a PCRM record directly. Use fields for the record payload."
+            }
+        },
+        {
+            "name": "pcrm_update_record",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_update_record",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_update_record"
+                    ]
+                },
+                "description": "Update one PCRM field on a record."
+            }
+        },
+        {
+            "name": "pcrm_delete_record",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_delete_record",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_delete_record"
+                    ]
+                },
+                "description": "Soft-delete a PCRM record."
+            }
+        },
+        {
+            "name": "pcrm_archive_record",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_archive_record",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_archive_record"
+                    ]
+                },
+                "description": "Archive or unarchive a PCRM record."
+            }
+        },
+        {
+            "name": "pcrm_list_properties",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_list_properties",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_list_properties"
+                    ]
+                },
+                "description": "List PCRM properties for an object."
+            }
+        },
+        {
+            "name": "pcrm_list_associations",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_list_associations",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_list_associations"
+                    ]
+                },
+                "description": "List PCRM associations for a record."
+            }
+        },
+        {
+            "name": "pcrm_add_association",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_add_association",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_add_association"
+                    ]
+                },
+                "description": "Associate two PCRM records directly."
+            }
+        },
+        {
+            "name": "pcrm_remove_association",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_remove_association",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_remove_association"
+                    ]
+                },
+                "description": "Remove an association between two PCRM records."
+            }
+        },
+        {
+            "name": "pcrm_get_orchestration_meta",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_get_orchestration_meta",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_get_orchestration_meta"
+                    ]
+                },
+                "description": "Read PCRM orchestration metadata directly from the control plane."
+            }
+        },
+        {
+            "name": "pcrm_discover_agents",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_discover_agents",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_discover_agents"
+                    ]
+                },
+                "description": "Read the PCRM agent registry directly."
+            }
+        },
+        {
+            "name": "pcrm_list_backend_actions",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_list_backend_actions",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_list_backend_actions"
+                    ]
+                },
+                "description": "Read the PCRM backend action catalog."
+            }
+        },
+        {
+            "name": "pcrm_list_social_channels",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_list_social_channels",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_list_social_channels"
+                    ]
+                },
+                "description": "Read the configured PCRM social channel registry."
+            }
+        },
+        {
+            "name": "upsert_working_plan",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/upsert_working_plan",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "upsert_working_plan"
+                    ]
+                },
+                "description": "Create or update the persistent working plan for the current Manny session. Use this before and during multi-step investigations so the execution plan survives across turns."
+            }
+        },
+        {
+            "name": "append_working_note",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/append_working_note",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "append_working_note"
+                    ]
+                },
+                "description": "Append a collected finding, source note, or evidence item to the current session scratchpad."
+            }
+        },
+        {
+            "name": "get_working_context",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/get_working_context",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "get_working_context"
+                    ]
+                },
+                "description": "Read the current session working plan and recent collected notes."
+            }
+        },
+        {
+            "name": "answer_core_memory",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/answer_core_memory",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "answer_core_memory"
+                    ]
+                },
+                "description": "Use Gemini Enterprise answer mode over P's notebook and memory layer to synthesize a grounded answer with supporting references."
+            }
+        },
+        {
+            "name": "search_core_memory",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/search_core_memory",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "search_core_memory"
+                    ]
+                },
+                "description": "Search P's authoritative NotebookLM Memory matrix for deep context."
+            }
+        },
+        {
+            "name": "get_p_notebook_catalog",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/get_p_notebook_catalog",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "get_p_notebook_catalog"
+                    ]
+                },
+                "description": "Return the canonical P notebook catalog with notebook IDs, resource names, roles, and routing guidance."
+            }
+        },
+        {
+            "name": "ingest_permanent_memory",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/ingest_permanent_memory",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "ingest_permanent_memory"
+                    ]
+                },
+                "description": "Upload a core markdown document into P's brain permanently."
+            }
+        },
+        {
+            "name": "pcrm_sql_execution",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/pcrm_sql_execution",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "pcrm_sql_execution"
+                    ]
+                },
+                "description": "Execute a generic SQL query against PCRM Postgres instances (God Mode)."
+            }
+        },
+        {
+            "name": "gce_vm_orchestration",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/gce_vm_orchestration",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "gce_vm_orchestration"
+                    ]
+                },
+                "description": "Control specific Google Compute Engine VMs physically."
+            }
+        },
+        {
+            "name": "notebooklm_read",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/notebooklm_read",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "notebooklm_read"
+                    ]
+                },
+                "description": "Read a NotebookLM notebook or specific source inside the notebook natively. To read the notebook manifest, only pass notebook_id."
+            }
+        },
+        {
+            "name": "notebooklm_write",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/notebooklm_write",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "notebooklm_write"
+                    ]
+                },
+                "description": "Write or upload a new markdown source file into a NotebookLM notebook natively."
+            }
+        },
+        {
+            "name": "notebooklm_edit",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/notebooklm_edit",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "notebooklm_edit"
+                    ]
+                },
+                "description": "Edit or patch an existing source inside NotebookLM."
+            }
+        },
+        {
+            "name": "notebooklm_delete",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{{raw_payload}}"
+                },
+                "url": {
+                    "raw": "{{p_gateway_base_url}}/p-execute/notebooklm_delete",
+                    "host": [
+                        "{{p_gateway_base_url}}"
+                    ],
+                    "path": [
+                        "p-execute",
+                        "notebooklm_delete"
+                    ]
+                },
+                "description": "Delete a source file from NotebookLM."
+            }
+        }
+    ]
+}

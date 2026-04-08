@@ -1,0 +1,119 @@
+Catalog Audit Report
+Generated: 2026-02-16T04:45:39.426644Z
+
+Summary
+- Apps Script catalog: 72 items
+- D1 automotive_products: 44 items
+- D1 finance_products: 28 items
+- Missing in D1: 0
+- Items with mismatches: 54
+
+Mismatches
+- AUTO-BW-001 — Dent Repair
+  - Issues: category, subcategory
+- AUTO-BW-002 — Panel Repair/Replacement
+  - Issues: category
+- AUTO-BW-003 — Paint Refinishing
+  - Issues: category
+- AUTO-DMV-001 — Title & Registration
+  - Issues: category, subcategory
+- AUTO-DMV-002 — VIN/Odometer Verification
+  - Issues: category
+- AUTO-DMV-003 — Notary Services
+  - Issues: category
+- AUTO-DMV-PKG — Standalone DMV Package
+  - Issues: category
+- AUTO-IA-001 — Body Inspection
+  - Issues: category, subcategory
+- AUTO-IA-002 — Complete Vehicle Scan
+  - Issues: category, subcategory
+- AUTO-IA-003 — Pre-purchase Inspection
+  - Issues: category, subcategory
+- AUTO-IA-004 — Safety Inspection
+  - Issues: category, subcategory
+- AUTO-IA-005 — Vehicle Appraisal
+  - Issues: category, subcategory
+- AUTO-IA-PKG — Standalone Inspection Package
+  - Issues: category
+- AUTO-IA-PKG2 — Standalone Appraisal Package
+  - Issues: category
+- AUTO-KP-001 — Key Cutting
+  - Issues: category, subcategory
+- AUTO-KP-002 — Key Fob Programming
+  - Issues: category
+- AUTO-MS-002 — Detail Service
+  - Issues: subcategory
+- AUTO-MS-003 — Complete Detail x2
+  - Issues: subcategory
+- AUTO-TR-002 — Scheduled Transport
+  - Issues: subcategory
+- AUTO-TW-001 — Tire Sales
+  - Issues: category
+- AUTO-TW-002 — Mounting & Balancing
+  - Issues: category, subcategory
+- AUTO-TW-003 — Tire Rotation
+  - Issues: category, subcategory
+- AUTO-TW-004 — Wheel Alignment
+  - Issues: category
+- AUTO-TW-005 — Wheel Repair - Cosmetic
+  - Issues: category
+- AUTO-TW-006 — Wheel Repair - Straightening
+  - Issues: category
+- AUTO-VS-004 — Elite Vehicle Purchase Solutions
+  - Issues: subcategory
+- FIN-AF-001 — Loan Acquisition
+  - Issues: subcategory
+- FIN-AF-002 — Funding Options Review
+  - Issues: subcategory
+- FIN-AF-003 — Rate & Term Review
+  - Issues: subcategory
+- FIN-AF-004 — Refinance/Consolidation Options
+  - Issues: subcategory
+- FIN-AF-005 — Readiness Checklist
+  - Issues: subcategory
+- FIN-AF-006 — Curated Lender Introductions
+  - Issues: subcategory
+- FIN-AF-PKG1 — Standalone Auto Finance Package
+  - Issues: subcategory
+- FIN-AF-PKG2 — Standalone Retail/Broker Package
+  - Issues: subcategory
+- FIN-AF-PKG3 — Standalone Wholesale/Broker Package
+  - Issues: subcategory
+- FIN-BF-001 — LLC Formation
+  - Issues: subcategory
+- FIN-BF-002 — Corporation (C/S-Corp)
+  - Issues: subcategory
+- FIN-BF-003 — DBA Registration
+  - Issues: subcategory
+- FIN-BF-004 — Nonprofit Formation
+  - Issues: subcategory
+- FIN-BF-005 — EIN Registration
+  - Issues: subcategory
+- FIN-BF-006 — Business Credit Setup
+  - Issues: subcategory
+- FIN-BT-001 — Monthly Reconciliation
+  - Issues: subcategory
+- FIN-BT-002 — Invoices & Bills Tracking
+  - Issues: subcategory
+- FIN-BT-003 — Profit & Loss (P&L)
+  - Issues: subcategory
+- FIN-BT-004 — Balance Sheet
+  - Issues: subcategory
+- FIN-BT-005 — Tax Summary
+  - Issues: subcategory
+- FIN-BT-006 — Document Gathering
+  - Issues: subcategory
+- FIN-BT-007 — Audit Packet Preparation
+  - Issues: subcategory
+- FIN-CS-001 — Credit Strategy Discovery
+  - Issues: category, subcategory
+- FIN-CS-002 — Credit Strategy
+  - Issues: category, subcategory
+- FIN-CS-003 — Tradeline Validation
+  - Issues: category, subcategory
+- FIN-CS-004 — MyScoreIQ 7-day trial
+  - Issues: category, subcategory
+- FIN-CS-005 — MyScoreIQ Monthly Subscription
+  - Issues: category, subcategory
+- FIN-CS-006 — MyScoreIQ On-Demand Pull
+  - Issues: category, subcategory

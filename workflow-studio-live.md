@@ -1,0 +1,714 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - img "PCRM logo" [ref=e6]
+    - generic [ref=e7]: Pushing Capital A relations management platform
+    - generic [ref=e8]:
+      - text: Signed in as
+      - strong [ref=e9]: manny
+    - generic [ref=e10]:
+      - generic [ref=e11]: Primary Surfaces
+      - link "The Whiteboard Command center" [ref=e12] [cursor=pointer]:
+        - /url: "#/whiteboard"
+        - generic [ref=e13]: The Whiteboard
+        - generic [ref=e14]: Command center
+      - link "Tasks" [ref=e15] [cursor=pointer]:
+        - /url: "#/whiteboard/tasks"
+      - link "Chat (5)" [ref=e16] [cursor=pointer]:
+        - /url: "#/whiteboard/chat"
+      - link "Orchestration Execution grid" [ref=e17] [cursor=pointer]:
+        - /url: "#/orchestration"
+        - generic [ref=e18]: Orchestration
+        - generic [ref=e19]: Execution grid
+      - link "Assets Secured library" [ref=e20] [cursor=pointer]:
+        - /url: "#/asset-library"
+        - generic [ref=e21]: Assets
+        - generic [ref=e22]: Secured library
+      - link "Postman API catalog" [ref=e23] [cursor=pointer]:
+        - /url: "#/postman"
+        - generic [ref=e24]: Postman
+        - generic [ref=e25]: API catalog
+      - link "Actions Agent command lane" [ref=e26] [cursor=pointer]:
+        - /url: "#/actions"
+        - generic [ref=e27]: Actions
+        - generic [ref=e28]: Agent command lane
+      - link "AGENTS A2A CHATBOX Live worker bus" [ref=e29] [cursor=pointer]:
+        - /url: "#/agents-a2a"
+        - generic [ref=e30]: AGENTS A2A CHATBOX
+        - generic [ref=e31]: Live worker bus
+      - link "Workflow Studio Pipelines, stages, logic" [ref=e32] [cursor=pointer]:
+        - /url: "#/workflow-studio"
+        - generic [ref=e33]: Workflow Studio
+        - generic [ref=e34]: Pipelines, stages, logic
+    - navigation [ref=e215]:
+      - generic [ref=e216]:
+        - generic [ref=e217]: Relationship Core
+        - generic [ref=e218]: People, companies, and live deals.
+        - generic [ref=e219]:
+          - link "Contacts Client identities, owners, and relationship anchors." [ref=e220] [cursor=pointer]:
+            - /url: "#/contacts"
+            - generic [ref=e221]: Contacts
+            - generic [ref=e222]: Client identities, owners, and relationship anchors.
+          - link "Companies Business entities, ownership context, and associated records." [ref=e223] [cursor=pointer]:
+            - /url: "#/companies"
+            - generic [ref=e224]: Companies
+            - generic [ref=e225]: Business entities, ownership context, and associated records.
+          - link "Deals Live cases, revenue, stage, and attached execution." [ref=e226] [cursor=pointer]:
+            - /url: "#/deals"
+            - generic [ref=e227]: Deals
+            - generic [ref=e228]: Live cases, revenue, stage, and attached execution.
+          - link "Desired Vehicles Client demand, sourcing intent, and target inventory." [ref=e229] [cursor=pointer]:
+            - /url: "#/desired_vehicles"
+            - generic [ref=e230]: Desired Vehicles
+            - generic [ref=e231]: Client demand, sourcing intent, and target inventory.
+      - generic [ref=e232]:
+        - generic [ref=e233]: Automotive Ops
+        - generic [ref=e234]: Assets, inspections, parts, transport, and field execution.
+        - generic [ref=e235]:
+          - link "Vehicles Vehicle truth, inspections, and asset-state records." [ref=e236] [cursor=pointer]:
+            - /url: "#/p242835887_vehicles"
+            - generic [ref=e237]: Vehicles
+            - generic [ref=e238]: Vehicle truth, inspections, and asset-state records.
+          - link "Vehicle Inspections Inspection evidence, issues, and mechanical truth." [ref=e239] [cursor=pointer]:
+            - /url: "#/p242835887_vehicle_inspections"
+            - generic [ref=e240]: Vehicle Inspections
+            - generic [ref=e241]: Inspection evidence, issues, and mechanical truth.
+          - link "Transport Carrier routing, delivery state, and movement logistics." [ref=e242] [cursor=pointer]:
+            - /url: "#/p242835887_transport"
+            - generic [ref=e243]: Transport
+            - generic [ref=e244]: Carrier routing, delivery state, and movement logistics.
+          - link "Service Requests Execution requests that bridge client need to field work." [ref=e245] [cursor=pointer]:
+            - /url: "#/p242835887_service_requests"
+            - generic [ref=e246]: Service Requests
+            - generic [ref=e247]: Execution requests that bridge client need to field work.
+          - link "Subcontractor Job Assigned external work, state, and evidence of completion." [ref=e248] [cursor=pointer]:
+            - /url: "#/p242835887_subcontractor_job"
+            - generic [ref=e249]: Subcontractor Job
+            - generic [ref=e250]: Assigned external work, state, and evidence of completion.
+          - link "Subcontractors Verified operators and vendor execution records." [ref=e251] [cursor=pointer]:
+            - /url: "#/p242835887_subcontractors"
+            - generic [ref=e252]: Subcontractors
+            - generic [ref=e253]: Verified operators and vendor execution records.
+          - link "Inspection Items Assets, inspections, parts, transport, and field execution." [ref=e254] [cursor=pointer]:
+            - /url: "#/p242835887_inspection_items"
+            - generic [ref=e255]: Inspection Items
+            - generic [ref=e256]: Assets, inspections, parts, transport, and field execution.
+          - link "Part Types Assets, inspections, parts, transport, and field execution." [ref=e257] [cursor=pointer]:
+            - /url: "#/p242835887_part_types"
+            - generic [ref=e258]: Part Types
+            - generic [ref=e259]: Assets, inspections, parts, transport, and field execution.
+          - link "Parttype Relationships Assets, inspections, parts, transport, and field execution." [ref=e260] [cursor=pointer]:
+            - /url: "#/p242835887_parttype_relationships"
+            - generic [ref=e261]: Parttype Relationships
+            - generic [ref=e262]: Assets, inspections, parts, transport, and field execution.
+          - link "Skus Assets, inspections, parts, transport, and field execution." [ref=e263] [cursor=pointer]:
+            - /url: "#/p242835887_skus"
+            - generic [ref=e264]: Skus
+            - generic [ref=e265]: Assets, inspections, parts, transport, and field execution.
+          - link "Sku Assets Assets, inspections, parts, transport, and field execution." [ref=e266] [cursor=pointer]:
+            - /url: "#/p242835887_sku_assets"
+            - generic [ref=e267]: Sku Assets
+            - generic [ref=e268]: Assets, inspections, parts, transport, and field execution.
+          - link "Sku Attributes Assets, inspections, parts, transport, and field execution." [ref=e269] [cursor=pointer]:
+            - /url: "#/p242835887_sku_attributes"
+            - generic [ref=e270]: Sku Attributes
+            - generic [ref=e271]: Assets, inspections, parts, transport, and field execution.
+          - link "Brands Assets, inspections, parts, transport, and field execution." [ref=e272] [cursor=pointer]:
+            - /url: "#/p242835887_brands"
+            - generic [ref=e273]: Brands
+            - generic [ref=e274]: Assets, inspections, parts, transport, and field execution.
+      - generic [ref=e275]:
+        - generic [ref=e276]: Financial Intelligence
+        - generic [ref=e277]: Credit, income, payout, and lender-facing paper.
+        - generic [ref=e278]:
+          - link "Financial Profiles Income, liabilities, DTI, and lender-facing readiness." [ref=e279] [cursor=pointer]:
+            - /url: "#/p242835887_financial_profiles"
+            - generic [ref=e280]: Financial Profiles
+            - generic [ref=e281]: Income, liabilities, DTI, and lender-facing readiness.
+          - link "Credit Reports Credit pulls, bureau state, and supporting evidence." [ref=e282] [cursor=pointer]:
+            - /url: "#/p242835887_credit_reports"
+            - generic [ref=e283]: Credit Reports
+            - generic [ref=e284]: Credit pulls, bureau state, and supporting evidence.
+          - link "Credit Tradelines Tradeline-level exposure and repayment history." [ref=e285] [cursor=pointer]:
+            - /url: "#/p242835887_credit_tradelines"
+            - generic [ref=e286]: Credit Tradelines
+            - generic [ref=e287]: Tradeline-level exposure and repayment history.
+          - link "Credit Inspections Credit review findings and qualification context." [ref=e288] [cursor=pointer]:
+            - /url: "#/p242835887_credit_inspections"
+            - generic [ref=e289]: Credit Inspections
+            - generic [ref=e290]: Credit review findings and qualification context.
+          - link "Payouts Money movement, disposition, and partner settlement state." [ref=e291] [cursor=pointer]:
+            - /url: "#/p242835887_payouts"
+            - generic [ref=e292]: Payouts
+            - generic [ref=e293]: Money movement, disposition, and partner settlement state.
+      - generic [ref=e294]:
+        - generic [ref=e295]: Communications
+        - generic [ref=e296]: Calls, email, notes, meetings, and commercial objects.
+        - generic [ref=e297]:
+          - link "Calls Calls, email, notes, meetings, and commercial objects." [ref=e298] [cursor=pointer]:
+            - /url: "#/calls"
+            - generic [ref=e299]: Calls
+            - generic [ref=e300]: Calls, email, notes, meetings, and commercial objects.
+          - link "Emails Calls, email, notes, meetings, and commercial objects." [ref=e301] [cursor=pointer]:
+            - /url: "#/emails"
+            - generic [ref=e302]: Emails
+            - generic [ref=e303]: Calls, email, notes, meetings, and commercial objects.
+          - link "Meetings Calls, email, notes, meetings, and commercial objects." [ref=e304] [cursor=pointer]:
+            - /url: "#/meetings"
+            - generic [ref=e305]: Meetings
+            - generic [ref=e306]: Calls, email, notes, meetings, and commercial objects.
+          - link "Notes Calls, email, notes, meetings, and commercial objects." [ref=e307] [cursor=pointer]:
+            - /url: "#/notes"
+            - generic [ref=e308]: Notes
+            - generic [ref=e309]: Calls, email, notes, meetings, and commercial objects.
+          - link "Line Items Calls, email, notes, meetings, and commercial objects." [ref=e310] [cursor=pointer]:
+            - /url: "#/line_items"
+            - generic [ref=e311]: Line Items
+            - generic [ref=e312]: Calls, email, notes, meetings, and commercial objects.
+          - link "Products Calls, email, notes, meetings, and commercial objects." [ref=e313] [cursor=pointer]:
+            - /url: "#/products"
+            - generic [ref=e314]: Products
+            - generic [ref=e315]: Calls, email, notes, meetings, and commercial objects.
+          - link "Quotes Calls, email, notes, meetings, and commercial objects." [ref=e316] [cursor=pointer]:
+            - /url: "#/quotes"
+            - generic [ref=e317]: Quotes
+            - generic [ref=e318]: Calls, email, notes, meetings, and commercial objects.
+          - link "Tasks Calls, email, notes, meetings, and commercial objects." [ref=e319] [cursor=pointer]:
+            - /url: "#/tasks"
+            - generic [ref=e320]: Tasks
+            - generic [ref=e321]: Calls, email, notes, meetings, and commercial objects.
+          - link "Tickets Calls, email, notes, meetings, and commercial objects." [ref=e322] [cursor=pointer]:
+            - /url: "#/tickets"
+            - generic [ref=e323]: Tickets
+            - generic [ref=e324]: Calls, email, notes, meetings, and commercial objects.
+      - generic [ref=e325]:
+        - generic [ref=e326]: Workflow Control
+        - generic [ref=e327]: Workflow design, pipeline stages, routing logic, and handoff contracts.
+        - generic [ref=e328]:
+          - link "Workflow Definitions Top-level workflow contracts for tasks, tickets, products, and custom execution lanes." [ref=e329] [cursor=pointer]:
+            - /url: "#/workflow_definitions"
+            - generic [ref=e330]: Workflow Definitions
+            - generic [ref=e331]: Top-level workflow contracts for tasks, tickets, products, and custom execution lanes.
+          - link "Workflow Pipelines Pipeline families with ordered stages and linked product or workflow context." [ref=e332] [cursor=pointer]:
+            - /url: "#/workflow_pipelines"
+            - generic [ref=e333]: Workflow Pipelines
+            - generic [ref=e334]: Pipeline families with ordered stages and linked product or workflow context.
+          - link "Workflow Stages Stage-by-stage execution states used in the live Mermaid workflow charts." [ref=e335] [cursor=pointer]:
+            - /url: "#/workflow_stages"
+            - generic [ref=e336]: Workflow Stages
+            - generic [ref=e337]: Stage-by-stage execution states used in the live Mermaid workflow charts.
+          - link "Workflow Logic Transition rules, conditions, and automation steps between workflow stages." [ref=e338] [cursor=pointer]:
+            - /url: "#/workflow_logic"
+            - generic [ref=e339]: Workflow Logic
+            - generic [ref=e340]: Transition rules, conditions, and automation steps between workflow stages.
+          - link "Workflow Handoffs Worker, system, or review handoffs tied to specific stage transitions." [ref=e341] [cursor=pointer]:
+            - /url: "#/workflow_handoffs"
+            - generic [ref=e342]: Workflow Handoffs
+            - generic [ref=e343]: Worker, system, or review handoffs tied to specific stage transitions.
+      - generic [ref=e344]:
+        - generic [ref=e345]: Intelligence Memory
+        - generic [ref=e346]: AI memory, attributes, referral logic, and relationship maps.
+        - generic [ref=e347]:
+          - link "Ai Commitment Promise and obligation tracking tied back to conversations and owners." [ref=e348] [cursor=pointer]:
+            - /url: "#/ai_commitment"
+            - generic [ref=e349]: Ai Commitment
+            - generic [ref=e350]: Promise and obligation tracking tied back to conversations and owners.
+          - link "Ai Conversation Thread history, participants, intent, and conversation outcomes." [ref=e351] [cursor=pointer]:
+            - /url: "#/ai_conversation"
+            - generic [ref=e352]: Ai Conversation
+            - generic [ref=e353]: Thread history, participants, intent, and conversation outcomes.
+          - link "Ai Memory Persistent operating memory tied to people, deals, and tasks." [ref=e354] [cursor=pointer]:
+            - /url: "#/ai_memory"
+            - generic [ref=e355]: Ai Memory
+            - generic [ref=e356]: Persistent operating memory tied to people, deals, and tasks.
+          - link "Attributes Typed entity attributes with origin, confidence, and target context." [ref=e357] [cursor=pointer]:
+            - /url: "#/attributes"
+            - generic [ref=e358]: Attributes
+            - generic [ref=e359]: Typed entity attributes with origin, confidence, and target context.
+          - link "Pc Company Vision Strategic directives, themes, and operating horizons for the company." [ref=e360] [cursor=pointer]:
+            - /url: "#/pc_company_vision"
+            - generic [ref=e361]: Pc Company Vision
+            - generic [ref=e362]: Strategic directives, themes, and operating horizons for the company.
+          - link "Pc Relationship Structured relationships and projections that also map into associations." [ref=e363] [cursor=pointer]:
+            - /url: "#/pc_relationship"
+            - generic [ref=e364]: Pc Relationship
+            - generic [ref=e365]: Structured relationships and projections that also map into associations.
+          - link "Principals Named principals, roles, trust context, and contact paths." [ref=e366] [cursor=pointer]:
+            - /url: "#/principals"
+            - generic [ref=e367]: Principals
+            - generic [ref=e368]: Named principals, roles, trust context, and contact paths.
+          - link "Referral Partners Referral logic, partner attribution, and commission structure." [ref=e369] [cursor=pointer]:
+            - /url: "#/referral_partners"
+            - generic [ref=e370]: Referral Partners
+            - generic [ref=e371]: Referral logic, partner attribution, and commission structure.
+          - link "Memory Route Lineage Who placed information, where it came from, and how it traveled." [ref=e372] [cursor=pointer]:
+            - /url: "#/memory_route_lineage"
+            - generic [ref=e373]: Memory Route Lineage
+            - generic [ref=e374]: Who placed information, where it came from, and how it traveled.
+          - link "Memory Ingest Batch One discovery or ingest run across BigQuery, docs, Lucid, and NotebookLM." [ref=e375] [cursor=pointer]:
+            - /url: "#/memory_ingest_batch"
+            - generic [ref=e376]: Memory Ingest Batch
+            - generic [ref=e377]: One discovery or ingest run across BigQuery, docs, Lucid, and NotebookLM.
+      - generic [ref=e378]:
+        - generic [ref=e379]: Databases and Their Associations
+        - generic [ref=e380]: Database, store, object, and listener coverage mapped back to workers.
+        - generic [ref=e381]:
+          - link "Data Surface Registry Databases, stores, indexes, and platform objects with listener and access coverage." [ref=e382] [cursor=pointer]:
+            - /url: "#/data_surface_registry"
+            - generic [ref=e383]: Data Surface Registry
+            - generic [ref=e384]: Databases, stores, indexes, and platform objects with listener and access coverage.
+          - link "Worker Data Surface Associations Per-worker read, write, delete, and listener contracts for each data surface." [ref=e385] [cursor=pointer]:
+            - /url: "#/worker_data_surface_associations"
+            - generic [ref=e386]: Worker Data Surface Associations
+            - generic [ref=e387]: Per-worker read, write, delete, and listener contracts for each data surface.
+      - generic [ref=e388]:
+        - generic [ref=e389]: Additional Objects
+        - generic [ref=e390]: Secondary records still available inside the same data plane.
+        - generic [ref=e391]:
+          - link "Connection Registry" [ref=e392] [cursor=pointer]:
+            - /url: "#/connection_registry"
+            - generic [ref=e393]: Connection Registry
+          - link "Current State" [ref=e394] [cursor=pointer]:
+            - /url: "#/current_state"
+            - generic [ref=e395]: Current State
+          - link "Generated Assets" [ref=e396] [cursor=pointer]:
+            - /url: "#/generated_assets"
+            - generic [ref=e397]: Generated Assets
+          - link "Ai Commitment" [ref=e398] [cursor=pointer]:
+            - /url: "#/p242835887_ai_commitment"
+            - generic [ref=e399]: Ai Commitment
+          - link "Ai Conversation" [ref=e400] [cursor=pointer]:
+            - /url: "#/p242835887_ai_conversation"
+            - generic [ref=e401]: Ai Conversation
+          - link "Ai Memory" [ref=e402] [cursor=pointer]:
+            - /url: "#/p242835887_ai_memory"
+            - generic [ref=e403]: Ai Memory
+          - link "Attributes" [ref=e404] [cursor=pointer]:
+            - /url: "#/p242835887_attributes"
+            - generic [ref=e405]: Attributes
+          - link "Pc Company Vision" [ref=e406] [cursor=pointer]:
+            - /url: "#/p242835887_pc_company_vision"
+            - generic [ref=e407]: Pc Company Vision
+          - link "Pc Relationship" [ref=e408] [cursor=pointer]:
+            - /url: "#/p242835887_pc_relationship"
+            - generic [ref=e409]: Pc Relationship
+          - link "Principals" [ref=e410] [cursor=pointer]:
+            - /url: "#/p242835887_principals"
+            - generic [ref=e411]: Principals
+          - link "Referral Partners" [ref=e412] [cursor=pointer]:
+            - /url: "#/p242835887_referral_partners"
+            - generic [ref=e413]: Referral Partners
+          - link "Worker Profiles" [ref=e414] [cursor=pointer]:
+            - /url: "#/worker_profiles"
+            - generic [ref=e415]: Worker Profiles
+    - generic [ref=e37]:
+      - generic [ref=e38]: Archives
+      - link "View Archived Records" [ref=e39] [cursor=pointer]:
+        - /url: "#/archives"
+      - link "Invoices" [ref=e41] [cursor=pointer]:
+        - /url: "#/invoices"
+      - link "Assets" [ref=e42] [cursor=pointer]:
+        - /url: "#/asset-library"
+      - link "Postman" [ref=e43] [cursor=pointer]:
+        - /url: "#/postman"
+      - link "Actions" [ref=e44] [cursor=pointer]:
+        - /url: "#/actions"
+      - link "Settings & Backend" [ref=e45] [cursor=pointer]:
+        - /url: "#/settings"
+      - link "Object Tools" [ref=e46] [cursor=pointer]:
+        - /url: "#/object-tools"
+      - button "Logout" [ref=e47] [cursor=pointer]
+  - main [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]: Workflow Plane
+        - heading "Workflow Studio" [level=1] [ref=e52]
+        - paragraph [ref=e53]: Design workflows, pipeline stages, transition logic, and handoffs for tasks, tickets, and products, then render the live Mermaid stage map from durable records.
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - text: Signed in
+          - strong [ref=e56]: manny
+        - generic [ref=e57]:
+          - text: Route
+          - strong [ref=e58]: Workflow Studio
+    - generic [ref=e59]:
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]: Workflows
+          - generic [ref=e63]: "3"
+        - generic [ref=e64]:
+          - generic [ref=e65]: Pipelines
+          - generic [ref=e66]: "4"
+        - generic [ref=e67]:
+          - generic [ref=e68]: Stages
+          - generic [ref=e69]: "20"
+        - generic [ref=e70]:
+          - generic [ref=e71]: Logic
+          - generic [ref=e72]: "16"
+        - generic [ref=e73]:
+          - generic [ref=e74]: Handoffs
+          - generic [ref=e75]: "16"
+        - generic [ref=e76]:
+          - generic [ref=e77]: Products
+          - generic [ref=e78]: "92"
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]: Workflow plane controls
+          - generic [ref=e82]: Bootstrap the objects, sync live task and ticket pipelines, then define custom logic and handoffs.
+        - button "Bootstrap workflow plane" [ref=e83] [cursor=pointer]
+        - button "Sync live pipelines" [ref=e84] [cursor=pointer]
+        - button "Refresh studio" [ref=e416] [cursor=pointer]
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - generic [ref=e88]:
+            - heading "Workflow filters" [level=3] [ref=e89]
+            - generic [ref=e90]:
+              - generic [ref=e91]: Workflow
+              - combobox "Workflow" [ref=e92]:
+                - option "Product Lifecycle" [selected]
+                - option "Task Execution"
+                - option "Ticket Resolution"
+            - generic [ref=e93]:
+              - generic [ref=e94]: Pipeline
+              - combobox "Pipeline" [ref=e95]:
+                - option "Products Lifecycle" [selected]
+            - generic [ref=e96]:
+              - text: "Selected workflow:"
+              - strong [ref=e97]: Product Lifecycle
+            - generic [ref=e98]:
+              - text: "Selected pipeline:"
+              - strong [ref=e99]: Products Lifecycle
+          - generic [ref=e100]:
+            - heading "Live pipeline inventory" [level=3] [ref=e101]
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - strong [ref=e104]: tasks
+                - generic [ref=e105]: seeded_support
+              - generic [ref=e106]: 1 pipeline families detected.
+              - generic [ref=e418]: Task Pipeline · 5 stages
+            - generic [ref=e107]:
+              - generic [ref=e108]:
+                - strong [ref=e109]: tickets
+                - generic [ref=e110]: seeded_support
+              - generic [ref=e111]: 2 pipeline families detected.
+              - generic [ref=e419]:
+                - generic [ref=e420]: Ticket pipeline · 4 stages
+                - generic [ref=e421]: Processor Pipeline - Credit Repair · 7 stages
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - strong [ref=e114]: products
+                - generic [ref=e115]: seeded_fallback
+              - generic [ref=e116]: 1 pipeline families detected.
+              - generic [ref=e423]: Products Lifecycle · 4 stages
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - generic [ref=e120]: Live Mermaid
+              - heading "Product Lifecycle" [level=3] [ref=e424]
+            - generic [ref=e122]: 4 stages · 3 logic edges · 3 handoffs
+          - document [ref=e426]:
+            - generic [ref=e428]:
+              - generic [ref=e429]:
+                - paragraph [ref=e435]: sequential • operator
+                - paragraph [ref=e441]: sequential • review
+                - paragraph [ref=e447]: sequential • fulfillment
+              - generic [ref=e448]:
+                - paragraph [ref=e455]: "Workflow: Product Lifecycle"
+                - paragraph [ref=e462]: "Pipeline: Products Lifecycle"
+                - paragraph [ref=e469]: Backlog
+                - paragraph [ref=e476]: Configuring
+                - paragraph [ref=e483]: Review
+                - paragraph [ref=e490]: Live
+      - generic [ref=e124]:
+        - generic [ref=e125]:
+          - heading "Create workflow" [level=3] [ref=e126]
+          - generic [ref=e127]:
+            - generic [ref=e128]: Workflow key
+            - textbox "Workflow key" [ref=e129]:
+              - /placeholder: tasks_execution
+          - generic [ref=e130]:
+            - generic [ref=e131]: Workflow title
+            - textbox "Workflow title" [ref=e132]:
+              - /placeholder: Task Execution
+          - generic [ref=e133]:
+            - generic [ref=e134]: Source object
+            - combobox "Source object" [ref=e135]:
+              - option "tasks" [selected]
+              - option "tickets"
+              - option "products"
+              - option "custom"
+          - generic [ref=e136]:
+            - generic [ref=e137]: Primary product
+            - combobox "Primary product" [ref=e138]:
+              - option "No primary product"
+              - option "Standalone Inspection Package" [selected]
+              - option "Standalone Auto Finance Package"
+              - option "Standalone Labor Package"
+              - option "Business Credit Setup"
+              - option "Standalone Transport Package"
+              - option "Loan Acquisition"
+              - option "Standalone Parts Package"
+              - option "MyScoreIQ on demand pull"
+              - option "Standalone Wholesale/Broker Package"
+              - option "Standalone Appraisal Package"
+              - option "Standalone DMV Course/Package"
+              - option "Standalone Mobile Services Package"
+              - option "Appraisal Course userOne"
+              - option "MyScoreIQ 7-day trial/subscription charge"
+              - option "MyScoreIQ Monthly Subscription"
+              - option "Standalone Retail/Broker Package"
+              - option "userOne Application"
+              - option "Parts Course userOne"
+              - option "Transport Course userOne"
+              - option "Mobile Services Course userOne"
+              - option "Inspection Course userOne"
+              - option "Auto Finance Course userOne"
+              - option "DMV Products Course userOne"
+              - option "Retail Auto Course userOne"
+              - option "Wholesale Vehicle Course userOne"
+              - option "Labor Course userOne"
+              - option "Background Check"
+              - option "Tradeline Validation"
+              - option "Credit Strategy Discovery"
+              - option "Consignment"
+              - option "Elite Vehicle Purchase Solutions"
+              - option "Credit Strategy"
+              - option "Body Inspection"
+              - option "Proof of Income"
+              - 'option "Identity & Business Verification: Business Identity Verification (KYB): Address & Good Standing Check"'
+              - 'option "Identity & Business Verification: Business Identity Verification (KYB): Tax ID (EIN) Check"'
+              - 'option "Identity & Business Verification: Business Identity Verification (KYB): Owners & Officers Check"'
+              - 'option "Identity & Business Verification: Business Identity Verification (KYB): Company Registration Check"'
+              - 'option "Identity & Business Verification: Personal ID Verification (KYC)"'
+              - 'option "Lender Matching: Curated Lender Introductions"'
+              - 'option "Loan Optimization: Refinance / Consolidation Options"'
+              - 'option "Loan Optimization: Rate & Term Review"'
+              - 'option "Loan Strategy & Advisory: Readiness Checklist"'
+              - 'option "Loan Strategy & Advisory: Funding Options Review"'
+              - 'option "Income Verification (1099, W‑2, Tax): Tax Return Summary"'
+              - 'option "Income Verification (1099, W‑2, Tax): W‑2 Summary"'
+              - 'option "Income Verification (1099, W‑2, Tax): 1099 Summary"'
+              - 'option "Financial Statements & Tax Summary: Tax Summary"'
+              - 'option "Financial Statements & Tax Summary: Balance Sheet"'
+              - 'option "Financial Statements & Tax Summary: Profit & Loss (P&L)"'
+              - 'option "Bookkeeping: Invoices & Bills Tracking"'
+              - 'option "Bookkeeping: Monthly Reconciliation"'
+              - 'option "Tax Audit Preparation: Audit Packet Preparation"'
+              - 'option "Tax Audit Preparation: Document Gathering & Organization"'
+              - 'option "Credit Card Processing Setup: Payment Gateway / POS Integration"'
+              - 'option "Credit Card Processing Setup: Merchant Account Setup"'
+              - 'option "Specialized Issue Resolution: Contract & Policy Questions"'
+              - 'option "Specialized Issue Resolution: Agency Response Support"'
+              - 'option "Specialized Issue Resolution: Compliance & Filings"'
+              - 'option "Launch Support: Operating Agreement / Bylaws Templates"'
+              - 'option "Launch Support: Business Bank Account Setup"'
+              - 'option "Launch Support: Licenses & Permits"'
+              - 'option "Business Formation: EIN Registration"'
+              - 'option "Business Formation: Nonprofit"'
+              - 'option "Business Formation: DBA (Doing Business As)"'
+              - 'option "Business Formation: Corporation (C‑Corp, S‑Corp)"'
+              - 'option "Business Formation: LLC"'
+              - 'option "Logistics & Admin: Notary Services"'
+              - 'option "Logistics & Admin: DMV Services: VIN/Odometer Verification"'
+              - 'option "Logistics & Admin: DMV Services: Title & Registration"'
+              - 'option "Logistics & Admin: Towing & Transport: Scheduled Transport"'
+              - 'option "Logistics & Admin: Towing & Transport: Emergency Towing"'
+              - 'option "Parts: Parts (New, Used, Refurbished)"'
+              - 'option "Sales: Used Car Sales"'
+              - 'option "Sales: New Car Sales"'
+              - 'option "Keys & Programming: Key Fob Programming"'
+              - 'option "Keys & Programming: Key Cutting"'
+              - 'option "Body Work & Paint: Paint Refinishing"'
+              - 'option "Body Work & Paint: Panel Repair/Replacement"'
+              - 'option "Body Work & Paint: Dent Repair"'
+              - option "Mobile Car Wash"
+              - 'option "Wheel Repair (Mobile): Straightening"'
+              - 'option "Wheel Repair (Mobile): Cosmetic Repair"'
+              - 'option "Auto Glass & Windshield: Side/Rear Glass Replacement"'
+              - 'option "Auto Glass & Windshield: Windshield Replacement"'
+              - 'option "Auto Glass & Windshield: Chip Repair"'
+              - 'option "Tires & Wheel Alignment: Wheel Alignment"'
+              - 'option "Tires & Wheel Alignment: Rotation"'
+              - 'option "Tires & Wheel Alignment: Mounting & Balancing"'
+              - 'option "Tires & Wheel Alignment: Tire Sales"'
+              - 'option "Service & Repair: Electrical Repair"'
+              - 'option "Service & Repair: Mechanical Repair"'
+          - generic [ref=e139]:
+            - generic [ref=e140]: Goal
+            - textbox "Goal" [ref=e141]:
+              - /placeholder: Describe what this workflow needs to accomplish.
+          - button "Create workflow" [ref=e142] [cursor=pointer]
+        - generic [ref=e143]:
+          - heading "Create pipeline" [level=3] [ref=e144]
+          - generic [ref=e145]:
+            - generic [ref=e146]: Workflow
+            - combobox "Workflow" [ref=e147]:
+              - option "Product Lifecycle" [selected]
+              - option "Task Execution"
+              - option "Ticket Resolution"
+          - generic [ref=e148]:
+            - generic [ref=e149]: Pipeline key
+            - textbox "Pipeline key" [ref=e150]:
+              - /placeholder: tasks_priority_lane
+          - generic [ref=e151]:
+            - generic [ref=e152]: Source object
+            - combobox "Source object" [ref=e153]:
+              - option "tasks" [selected]
+              - option "tickets"
+              - option "products"
+              - option "custom"
+          - generic [ref=e154]:
+            - generic [ref=e155]: Pipeline title
+            - textbox "Pipeline title" [ref=e156]:
+              - /placeholder: Tasks Priority Lane
+          - generic [ref=e157]:
+            - generic [ref=e158]: Logic summary
+            - textbox "Logic summary" [ref=e159]:
+              - /placeholder: Explain how work should move through this pipeline.
+          - button "Create pipeline" [ref=e160] [cursor=pointer]
+        - generic [ref=e161]:
+          - heading "Create stage" [level=3] [ref=e162]
+          - generic [ref=e163]:
+            - generic [ref=e164]: Pipeline
+            - combobox "Pipeline" [ref=e165]:
+              - option "Products Lifecycle" [selected]
+          - generic [ref=e166]:
+            - generic [ref=e167]:
+              - generic [ref=e168]: Stage key
+              - textbox "Stage key" [ref=e169]:
+                - /placeholder: task_qa
+            - generic [ref=e170]:
+              - generic [ref=e171]: Stage title
+              - textbox "Stage title" [ref=e172]:
+                - /placeholder: QA
+          - generic [ref=e173]:
+            - generic [ref=e174]:
+              - generic [ref=e175]: Display order
+              - textbox "Display order" [ref=e176]:
+                - /placeholder: "30"
+                - text: "10"
+            - generic [ref=e177]:
+              - generic [ref=e178]: Stage kind
+              - combobox "Stage kind" [ref=e179]:
+                - option "intake"
+                - option "triage"
+                - option "work" [selected]
+                - option "review"
+                - option "waiting"
+                - option "blocked"
+                - option "completed"
+          - generic [ref=e180]:
+            - checkbox "Terminal stage" [ref=e181]
+            - generic [ref=e182]: Terminal stage
+          - button "Create stage" [ref=e183] [cursor=pointer]
+        - generic [ref=e184]:
+          - heading "Create logic and handoff" [level=3] [ref=e185]
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - generic [ref=e188]: From stage
+              - combobox "From stage" [ref=e189]:
+                - option "Select stage" [selected]
+                - option "Backlog"
+                - option "Configuring"
+                - option "Review"
+                - option "Live"
+            - generic [ref=e190]:
+              - generic [ref=e191]: To stage
+              - combobox "To stage" [ref=e192]:
+                - option "Select stage" [selected]
+                - option "Backlog"
+                - option "Configuring"
+                - option "Review"
+                - option "Live"
+          - generic [ref=e193]:
+            - generic [ref=e194]: Logic kind
+            - combobox "Logic kind" [ref=e195]:
+              - option "conditional" [selected]
+              - option "sequential"
+              - option "automation"
+              - option "escalation"
+              - option "review"
+          - generic [ref=e196]:
+            - generic [ref=e197]: Condition expression
+            - textbox "Condition expression" [ref=e198]:
+              - /placeholder: priority == HIGH && evidence_ready == true
+          - generic [ref=e199]:
+            - generic [ref=e200]: Automation action
+            - textbox "Automation action" [ref=e201]:
+              - /placeholder: Create follow-up task and notify worker room.
+          - generic [ref=e202]:
+            - button "Create logic" [ref=e203] [cursor=pointer]
+            - button "Create handoff" [ref=e204] [cursor=pointer]
+      - generic [ref=e205]:
+        - generic [ref=e206]:
+          - heading "Workflows and pipelines" [level=3] [ref=e207]
+          - generic [ref=e491]:
+            - generic [ref=e492]:
+              - generic [ref=e493]:
+                - strong [ref=e494]: Product Lifecycle
+                - generic [ref=e495]: seeded_fallback
+              - generic [ref=e496]: Track products through catalog, configuration, launch, and lifecycle changes inside PCRM.
+              - generic [ref=e497]: 1 pipelines · source products
+              - link "Open workflow record" [ref=e498] [cursor=pointer]:
+                - /url: "#/workflow_definitions/workflow_products_lifecycle"
+            - generic [ref=e499]:
+              - generic [ref=e500]:
+                - strong [ref=e501]: Task Execution
+                - generic [ref=e502]: seeded_support
+              - generic [ref=e503]: Move internal work from intake through completion with visible stages and clean handoffs.
+              - generic [ref=e504]: 1 pipelines · source tasks
+              - link "Open workflow record" [ref=e505] [cursor=pointer]:
+                - /url: "#/workflow_definitions/workflow_tasks_execution"
+            - generic [ref=e506]:
+              - generic [ref=e507]:
+                - strong [ref=e508]: Ticket Resolution
+                - generic [ref=e509]: seeded_support
+              - generic [ref=e510]: Route tickets through triage, active work, waiting states, and resolution without losing ownership.
+              - generic [ref=e511]: 2 pipelines · source tickets
+              - link "Open workflow record" [ref=e512] [cursor=pointer]:
+                - /url: "#/workflow_definitions/workflow_tickets_resolution"
+        - generic [ref=e208]:
+          - heading "Stages, logic, and handoffs" [level=3] [ref=e209]
+          - generic [ref=e513]:
+            - generic [ref=e514]:
+              - generic [ref=e515]:
+                - strong [ref=e516]: Backlog
+                - generic [ref=e517]: Order 10
+              - generic [ref=e518]: intake · owner retool_product_manager · in-flight
+              - generic [ref=e519]: 1 outgoing logic edges · 1 outgoing handoffs
+              - link "Open stage record" [ref=e520] [cursor=pointer]:
+                - /url: "#/workflow_stages/workflow_stage_products_products_lifecycle_default_product_backlog"
+            - generic [ref=e521]:
+              - generic [ref=e522]:
+                - strong [ref=e523]: Configuring
+                - generic [ref=e524]: Order 20
+              - generic [ref=e525]: work · owner retool_product_manager · in-flight
+              - generic [ref=e526]: 1 outgoing logic edges · 1 outgoing handoffs
+              - link "Open stage record" [ref=e527] [cursor=pointer]:
+                - /url: "#/workflow_stages/workflow_stage_products_products_lifecycle_default_product_configuring"
+            - generic [ref=e528]:
+              - generic [ref=e529]:
+                - strong [ref=e530]: Review
+                - generic [ref=e531]: Order 30
+              - generic [ref=e532]: review · owner retool_product_manager · in-flight
+              - generic [ref=e533]: 1 outgoing logic edges · 1 outgoing handoffs
+              - link "Open stage record" [ref=e534] [cursor=pointer]:
+                - /url: "#/workflow_stages/workflow_stage_products_products_lifecycle_default_product_review"
+            - generic [ref=e535]:
+              - generic [ref=e536]:
+                - strong [ref=e537]: Live
+                - generic [ref=e538]: Order 40
+              - generic [ref=e539]: completed · owner retool_product_manager · terminal
+              - generic [ref=e540]: 0 outgoing logic edges · 0 outgoing handoffs
+              - link "Open stage record" [ref=e541] [cursor=pointer]:
+                - /url: "#/workflow_stages/workflow_stage_products_products_lifecycle_default_product_live"
+      - generic [ref=e210]:
+        - generic [ref=e211]:
+          - heading "Recent handoffs" [level=3] [ref=e212]
+          - generic [ref=e542]: operator · workflow_stage_products_products_lifecycle_default_product_backlog → workflow_stage_products_products_lifecycle_default_product_configuring · retool_product_manager
+          - generic [ref=e543]: review · workflow_stage_products_products_lifecycle_default_product_configuring → workflow_stage_products_products_lifecycle_default_product_review · retool_product_manager
+          - generic [ref=e544]: fulfillment · workflow_stage_products_products_lifecycle_default_product_review → workflow_stage_products_products_lifecycle_default_product_live · retool_product_manager
+        - generic [ref=e213]:
+          - heading "Recent logic rules" [level=3] [ref=e214]
+          - generic [ref=e545]: sequential · workflow_stage_products_products_lifecycle_default_product_backlog → workflow_stage_products_products_lifecycle_default_product_configuring · no condition
+          - generic [ref=e546]: sequential · workflow_stage_products_products_lifecycle_default_product_configuring → workflow_stage_products_products_lifecycle_default_product_review · no condition
+          - generic [ref=e547]: sequential · workflow_stage_products_products_lifecycle_default_product_review → workflow_stage_products_products_lifecycle_default_product_live · no condition
