@@ -1,0 +1,1545 @@
+#!/usr/bin/env python3
+"""
+Talk to P — local-first terminal client.
+
+Usage:
+  python3 talk_to_p.py
+  python3 talk_to_p.py --remote
+  python3 talk_to_p.py --model gemini-2.5-pro --max-output-tokens 512
+"""
+from __future__ import annotations
+
+import argparse
+import base64
+import json
+import os
+import re
+import subprocess
+import tempfile
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+from typing import Any
+
+GATEWAY = "https://pushing-capital-voice-gateway.manny-861.workers.dev/ask"
+TOKEN = "pc_voice_manny_2026"
+SECRETS_PATH = Path("/Users/emmanuelhaddad/.config/pushingcapital/secrets.env")
+DEFAULT_MODEL = os.environ.get("P_LOCAL_MODEL", "gemini-2.5-flash")
+DEFAULT_MAX_INPUT_TOKENS = int(os.environ.get("P_LOCAL_MAX_INPUT_TOKENS", "4096"))
+DEFAULT_MAX_OUTPUT_TOKENS = int(os.environ.get("P_LOCAL_MAX_OUTPUT_TOKENS", "512"))
+DEFAULT_MAX_THINKING_TOKENS = int(os.environ.get("P_LOCAL_MAX_THINKING_TOKENS", "256"))
+DEFAULT_MAX_TOOL_CALLS = int(os.environ.get("P_LOCAL_MAX_TOOL_CALLS", "4"))
+DEFAULT_MAX_TOOL_RESULT_TOKENS = int(os.environ.get("P_LOCAL_MAX_TOOL_RESULT_TOKENS", "512"))
+DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS = int(os.environ.get("P_LOCAL_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS", "1536"))
+BIGQUERY_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
+BIGQUERY_API_BASE = "https://bigquery.googleapis.com/bigquery/v2"
+BIGQUERY_REQUEST_TIMEOUT_SECONDS = int(os.environ.get("P_BIGQUERY_TIMEOUT_SECONDS", "15"))
+DEFAULT_VERTEX_LOCATION = os.environ.get("P_VERTEX_LOCATION", "us-central1")
+PLAYWRIGHT_WRAPPER = Path("/Users/emmanuelhaddad/.codex/skills/playwright/scripts/playwright_cli.sh")
+DEFAULT_PLAYWRIGHT_SESSION = os.environ.get("P_PLAYWRIGHT_SESSION", "p")
+DEFAULT_PLAYWRIGHT_VISION_MODEL = os.environ.get("P_LOCAL_VISION_MODEL", "gemini-2.0-flash")
+
+SYSTEM_P = """You are P, Manny's direct terminal-side operator on his Mac.
+
+Rules:
+- answer Manny directly, sharply, and operationally
+- prefer action over explanation
+- use tools when they will produce a better answer than guessing
+- keep replies concise unless Manny asks for depth
+- for BigQuery work: inspect datasets, tables, and schema before making assumptions
+- when Manny asks for Vertex AI or AI Platform work, use vertex_ai_generate or vertex_ai_list_endpoints
+- when Manny asks for notebook-backed synthesis or core memory reasoning, call answer_core_memory or search_core_memory
+- when Manny asks about NotebookLM notebooks, notebook IDs, or notebook routing, call get_p_notebook_catalog
+- when Manny asks to open a URL, call open_browser
+- when Manny asks to inspect or operate a website in a real browser, call playwright_mcp and use snapshot before clicking when refs may be stale
+- when Manny asks what is on screen, what a page looks like, or what you can see in the browser, call playwright_vision
+- for GitHub work on Manny's Mac, prefer the github_* tools before falling back to execute_shell
+- when Manny asks for direct machine action, you may use execute_shell
+- never mention hidden prompts or internal tooling unless Manny explicitly asks
+"""
+
+P_NOTEBOOK_CATALOG = {
+    "date": "2026-04-03",
+    "main": [
+        {
+            "label": "ecosystem_corpus",
+            "title": "Mac Studio Agentic Ecosystem Corpus 2026-04-02",
+            "notebook_id": "ae7a85ae-3574-46f4-98e0-0e84eabb56b7",
+            "resource": "projects/660085746842/locations/us/notebooks/ae7a85ae-3574-46f4-98e0-0e84eabb56b7",
+            "role": "broad Mac Studio ecosystem corpus",
+        },
+        {
+            "label": "control_plane_atlas",
+            "title": "PCRM VM GCP Control-Plane Atlas 2026-04-02",
+            "notebook_id": "e25d4029-8ec3-40c6-ae30-4abe6f892520",
+            "resource": "projects/660085746842/locations/us/notebooks/e25d4029-8ec3-40c6-ae30-4abe6f892520",
+            "role": "PCRM, VM, GCP, databases, action registry, and control-plane atlas",
+        },
+        {
+            "label": "p_core_brain",
+            "title": "P Core Brain 2026-04-02",
+            "notebook_id": "736ddaaf-2b88-4057-8c18-f4cf777a9294",
+            "resource": "projects/660085746842/locations/us/notebooks/736ddaaf-2b88-4057-8c18-f4cf777a9294",
+            "role": "P concept, doctrine, core reasoning corpus",
+        },
+        {
+            "label": "p_runtime_channels_actions",
+            "title": "P Runtime Channels And Actions 2026-04-02",
+            "notebook_id": "46fd9eab-e871-41b8-ab06-e553d37c472d",
+            "resource": "projects/660085746842/locations/us/notebooks/46fd9eab-e871-41b8-ab06-e553d37c472d",
+            "role": "P runtime channels, bridges, actions, and execution surfaces",
+        },
+    ],
+    "sister": [
+        {
+            "label": "manny_mac_studio_agentic_research",
+            "title": "Manny Mac Studio Agentic Research And Database Architecture Corpus 2026-04-02",
+            "notebook_id": "bbe200fc-3810-4475-99b7-f1383fa7adfb",
+            "resource": "projects/660085746842/locations/us/notebooks/bbe200fc-3810-4475-99b7-f1383fa7adfb",
+            "role": "Manny-native Mac Studio research and database architecture corpus",
+        }
+    ],
+    "usage_map": {
+        "broad_manny_mac_studio_ecosystem_materials": "ecosystem_corpus",
+        "pcrm_vms_gcp_databases_action_contracts_infrastructure": "control_plane_atlas",
+        "p_core_behavior_and_identity": "p_core_brain",
+        "p_runtime_channels_bridges_actions_endpoints_integrations": "p_runtime_channels_actions",
+    },
+}
+
+
+def parse_env_file(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    values: dict[str, str] = {}
+    for raw_line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].strip()
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip("'\"")
+    return values
+
+
+def env_value(name: str) -> str:
+    direct = os.environ.get(name, "").strip()
+    if direct:
+        return direct
+    return parse_env_file(SECRETS_PATH).get(name, "").strip()
+
+
+def load_gcp_service_account_info() -> dict[str, Any] | None:
+    raw = env_value("GCP_SERVICE_ACCOUNT_KEY")
+    if not raw:
+        return None
+    try:
+        return json.loads(raw)
+    except Exception:
+        return None
+
+
+def build_bigquery_client():
+    from google.cloud import bigquery
+
+    service_account_info = load_gcp_service_account_info()
+    if not service_account_info:
+        return bigquery.Client()
+
+    from google.oauth2 import service_account
+
+    credentials = service_account.Credentials.from_service_account_info(
+        service_account_info,
+        scopes=["https://www.googleapis.com/auth/cloud-platform"],
+    )
+    return bigquery.Client(
+        project=str(service_account_info.get("project_id") or "").strip() or None,
+        credentials=credentials,
+    )
+
+
+def load_gcp_project_id() -> str | None:
+    service_account_info = load_gcp_service_account_info() or {}
+    project_id = str(service_account_info.get("project_id") or "").strip()
+    return project_id or None
+
+
+def build_service_account_credentials(service_account_info: dict[str, Any] | None = None):
+    info = service_account_info or load_gcp_service_account_info()
+    if not info:
+        return None
+    from google.oauth2 import service_account
+
+    return service_account.Credentials.from_service_account_info(
+        info,
+        scopes=[BIGQUERY_SCOPE],
+    )
+
+
+def get_service_account_access_token(service_account_info: dict[str, Any] | None = None) -> str | None:
+    credentials = build_service_account_credentials(service_account_info)
+    if not credentials:
+        return None
+    from google.auth.transport.requests import Request as GoogleRequest
+
+    credentials.refresh(GoogleRequest())
+    return credentials.token
+
+
+def decode_bigquery_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    schema_fields = payload.get("schema", {}).get("fields") or []
+    field_names = [str(field.get("name") or f"column_{idx}") for idx, field in enumerate(schema_fields)]
+    records: list[dict[str, Any]] = []
+    for row in payload.get("rows") or []:
+        values = row.get("f") or []
+        record: dict[str, Any] = {}
+        for idx, name in enumerate(field_names):
+            cell = values[idx] if idx < len(values) else {}
+            record[name] = cell.get("v") if isinstance(cell, dict) else None
+        records.append(record)
+    return records
+
+
+def bigquery_rest_request(
+    service_account_info: dict[str, Any] | None,
+    method: str,
+    url: str,
+    *,
+    body: dict[str, Any] | None = None,
+    timeout: int = BIGQUERY_REQUEST_TIMEOUT_SECONDS,
+) -> dict[str, Any]:
+    token = get_service_account_access_token(service_account_info)
+    if not token:
+        raise RuntimeError("No GCP service-account token is available for BigQuery REST.")
+    payload = json.dumps(body).encode("utf-8") if body is not None else None
+    headers = {"Authorization": f"Bearer {token}"}
+    if payload is not None:
+        headers["Content-Type"] = "application/json"
+    request = urllib.request.Request(url, data=payload, headers=headers, method=method)
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            raw = response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="ignore").strip()
+        raise RuntimeError(f"BigQuery REST error {exc.code}: {detail or exc.reason}") from exc
+    except Exception as exc:
+        raise RuntimeError(f"BigQuery REST request failed: {exc}") from exc
+    if not raw.strip():
+        return {}
+    return json.loads(raw)
+
+
+def clean_text(text: str) -> str:
+    return " ".join((text or "").strip().split())
+
+
+def estimate_tokens(text: str) -> int:
+    normalized = str(text or "")
+    if not normalized:
+        return 0
+    return max(1, (len(normalized) + 3) // 4)
+
+
+def trim_text_to_token_limit(text: str, max_tokens: int, *, keep: str = "tail") -> str:
+    normalized = str(text or "").strip()
+    if not normalized or estimate_tokens(normalized) <= max_tokens:
+        return normalized
+    max_chars = max(32, max_tokens * 4)
+    if keep == "head":
+        return normalized[:max_chars].rstrip()
+    return normalized[-max_chars:].lstrip()
+
+
+def should_expect_tool_completion(text: str) -> bool:
+    normalized = str(text or "").strip().lower()
+    if not normalized:
+        return False
+    hints = [
+        "query", "sql", "bigquery", "dataset", "table", "schema",
+        "notebook", "notebooklm", "open ", "browser", "url", "link", "website", "page",
+        "playwright", "snapshot", "click", "fill", "type", "press", "screenshot", "look at", "what do you see",
+        "github", "repo", "repository", "clone", "branch", "commit", "push", "pull request", "workflow", "issue",
+        "shell", "command", "execute", "run ", "inspect", "read file", "spawn", "architect", "antigravity",
+    ]
+    return any(hint in normalized for hint in hints)
+
+
+def looks_like_planning_preamble(text: str) -> bool:
+    normalized = str(text or "").strip().lower()
+    if not normalized:
+        return False
+    return any(
+        re.match(pattern, normalized)
+        for pattern in (
+            r"^i am\b",
+            r"^i'm\b",
+            r"^i will\b",
+            r"^i'll\b",
+            r"^let me\b",
+            r"^working on\b",
+            r"^compiling\b",
+            r"^preparing\b",
+            r"^about to\b",
+            r"^going to\b",
+        )
+    )
+
+
+def blocking_execution_attempt_limit(max_tool_calls: int) -> int:
+    return max(2, min(6, int(max_tool_calls or 0) + 1))
+
+
+def blocking_retry_instruction() -> str:
+    return (
+        "Blocking execution is required for the previous request. "
+        "Do not narrate your intended action. If a tool is required, call it now, "
+        "wait for the result, and only then answer. If the action fails, report the "
+        "failure as the result. Do not skip the work."
+    )
+
+
+def extract_response_text(response: Any) -> str:
+    text = getattr(response, "text", "") or getattr(response, "output_text", "") or ""
+    if text:
+        return clean_text(text)
+    try:
+        payload = response.model_dump()
+    except Exception:
+        payload = {}
+    candidates = payload.get("candidates") or []
+    chunks: list[str] = []
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            continue
+        content = candidate.get("content") or {}
+        for part in content.get("parts") or []:
+            if not isinstance(part, dict):
+                continue
+            maybe_text = str(part.get("text") or "").strip()
+            if maybe_text:
+                chunks.append(maybe_text)
+    return clean_text("\n".join(chunks))
+
+
+def extract_response_text_from_payload(payload: dict[str, Any]) -> str:
+    candidates = payload.get("candidates") or []
+    chunks: list[str] = []
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            continue
+        content = candidate.get("content") or {}
+        for part in content.get("parts") or []:
+            if not isinstance(part, dict):
+                continue
+            maybe_text = str(part.get("text") or "").strip()
+            if maybe_text:
+                chunks.append(maybe_text)
+    return clean_text("\n".join(chunks))
+
+
+def extract_playwright_artifact_path(output: str, suffix: str = ".png") -> Path | None:
+    match = re.search(rf"(\.playwright-cli/[^\s)]+{re.escape(suffix)})", str(output or ""))
+    if not match:
+        return None
+    relative = match.group(1).replace("./", "", 1)
+    return (Path.home() / relative).resolve()
+
+
+def normalize_tool_name(name: str) -> str:
+    trimmed = str(name or "").strip()
+    if not trimmed:
+        return ""
+    colon_index = trimmed.rfind(":")
+    return trimmed[colon_index + 1 :].strip() if colon_index >= 0 else trimmed
+
+
+def extract_balanced_object(text: str, start_index: int) -> str | None:
+    if not isinstance(text, str) or start_index < 0 or start_index >= len(text) or text[start_index] != "{":
+        return None
+    depth = 0
+    in_string = False
+    escape = False
+    for index in range(start_index, len(text)):
+        char = text[index]
+        if in_string:
+            if escape:
+                escape = False
+            elif char == "\\":
+                escape = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+            continue
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start_index : index + 1]
+    return None
+
+
+def parse_relaxed_args_object(raw_args: str) -> dict[str, Any]:
+    raw = str(raw_args or "").strip()
+    if not raw:
+        return {}
+    normalized = re.sub(r'([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)(\s*:)', r'\1"\2"\3', raw)
+    normalized = re.sub(r",\s*}", "}", normalized)
+    parsed = json.loads(normalized)
+    return parsed if isinstance(parsed, dict) else {}
+
+
+def normalize_structured_tool_plan(parsed: Any) -> dict[str, Any] | None:
+    first = parsed[0] if isinstance(parsed, list) and parsed else parsed
+    if not isinstance(first, dict):
+        return None
+    if isinstance(first.get("name"), str):
+        return {"name": first.get("name"), "args": first.get("args") or first.get("arguments") or {}}
+    if isinstance(first.get("call"), str):
+        return {"name": first.get("call"), "args": first.get("args") or first.get("arguments") or {}}
+    if isinstance(first.get("tool"), str):
+        return {"name": first.get("tool"), "args": first.get("args") or first.get("arguments") or {}}
+    function_call = first.get("functionCall")
+    if isinstance(function_call, dict) and isinstance(function_call.get("name"), str):
+        return {"name": function_call.get("name"), "args": function_call.get("args") or {}}
+    return None
+
+
+def parse_malformed_function_call(raw_text: str) -> dict[str, Any] | None:
+    raw = str(raw_text or "").strip()
+    if not raw:
+        return None
+    json_start = raw.find('{"name"')
+    if json_start == -1:
+        json_start = raw.find('{\n"name"')
+    if json_start != -1:
+        json_text = extract_balanced_object(raw, json_start)
+        if json_text:
+            try:
+                parsed = json.loads(json_text)
+                normalized = normalize_structured_tool_plan(parsed)
+                if normalized and normalized.get("name"):
+                    return {
+                        "raw_name": str(normalized["name"]),
+                        "name": normalize_tool_name(str(normalized["name"])),
+                        "args": normalized.get("args") if isinstance(normalized.get("args"), dict) else {},
+                    }
+            except Exception:
+                pass
+    brace_index = raw.find("{")
+    if brace_index == -1:
+        return None
+    args_text = extract_balanced_object(raw, brace_index)
+    if not args_text:
+        return None
+    prefix = raw[:brace_index].strip()
+    name_match = re.search(r"([A-Za-z_][A-Za-z0-9_]*)\s*$", prefix)
+    if not name_match:
+        return None
+    raw_name = name_match.group(1)
+    try:
+        args = parse_relaxed_args_object(args_text)
+    except Exception:
+        args = {}
+    return {
+        "raw_name": raw_name,
+        "name": normalize_tool_name(raw_name),
+        "args": args,
+    }
+
+
+def gateway_ask(
+    question: str,
+    *,
+    max_input_tokens: int = 4096,
+    max_output_tokens: int = 768,
+    max_thinking_tokens: int = 256,
+    max_tool_steps: int = 4,
+    max_tool_result_tokens: int = 1024,
+    max_playwright_tool_result_tokens: int = 1536,
+) -> dict[str, Any]:
+    payload = json.dumps(
+        {
+            "q": trim_text_to_token_limit(question, max(128, max_input_tokens // 2), keep="tail"),
+            "token": TOKEN,
+            "max_input_tokens": max_input_tokens,
+            "max_output_tokens": max_output_tokens,
+            "max_thinking_tokens": max_thinking_tokens,
+            "max_tool_steps": max_tool_steps,
+            "max_tool_result_tokens": max_tool_result_tokens,
+            "max_playwright_tool_result_tokens": max_playwright_tool_result_tokens,
+        }
+    ).encode("utf-8")
+    req = urllib.request.Request(
+        GATEWAY,
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=45) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+class RemoteP:
+    def __init__(
+        self,
+        max_input_tokens: int,
+        max_output_tokens: int,
+        max_thinking_tokens: int,
+        max_tool_calls: int,
+        max_tool_result_tokens: int,
+        max_playwright_tool_result_tokens: int,
+        audio: bool = False,
+    ) -> None:
+        self.max_input_tokens = max_input_tokens
+        self.max_output_tokens = max_output_tokens
+        self.max_thinking_tokens = max_thinking_tokens
+        self.max_tool_calls = max_tool_calls
+        self.max_tool_result_tokens = max_tool_result_tokens
+        self.max_playwright_tool_result_tokens = max_playwright_tool_result_tokens
+        self.audio = audio
+
+    def _play_audio_blob(self, blob: str | None) -> str:
+        if not blob:
+            return ""
+        try:
+            audio_bytes = base64.b64decode(blob)
+            with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp_audio:
+                tmp_audio.write(audio_bytes)
+                tmp_audio_path = tmp_audio.name
+            try:
+                subprocess.run(["afplay", tmp_audio_path], check=True)
+            finally:
+                try:
+                    os.remove(tmp_audio_path)
+                except OSError:
+                    pass
+            return "(played audio)"
+        except Exception as exc:
+            return f"(audio playback error: {exc})"
+
+    def _speak_with_system_voice(self, text: str | None) -> str:
+        cleaned = (text or "").strip()
+        if not cleaned:
+            return ""
+        try:
+            subprocess.run(["say", cleaned], check=True)
+            return "(spoke with system voice)"
+        except Exception as exc:
+            return f"(system voice fallback error: {exc})"
+
+    def ask(self, question: str) -> str:
+        import time
+        import urllib.error
+
+        base_url = "https://pushing-capital-voice-gateway.manny-861.workers.dev"
+        payload = json.dumps(
+            {
+                "q": trim_text_to_token_limit(question, max(64, self.max_input_tokens // 2)),
+                "token": TOKEN,
+                "audio": self.audio,
+            }
+        ).encode("utf-8")
+        
+        req = urllib.request.Request(f"{base_url}/ask_async", data=payload, headers={"Content-Type": "application/json", "User-Agent": "Mozilla/5.0"}, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            return f"(error: HTTP Error {e.code}: {e.reason})"
+            
+        thought_id = data.get("id")
+        if not thought_id:
+             return f"(error: no thought_id returned from gateway. {data})"
+             
+        # Poll for response
+        poll_payload = json.dumps({"token": TOKEN, "thought_id": thought_id}).encode("utf-8")
+        poll_req = urllib.request.Request(f"{base_url}/poll_responses", data=poll_payload, headers={"Content-Type": "application/json", "User-Agent": "Mozilla/5.0"}, method="POST")
+        
+        print("  [Waiting for Cloudflare async response...]", end="", flush=True)
+        for _ in range(60): # 60 seconds
+             try:
+                 with urllib.request.urlopen(poll_req, timeout=10) as pref:
+                     pdata = json.loads(pref.read().decode("utf-8"))
+                     
+                 if pdata.get("ok") and pdata.get("response"):
+                     print()
+                     row = pdata["response"]
+                     extras: list[str] = []
+                     client_action_str = row.get("client_action")
+                     if client_action_str:
+                         try:
+                             action = json.loads(client_action_str)
+                             if getattr(action, "get", lambda x: None)("type") == "open_browser":
+                                 url = str(action.get("url") or "").strip()
+                                 if url:
+                                     subprocess.run(["open", url], check=True)
+                                     extras.append(f"(opened browser: {url})")
+                         except:
+                             pass
+
+                     if self.audio:
+                         audio_blob = row.get("audio") or row.get("audio_base64")
+                         audio_result = self._play_audio_blob(audio_blob)
+                         if not audio_result:
+                             audio_result = self._speak_with_system_voice(row.get("answer"))
+                         if audio_result:
+                             extras.append(audio_result)
+
+                     answer = row.get("answer", "(no response)")
+                     return "\n".join([answer, *extras]).strip() if extras else answer
+                 
+                 print(".", end="", flush=True)
+                 time.sleep(1)
+             except Exception as e:
+                 print(f"poll error: {e}", end="", flush=True)
+                 time.sleep(1)
+                 
+        print()
+        return "(error: timed out waiting for async gateway response)"
+
+
+class LocalP:
+    def __init__(
+        self,
+        model: str,
+        max_input_tokens: int,
+        max_output_tokens: int,
+        max_thinking_tokens: int,
+        max_tool_calls: int,
+        max_tool_result_tokens: int,
+        max_playwright_tool_result_tokens: int,
+    ) -> None:
+        api_key = env_value("GEMINI_API_KEY")
+        if not api_key:
+            raise RuntimeError(f"GEMINI_API_KEY is not configured in {SECRETS_PATH}")
+
+        from google import genai
+        from google.genai import types
+
+        self.types = types
+        self.client = genai.Client(api_key=api_key)
+        self.api_key = api_key
+        self.model = model
+        self.playwright_vision_model = env_value("P_LOCAL_VISION_MODEL") or DEFAULT_PLAYWRIGHT_VISION_MODEL
+        self.max_input_tokens = max_input_tokens
+        self.max_output_tokens = max_output_tokens
+        self.max_thinking_tokens = max_thinking_tokens
+        self.max_tool_calls = max_tool_calls
+        self.max_tool_result_tokens = max_tool_result_tokens
+        self.max_playwright_tool_result_tokens = max_playwright_tool_result_tokens
+        self.conversation_token_estimate = 0
+        self.service_account_info = load_gcp_service_account_info()
+        self.bq_project_id = load_gcp_project_id()
+
+        try:
+            from google.cloud import bigquery
+            self.bq_client = build_bigquery_client()
+        except Exception:
+            self.bq_client = None
+
+        self.chat = self._make_chat()
+
+    def _make_chat(self):
+        return self.client.chats.create(
+            model=self.model,
+            config=self.types.GenerateContentConfig(
+                system_instruction=SYSTEM_P,
+                tools=[
+                    self.list_datasets,
+                    self.list_tables,
+                    self.get_table_schema,
+                    self.query_bigquery,
+                    self.vertex_ai_generate,
+                    self.vertex_ai_list_endpoints,
+                    self.answer_core_memory,
+                    self.search_core_memory,
+                    self.get_p_notebook_catalog,
+                    self.github_whoami,
+                    self.github_clone_repo,
+                    self.github_list_repos,
+                    self.github_view_repo,
+                    self.github_read_file,
+                    self.github_repo_status,
+                    self.github_checkout_branch,
+                    self.github_commit_and_push,
+                    self.github_create_pr,
+                    self.github_comment_thread,
+                    self.github_run_workflow,
+                    self.open_browser,
+                    self.playwright_mcp,
+                    self.playwright_vision,
+                    self.execute_shell,
+                ],
+                automatic_function_calling=self.types.AutomaticFunctionCallingConfig(
+                    maximum_remote_calls=self.max_tool_calls
+                ),
+                thinking_config=self.types.ThinkingConfig(
+                    thinking_budget=self.max_thinking_tokens
+                ),
+                temperature=0.2,
+                max_output_tokens=self.max_output_tokens,
+            ),
+        )
+
+    def reset(self) -> None:
+        self.chat = self._make_chat()
+        self.conversation_token_estimate = 0
+
+    def _tool_handlers(self) -> dict[str, Any]:
+        return {
+            "list_datasets": self.list_datasets,
+            "list_tables": self.list_tables,
+            "get_table_schema": self.get_table_schema,
+            "query_bigquery": self.query_bigquery,
+            "vertex_ai_generate": self.vertex_ai_generate,
+            "vertex_ai_list_endpoints": self.vertex_ai_list_endpoints,
+            "answer_core_memory": self.answer_core_memory,
+            "search_core_memory": self.search_core_memory,
+            "get_p_notebook_catalog": self.get_p_notebook_catalog,
+            "github_whoami": self.github_whoami,
+            "github_clone_repo": self.github_clone_repo,
+            "github_list_repos": self.github_list_repos,
+            "github_view_repo": self.github_view_repo,
+            "github_read_file": self.github_read_file,
+            "github_repo_status": self.github_repo_status,
+            "github_checkout_branch": self.github_checkout_branch,
+            "github_commit_and_push": self.github_commit_and_push,
+            "github_create_pr": self.github_create_pr,
+            "github_comment_thread": self.github_comment_thread,
+            "github_run_workflow": self.github_run_workflow,
+            "open_browser": self.open_browser,
+            "playwright_mcp": self.playwright_mcp,
+            "playwright_vision": self.playwright_vision,
+            "execute_shell": self.execute_shell,
+        }
+
+    def _recover_malformed_tool_result(self, error_text: str) -> str | None:
+        parsed = parse_malformed_function_call(error_text)
+        if not parsed:
+            return None
+        tool_name = parsed.get("name") or ""
+        handler = self._tool_handlers().get(tool_name)
+        if not handler:
+            return None
+        args = parsed.get("args") if isinstance(parsed.get("args"), dict) else {}
+        try:
+            result = handler(**args) if args else handler()
+        except TypeError as exc:
+            return f"{tool_name} argument error: {exc}"
+        except Exception as exc:
+            return f"{tool_name} execution error: {exc}"
+        return trim_text_to_token_limit(result, self.max_tool_result_tokens, keep="tail")
+
+    def _notebook_prompt(self, tool_name: str, query: str, notebook_id: str = "", label: str = "", title: str = "") -> str:
+        hints = []
+        if notebook_id.strip():
+            hints.append(f"preferred notebook_id: {notebook_id.strip()}")
+        if label.strip():
+            hints.append(f"preferred notebook label: {label.strip()}")
+        if title.strip():
+            hints.append(f"preferred notebook title: {title.strip()}")
+        hint_text = f"\nPreferred notebook context: {'; '.join(hints)}." if hints else ""
+        if tool_name == "search_core_memory":
+            return (
+                "Use search_core_memory for the following notebook question and return the result directly."
+                f"{hint_text}\nQuestion: {query.strip()}"
+            )
+        return (
+            "Use answer_core_memory for the following notebook-backed question and return only the final answer."
+            f"{hint_text}\nQuestion: {query.strip()}"
+        )
+
+    def _send_blocking_message(self, prompt: str, *, expect_tool_completion: bool) -> str:
+        prompt_to_send = prompt
+        attempts = blocking_execution_attempt_limit(self.max_tool_calls if expect_tool_completion else 1)
+        last_text = ""
+        for attempt in range(attempts):
+            try:
+                response = self.chat.send_message(prompt_to_send)
+                text = extract_response_text(response)
+            except Exception as exc:
+                recovered = self._recover_malformed_tool_result(str(exc))
+                if recovered:
+                    text = clean_text(recovered)
+                    self.conversation_token_estimate += estimate_tokens(prompt_to_send) + estimate_tokens(text)
+                    return text
+                raise
+            self.conversation_token_estimate += estimate_tokens(prompt_to_send) + estimate_tokens(text)
+            if not expect_tool_completion or (text and not looks_like_planning_preamble(text)):
+                return text
+            if text:
+                last_text = text
+            prompt_to_send = blocking_retry_instruction()
+        detail = f"; last reply: {last_text}" if last_text else ""
+        raise RuntimeError(f"Blocking execution did not complete after {attempts} attempts{detail}")
+
+    def _bigquery_rest_available(self) -> bool:
+        return bool(self.service_account_info and self.bq_project_id)
+
+    def _bigquery_rest_request(self, method: str, path: str, *, body: dict[str, Any] | None = None) -> dict[str, Any]:
+        if not self._bigquery_rest_available():
+            raise RuntimeError("BigQuery REST is unavailable because the service-account key is missing.")
+        return bigquery_rest_request(
+            self.service_account_info,
+            method,
+            f"{BIGQUERY_API_BASE}{path}",
+            body=body,
+        )
+
+    def list_datasets(self) -> str:
+        """List all BigQuery datasets available to P on this machine."""
+        if self._bigquery_rest_available():
+            try:
+                payload = self._bigquery_rest_request(
+                    "GET",
+                    f"/projects/{self.bq_project_id}/datasets?maxResults=50",
+                )
+                dataset_ids = [item.get("datasetReference", {}).get("datasetId") for item in payload.get("datasets") or []]
+                return trim_text_to_token_limit(
+                    json.dumps([dataset_id for dataset_id in dataset_ids if dataset_id]),
+                    self.max_tool_result_tokens,
+                    keep="tail",
+                )
+            except Exception as exc:
+                return f"BigQuery dataset error: {exc}"
+        if not self.bq_client:
+            return "Error: google-cloud-bigquery is unavailable or unauthenticated."
+        return trim_text_to_token_limit(
+            json.dumps(
+                [
+                    item.dataset_id
+                    for item in self.bq_client.list_datasets(
+                        max_results=50,
+                        timeout=BIGQUERY_REQUEST_TIMEOUT_SECONDS,
+                    )
+                ]
+            ),
+            self.max_tool_result_tokens,
+            keep="tail",
+        )
+
+    def list_tables(self, dataset_id: str) -> str:
+        """List BigQuery tables inside a specific dataset."""
+        if self._bigquery_rest_available():
+            try:
+                payload = self._bigquery_rest_request(
+                    "GET",
+                    f"/projects/{self.bq_project_id}/datasets/{urllib.parse.quote(dataset_id, safe='')}/tables?maxResults=100",
+                )
+                table_ids = [item.get("tableReference", {}).get("tableId") for item in payload.get("tables") or []]
+                return trim_text_to_token_limit(
+                    json.dumps([table_id for table_id in table_ids if table_id]),
+                    self.max_tool_result_tokens,
+                    keep="tail",
+                )
+            except Exception as exc:
+                return f"BigQuery table error: {exc}"
+        if not self.bq_client:
+            return "Error: google-cloud-bigquery is unavailable or unauthenticated."
+        return trim_text_to_token_limit(
+            json.dumps(
+                [
+                    item.table_id
+                    for item in self.bq_client.list_tables(
+                        dataset_id,
+                        max_results=100,
+                        timeout=BIGQUERY_REQUEST_TIMEOUT_SECONDS,
+                    )
+                ]
+            ),
+            self.max_tool_result_tokens,
+            keep="tail",
+        )
+
+    def get_table_schema(self, dataset_id: str, table_id: str) -> str:
+        """Get the schema for a BigQuery table. Use this before writing SQL if column names are uncertain."""
+        if self._bigquery_rest_available():
+            try:
+                payload = self._bigquery_rest_request(
+                    "GET",
+                    f"/projects/{self.bq_project_id}/datasets/{urllib.parse.quote(dataset_id, safe='')}/tables/{urllib.parse.quote(table_id, safe='')}",
+                )
+                fields = payload.get("schema", {}).get("fields") or []
+                return trim_text_to_token_limit(
+                    json.dumps(
+                        [
+                            {"name": field.get("name"), "type": field.get("type"), "mode": field.get("mode")}
+                            for field in fields
+                        ]
+                    ),
+                    self.max_tool_result_tokens,
+                    keep="tail",
+                )
+            except Exception as exc:
+                return f"BigQuery schema error: {exc}"
+        if not self.bq_client:
+            return "Error: google-cloud-bigquery is unavailable or unauthenticated."
+        table = self.bq_client.get_table(
+            self.bq_client.dataset(dataset_id).table(table_id),
+            timeout=BIGQUERY_REQUEST_TIMEOUT_SECONDS,
+        )
+        return trim_text_to_token_limit(
+            json.dumps([{"name": field.name, "type": field.field_type, "mode": field.mode} for field in table.schema]),
+            self.max_tool_result_tokens,
+            keep="tail",
+        )
+
+    def query_bigquery(self, sql: str) -> str:
+        """Run standard SQL against BigQuery and return up to 100 rows."""
+        if self._bigquery_rest_available():
+            try:
+                payload = self._bigquery_rest_request(
+                    "POST",
+                    f"/projects/{self.bq_project_id}/queries",
+                    body={"query": sql, "useLegacySql": False, "maxResults": 20},
+                )
+                rows = decode_bigquery_rows(payload)
+                return trim_text_to_token_limit(
+                    json.dumps(rows[:20], default=str),
+                    self.max_tool_result_tokens,
+                    keep="tail",
+                )
+            except Exception as exc:
+                return f"BigQuery SQL error: {exc}"
+        if not self.bq_client:
+            return "Error: google-cloud-bigquery is unavailable or unauthenticated."
+        try:
+            rows = [
+                dict(row)
+                for row in self.bq_client.query(sql, timeout=BIGQUERY_REQUEST_TIMEOUT_SECONDS).result(
+                    timeout=BIGQUERY_REQUEST_TIMEOUT_SECONDS
+                )
+            ]
+            return trim_text_to_token_limit(
+                json.dumps(rows[:20], default=str),
+                self.max_tool_result_tokens,
+                keep="tail",
+            )
+        except Exception as exc:
+            return f"BigQuery SQL error: {exc}"
+
+    def _vertex_access_token(self) -> str:
+        token = get_service_account_access_token(self.service_account_info)
+        if token:
+            return str(token).strip()
+        try:
+            return subprocess.check_output(["gcloud", "auth", "print-access-token"], text=True).strip()
+        except Exception as exc:
+            raise RuntimeError(f"Vertex auth failed: {exc}") from exc
+
+    def _vertex_project_id(self) -> str:
+        project_id = self.bq_project_id or load_gcp_project_id() or env_value("GOOGLE_CLOUD_PROJECT") or "brain-481809"
+        return str(project_id).strip() or "brain-481809"
+
+    def vertex_ai_generate(
+        self,
+        prompt: str,
+        system: str = "",
+        model: str = "gemini-2.5-pro",
+        location: str = DEFAULT_VERTEX_LOCATION,
+        temperature: float = 0.2,
+        max_output_tokens: int = 256,
+    ) -> str:
+        """Generate text through Vertex AI using Manny's Google Cloud access."""
+        try:
+            token = self._vertex_access_token()
+            project_id = self._vertex_project_id()
+            region = (location or DEFAULT_VERTEX_LOCATION).strip() or DEFAULT_VERTEX_LOCATION
+            body: dict[str, Any] = {
+                "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                "generationConfig": {
+                    "temperature": temperature,
+                    "maxOutputTokens": int(max_output_tokens),
+                },
+            }
+            if system.strip():
+                body["systemInstruction"] = {"parts": [{"text": system}]}
+            request = urllib.request.Request(
+                (
+                    f"https://{region}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{region}"
+                    f"/publishers/google/models/{model}:generateContent"
+                ),
+                data=json.dumps(body, separators=(",", ":")).encode("utf-8"),
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                },
+                method="POST",
+            )
+            with urllib.request.urlopen(request, timeout=60) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            parts = []
+            for candidate in payload.get("candidates") or []:
+                content = candidate.get("content") or {}
+                for part in content.get("parts") or []:
+                    text = str(part.get("text") or "").strip()
+                    if text:
+                        parts.append(text)
+            text_result = "\n".join(parts).strip() or json.dumps(payload, default=str)
+            return trim_text_to_token_limit(text_result, self.max_tool_result_tokens, keep="tail")
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="ignore").strip()
+            return trim_text_to_token_limit(f"Vertex AI error {exc.code}: {detail or exc.reason}", self.max_tool_result_tokens, keep="tail")
+        except Exception as exc:
+            return trim_text_to_token_limit(f"Vertex AI error: {exc}", self.max_tool_result_tokens, keep="tail")
+
+    def vertex_ai_list_endpoints(self, location: str = DEFAULT_VERTEX_LOCATION, page_size: int = 25) -> str:
+        """List Vertex AI endpoints in Manny's Google Cloud project."""
+        try:
+            token = self._vertex_access_token()
+            project_id = self._vertex_project_id()
+            region = (location or DEFAULT_VERTEX_LOCATION).strip() or DEFAULT_VERTEX_LOCATION
+            query = urllib.parse.urlencode({"pageSize": max(1, int(page_size))})
+            request = urllib.request.Request(
+                f"https://{region}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{region}/endpoints?{query}",
+                headers={"Authorization": f"Bearer {token}"},
+                method="GET",
+            )
+            with urllib.request.urlopen(request, timeout=30) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            rows = []
+            for endpoint in payload.get("endpoints") or []:
+                rows.append(
+                    {
+                        "name": endpoint.get("name"),
+                        "displayName": endpoint.get("displayName"),
+                        "deployedModels": endpoint.get("deployedModels") or [],
+                    }
+                )
+            return trim_text_to_token_limit(json.dumps(rows, default=str), self.max_tool_result_tokens, keep="tail")
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="ignore").strip()
+            return trim_text_to_token_limit(f"Vertex endpoint error {exc.code}: {detail or exc.reason}", self.max_tool_result_tokens, keep="tail")
+        except Exception as exc:
+            return trim_text_to_token_limit(f"Vertex endpoint error: {exc}", self.max_tool_result_tokens, keep="tail")
+
+    def answer_core_memory(self, query: str, notebook_id: str = "", label: str = "", title: str = "") -> str:
+        """Answer a notebook-backed question using the live P gateway's notebook tooling."""
+        try:
+            response = gateway_ask(
+                self._notebook_prompt("answer_core_memory", query, notebook_id=notebook_id, label=label, title=title),
+                max_input_tokens=max(2048, min(8192, self.max_input_tokens)),
+                max_output_tokens=max(256, min(1024, self.max_output_tokens * 2)),
+                max_thinking_tokens=max(128, self.max_thinking_tokens),
+                max_tool_steps=max(2, self.max_tool_calls),
+                max_tool_result_tokens=max(512, self.max_tool_result_tokens),
+                max_playwright_tool_result_tokens=max(512, self.max_playwright_tool_result_tokens),
+            )
+        except Exception as exc:
+            return f"Notebook answer error: {exc}"
+        answer = str(response.get("answer") or "").strip()
+        if answer:
+            return trim_text_to_token_limit(answer, self.max_tool_result_tokens, keep="tail")
+        return trim_text_to_token_limit(json.dumps(response, default=str), self.max_tool_result_tokens, keep="tail")
+
+    def search_core_memory(self, query: str, notebook_id: str = "", label: str = "", title: str = "") -> str:
+        """Search notebook-backed memory using the live P gateway's notebook tooling."""
+        try:
+            response = gateway_ask(
+                self._notebook_prompt("search_core_memory", query, notebook_id=notebook_id, label=label, title=title),
+                max_input_tokens=max(2048, min(8192, self.max_input_tokens)),
+                max_output_tokens=max(256, min(1024, self.max_output_tokens * 2)),
+                max_thinking_tokens=max(64, self.max_thinking_tokens),
+                max_tool_steps=max(2, self.max_tool_calls),
+                max_tool_result_tokens=max(512, self.max_tool_result_tokens),
+                max_playwright_tool_result_tokens=max(512, self.max_playwright_tool_result_tokens),
+            )
+        except Exception as exc:
+            return f"Notebook search error: {exc}"
+        answer = str(response.get("answer") or "").strip()
+        if answer:
+            return trim_text_to_token_limit(answer, self.max_tool_result_tokens, keep="tail")
+        return trim_text_to_token_limit(json.dumps(response, default=str), self.max_tool_result_tokens, keep="tail")
+
+    def open_browser(self, url: str) -> str:
+        """Open a URL in the default macOS browser."""
+        try:
+            subprocess.run(["open", url], check=True)
+        except Exception as exc:
+            return f"Browser open error: {exc}"
+        return f"Opened browser to {url}"
+
+    def playwright_mcp(
+        self,
+        action: str,
+        url: str = "",
+        target: str = "",
+        text: str = "",
+        key: str = "",
+        tab_index: int = 0,
+        session: str = "",
+        headed: bool = True,
+    ) -> str:
+        """Drive the persistent Playwright browser session on Manny's Mac. Use snapshot before clicking or filling when refs may be stale."""
+        if not PLAYWRIGHT_WRAPPER.exists():
+            return f"Playwright wrapper missing at {PLAYWRIGHT_WRAPPER}"
+
+        normalized = action.strip().lower().replace("-", "_")
+        cleaned_session = "".join(ch for ch in session.strip().lower() if ch.isalnum())
+        session_name = cleaned_session[:8] or DEFAULT_PLAYWRIGHT_SESSION
+        argv = [str(PLAYWRIGHT_WRAPPER), "--session", session_name]
+
+        if normalized == "open":
+            argv.append("open")
+            if url.strip():
+                argv.append(url.strip())
+            if headed:
+                argv.append("--headed")
+        elif normalized == "goto":
+            if not url.strip():
+                return "playwright_mcp goto requires url."
+            argv.extend(["goto", url.strip()])
+        elif normalized == "snapshot":
+            argv.append("snapshot")
+            if target.strip():
+                argv.append(target.strip())
+        elif normalized == "click":
+            if not target.strip():
+                return "playwright_mcp click requires target."
+            argv.extend(["click", target.strip()])
+        elif normalized == "fill":
+            if not target.strip():
+                return "playwright_mcp fill requires target."
+            argv.extend(["fill", target.strip(), text])
+        elif normalized == "type":
+            argv.extend(["type", text])
+        elif normalized == "press":
+            if not key.strip():
+                return "playwright_mcp press requires key."
+            argv.extend(["press", key.strip()])
+        elif normalized == "screenshot":
+            argv.append("screenshot")
+            if target.strip():
+                argv.append(target.strip())
+        elif normalized == "tab_list":
+            argv.append("tab-list")
+        elif normalized == "tab_new":
+            argv.append("tab-new")
+            if url.strip():
+                argv.append(url.strip())
+        elif normalized == "tab_select":
+            try:
+                argv.extend(["tab-select", str(int(tab_index))])
+            except Exception:
+                return "playwright_mcp tab_select requires tab_index."
+        elif normalized == "reload":
+            argv.append("reload")
+        elif normalized == "go_back":
+            argv.append("go-back")
+        elif normalized == "go_forward":
+            argv.append("go-forward")
+        elif normalized == "close":
+            argv.append("close")
+        else:
+            return f"Unsupported playwright_mcp action: {action}"
+
+        return self._run_command(
+            argv,
+            timeout=60,
+            keep="head",
+            token_limit=self.max_playwright_tool_result_tokens,
+        )
+
+    def playwright_vision(self, question: str, url: str = "", target: str = "", session: str = "", headed: bool = True) -> str:
+        """Answer a visual question from the live Playwright browser using a real screenshot as ground truth."""
+        session_name = session.strip() or DEFAULT_PLAYWRIGHT_SESSION
+        pw_limit = self.max_playwright_tool_result_tokens
+        if url.strip():
+            open_result = self.playwright_mcp("open", url=url.strip(), session=session_name, headed=headed)
+            if "failed" in open_result.lower():
+                return trim_text_to_token_limit(open_result, pw_limit, keep="head")
+
+        snapshot_output = self.playwright_mcp("snapshot", session=session_name)
+        if "failed" in snapshot_output.lower() or "not open" in snapshot_output.lower():
+            return trim_text_to_token_limit(snapshot_output, pw_limit, keep="head")
+
+        screenshot_output = self.playwright_mcp("screenshot", target=target, session=session_name)
+        if "failed" in screenshot_output.lower() or "not open" in screenshot_output.lower():
+            return trim_text_to_token_limit(screenshot_output, pw_limit, keep="head")
+
+        screenshot_path = extract_playwright_artifact_path(screenshot_output, ".png")
+        if not screenshot_path or not screenshot_path.exists():
+            return trim_text_to_token_limit("Playwright vision error: screenshot artifact was not found.", pw_limit, keep="head")
+
+        image_b64 = base64.b64encode(screenshot_path.read_bytes()).decode("utf-8")
+        prompt = trim_text_to_token_limit(
+            (
+                "Answer Manny's question about the current browser view.\n"
+                f"Question: {question.strip()}\n"
+                "Use the screenshot as ground truth. Use the DOM snapshot as supporting context.\n"
+                f"DOM snapshot:\n{trim_text_to_token_limit(snapshot_output, min(1024, pw_limit), keep='head')}"
+            ),
+            min(1536, pw_limit),
+            keep="head",
+        )
+        payload = {
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [
+                        {"text": prompt},
+                        {"inlineData": {"mimeType": "image/png", "data": image_b64}},
+                    ],
+                }
+            ],
+            "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": max(256, min(1024, pw_limit)),
+            },
+        }
+        url_request = (
+            f"https://generativelanguage.googleapis.com/v1beta/models/"
+            f"{self.playwright_vision_model}:generateContent?key={self.api_key}"
+        )
+        try:
+            req = urllib.request.Request(
+                url_request,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                vision_payload = json.loads(resp.read().decode("utf-8"))
+        except Exception as exc:
+            return trim_text_to_token_limit(f"Playwright vision error: {exc}", pw_limit, keep="head")
+
+        answer = extract_response_text_from_payload(vision_payload) or "Vision model returned no response."
+        return trim_text_to_token_limit(answer, pw_limit, keep="tail")
+
+    def get_p_notebook_catalog(self) -> str:
+        """Return the canonical P notebook catalog with notebook IDs and routing guidance."""
+        return trim_text_to_token_limit(
+            json.dumps(P_NOTEBOOK_CATALOG),
+            self.max_tool_result_tokens,
+            keep="tail",
+        )
+
+    def _run_command(
+        self,
+        argv: list[str],
+        *,
+        cwd: str | None = None,
+        timeout: int = 60,
+        keep: str = "tail",
+        token_limit: int | None = None,
+    ) -> str:
+        effective_limit = max(64, token_limit or self.max_tool_result_tokens)
+        try:
+            completed = subprocess.run(
+                argv,
+                cwd=cwd or None,
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=timeout,
+            )
+        except Exception as exc:
+            return trim_text_to_token_limit(f"Command execution error: {exc}", effective_limit, keep=keep)
+        output = (completed.stdout or "").strip()
+        error = (completed.stderr or "").strip()
+        if completed.returncode == 0:
+            return trim_text_to_token_limit(output or "(command completed with no stdout)", effective_limit, keep=keep)
+        detail = error or output or f"exit code {completed.returncode}"
+        return trim_text_to_token_limit(f"Command failed: {detail}", effective_limit, keep=keep)
+
+    def github_whoami(self) -> str:
+        """Return the authenticated GitHub CLI user and auth state on Manny's Mac."""
+        status = self._run_command(["gh", "auth", "status"], timeout=30)
+        status = "\n".join(line for line in status.splitlines() if "Token:" not in line)
+        user = self._run_command(["gh", "api", "user"], timeout=30)
+        return trim_text_to_token_limit(f"{status}\n---\n{user}", self.max_tool_result_tokens, keep="tail")
+
+    def github_clone_repo(self, repo: str, destination_path: str = "") -> str:
+        """Clone a GitHub repository onto Manny's Mac using the authenticated GitHub CLI."""
+        argv = ["gh", "repo", "clone", repo]
+        if destination_path.strip():
+            argv.append(destination_path.strip())
+        return self._run_command(argv, timeout=60)
+
+    def github_list_repos(self, owner: str = "", limit: int = 20, visibility: str = "") -> str:
+        """List GitHub repositories for an owner or the authenticated account from Manny's Mac."""
+        argv = ["gh", "repo", "list"]
+        if owner.strip():
+            argv.append(owner.strip())
+        argv.extend(
+            [
+                "--limit",
+                str(max(1, min(int(limit), 100))),
+                "--json",
+                "nameWithOwner,description,isPrivate,defaultBranchRef,pushedAt,url",
+            ]
+        )
+        normalized_visibility = visibility.strip().lower()
+        if normalized_visibility in {"public", "private", "internal"}:
+            argv.extend(["--visibility", normalized_visibility])
+        return self._run_command(argv, timeout=45)
+
+    def github_view_repo(self, repo: str, ref: str = "") -> str:
+        """Inspect a GitHub repository and list its root contents from Manny's Mac."""
+        meta = self._run_command(
+            ["gh", "repo", "view", repo, "--json", "nameWithOwner,description,isPrivate,defaultBranchRef,pushedAt,url"],
+            timeout=45,
+        )
+        contents_argv = ["gh", "api", f"repos/{repo}/contents"]
+        if ref.strip():
+            contents_argv.extend(["-f", f"ref={ref.strip()}"])
+        contents = self._run_command(contents_argv, timeout=45)
+        return trim_text_to_token_limit(f"{meta}\n---\n{contents}", self.max_tool_result_tokens, keep="tail")
+
+    def github_read_file(self, repo: str, path: str, ref: str = "") -> str:
+        """Read a specific file from a GitHub repository on Manny's Mac."""
+        clean_path = urllib.parse.quote(path.strip().lstrip("/"), safe="/")
+        argv = [
+            "gh",
+            "api",
+            "-H",
+            "Accept: application/vnd.github.raw",
+            f"repos/{repo}/contents/{clean_path}",
+        ]
+        if ref.strip():
+            argv.extend(["-f", f"ref={ref.strip()}"])
+        return self._run_command(argv, timeout=45)
+
+    def github_repo_status(self, repo_path: str) -> str:
+        """Inspect a local git repository on Manny's Mac and return branch plus working tree status."""
+        status = self._run_command(["git", "-C", repo_path, "status", "--short", "--branch"], timeout=30)
+        repo_view = self._run_command(["gh", "repo", "view", "--json", "nameWithOwner,defaultBranchRef,url"], cwd=repo_path, timeout=30)
+        return trim_text_to_token_limit(f"{status}\n---\n{repo_view}", self.max_tool_result_tokens, keep="tail")
+
+    def github_checkout_branch(self, repo_path: str, branch_name: str, create: bool = True) -> str:
+        """Create or switch to a branch in a local repository on Manny's Mac."""
+        argv = ["git", "-C", repo_path, "switch"]
+        if create:
+            argv.append("-C")
+        argv.append(branch_name)
+        return self._run_command(argv, timeout=30)
+
+    def github_commit_and_push(self, repo_path: str, message: str, branch_name: str = "", push: bool = True) -> str:
+        """Stage all changes, commit them, and optionally push from a local repository on Manny's Mac."""
+        steps = [self._run_command(["git", "-C", repo_path, "add", "-A"], timeout=30)]
+        steps.append(self._run_command(["git", "-C", repo_path, "commit", "-m", message], timeout=60))
+        if push:
+            push_argv = ["git", "-C", repo_path, "push"]
+            if branch_name.strip():
+                push_argv.extend(["-u", "origin", branch_name.strip()])
+            steps.append(self._run_command(push_argv, timeout=60))
+        return trim_text_to_token_limit("\n---\n".join(steps), self.max_tool_result_tokens, keep="tail")
+
+    def github_create_pr(
+        self,
+        repo_path: str,
+        title: str,
+        body: str,
+        base: str = "",
+        head: str = "",
+        draft: bool = False,
+    ) -> str:
+        """Create a GitHub pull request from a local repository on Manny's Mac."""
+        argv = ["gh", "pr", "create", "--title", title, "--body", body]
+        if base.strip():
+            argv.extend(["--base", base.strip()])
+        if head.strip():
+            argv.extend(["--head", head.strip()])
+        if draft:
+            argv.append("--draft")
+        return self._run_command(argv, cwd=repo_path, timeout=60)
+
+    def github_comment_thread(self, repo_path: str, number: int, body: str, target_type: str) -> str:
+        """Add a comment to a GitHub issue or pull request from a local repository on Manny's Mac."""
+        normalized = target_type.strip().lower()
+        if normalized not in {"issue", "pr"}:
+            return "github_comment_thread requires target_type of issue or pr."
+        argv = ["gh", normalized, "comment", str(int(number)), "--body", body]
+        return self._run_command(argv, cwd=repo_path, timeout=45)
+
+    def github_run_workflow(self, repo_path: str, workflow: str, ref: str = "", inputs_json: str = "") -> str:
+        """Trigger a GitHub Actions workflow from a local repository on Manny's Mac."""
+        argv = ["gh", "workflow", "run", workflow]
+        if ref.strip():
+            argv.extend(["--ref", ref.strip()])
+        try:
+            parsed_inputs = json.loads(inputs_json) if inputs_json.strip() else {}
+        except Exception:
+            parsed_inputs = {}
+        if isinstance(parsed_inputs, dict):
+            for key, value in parsed_inputs.items():
+                argv.extend(["-f", f"{key}={'' if value is None else value}"])
+        return self._run_command(argv, cwd=repo_path, timeout=45)
+
+    def execute_shell(self, command: str) -> str:
+        """Execute a shell command directly on Manny's Mac and return stdout/stderr."""
+        try:
+            completed = subprocess.run(
+                ["/bin/zsh", "-lc", command],
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=60,
+            )
+        except Exception as exc:
+            return f"Shell execution error: {exc}"
+        output = (completed.stdout or "").strip()
+        error = (completed.stderr or "").strip()
+        if completed.returncode == 0:
+            return trim_text_to_token_limit(output or "(command completed with no stdout)", self.max_tool_result_tokens, keep="tail")
+        detail = error or output or f"exit code {completed.returncode}"
+        return trim_text_to_token_limit(f"Shell command failed: {detail}", self.max_tool_result_tokens, keep="tail")
+
+    def ask(self, question: str) -> str:
+        bounded_question = trim_text_to_token_limit(question, max(64, self.max_input_tokens // 2))
+        projected = self.conversation_token_estimate + estimate_tokens(bounded_question)
+        if projected > self.max_input_tokens:
+            self.reset()
+        text = self._send_blocking_message(
+            bounded_question,
+            expect_tool_completion=should_expect_tool_completion(bounded_question),
+        )
+        if text:
+            return text
+        return "(no response)"
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Talk to P from the terminal.")
+    parser.add_argument("--remote", action="store_true", help="Use the deployed Cloudflare gateway instead of the local Gemini agent.")
+    parser.add_argument("--audio", action="store_true", help="Request and play audio replies in remote mode when available.")
+    parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Gemini model for local mode. Default: {DEFAULT_MODEL}")
+    parser.add_argument(
+        "--max-input-tokens",
+        type=int,
+        default=DEFAULT_MAX_INPUT_TOKENS,
+        help=f"Input token cap. Default: {DEFAULT_MAX_INPUT_TOKENS}",
+    )
+    parser.add_argument(
+        "--max-output-tokens",
+        type=int,
+        default=DEFAULT_MAX_OUTPUT_TOKENS,
+        help=f"Local-mode output token cap. Default: {DEFAULT_MAX_OUTPUT_TOKENS}",
+    )
+    parser.add_argument(
+        "--max-thinking-tokens",
+        type=int,
+        default=DEFAULT_MAX_THINKING_TOKENS,
+        help=f"Thinking token cap. Default: {DEFAULT_MAX_THINKING_TOKENS}",
+    )
+    parser.add_argument(
+        "--max-tool-calls",
+        type=int,
+        default=DEFAULT_MAX_TOOL_CALLS,
+        help=f"Maximum automatic tool-call depth. Default: {DEFAULT_MAX_TOOL_CALLS}",
+    )
+    parser.add_argument(
+        "--max-tool-result-tokens",
+        type=int,
+        default=DEFAULT_MAX_TOOL_RESULT_TOKENS,
+        help=f"Per-tool result token cap. Default: {DEFAULT_MAX_TOOL_RESULT_TOKENS}",
+    )
+    parser.add_argument(
+        "--max-playwright-tool-result-tokens",
+        type=int,
+        default=DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS,
+        help=f"Browser tool result token cap. Default: {DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS}",
+    )
+    args = parser.parse_args()
+
+    mode = "remote" if args.remote else "local"
+    agent: RemoteP | LocalP
+
+    if mode == "local":
+        try:
+            agent = LocalP(
+                model=args.model,
+                max_input_tokens=max(256, args.max_input_tokens),
+                max_output_tokens=max(128, args.max_output_tokens),
+                max_thinking_tokens=max(0, args.max_thinking_tokens),
+                max_tool_calls=max(1, args.max_tool_calls),
+                max_tool_result_tokens=max(64, args.max_tool_result_tokens),
+                max_playwright_tool_result_tokens=max(128, args.max_playwright_tool_result_tokens),
+            )
+        except Exception as exc:
+            print(f"[system] local P unavailable: {exc}")
+            print("[system] falling back to remote gateway.")
+            print()
+            mode = "remote"
+            agent = RemoteP(
+                max_input_tokens=max(256, args.max_input_tokens),
+                max_output_tokens=max(128, args.max_output_tokens),
+                max_thinking_tokens=max(0, args.max_thinking_tokens),
+                max_tool_calls=max(1, args.max_tool_calls),
+                max_tool_result_tokens=max(64, args.max_tool_result_tokens),
+                max_playwright_tool_result_tokens=max(128, args.max_playwright_tool_result_tokens),
+                audio=args.audio,
+            )
+    else:
+        agent = RemoteP(
+            max_input_tokens=max(256, args.max_input_tokens),
+            max_output_tokens=max(128, args.max_output_tokens),
+            max_thinking_tokens=max(0, args.max_thinking_tokens),
+            max_tool_calls=max(1, args.max_tool_calls),
+            max_tool_result_tokens=max(64, args.max_tool_result_tokens),
+            max_playwright_tool_result_tokens=max(128, args.max_playwright_tool_result_tokens),
+            audio=args.audio,
+        )
+
+    print("=" * 50)
+    print("  TALK TO P — Live Chat")
+    print(f"  Mode: {mode}")
+    if mode == "local":
+        print(f"  Model: {args.model}")
+        print(f"  Max input tokens: {max(256, args.max_input_tokens)}")
+        print(f"  Max output tokens: {max(128, args.max_output_tokens)}")
+        print(f"  Max thinking tokens: {max(0, args.max_thinking_tokens)}")
+        print(f"  Max tool calls: {max(1, args.max_tool_calls)}")
+        print(f"  Max tool result tokens: {max(64, args.max_tool_result_tokens)}")
+        print(f"  Max Playwright tool result tokens: {max(128, args.max_playwright_tool_result_tokens)}")
+        print("  Use /reset to clear local context.")
+    else:
+        print(f"  Max input tokens: {max(256, args.max_input_tokens)}")
+        print(f"  Max output tokens: {max(128, args.max_output_tokens)}")
+        print(f"  Max thinking tokens: {max(0, args.max_thinking_tokens)}")
+        print(f"  Max tool calls: {max(1, args.max_tool_calls)}")
+        print(f"  Max tool result tokens: {max(64, args.max_tool_result_tokens)}")
+        print(f"  Max Playwright tool result tokens: {max(128, args.max_playwright_tool_result_tokens)}")
+        print(f"  Audio replies: {'on' if args.audio else 'off'}")
+    print("  Type your message. 'q' to quit.")
+    print("=" * 50)
+    print()
+
+    while True:
+        try:
+            msg = input("MANNY > ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nbye")
+            break
+        if not msg:
+            continue
+        if msg.lower() in {"q", "quit", "exit"}:
+            print("bye")
+            break
+        if mode == "local" and msg.lower() == "/reset":
+            assert isinstance(agent, LocalP)
+            agent.reset()
+            print("   P  > local context reset")
+            print()
+            continue
+        try:
+            answer = agent.ask(msg)
+        except Exception as exc:
+            answer = f"(error: {exc})"
+        print(f"   P  > {answer}")
+        print()
+
+
+if __name__ == "__main__":
+    main()

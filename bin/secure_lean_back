@@ -1,0 +1,14 @@
+#!/bin/zsh
+echo "🔮 Booting internal proxy server..."
+pkill -f leanback_server.py 2>/dev/null || true
+pkill -f cloudflared 2>/dev/null || true
+
+# Boot the python server immune to SSH disconnections
+nohup python3 ~/bin/leanback_server.py > /tmp/leanback.log 2>&1 &
+
+echo "🌐 Deploying instant secure HTTPS tunnel via Cloudflare..."
+echo "Please wait 5 seconds for the secure link to generate below!"
+echo ""
+
+# Boot Cloudflared tunnel
+/opt/homebrew/bin/cloudflared tunnel --url http://localhost:8080

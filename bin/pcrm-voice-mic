@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -euo pipefail
+
+# Bypass Chrome entirely. Just open the native voice recording layer.
+/usr/bin/open "superwhisper://record"

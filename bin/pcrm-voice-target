@@ -1,0 +1,62 @@
+#!/bin/zsh
+set -euo pipefail
+
+record_after_focus="0"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --record)
+      record_after_focus="1"
+      shift
+      ;;
+    --help|-h)
+      echo "Usage: pcrm-voice-target [--record] [codex|stitch|agent|media|debate] [optional-route]" >&2
+      exit 0
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+target="${1:-debate}"
+route_override="${2:-}"
+
+case "$target" in
+  codex) mode_key="pcrm-codex" ;;
+  stitch) mode_key="pcrm-stitch" ;;
+  agent) mode_key="pcrm-agent" ;;
+  media) mode_key="pcrm-media" ;;
+  debate) mode_key="pcrm-debate" ;;
+  *)
+    echo "Usage: pcrm-voice-target [--record] [codex|stitch|agent|media|debate] [optional-route]" >&2
+    exit 1
+    ;;
+esac
+
+# 1. Set the internal agent mode in SuperWhisper 
+# (This points the webhook to Vision Ears or the Voice Gateway)
+/usr/bin/open "superwhisper://mode?key=${mode_key}"
+sleep 0.15
+
+# 2. Focus Safari and ensure the platform is open
+osascript <<APPLESCRIPT
+tell application "Safari"
+    activate
+    set platformUrl to "https://platform.pushingcap.com"
+    set found to false
+    repeat with t in tabs of windows
+        if URL of t contains "platform.pushingcap.com" then
+            set found to true
+            set current tab of window 1 to t
+            exit repeat
+        end if
+    end repeat
+    if not found then
+        open location platformUrl
+    end if
+end tell
+APPLESCRIPT
+
+# 3. Trigger audio capture natively (bypassing Chrome entirely)
+/usr/bin/open "superwhisper://record"

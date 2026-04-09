@@ -1,0 +1,105 @@
+#!/bin/zsh
+set -euo pipefail
+
+# Generate a resumable file manifest for the external volume "Pushing Cap".
+# Output is written under ~/manifests/pushing-cap/<timestamp>/ by default.
+#
+# This is intentionally "dumb but reliable":
+# - Scans each top-level entry (including dotfiles) into its own segment file.
+# - If interrupted, re-run with the same output dir to resume (existing segments are skipped).
+#
+# Usage:
+#   pushing-cap-manifest                # create a new run dir and scan everything
+#   pushing-cap-manifest /path/to/run   # resume or run into an explicit dir
+
+VOLUME_NAME="Pushing Cap"
+MOUNT_POINT="/Volumes/${VOLUME_NAME}"
+OUT_ROOT="/Users/${USER}/manifests/pushing-cap"
+
+should_skip_entry() {
+  local e="$1"
+  case "$e" in
+    # These are system/indexing folders that can be huge and are not useful for ingest diffs.
+    .Spotlight-V100|.fseventsd|.Trashes|.TemporaryItems|.DocumentRevisions-V100*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+if [[ ! -d "${MOUNT_POINT}" ]]; then
+  echo "Volume not mounted: ${MOUNT_POINT}" >&2
+  echo "Mount it first (example): /Users/${USER}/bin/pushing-cap mount-ro" >&2
+  exit 1
+fi
+
+run_dir="${1:-}"
+if [[ -z "${run_dir}" ]]; then
+  run_dir="${OUT_ROOT}/$(date +%Y-%m-%d_%H%M%S)"
+fi
+
+segments_dir="${run_dir}/segments"
+logs_dir="${run_dir}/logs"
+progress_log="${run_dir}/progress.log"
+
+mkdir -p "${segments_dir}" "${logs_dir}"
+touch "${progress_log}"
+
+ts() { date +"%Y-%m-%d %H:%M:%S"; }
+
+safe_name() {
+  # Create a filesystem-safe, collision-resistant segment filename for a top-level entry name.
+  # Prints a single line to stdout.
+  python3 - "$1" <<'PY'
+import hashlib, re, sys
+s = sys.argv[1]
+slug = re.sub(r"[^A-Za-z0-9._-]+", "_", s).strip("_")
+slug = slug[:60] if slug else "entry"
+h = hashlib.sha1(s.encode("utf-8", "surrogateescape")).hexdigest()[:12]
+print(f"{slug}__{h}")
+PY
+}
+
+echo "$(ts) START run_dir=${run_dir}" >> "${progress_log}"
+
+while IFS= read -r -d '' entry_path; do
+  entry="${entry_path##*/}"
+  if should_skip_entry "${entry}"; then
+    echo "$(ts) SKIP entry=${entry}" >> "${progress_log}"
+    continue
+  fi
+  seg_base="$(safe_name "${entry}")"
+  seg_file="${segments_dir}/${seg_base}.paths.txt"
+  err_file="${logs_dir}/${seg_base}.err.log"
+
+  # Resume support: if segment exists, skip it.
+  if [[ -f "${seg_file}" ]]; then
+    continue
+  fi
+
+  echo "$(ts) START entry=${entry}" >> "${progress_log}"
+
+  tmp="${seg_file}.tmp"
+  rm -f "${tmp}"
+
+  # Run find from the volume root so output paths are relative to the volume.
+  (
+    cd "${MOUNT_POINT}"
+    find "${entry}" -type f -print
+  ) > "${tmp}" 2> "${err_file}" || true
+
+  mv "${tmp}" "${seg_file}"
+
+  # Keep progress log cheap; line count is optional but useful and fast for per-entry segments.
+  lines="$(wc -l < "${seg_file}" | tr -d ' ')"
+  echo "$(ts) DONE entry=${entry} lines=${lines}" >> "${progress_log}"
+done < <(find "${MOUNT_POINT}" -mindepth 1 -maxdepth 1 -print0)
+
+echo "$(ts) COMBINE segments" >> "${progress_log}"
+cat "${segments_dir}"/*.paths.txt > "${run_dir}/files.raw.txt"
+LC_ALL=C sort -u "${run_dir}/files.raw.txt" > "${run_dir}/local.paths.sorted.txt"
+
+echo "$(ts) DONE local_paths=$(wc -l < "${run_dir}/local.paths.sorted.txt" | tr -d ' ')" >> "${progress_log}"
+echo "${run_dir}"

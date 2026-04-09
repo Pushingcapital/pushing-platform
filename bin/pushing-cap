@@ -1,0 +1,59 @@
+#!/bin/zsh
+set -euo pipefail
+
+VOLUME_NAME="Pushing Cap"
+MOUNT_POINT="/Volumes/${VOLUME_NAME}"
+MOUNT_EXFAT="/System/Library/Filesystems/exfat.fs/Contents/Resources/mount_exfat"
+USER_ID="$(id -u)"
+GROUP_ID="$(id -g)"
+
+detect_disk_slice() {
+  # Finds the WD "easystore 264D" whole-disk BSD name (e.g. disk4), then assumes s1.
+  local whole
+  whole="$(
+    ioreg -r -c IOMedia -w0 -l | awk '
+      /easystore 264D Media/ {f=1; w=0}
+      f && /"Whole" = Yes/ {w=1}
+      f && w && /"BSD Name" =/ {gsub(/"/,"",$5); print $5; exit}
+    '
+  )"
+  if [[ -z "${whole}" ]]; then
+    echo "Could not auto-detect the WD easystore disk. Pass it explicitly, e.g.:" >&2
+    echo "  pushing-cap mount-ro disk4s1" >&2
+    return 1
+  fi
+  echo "${whole}s1"
+}
+
+cmd="${1:-}"
+disk_slice="${2:-}"
+
+case "${cmd}" in
+  status)
+    mount | grep -E "/Volumes/${VOLUME_NAME}( |$)" || true
+    ;;
+  unmount)
+    sudo umount "${MOUNT_POINT}" 2>/dev/null || true
+    ;;
+  mount-ro)
+    if [[ -z "${disk_slice}" ]]; then
+      disk_slice="$(detect_disk_slice)"
+    fi
+    sudo mkdir -p "${MOUNT_POINT}"
+    sudo umount "${MOUNT_POINT}" 2>/dev/null || true
+    sudo "${MOUNT_EXFAT}" -o ro,noowners -u "${USER_ID}" -g "${GROUP_ID}" -m 755 "/dev/${disk_slice}" "${MOUNT_POINT}"
+    ;;
+  mount)
+    if [[ -z "${disk_slice}" ]]; then
+      disk_slice="$(detect_disk_slice)"
+    fi
+    sudo mkdir -p "${MOUNT_POINT}"
+    sudo umount "${MOUNT_POINT}" 2>/dev/null || true
+    sudo "${MOUNT_EXFAT}" -o noowners -u "${USER_ID}" -g "${GROUP_ID}" -m 755 "/dev/${disk_slice}" "${MOUNT_POINT}"
+    ;;
+  *)
+    echo "Usage: pushing-cap {status|mount|mount-ro|unmount} [diskXsY]" >&2
+    exit 2
+    ;;
+esac
+

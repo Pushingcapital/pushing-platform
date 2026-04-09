@@ -1,0 +1,2 @@
+#!/bin/zsh
+exec /Users/emmanuelhaddad/bin/pcrm-voice-target debate "$@"

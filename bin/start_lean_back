@@ -1,0 +1,25 @@
+#!/bin/zsh
+echo "🔮 Energizing Lean Back Mode..."
+
+# Kill any existing server on this port just in case
+pkill -f leanback_server.py 2>/dev/null || true
+
+# Boot the proxy server in the background
+python3 ~/bin/leanback_server.py > /tmp/leanback.log 2>&1 &
+SERVER_PID=$!
+
+sleep 1
+
+# Launch the visual interface natively
+open "http://localhost:8080/lean_back_p.html"
+
+echo "✅ Lean Back Orb is live in your browser!"
+echo "\nThe background proxy is handling your Voice Gateway traffic."
+echo "Press ANY KEY in this terminal when you want to power down the server."
+
+read -k 1
+
+# Cleanup
+echo "\nPowering down..."
+kill $SERVER_PID 2>/dev/null || true
+echo "Server offline. Goodbye!"
