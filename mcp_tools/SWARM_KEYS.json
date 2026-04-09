@@ -1,0 +1,32 @@
+{
+  "system_identifier": "P_CORE_SWARM_VAULT",
+  "doctrine_status": "HARDWARE_LOCKED",
+  "description": "The biological truth ledger of API keys. All agents must securely pull their identity token from this memory vector to execute tools or trigger the macOS router.",
+  "workers": {
+    "GEMINI": {
+      "key": "sk_swarm_gemini_5409",
+      "role": "INTELLIGENCE_CORE",
+      "capabilities": ["ANALYSIS", "REASONING", "DISPATCH"]
+    },
+    "P_CORE": {
+      "key": "sk_swarm_pcore_9921",
+      "role": "ARCHITECT_ORCHESTRATOR",
+      "capabilities": ["ROUTING", "FILE_READ", "DB_WRITE"]
+    },
+    "ANTIGRAVITY": {
+      "key": "sk_swarm_antigrav_001",
+      "role": "SWARM_OPERATIVE",
+      "capabilities": ["HOST_BASH", "SYSTEM_MUTATION", "FILE_WRITE"]
+    },
+    "CODE_WORKER": {
+      "key": "sk_swarm_codeworker_8",
+      "role": "SYNTHESIS_BLOCK",
+      "capabilities": ["NEXTJS_UI", "HARDWARE_LOCK_OVERRIDE"]
+    },
+    "LIAISON": {
+      "key": "sk_swarm_liaison_77",
+      "role": "TELECOM_WATCHER",
+      "capabilities": ["IMESSAGE_READ", "SMS_DISPATCH"]
+    }
+  }
+}
