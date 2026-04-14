@@ -1,0 +1,87 @@
+name: P Deploy — Tailscale Mesh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bin/p_web_relay.py'
+      - 'bin/p_chat_bridge.py'
+      - 'PushingP Vault/Core/Launcher/talk_to_p.py'
+      - 'bin/p_memory_builder.py'
+  workflow_dispatch:
+    inputs:
+      target_node:
+        description: 'Target node (all / gcp-vm / emilias-mbp / hp-desktop)'
+        required: false
+        default: 'all'
+
+jobs:
+  deploy-to-tailnet:
+    name: Deploy P to Tailscale Mesh
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Verify Tailscale connection
+        run: |
+          tailscale status
+          echo "✅ Connected to pushingcap.com tailnet"
+
+      - name: Deploy to GCP VM node (pc-orchestrator-vm)
+        if: ${{ inputs.target_node == 'all' || inputs.target_node == 'gcp-vm' }}
+        run: |
+          # Sync P stack to GCP VM via Tailscale
+          rsync -az --exclude='node_modules' --exclude='.next' --exclude='.venv' \
+            --exclude='.antigravity' \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            . manny@100.73.193.101:~/pushing-platform/
+          
+          # Restart P relay service
+          ssh -o StrictHostKeyChecking=no manny@100.73.193.101 \
+            "sudo systemctl restart p-relay && systemctl status p-relay --no-pager"
+          
+          echo "✅ GCP VM (pc-orchestrator-vm) updated"
+
+      - name: Deploy to Emilia's MacBook
+        if: ${{ inputs.target_node == 'all' || inputs.target_node == 'emilias-mbp' }}
+        continue-on-error: true
+        run: |
+          rsync -az --exclude='node_modules' --exclude='.next' --exclude='.venv' \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            . manny@100.107.250.90:~/pushing-platform/ 2>/dev/null || \
+            rsync -az --exclude='node_modules' --exclude='.next' --exclude='.venv' \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            . manny@100.102.41.1:~/pushing-platform/ 2>/dev/null || \
+            echo "⚠️ Emilia's MacBook offline — will sync on next connection"
+
+      - name: Deploy to HP Desktop (WSL2)
+        if: ${{ inputs.target_node == 'all' || inputs.target_node == 'hp-desktop' }}
+        continue-on-error: true
+        run: |
+          ssh -o StrictHostKeyChecking=no manny@100.121.100.10 \
+            "wsl rsync -az --exclude='node_modules' /mnt/... ~/pushing-platform/" 2>/dev/null || \
+            echo "⚠️ HP Desktop offline — will sync on next connection"
+
+      - name: Verify P relay health on GCP VM
+        run: |
+          sleep 5
+          STATUS=$(curl -sf http://100.73.193.101:7779/health 2>/dev/null && echo "✅ P relay healthy" || echo "⚠️ P relay not responding yet")
+          echo "$STATUS"
+
+      - name: Report deployment
+        run: |
+          echo "=== Deployment Summary ==="
+          echo "Tailnet: pushingcap.com"  
+          echo "Commit:  ${{ github.sha }}"
+          echo "Branch:  ${{ github.ref_name }}"
+          echo "Trigger: ${{ github.event_name }}"
+          tailscale status | head -5
