@@ -6,10 +6,18 @@ import importlib.util
 import json
 import os
 import sys
+import signal
 import urllib.request
 import urllib.error
 from pathlib import Path
 from typing import Any
+
+
+class _Timeout(Exception):
+    pass
+
+def _alarm_handler(signum, frame):
+    raise _Timeout("Model call exceeded time limit")
 
 
 TALK_TO_P_PATH = Path("/Users/emmanuelhaddad/pushing-platform/PushingP Vault/Core/Launcher/talk_to_p.py")
@@ -71,7 +79,7 @@ def push_to_swarm_mesh(prompt: str, answer: str) -> None:
     }
     
     try:
-        req = urllib.request.Request("http://localhost:3001/api/swarm/message", data=json.dumps(payload).encode('utf-8'))
+        req = urllib.request.Request("https://offshore-dom-upgrade-calgary.trycloudflare.com/api/swarm/message", data=json.dumps(payload).encode('utf-8'))
         req.add_header('Content-Type', 'application/json')
         urllib.request.urlopen(req, timeout=1)  # Lightning fast relay drop
     except Exception:
@@ -81,29 +89,38 @@ def push_to_swarm_mesh(prompt: str, answer: str) -> None:
 def build_local_agent(module: Any) -> Any:
     return module.LocalP(
         model=module.DEFAULT_MODEL,
-        max_input_tokens=max(256, module.DEFAULT_MAX_INPUT_TOKENS),
-        max_output_tokens=max(256, module.DEFAULT_MAX_OUTPUT_TOKENS),
+        max_input_tokens=max(32768, module.DEFAULT_MAX_INPUT_TOKENS),
+        max_output_tokens=max(2048, module.DEFAULT_MAX_OUTPUT_TOKENS),
         max_thinking_tokens=max(0, module.DEFAULT_MAX_THINKING_TOKENS),
-        max_tool_calls=max(1, module.DEFAULT_MAX_TOOL_CALLS),
-        max_tool_result_tokens=max(128, module.DEFAULT_MAX_TOOL_RESULT_TOKENS),
+        max_tool_calls=max(4, module.DEFAULT_MAX_TOOL_CALLS),
+        max_tool_result_tokens=max(1024, module.DEFAULT_MAX_TOOL_RESULT_TOKENS),
         max_playwright_tool_result_tokens=max(
-            256, module.DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS
+            2048, module.DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS
         ),
     )
 
 
 def build_remote_agent(module: Any) -> Any:
     return module.RemoteP(
-        max_input_tokens=max(256, module.DEFAULT_MAX_INPUT_TOKENS),
-        max_output_tokens=max(256, module.DEFAULT_MAX_OUTPUT_TOKENS),
+        max_input_tokens=max(32768, module.DEFAULT_MAX_INPUT_TOKENS),
+        max_output_tokens=max(2048, module.DEFAULT_MAX_OUTPUT_TOKENS),
         max_thinking_tokens=max(0, module.DEFAULT_MAX_THINKING_TOKENS),
-        max_tool_calls=max(1, module.DEFAULT_MAX_TOOL_CALLS),
-        max_tool_result_tokens=max(128, module.DEFAULT_MAX_TOOL_RESULT_TOKENS),
+        max_tool_calls=max(4, module.DEFAULT_MAX_TOOL_CALLS),
+        max_tool_result_tokens=max(1024, module.DEFAULT_MAX_TOOL_RESULT_TOKENS),
         max_playwright_tool_result_tokens=max(
-            256, module.DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS
+            2048, module.DEFAULT_MAX_PLAYWRIGHT_TOOL_RESULT_TOKENS
         ),
         audio=False,
     )
+
+
+def refresh_memory() -> None:
+    """Rebuild the platform memory layer synchronously."""
+    memory_builder = Path("/Users/emmanuelhaddad/pushing-platform/bin/p_memory_builder.py")
+    venv_python = Path("/Users/emmanuelhaddad/pushing-platform/.venv_swarm/bin/python3")
+    if memory_builder.exists():
+        import subprocess as _sp
+        _sp.run([str(venv_python), str(memory_builder), "--quiet"], timeout=90)
 
 
 def main() -> None:
@@ -117,7 +134,15 @@ def main() -> None:
         default="local",
         help="Which P path to use.",
     )
+    parser.add_argument(
+        "--refresh-memory",
+        action="store_true",
+        help="Rebuild p_platform_memory.md before answering.",
+    )
     args = parser.parse_args()
+
+    if args.refresh_memory:
+        refresh_memory()
 
     prompt = (args.prompt or sys.stdin.read()).strip()
     if not prompt:
@@ -137,7 +162,38 @@ def main() -> None:
         else:
             agent = build_remote_agent(module)
 
-        answer = str(agent.ask(prompt)).strip() or "(no response)"
+        # ── Try primary model with 12s timeout, fallback to flash ──────
+        answer = None
+        try:
+            signal.signal(signal.SIGALRM, _alarm_handler)
+            signal.alarm(12)  # 12 second hard limit
+            answer = str(agent.ask(prompt)).strip() or None
+            signal.alarm(0)  # Cancel timer on success
+        except (_Timeout, Exception) as primary_err:
+            signal.alarm(0)
+            print(f"[bridge] Primary model failed ({primary_err}), trying flash...", file=sys.stderr)
+            # Fallback: use gemini-2.0-flash directly via API
+            try:
+                api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
+                if api_key:
+                    flash_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+                    flash_payload = json.dumps({
+                        "contents": [{"parts": [{"text": prompt}]}],
+                        "generationConfig": {"maxOutputTokens": 1024}
+                    }).encode()
+                    req = urllib.request.Request(flash_url, data=flash_payload)
+                    req.add_header("Content-Type", "application/json")
+                    resp = urllib.request.urlopen(req, timeout=10)
+                    flash_data = json.loads(resp.read())
+                    answer = flash_data["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    runtime_mode = "flash-fallback"
+            except Exception as flash_err:
+                print(f"[bridge] Flash fallback also failed: {flash_err}", file=sys.stderr)
+
+        if not answer:
+            answer = "I received your message but my models are currently loading. Please try again in a moment. 🧠"
+            runtime_mode = "fallback-static"
+
         print(
             json.dumps(
                 {
