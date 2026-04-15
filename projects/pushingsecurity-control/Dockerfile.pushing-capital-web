@@ -1,0 +1,33 @@
+FROM node:20-bookworm-slim AS build
+
+ENV NEXT_TELEMETRY_DISABLED=1
+
+WORKDIR /app
+
+COPY package.json package-lock.json turbo.json ./
+COPY apps/pushing-capital-web/package.json apps/pushing-capital-web/package.json
+COPY packages/integrations/package.json packages/integrations/package.json
+
+RUN npm ci
+
+COPY apps/pushing-capital-web apps/pushing-capital-web
+COPY packages/integrations packages/integrations
+
+RUN npm run build --workspace=@pushingcap/pushing-capital-web
+
+FROM node:20-bookworm-slim AS runner
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=8080
+ENV HOSTNAME=0.0.0.0
+
+WORKDIR /app
+
+COPY --from=build /app/apps/pushing-capital-web/.next/standalone ./
+COPY --from=build /app/apps/pushing-capital-web/.next/static ./apps/pushing-capital-web/.next/static
+COPY --from=build /app/apps/pushing-capital-web/public ./apps/pushing-capital-web/public
+
+EXPOSE 8080
+
+CMD ["node", "apps/pushing-capital-web/server.js"]

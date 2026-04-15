@@ -2,99 +2,227 @@
 /**
  * experian-handler.mjs
  *
- * Playwright automation handler for Experian login.
- * Runs on GCE fleet nodes via the orchestrator-receiver.
- * Mirrors the client's device fingerprint + IP for stealth.
- *
- * IP Mirroring Modes:
- *   --proxy socks5://127.0.0.1:1080   Route through SOCKS5 (Tailscale exit node)
- *   --proxy http://proxy:8080          Route through HTTP proxy
- *   --exit-node <tailscale-ip>         Auto-configure Tailscale exit node before launch
+ * Stealth Playwright handler for Experian personal credit report.
+ * Routes through client's phone IP, clones their device fingerprint,
+ * simulates human behavior, persists browser profiles.
  *
  * Usage:
- *   node experian-handler.mjs --username <user> --password <pass> \
- *     [--fingerprint <json>] [--proxy <url>] [--exit-node <ip>]
+ *   node experian-handler.mjs --username <u> --password <p> \
+ *     --exit-node <tailscale-ip> --profile <path> --fingerprint <json>
  */
 
 import { chromium } from "playwright";
 import { execSync } from "child_process";
-
-// ── Config ────────────────────────────────────────────────────────────────
+import fs from "fs";
+import path from "path";
 
 const EXPERIAN_URL = "https://www.experian.com";
-const EXPERIAN_LOGIN_URL = "https://usa.experian.com/member/myaccount";
 const TIMEOUT = 30_000;
 
-// ── Parse CLI args ────────────────────────────────────────────────────────
+// ── CLI ───────────────────────────────────────────────────────────────────
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  const parsed = {};
+  const p = {};
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === "--username" && args[i + 1]) parsed.username = args[++i];
-    else if (args[i] === "--password" && args[i + 1]) parsed.password = args[++i];
-    else if (args[i] === "--fingerprint" && args[i + 1]) {
-      try { parsed.fingerprint = JSON.parse(args[++i]); } catch { parsed.fingerprint = {}; }
+    const a = args[i], n = args[i + 1];
+    if (a === "--username" && n) p.username = args[++i];
+    else if (a === "--password" && n) p.password = args[++i];
+    else if (a === "--proxy" && n) p.proxy = args[++i];
+    else if (a === "--exit-node" && n) p.exitNode = args[++i];
+    else if (a === "--profile" && n) p.profileDir = args[++i];
+    else if (a === "--screenshot-dir" && n) p.screenshotDir = args[++i];
+    else if (a === "--fingerprint" && n) {
+      try { p.fingerprint = JSON.parse(args[++i]); } catch { p.fingerprint = {}; }
     }
-    else if (args[i] === "--screenshot-dir" && args[i + 1]) parsed.screenshotDir = args[++i];
-    else if (args[i] === "--proxy" && args[i + 1]) parsed.proxy = args[++i];
-    else if (args[i] === "--exit-node" && args[i + 1]) parsed.exitNode = args[++i];
   }
-  return parsed;
+  return p;
 }
 
-// ── Tailscale exit node ───────────────────────────────────────────────────
+// ── Tailscale IP mirroring ────────────────────────────────────────────────
 
-function configureTailscaleExit(exitNodeIP) {
-  const log = (msg) => console.log(`[vpn] ${new Date().toISOString()} ${msg}`);
+function setExitNode(ip) {
   try {
-    log(`Setting Tailscale exit node → ${exitNodeIP}`);
-    execSync(`sudo tailscale set --exit-node=${exitNodeIP}`, { timeout: 15000 });
-    // Verify routing
-    const check = execSync("curl -s --max-time 10 https://api.ipify.org", { encoding: "utf-8" }).trim();
-    log(`Exit IP verified: ${check}`);
-    return check;
-  } catch (err) {
-    log(`Exit node setup failed: ${err.message}`);
+    execSync(`sudo tailscale set --exit-node=${ip}`, { timeout: 15000 });
+    const actual = execSync("curl -s --max-time 10 https://api.ipify.org", { encoding: "utf-8" }).trim();
+    log(`Exit IP: ${actual}`);
+    return actual;
+  } catch (e) {
+    log(`Exit node failed: ${e.message}`);
     return null;
   }
 }
 
-function clearTailscaleExit() {
-  try {
-    execSync("sudo tailscale set --exit-node=", { timeout: 10000 });
-    console.log("[vpn] Exit node cleared.");
-  } catch { /* silent */ }
+function clearExitNode() {
+  try { execSync("sudo tailscale set --exit-node=", { timeout: 10000 }); } catch {}
 }
 
-// ── Device mirroring ──────────────────────────────────────────────────────
+// ── Human behavior ────────────────────────────────────────────────────────
 
-function buildBrowserContext(fingerprint = {}) {
-  return {
-    viewport: {
-      width: fingerprint.innerWidth || 1440,
-      height: fingerprint.innerHeight || 900,
-    },
-    deviceScaleFactor: fingerprint.devicePixelRatio || 2,
-    userAgent: fingerprint.userAgent || undefined,
-    locale: fingerprint.locale || "en-US",
-    timezoneId: fingerprint.timezone || "America/Los_Angeles",
-    colorScheme: "light",
-    hasTouch: fingerprint.touchSupport || false,
-  };
+function log(msg) {
+  console.log(`[experian] ${new Date().toISOString()} ${msg}`);
 }
 
-// ── Main automation ───────────────────────────────────────────────────────
+/** Type like a human — variable speed, occasional pauses, typo hesitation */
+async function humanType(el, text, page) {
+  await el.click();
+  await sleep(300 + rand(400));
 
-async function loginToExperian({ username, password, fingerprint = {}, screenshotDir = "/tmp", proxy, exitNode }) {
-  const log = (msg) => console.log(`[experian] ${new Date().toISOString()} ${msg}`);
-
-  // Configure IP mirroring
-  let exitIP = null;
-  if (exitNode) {
-    exitIP = configureTailscaleExit(exitNode);
-    log(`IP mirrored via Tailscale exit → ${exitIP}`);
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    // Occasional micro-pause (thinking)
+    if (rand(100) < 8) await sleep(400 + rand(800));
+    await el.press(char, { delay: 0 });
+    await sleep(80 + rand(180)); // keystroke interval
   }
+  await sleep(200 + rand(300)); // post-type pause
+}
+
+/** Move mouse along a Bézier curve — looks human */
+async function humanMouse(page, x, y) {
+  const steps = 15 + Math.floor(rand(20));
+  const fromX = 100 + rand(200);
+  const fromY = 100 + rand(200);
+  const cpX = fromX + (x - fromX) * 0.4 + (rand(1) - 0.5) * 120;
+  const cpY = fromY + (y - fromY) * 0.4 + (rand(1) - 0.5) * 120;
+
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const px = (1 - t) ** 2 * fromX + 2 * (1 - t) * t * cpX + t ** 2 * x;
+    const py = (1 - t) ** 2 * fromY + 2 * (1 - t) * t * cpY + t ** 2 * y;
+    await page.mouse.move(px, py);
+    await sleep(4 + rand(12));
+  }
+}
+
+/** Scroll page naturally */
+async function humanScroll(page, distance = 300) {
+  const steps = 5 + Math.floor(rand(8));
+  const perStep = distance / steps;
+  for (let i = 0; i < steps; i++) {
+    await page.mouse.wheel(0, perStep + rand(20) - 10);
+    await sleep(30 + rand(50));
+  }
+  await sleep(200 + rand(400));
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function rand(max) { return Math.random() * max; }
+
+// ── Context builder ───────────────────────────────────────────────────────
+
+function buildContext(fp = {}) {
+  const ctx = {
+    viewport: { width: fp.innerWidth || 414, height: fp.innerHeight || 896 },
+    deviceScaleFactor: fp.devicePixelRatio || 3,
+    userAgent: fp.userAgent || "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1",
+    locale: fp.locale || "en-US",
+    timezoneId: fp.timezone || "America/Los_Angeles",
+    hasTouch: fp.touchSupport ?? true,
+    isMobile: (fp.maxTouchPoints || 0) > 0,
+    colorScheme: "light",
+    geolocation: undefined,
+    permissions: ["geolocation"],
+  };
+  return ctx;
+}
+
+// ── Stealth patches ───────────────────────────────────────────────────────
+
+async function applyStealthPatches(context, fp = {}) {
+  await context.addInitScript((fingerprint) => {
+    // WebDriver
+    Object.defineProperty(navigator, "webdriver", { get: () => false });
+    delete navigator.__proto__.webdriver;
+
+    // Chrome runtime
+    window.chrome = {
+      runtime: { connect: () => {}, sendMessage: () => {}, onMessage: { addListener: () => {} } },
+      loadTimes: () => ({}),
+      csi: () => ({}),
+    };
+
+    // Plugins (mimic real browser)
+    Object.defineProperty(navigator, "plugins", {
+      get: () => {
+        const plugins = [
+          { name: "Chrome PDF Plugin", filename: "internal-pdf-viewer" },
+          { name: "Chrome PDF Viewer", filename: "mhjfbmdgcfjbbpaeojofohoefgiehjai" },
+          { name: "Native Client", filename: "internal-nacl-plugin" },
+        ];
+        plugins.length = 3;
+        return plugins;
+      },
+    });
+
+    // Languages
+    if (fingerprint.languages) {
+      Object.defineProperty(navigator, "languages", { get: () => fingerprint.languages });
+    }
+
+    // Hardware concurrency
+    if (fingerprint.hardwareConcurrency) {
+      Object.defineProperty(navigator, "hardwareConcurrency", { get: () => fingerprint.hardwareConcurrency });
+    }
+
+    // Device memory
+    if (fingerprint.deviceMemory) {
+      Object.defineProperty(navigator, "deviceMemory", { get: () => fingerprint.deviceMemory });
+    }
+
+    // Max touch points
+    if (fingerprint.maxTouchPoints) {
+      Object.defineProperty(navigator, "maxTouchPoints", { get: () => fingerprint.maxTouchPoints });
+    }
+
+    // Platform
+    if (fingerprint.platform) {
+      Object.defineProperty(navigator, "platform", { get: () => fingerprint.platform });
+    }
+
+    // Vendor
+    if (fingerprint.vendor) {
+      Object.defineProperty(navigator, "vendor", { get: () => fingerprint.vendor });
+    }
+
+    // WebGL spoofing
+    const getParameterOrig = WebGLRenderingContext.prototype.getParameter;
+    WebGLRenderingContext.prototype.getParameter = function (param) {
+      if (param === 37445) return fingerprint.gpuVendor || "Apple Inc.";
+      if (param === 37446) return fingerprint.gpuRenderer || "Apple GPU";
+      return getParameterOrig.call(this, param);
+    };
+
+    // Permissions API spoof
+    const origQuery = window.Permissions?.prototype?.query;
+    if (origQuery) {
+      window.Permissions.prototype.query = (parameters) =>
+        parameters.name === "notifications"
+          ? Promise.resolve({ state: Notification.permission })
+          : origQuery.call(window.Permissions.prototype, parameters);
+    }
+
+    // Connection API
+    if (fingerprint.connectionType) {
+      Object.defineProperty(navigator, "connection", {
+        get: () => ({
+          effectiveType: fingerprint.connectionType,
+          downlink: fingerprint.downlink || 10,
+          rtt: fingerprint.rtt || 50,
+          saveData: fingerprint.saveData || false,
+        }),
+      });
+    }
+  }, fp);
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────
+
+async function run(opts) {
+  const { username, password, fingerprint = {}, screenshotDir = "/tmp", proxy, exitNode, profileDir } = opts;
+
+  // Step 0: IP mirroring
+  if (exitNode) setExitNode(exitNode);
 
   const launchOpts = {
     headless: true,
@@ -102,187 +230,202 @@ async function loginToExperian({ username, password, fingerprint = {}, screensho
       "--disable-blink-features=AutomationControlled",
       "--disable-dev-shm-usage",
       "--no-sandbox",
+      "--disable-infobars",
+      "--disable-extensions",
+      "--disable-gpu",
+      "--window-size=414,896",
     ],
   };
-
-  // Proxy support: SOCKS5 (Tailscale) or HTTP
-  if (proxy) {
-    launchOpts.proxy = { server: proxy };
-    log(`Proxy configured: ${proxy}`);
-  }
+  if (proxy) launchOpts.proxy = { server: proxy };
 
   const browser = await chromium.launch(launchOpts);
-  const context = await browser.newContext(buildBrowserContext(fingerprint));
 
-  // Stealth patches
-  await context.addInitScript(() => {
-    Object.defineProperty(navigator, "webdriver", { get: () => false });
-    // Override chrome automation indicators
-    window.chrome = { runtime: {} };
-    Object.defineProperty(navigator, "plugins", {
-      get: () => [1, 2, 3, 4, 5],
-    });
-    Object.defineProperty(navigator, "languages", {
-      get: () => ["en-US", "en"],
-    });
-  });
+  // Load persisted profile if exists
+  const storagePath = profileDir ? path.join(profileDir, "storage.json") : null;
+  const contextOpts = buildContext(fingerprint);
+  if (storagePath && fs.existsSync(storagePath)) {
+    contextOpts.storageState = storagePath;
+    log("Loaded persisted profile.");
+  }
 
+  const context = await browser.newContext(contextOpts);
+  await applyStealthPatches(context, fingerprint);
   const page = await context.newPage();
 
+  // Inject realistic mouse trail listener
+  await page.evaluate(() => {
+    document.addEventListener("mousemove", () => {}, { passive: true });
+  });
+
   try {
-    // Step 1: Navigate to Experian
+    // ── Navigate ──────────────────────────────────────────────────────
     log("Navigating to Experian...");
     await page.goto(EXPERIAN_URL, { waitUntil: "domcontentloaded", timeout: TIMEOUT });
-    await page.waitForTimeout(2000);
-    await page.screenshot({ path: `${screenshotDir}/experian_01_homepage.png` });
+    await sleep(2000 + rand(1500));
+    await humanScroll(page, 100);
+    await page.screenshot({ path: `${screenshotDir}/01_homepage.png` });
 
-    // Step 2: Find and click Sign In
-    log("Looking for Sign In link...");
-    const signInLink = page.locator('a:has-text("Sign In"), a:has-text("Log In"), [data-testid="sign-in"], a[href*="signin"], a[href*="login"]').first();
-    if (await signInLink.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await signInLink.click();
-      await page.waitForTimeout(3000);
+    // ── Find Sign In ──────────────────────────────────────────────────
+    log("Looking for Sign In...");
+    const signIn = page.locator('a:has-text("Sign In"), a:has-text("Log In"), a[href*="login"], a[href*="signin"]').first();
+    if (await signIn.isVisible({ timeout: 5000 }).catch(() => false)) {
+      const box = await signIn.boundingBox();
+      if (box) await humanMouse(page, box.x + box.width / 2, box.y + box.height / 2);
+      await sleep(200 + rand(300));
+      await signIn.click();
+      await sleep(3000 + rand(2000));
     } else {
-      // Try direct navigation
-      log("Sign In link not found, navigating directly...");
-      await page.goto(EXPERIAN_LOGIN_URL, { waitUntil: "domcontentloaded", timeout: TIMEOUT });
-      await page.waitForTimeout(3000);
+      await page.goto("https://usa.experian.com/login", { waitUntil: "domcontentloaded", timeout: TIMEOUT });
+      await sleep(3000 + rand(2000));
     }
-    await page.screenshot({ path: `${screenshotDir}/experian_02_login_page.png` });
+    await page.screenshot({ path: `${screenshotDir}/02_login.png` });
 
-    // Step 3: Fill username
-    log("Looking for username field...");
-    const usernameField = page.locator(
-      'input[name="username"], input[id="username"], input[name="email"], input[id="email"], input[type="email"], input[placeholder*="user" i], input[placeholder*="email" i]'
+    // ── Fill username ─────────────────────────────────────────────────
+    log("Entering username...");
+    const userField = page.locator(
+      'input[name="username"], input[id="username"], input[name="email"], input[id="email"], input[type="email"]'
     ).first();
+    await userField.waitFor({ timeout: TIMEOUT });
+    const ub = await userField.boundingBox();
+    if (ub) await humanMouse(page, ub.x + ub.width / 2, ub.y + ub.height / 2);
+    await humanType(userField, username, page);
+    await page.screenshot({ path: `${screenshotDir}/03_username.png` });
 
-    await usernameField.waitFor({ timeout: TIMEOUT });
-    await usernameField.click();
-    await page.waitForTimeout(500);
-    await usernameField.fill(username);
-    log("Username entered.");
-    await page.screenshot({ path: `${screenshotDir}/experian_03_username.png` });
+    // ── Fill password ─────────────────────────────────────────────────
+    log("Entering password...");
+    const passField = page.locator('input[type="password"]').first();
+    await passField.waitFor({ timeout: TIMEOUT });
+    const pb = await passField.boundingBox();
+    if (pb) await humanMouse(page, pb.x + pb.width / 2, pb.y + pb.height / 2);
+    await sleep(400 + rand(600));
+    await humanType(passField, password, page);
 
-    // Step 4: Fill password
-    log("Looking for password field...");
-    const passwordField = page.locator(
-      'input[type="password"], input[name="password"], input[id="password"]'
-    ).first();
-
-    await passwordField.waitFor({ timeout: TIMEOUT });
-    await passwordField.click();
-    await page.waitForTimeout(500);
-    await passwordField.fill(password);
-    log("Password entered.");
-
-    // Step 5: Submit
-    log("Looking for submit button...");
+    // ── Submit ────────────────────────────────────────────────────────
+    log("Submitting...");
     const submitBtn = page.locator(
       'button[type="submit"], button:has-text("Sign In"), button:has-text("Log In"), input[type="submit"]'
     ).first();
-
     await submitBtn.waitFor({ timeout: 10000 });
-    await page.screenshot({ path: `${screenshotDir}/experian_04_preflight.png` });
+    const sb = await submitBtn.boundingBox();
+    if (sb) await humanMouse(page, sb.x + sb.width / 2, sb.y + sb.height / 2);
+    await sleep(300 + rand(400));
+    await page.screenshot({ path: `${screenshotDir}/04_preflight.png` });
     await submitBtn.click();
-    log("Login submitted. Waiting for response...");
+    log("Login submitted.");
+    await sleep(5000 + rand(3000));
+    await page.screenshot({ path: `${screenshotDir}/05_response.png` });
 
-    // Step 6: Wait for navigation
-    await page.waitForTimeout(5000);
-    await page.screenshot({ path: `${screenshotDir}/experian_05_post_login.png` });
+    const url = page.url();
+    log(`Post-login: ${url}`);
 
-    // Check for success indicators
-    const currentUrl = page.url();
-    log(`Post-login URL: ${currentUrl}`);
-
-    // Check for common error indicators
-    const errorVisible = await page.locator(
-      '.error-message, .alert-danger, [class*="error"], [data-testid*="error"]'
+    // ── Check for MFA ─────────────────────────────────────────────────
+    const mfa = await page.locator(
+      'input[name="otp"], input[name="code"], input[placeholder*="code" i], input[placeholder*="verification" i]'
     ).isVisible({ timeout: 3000 }).catch(() => false);
 
-    if (errorVisible) {
-      const errorText = await page.locator(
-        '.error-message, .alert-danger, [class*="error"]'
-      ).first().textContent().catch(() => "Unknown error");
-      log(`Login error detected: ${errorText}`);
-      return {
-        success: false,
-        error: errorText,
-        url: currentUrl,
-        screenshots: ["experian_01_homepage.png", "experian_02_login_page.png", "experian_05_post_login.png"],
-      };
+    if (mfa) {
+      log("MFA detected.");
+      await page.screenshot({ path: `${screenshotDir}/06_mfa.png` });
+      return { success: false, mfaRequired: true, url };
     }
 
-    // Check for MFA/2FA
-    const mfaVisible = await page.locator(
-      'input[name="otp"], input[name="code"], input[placeholder*="code" i], input[placeholder*="verification" i], [class*="mfa"], [class*="verification"]'
-    ).isVisible({ timeout: 3000 }).catch(() => false);
-
-    if (mfaVisible) {
-      log("MFA/2FA detected. Awaiting code.");
-      await page.screenshot({ path: `${screenshotDir}/experian_06_mfa.png` });
-      return {
-        success: false,
-        mfaRequired: true,
-        url: currentUrl,
-        screenshots: ["experian_05_post_login.png", "experian_06_mfa.png"],
-      };
+    // ── Check for errors ──────────────────────────────────────────────
+    const errEl = page.locator('.error-message, .alert-danger, [class*="error"]').first();
+    if (await errEl.isVisible({ timeout: 2000 }).catch(() => false)) {
+      const errText = await errEl.textContent().catch(() => "Login failed");
+      log(`Error: ${errText}`);
+      return { success: false, error: errText, url };
     }
 
-    // Step 7: Extract account data if logged in
-    log("Attempting to extract account data...");
-    await page.waitForTimeout(2000);
+    // ── Parse credit report ───────────────────────────────────────────
+    log("Parsing credit report...");
+    await sleep(2000 + rand(2000));
+    await humanScroll(page, 500);
 
-    const pageTitle = await page.title();
-    const bodyText = await page.locator("body").textContent().catch(() => "");
+    const report = await page.evaluate(() => {
+      const getText = (sel) => document.querySelector(sel)?.textContent?.trim() || null;
+      const getAll = (sel) => [...document.querySelectorAll(sel)].map(el => el.textContent?.trim());
 
-    // Look for credit score
-    const scoreElement = await page.locator(
-      '[class*="score"], [data-testid*="score"], .fico-score, .credit-score'
-    ).first().textContent({ timeout: 5000 }).catch(() => null);
+      // FICO score — look for large number in score-related elements
+      let ficoScore = null;
+      const scoreEls = document.querySelectorAll('[class*="score"], [class*="Score"], [data-testid*="score"]');
+      for (const el of scoreEls) {
+        const num = parseInt(el.textContent?.match(/\b([3-8]\d{2})\b/)?.[1] || "");
+        if (num >= 300 && num <= 850) { ficoScore = num; break; }
+      }
 
-    await page.screenshot({ path: `${screenshotDir}/experian_07_dashboard.png`, fullPage: true });
+      // Also try raw page scan for 3-digit score
+      if (!ficoScore) {
+        const bodyText = document.body.textContent || "";
+        const scoreMatch = bodyText.match(/FICO[^\d]*(\d{3})/i) || bodyText.match(/score[^\d]*(\d{3})/i);
+        if (scoreMatch) {
+          const n = parseInt(scoreMatch[1]);
+          if (n >= 300 && n <= 850) ficoScore = n;
+        }
+      }
 
-    log("Login automation complete.");
+      // Accounts / tradelines
+      const accounts = [];
+      const accountCards = document.querySelectorAll('[class*="account"], [class*="tradeline"], [class*="Account"]');
+      accountCards.forEach(card => {
+        const text = card.textContent || "";
+        const balanceMatch = text.match(/\$[\d,]+\.?\d*/);
+        accounts.push({
+          rawText: text.substring(0, 300),
+          balance: balanceMatch ? balanceMatch[0] : null,
+        });
+      });
 
-    return {
-      success: true,
-      url: currentUrl,
-      pageTitle,
-      creditScore: scoreElement,
-      hasAccountAccess: currentUrl.includes("member") || currentUrl.includes("account"),
-      screenshots: [
-        "experian_01_homepage.png",
-        "experian_02_login_page.png",
-        "experian_05_post_login.png",
-        "experian_07_dashboard.png",
-      ],
-    };
+      // Inquiries
+      const inquiries = [];
+      const inquiryEls = document.querySelectorAll('[class*="inquiry"], [class*="Inquiry"]');
+      inquiryEls.forEach(el => {
+        inquiries.push({ rawText: el.textContent?.trim().substring(0, 200) });
+      });
+
+      return {
+        ficoScore,
+        pageTitle: document.title,
+        url: window.location.href,
+        accountCount: accounts.length,
+        accounts: accounts.slice(0, 30),
+        inquiryCount: inquiries.length,
+        inquiries: inquiries.slice(0, 20),
+        fullText: document.body.innerText?.substring(0, 10000),
+      };
+    });
+
+    await page.screenshot({ path: `${screenshotDir}/07_dashboard.png`, fullPage: true });
+    log(`FICO: ${report.ficoScore || "not found"} | Accounts: ${report.accountCount} | Inquiries: ${report.inquiryCount}`);
+
+    // ── Persist session ───────────────────────────────────────────────
+    if (storagePath) {
+      fs.mkdirSync(path.dirname(storagePath), { recursive: true });
+      await context.storageState({ path: storagePath });
+      log("Profile saved.");
+    }
+
+    return { success: true, report };
 
   } catch (error) {
     log(`Error: ${error.message}`);
-    await page.screenshot({ path: `${screenshotDir}/experian_error.png` }).catch(() => {});
-    return {
-      success: false,
-      error: error.message,
-      screenshots: ["experian_error.png"],
-    };
+    await page.screenshot({ path: `${screenshotDir}/error.png` }).catch(() => {});
+    return { success: false, error: error.message };
   } finally {
     await browser.close();
-    // Clean up Tailscale exit node if we set one
-    if (exitNode) clearTailscaleExit();
+    if (exitNode) clearExitNode();
   }
 }
 
-// ── Run ───────────────────────────────────────────────────────────────────
+// ── Entry ─────────────────────────────────────────────────────────────────
 
 const args = parseArgs();
-
 if (!args.username || !args.password) {
-  console.error("Usage: node experian-handler.mjs --username <user> --password <pass> [--fingerprint <json>]");
+  console.error("Usage: node experian-handler.mjs --username <u> --password <p> [options]");
   process.exit(1);
 }
 
-loginToExperian(args).then((result) => {
-  console.log(JSON.stringify(result, null, 2));
-  process.exit(result.success ? 0 : 1);
+run(args).then(r => {
+  console.log(JSON.stringify(r, null, 2));
+  process.exit(r.success ? 0 : 1);
 });

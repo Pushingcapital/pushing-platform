@@ -1,0 +1,23 @@
+{
+  "name": "@pushingcap/monorepo",
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "mcp:docusign": "node --experimental-strip-types ./packages/docusign-mcp/src/index.ts",
+    "dev:web": "turbo dev --filter=@pushingcap/pushing-capital-web",
+    "build:web": "turbo build --filter=@pushingcap/pushing-capital-web",
+    "lint:web": "turbo lint --filter=@pushingcap/pushing-capital-web",
+    "typecheck:web": "turbo typecheck --filter=@pushingcap/pushing-capital-web"
+  },
+  "devDependencies": {
+    "turbo": "^2.8.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@pushingcap/integrations",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./docusign": "./src/docusign.ts",
+    "./provider-secrets": "./src/provider-secrets.ts"
+  },
+  "dependencies": {
+    "docusign-esign": "^8.7.0"
+  }
+}
