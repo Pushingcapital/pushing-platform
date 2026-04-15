@@ -413,29 +413,27 @@ export default function VaultDashboard({ userName }: { userName?: string }) {
         }}
       >
         {[
-          { icon: "🔐", label: "Vault", active: true },
-          { icon: "📷", label: "Scan", active: false },
-          { icon: "⚙️", label: "Settings", active: false },
+          { icon: "🔐", label: "Vault", href: "/vault", active: true },
+          { icon: "🌐", label: "Browse", href: "/browse", active: false },
+          { icon: "⚙️", label: "Settings", href: "/settings", active: false },
         ].map((n) => (
-          <button
+          <a
             key={n.label}
-            type="button"
+            href={n.href}
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               gap: "4px",
-              background: "none",
-              border: "none",
               color: n.active ? "#6ee7b7" : "rgba(255,255,255,0.25)",
               fontSize: "18px",
-              cursor: "pointer",
+              textDecoration: "none",
               padding: "4px 16px",
             }}
           >
             <span>{n.icon}</span>
             <span style={{ fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase" }}>{n.label}</span>
-          </button>
+          </a>
         ))}
       </nav>
     </div>
