@@ -48,16 +48,72 @@ async function parseLicenseImage(file: File | Blob): Promise<ParsedIdentity> {
 
 function collectDeviceFingerprint() {
   const nav = typeof navigator !== "undefined" ? navigator : null;
+  const win = typeof window !== "undefined" ? window : null;
+  const screen = typeof window !== "undefined" ? window.screen : null;
+
+  // GPU info via WebGL
+  let gpuRenderer = "unknown";
+  let gpuVendor = "unknown";
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (gl) {
+      const ext = (gl as WebGLRenderingContext).getExtension("WEBGL_debug_renderer_info");
+      if (ext) {
+        gpuRenderer = (gl as WebGLRenderingContext).getParameter(ext.UNMASKED_RENDERER_WEBGL);
+        gpuVendor = (gl as WebGLRenderingContext).getParameter(ext.UNMASKED_VENDOR_WEBGL);
+      }
+    }
+  } catch { /* silent */ }
+
   return {
+    // Device identity
     userAgent: nav?.userAgent ?? "",
     platform: nav?.platform ?? "",
-    language: nav?.language ?? "en-US",
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? "America/Los_Angeles",
-    screenWidth: typeof screen !== "undefined" ? screen.width : 1920,
-    screenHeight: typeof screen !== "undefined" ? screen.height : 1080,
-    viewportWidth: typeof window !== "undefined" ? window.innerWidth : 1920,
-    viewportHeight: typeof window !== "undefined" ? window.innerHeight : 1080,
-    devicePixelRatio: typeof window !== "undefined" ? window.devicePixelRatio : 1,
+    vendor: nav?.vendor ?? "",
+    language: nav?.language ?? "",
+    languages: nav?.languages ? [...nav.languages] : [],
+
+    // Screen
+    screenWidth: screen?.width ?? 0,
+    screenHeight: screen?.height ?? 0,
+    availWidth: screen?.availWidth ?? 0,
+    availHeight: screen?.availHeight ?? 0,
+    colorDepth: screen?.colorDepth ?? 0,
+    pixelDepth: screen?.pixelDepth ?? 0,
+    devicePixelRatio: win?.devicePixelRatio ?? 1,
+    innerWidth: win?.innerWidth ?? 0,
+    innerHeight: win?.innerHeight ?? 0,
+    orientation: screen?.orientation?.type ?? "unknown",
+
+    // Hardware
+    hardwareConcurrency: nav?.hardwareConcurrency ?? 0,
+    maxTouchPoints: nav?.maxTouchPoints ?? 0,
+    deviceMemory: (nav as any)?.deviceMemory ?? null,
+    gpuRenderer,
+    gpuVendor,
+
+    // Network
+    connectionType: (nav as any)?.connection?.effectiveType ?? null,
+    downlink: (nav as any)?.connection?.downlink ?? null,
+    rtt: (nav as any)?.connection?.rtt ?? null,
+    saveData: (nav as any)?.connection?.saveData ?? false,
+
+    // Capabilities
+    cookieEnabled: nav?.cookieEnabled ?? false,
+    onLine: nav?.onLine ?? true,
+    pdfViewerEnabled: (nav as any)?.pdfViewerEnabled ?? null,
+    webdriver: (nav as any)?.webdriver ?? false,
+    touchSupport: "ontouchstart" in (win ?? {}),
+    mediaDevices: !!nav?.mediaDevices,
+
+    // Time & locale
+    timezone: Intl?.DateTimeFormat?.()?.resolvedOptions?.()?.timeZone ?? "",
+    timezoneOffset: new Date().getTimezoneOffset(),
+    locale: Intl?.DateTimeFormat?.()?.resolvedOptions?.()?.locale ?? "",
+
+    // Timestamp
+    capturedAt: new Date().toISOString(),
   };
 }
 
