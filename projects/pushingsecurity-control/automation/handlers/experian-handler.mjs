@@ -4,13 +4,20 @@
  *
  * Playwright automation handler for Experian login.
  * Runs on GCE fleet nodes via the orchestrator-receiver.
- * Mirrors the client's device fingerprint for stealth.
+ * Mirrors the client's device fingerprint + IP for stealth.
+ *
+ * IP Mirroring Modes:
+ *   --proxy socks5://127.0.0.1:1080   Route through SOCKS5 (Tailscale exit node)
+ *   --proxy http://proxy:8080          Route through HTTP proxy
+ *   --exit-node <tailscale-ip>         Auto-configure Tailscale exit node before launch
  *
  * Usage:
- *   node experian-handler.mjs --username <user> --password <pass> [--fingerprint <json>]
+ *   node experian-handler.mjs --username <user> --password <pass> \
+ *     [--fingerprint <json>] [--proxy <url>] [--exit-node <ip>]
  */
 
 import { chromium } from "playwright";
+import { execSync } from "child_process";
 
 // ── Config ────────────────────────────────────────────────────────────────
 
@@ -30,8 +37,34 @@ function parseArgs() {
       try { parsed.fingerprint = JSON.parse(args[++i]); } catch { parsed.fingerprint = {}; }
     }
     else if (args[i] === "--screenshot-dir" && args[i + 1]) parsed.screenshotDir = args[++i];
+    else if (args[i] === "--proxy" && args[i + 1]) parsed.proxy = args[++i];
+    else if (args[i] === "--exit-node" && args[i + 1]) parsed.exitNode = args[++i];
   }
   return parsed;
+}
+
+// ── Tailscale exit node ───────────────────────────────────────────────────
+
+function configureTailscaleExit(exitNodeIP) {
+  const log = (msg) => console.log(`[vpn] ${new Date().toISOString()} ${msg}`);
+  try {
+    log(`Setting Tailscale exit node → ${exitNodeIP}`);
+    execSync(`sudo tailscale set --exit-node=${exitNodeIP}`, { timeout: 15000 });
+    // Verify routing
+    const check = execSync("curl -s --max-time 10 https://api.ipify.org", { encoding: "utf-8" }).trim();
+    log(`Exit IP verified: ${check}`);
+    return check;
+  } catch (err) {
+    log(`Exit node setup failed: ${err.message}`);
+    return null;
+  }
+}
+
+function clearTailscaleExit() {
+  try {
+    execSync("sudo tailscale set --exit-node=", { timeout: 10000 });
+    console.log("[vpn] Exit node cleared.");
+  } catch { /* silent */ }
 }
 
 // ── Device mirroring ──────────────────────────────────────────────────────
@@ -53,16 +86,32 @@ function buildBrowserContext(fingerprint = {}) {
 
 // ── Main automation ───────────────────────────────────────────────────────
 
-async function loginToExperian({ username, password, fingerprint = {}, screenshotDir = "/tmp" }) {
-  const browser = await chromium.launch({
+async function loginToExperian({ username, password, fingerprint = {}, screenshotDir = "/tmp", proxy, exitNode }) {
+  const log = (msg) => console.log(`[experian] ${new Date().toISOString()} ${msg}`);
+
+  // Configure IP mirroring
+  let exitIP = null;
+  if (exitNode) {
+    exitIP = configureTailscaleExit(exitNode);
+    log(`IP mirrored via Tailscale exit → ${exitIP}`);
+  }
+
+  const launchOpts = {
     headless: true,
     args: [
       "--disable-blink-features=AutomationControlled",
       "--disable-dev-shm-usage",
       "--no-sandbox",
     ],
-  });
+  };
 
+  // Proxy support: SOCKS5 (Tailscale) or HTTP
+  if (proxy) {
+    launchOpts.proxy = { server: proxy };
+    log(`Proxy configured: ${proxy}`);
+  }
+
+  const browser = await chromium.launch(launchOpts);
   const context = await browser.newContext(buildBrowserContext(fingerprint));
 
   // Stealth patches
@@ -79,7 +128,6 @@ async function loginToExperian({ username, password, fingerprint = {}, screensho
   });
 
   const page = await context.newPage();
-  const log = (msg) => console.log(`[experian] ${new Date().toISOString()} ${msg}`);
 
   try {
     // Step 1: Navigate to Experian
@@ -220,6 +268,8 @@ async function loginToExperian({ username, password, fingerprint = {}, screensho
     };
   } finally {
     await browser.close();
+    // Clean up Tailscale exit node if we set one
+    if (exitNode) clearTailscaleExit();
   }
 }
 
