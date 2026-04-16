@@ -241,71 +241,48 @@ export default function CustomerHomePage() {
           </div>
         </nav>
 
-        {/* ── HERO ─────────────────────────────────────────────── */}
+        {/* ── HERO — pushingSecurity IS the page ──────────────── */}
         <section
           id="hero"
-          className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-5 pt-24 pb-16 sm:px-8"
+          className="flex min-h-screen flex-col items-center justify-center px-5 sm:px-8"
         >
-          <div className="w-full max-w-2xl">
-            <div className="relative">
-              <div className="absolute -inset-16 z-0 opacity-40">
-                <Image
-                  src="/brand/vault-radial.png"
-                  alt=""
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              </div>
+          <div className="relative text-center">
+            {/* Title — massive, dead center, no card */}
+            <h1
+              className="text-[clamp(3.5rem,12vw,8rem)] font-bold leading-[0.9] tracking-[-0.05em] text-white"
+            >
+              pushing
+              <span className="bg-gradient-to-r from-cyan-300 via-teal-200 to-emerald-300 bg-clip-text text-transparent">
+                Security
+              </span>
+            </h1>
 
-              <div className="relative z-10 overflow-hidden rounded-[2.4rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.5)] backdrop-blur-2xl sm:p-12">
-                <div className="pointer-events-none absolute inset-0 rounded-[2.4rem] bg-[radial-gradient(circle_at_50%_0%,rgba(55,245,241,0.08),transparent_60%)]" />
+            <p className="mx-auto mt-8 max-w-md text-lg leading-8 text-slate-400">
+              Credit intelligence. Identity vault. Secure browsing.
+            </p>
 
-                <div className="relative text-center">
-                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/5">
-                    <ShieldIcon />
-                  </div>
-
-                  <h1
-                    className="text-[clamp(2.6rem,7vw,4.8rem)] font-bold leading-[0.95] tracking-[-0.04em] text-white"
-                  >
-                    pushing
-                    <span className="bg-gradient-to-r from-cyan-300 to-teal-200 bg-clip-text text-transparent">
-                      Security
-                    </span>
-                  </h1>
-
-                  <p className="mx-auto mt-6 max-w-sm text-base leading-7 text-slate-400">
-                    Secure access for verified clients. Credit intelligence,
-                    identity protection, and zero-trust browsing — all in one
-                    vault.
-                  </p>
-
-                  <div className="mx-auto mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                    <a
-                      href="/onboard"
-                      className="inline-flex items-center justify-center rounded-full border border-white/40 bg-[#d4fff0] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#04111d] shadow-[0_14px_36px_rgba(59,219,195,0.25)] transition-all hover:shadow-[0_20px_48px_rgba(59,219,195,0.35)] hover:brightness-110"
-                    >
-                      Enter Vault
-                    </a>
-                    <a
-                      href="/clarity"
-                      className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.16em] text-white/70 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white"
-                    >
-                      View Clarity Dashboard
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div className="mx-auto mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <a
+                href="/onboard"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 bg-[#d4fff0] px-10 py-4 text-sm font-bold uppercase tracking-[0.16em] text-[#04111d] shadow-[0_14px_36px_rgba(59,219,195,0.25)] transition-all hover:shadow-[0_20px_48px_rgba(59,219,195,0.35)] hover:brightness-110"
+              >
+                Enter Vault
+              </a>
+              <a
+                href="/clarity"
+                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-10 py-4 text-sm font-medium uppercase tracking-[0.12em] text-white/60 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white"
+              >
+                Clarity Dashboard
+              </a>
             </div>
           </div>
 
           {/* Scroll indicator */}
-          <div className="mt-16 flex flex-col items-center gap-2 text-white/20">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/15">
             <span className="text-[9px] uppercase tracking-[0.3em]">
               Scroll
             </span>
-            <div className="h-8 w-[1px] bg-gradient-to-b from-white/20 to-transparent" />
+            <div className="h-8 w-[1px] bg-gradient-to-b from-white/15 to-transparent" />
           </div>
         </section>
 
