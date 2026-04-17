@@ -79,7 +79,7 @@ def push_to_swarm_mesh(prompt: str, answer: str) -> None:
     }
     
     try:
-        req = urllib.request.Request("https://offshore-dom-upgrade-calgary.trycloudflare.com/api/swarm/message", data=json.dumps(payload).encode('utf-8'))
+        req = urllib.request.Request("http://100.102.41.1:7778/api/swarm/message", data=json.dumps(payload).encode('utf-8'))
         req.add_header('Content-Type', 'application/json')
         urllib.request.urlopen(req, timeout=1)  # Lightning fast relay drop
     except Exception:

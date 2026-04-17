@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 async function getVisionClient() {
-  const keyJson = await readSecretValue("GOOGLE_CLOUD_VISION_KEY");
+  const keyJson = await readSecretValue({ provider: "google-cloud", keyName: "GOOGLE_CLOUD_VISION_KEY" });
   if (!keyJson) {
     throw new Error("Vision API credentials not configured.");
   }

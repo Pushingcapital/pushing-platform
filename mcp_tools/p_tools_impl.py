@@ -3,6 +3,7 @@ import json
 import os
 import subprocess
 import time
+import urllib.request
 from pathlib import Path
 
 import requests
@@ -12,6 +13,12 @@ SECRETS_PATH = Path("/Users/emmanuelhaddad/.config/pushingcapital/secrets.env")
 DEFAULT_GCP_PROJECT = "brain-481809"
 SECRET_CACHE = {}
 ENV_CACHE = None
+PLAYWRIGHT_WRAPPER = Path("/Users/emmanuelhaddad/.codex/skills/playwright/scripts/playwright_cli.sh")
+DEFAULT_PLAYWRIGHT_SESSION = "p"
+VOICE_GATEWAY_BASE = "https://pushing-capital-voice-gateway.manny-861.workers.dev"
+VOICE_GATEWAY_TOKEN = "pc_voice_manny_2026"
+VOICE_GATEWAY_RELAY_ID = "macstudio_adk_v2"
+INGEST_CHUNK_SIZE = int(os.environ.get("P_MEMORY_INGEST_CHUNK_SIZE", "5000"))
 
 
 def _parse_env_file(path):
@@ -383,11 +390,144 @@ def run_cmd(cmd):
     except Exception as e:
         return str(e)
 
-def execute_proxy(func_name, args, get_token_fn=None):
-    # Resolve aliases first to ensure correct security checks
-    if func_name == "ingest_permanent_memory":
-        func_name = "notebooklm_write"
 
+def _run_argv(argv, *, cwd=None, timeout=60):
+    try:
+        completed = subprocess.run(
+            argv,
+            cwd=cwd or None,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+    except Exception as exc:
+        return {"ok": False, "output": f"Command execution error: {exc}", "returncode": -1}
+
+    output = (completed.stdout or "").strip()
+    err = (completed.stderr or "").strip()
+    if completed.returncode == 0:
+        return {"ok": True, "output": output or "(ok)", "returncode": 0}
+    detail = err or output or f"exit code {completed.returncode}"
+    return {"ok": False, "output": f"Command failed: {detail}", "returncode": completed.returncode}
+
+
+def _gateway_post(path, payload, *, timeout=45):
+    url = f"{VOICE_GATEWAY_BASE.rstrip('/')}{path}"
+    merged = {"token": VOICE_GATEWAY_TOKEN, "relay_id": VOICE_GATEWAY_RELAY_ID}
+    merged.update(payload or {})
+    response = requests.post(url, json=merged, timeout=timeout)
+    if response.status_code >= 400:
+        return {"ok": False, "error": response.text.strip() or response.reason, "http_status": response.status_code}
+    try:
+        data = response.json()
+    except Exception:
+        return {"ok": False, "error": "Gateway returned non-JSON response", "raw": response.text[:1000]}
+    return data if isinstance(data, dict) else {"ok": True, "value": data}
+
+
+def _sql_quote(value):
+    return str(value or "").replace("'", "''")
+
+
+def _extract_text_payload(args):
+    for key in ("text", "content", "memory", "payload", "data", "note", "message"):
+        val = args.get(key)
+        if val is None:
+            continue
+        if isinstance(val, (dict, list)):
+            return json.dumps(val, ensure_ascii=False)
+        return str(val)
+    return ""
+
+
+def _chunk_text(text, size):
+    if size <= 0:
+        size = 5000
+    payload = str(text or "")
+    if not payload:
+        return []
+    return [payload[i:i + size] for i in range(0, len(payload), size)]
+
+
+def _ingest_text_to_cloud_memory(*, text, key_prefix="memory", source="manual"):
+    raw_text = str(text or "").strip()
+    if not raw_text:
+        return {"ok": False, "error": "Nothing to ingest"}
+
+    chunk_size = max(1000, INGEST_CHUNK_SIZE)
+    chunks = _chunk_text(raw_text, chunk_size)
+    timestamp = str(int(time.time()))
+    saved = 0
+
+    for idx, chunk in enumerate(chunks, start=1):
+        key = f"{key_prefix}:{timestamp}:{idx:04d}"
+        category = key_prefix.split(":", 1)[0] if ":" in key_prefix else key_prefix
+        query = (
+            "INSERT INTO memory_context (category, key, value, created_at, updated_at) "
+            "VALUES ('{c}', '{k}', '{v}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"
+        ).format(
+            c=_sql_quote(category or "memory"),
+            k=_sql_quote(key),
+            v=_sql_quote(chunk),
+        )
+        result = _gateway_post("/query_d1", {"query": query})
+        if not result.get("ok"):
+            return {
+                "ok": False,
+                "error": result.get("error", "Failed writing to Cloudflare D1"),
+                "chunk_index": idx,
+                "saved": saved,
+            }
+        saved += 1
+
+    meta_key = f"memory_ingest_meta:{timestamp}"
+    meta_value = json.dumps(
+        {
+            "source": source,
+            "key_prefix": key_prefix,
+            "chunks": saved,
+            "bytes": len(raw_text.encode("utf-8")),
+            "created_at": int(time.time()),
+        },
+        ensure_ascii=False,
+    )
+    _gateway_post("/query_kv", {"action": "put", "key": meta_key, "value": meta_value})
+
+    return {
+        "ok": True,
+        "source": source,
+        "key_prefix": key_prefix,
+        "chunks": saved,
+        "bytes": len(raw_text.encode("utf-8")),
+        "meta_key": meta_key,
+    }
+
+
+def _playwright_session_name(args):
+    raw = str(args.get("session") or "").strip().lower()
+    sanitized = "".join(ch for ch in raw if ch.isalnum())
+    return sanitized[:8] or DEFAULT_PLAYWRIGHT_SESSION
+
+
+def _playwright_exec(command_parts, args, *, timeout=90):
+    if not PLAYWRIGHT_WRAPPER.exists():
+        return {"ok": False, "output": f"Playwright wrapper missing at {PLAYWRIGHT_WRAPPER}", "returncode": -1}
+    session = _playwright_session_name(args)
+    argv = [str(PLAYWRIGHT_WRAPPER), "--session", session, *command_parts]
+    return _run_argv(argv, timeout=timeout)
+
+
+def _extract_gemini_text(payload):
+    for candidate in payload.get("candidates") or []:
+        content = candidate.get("content") or {}
+        for part in content.get("parts") or []:
+            text = str(part.get("text") or "").strip()
+            if text:
+                return text
+    return ""
+
+def execute_proxy(func_name, args, get_token_fn=None):
     # Hard server-side safety gates mirroring CI
     allow_mutations = os.environ.get("ALLOW_MUTATIONS", "false")
     mutation_intent = str(args.get("mutation_intent", "NO")).upper() == "YES"
@@ -443,12 +583,267 @@ def execute_proxy(func_name, args, get_token_fn=None):
         except Exception as e:
             return f"Search Core Memory Error: {e}"
 
+    if func_name == "cloudflare_d1_query":
+        query = str(args.get("query") or args.get("sql") or "").strip()
+        if not query:
+            return json.dumps({"status": "error", "error": "Missing query/sql."})
+        result = _gateway_post("/query_d1", {"query": query})
+        return json.dumps(result)
+
+    if func_name == "cloudflare_kv_get":
+        key = str(args.get("key") or "").strip()
+        if not key:
+            return json.dumps({"status": "error", "error": "Missing key."})
+        result = _gateway_post("/query_kv", {"action": "get", "key": key})
+        return json.dumps(result)
+
+    if func_name == "cloudflare_kv_put":
+        key = str(args.get("key") or "").strip()
+        if not key:
+            return json.dumps({"status": "error", "error": "Missing key."})
+        value = args.get("value")
+        if isinstance(value, (dict, list)):
+            value = json.dumps(value, ensure_ascii=False)
+        result = _gateway_post("/query_kv", {"action": "put", "key": key, "value": str(value or "")})
+        return json.dumps(result)
+
+    if func_name == "read_working_memory":
+        key_prefix = str(args.get("prefix") or args.get("key_prefix") or args.get("key") or "").strip()
+        limit = int(args.get("limit") or 50)
+        limit = max(1, min(500, limit))
+        if key_prefix:
+            query = (
+                "SELECT category, key, value, updated_at FROM memory_context "
+                f"WHERE key LIKE '{_sql_quote(key_prefix)}%' "
+                "ORDER BY updated_at DESC "
+                f"LIMIT {limit}"
+            )
+        else:
+            query = f"SELECT category, key, value, updated_at FROM memory_context ORDER BY updated_at DESC LIMIT {limit}"
+        result = _gateway_post("/query_d1", {"query": query})
+        return json.dumps(result)
+
+    if func_name == "clear_working_memory":
+        key_prefix = str(args.get("prefix") or args.get("key_prefix") or args.get("key") or "").strip()
+        if key_prefix:
+            query = f"DELETE FROM memory_context WHERE key LIKE '{_sql_quote(key_prefix)}%'"
+        else:
+            query = "DELETE FROM memory_context"
+        result = _gateway_post("/query_d1", {"query": query})
+        return json.dumps(result)
+
+    if func_name == "ingest_permanent_memory":
+        key_prefix = str(args.get("key_prefix") or args.get("namespace") or "memory").strip() or "memory"
+        source = str(args.get("source") or "manual").strip() or "manual"
+        text_payload = _extract_text_payload(args)
+
+        file_path = str(args.get("file_path") or args.get("path") or "").strip()
+        if not text_payload and file_path:
+            try:
+                text_payload = Path(file_path).expanduser().read_text(encoding="utf-8", errors="ignore")
+                source = source if source != "manual" else "file"
+            except Exception as exc:
+                return json.dumps({"status": "error", "error": f"Unable to read file_path: {exc}"})
+
+        url = str(args.get("url") or "").strip()
+        if not text_payload and url:
+            try:
+                response = requests.get(url, timeout=30)
+                response.raise_for_status()
+                text_payload = response.text
+                source = source if source != "manual" else "url"
+            except Exception as exc:
+                return json.dumps({"status": "error", "error": f"Unable to fetch url: {exc}"})
+
+        sql = str(args.get("query") or args.get("sql") or "").strip()
+        if not text_payload and sql:
+            bq_result = _bigquery_query(sql, get_token_fn=get_token_fn)
+            text_payload = str(bq_result or "")
+            source = source if source != "manual" else "bigquery"
+
+        if not text_payload:
+            return json.dumps({"status": "error", "error": "No ingest payload. Provide text/content, file_path, url, or query/sql."})
+
+        ingest_result = _ingest_text_to_cloud_memory(text=text_payload, key_prefix=key_prefix, source=source)
+        status = "success" if ingest_result.get("ok") else "error"
+        return json.dumps({"status": status, **ingest_result})
+
+    if func_name == "adk_ingest_agent_describe":
+        return json.dumps(
+            {
+                "status": "success",
+                "agent": "adk_ingest_agent",
+                "mode": "cloud_sync_memory_ingest",
+                "sinks": ["cloudflare_d1(memory_context)", "cloudflare_kv(metadata)", "bigquery_query(source optional)"],
+                "chunk_size": INGEST_CHUNK_SIZE,
+                "gateway": VOICE_GATEWAY_BASE,
+                "relay_id": VOICE_GATEWAY_RELAY_ID,
+            }
+        )
+
+    if func_name == "adk_ingest_agent_run":
+        payload = dict(args or {})
+        if "text" not in payload and "content" not in payload:
+            payload["text"] = _extract_text_payload(args)
+        if not str(payload.get("text") or "").strip():
+            payload["text"] = str(args.get("query") or args.get("sql") or "").strip()
+        if not str(payload.get("text") or "").strip() and str(args.get("url") or "").strip():
+            payload["url"] = str(args.get("url")).strip()
+        if not str(payload.get("text") or "").strip() and str(args.get("file_path") or args.get("path") or "").strip():
+            payload["file_path"] = str(args.get("file_path") or args.get("path")).strip()
+        payload["source"] = str(args.get("source") or "adk_ingest_agent").strip() or "adk_ingest_agent"
+        result = execute_proxy("ingest_permanent_memory", payload, get_token_fn=get_token_fn)
+        try:
+            parsed = json.loads(result)
+        except Exception:
+            parsed = {"status": "error", "error": str(result)}
+        parsed["agent"] = "adk_ingest_agent"
+        return json.dumps(parsed)
+
+    if func_name == "desktop_screenshot":
+        save_path = str(args.get("save_path") or f"/tmp/p_desktop_{int(time.time())}.png").strip()
+        result = _run_argv(["screencapture", "-x", save_path], timeout=30)
+        if not result.get("ok"):
+            return result.get("output")
+        return json.dumps({"status": "success", "path": save_path})
+
+    if func_name == "desktop_click":
+        x = args.get("x")
+        y = args.get("y")
+        if x is None or y is None:
+            return json.dumps({"status": "error", "error": "desktop_click requires x and y."})
+        cliclick = _run_argv(["/opt/homebrew/bin/cliclick", f"c:{int(x)},{int(y)}"], timeout=10)
+        if cliclick.get("ok"):
+            return json.dumps({"status": "success", "x": int(x), "y": int(y)})
+        return json.dumps(
+            {
+                "status": "error",
+                "error": "desktop_click requires cliclick at /opt/homebrew/bin/cliclick",
+                "detail": cliclick.get("output"),
+            }
+        )
+
+    if func_name == "desktop_vision":
+        question = str(args.get("question") or args.get("q") or "Describe what is visible on screen.").strip()
+        image_path = str(args.get("image_path") or "").strip()
+        if not image_path:
+            image_path = f"/tmp/p_desktop_vision_{int(time.time())}.png"
+            shot = _run_argv(["screencapture", "-x", image_path], timeout=30)
+            if not shot.get("ok"):
+                return json.dumps({"status": "error", "error": shot.get("output")})
+
+        api_key = _env_value("GEMINI_API_KEY")
+        if not api_key:
+            return json.dumps({"status": "error", "error": "GEMINI_API_KEY is not configured"})
+        model_name = str(args.get("model") or "gemini-2.5-flash").strip()
+        try:
+            image_b64 = base64.b64encode(Path(image_path).read_bytes()).decode("utf-8")
+        except Exception as exc:
+            return json.dumps({"status": "error", "error": f"Failed to read image: {exc}"})
+
+        payload = {
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [
+                        {"text": question},
+                        {"inlineData": {"mimeType": "image/png", "data": image_b64}},
+                    ],
+                }
+            ],
+            "generationConfig": {"temperature": 0.2, "maxOutputTokens": 1024},
+        }
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                model_payload = json.loads(resp.read().decode("utf-8"))
+        except Exception as exc:
+            return json.dumps({"status": "error", "error": f"desktop_vision request failed: {exc}"})
+        answer = _extract_gemini_text(model_payload) or "No vision response returned."
+        return json.dumps({"status": "success", "answer": answer, "image_path": image_path})
+
+    if func_name == "playwright_navigate":
+        url = str(args.get("url") or args.get("target") or "").strip()
+        if not url:
+            return "playwright_navigate requires url."
+        navigate = _playwright_exec(["goto", url], args)
+        if navigate.get("ok"):
+            return navigate.get("output")
+        fallback = _playwright_exec(["open", url, "--headed"], args)
+        return fallback.get("output")
+
+    if func_name == "playwright_snapshot":
+        target = str(args.get("target") or args.get("element") or "").strip()
+        command = ["snapshot"]
+        if target:
+            command.append(target)
+        result = _playwright_exec(command, args)
+        return result.get("output")
+
+    if func_name == "playwright_click":
+        target = str(args.get("target") or args.get("selector") or "").strip()
+        if not target:
+            return "playwright_click requires target."
+        button = str(args.get("button") or "").strip()
+        command = ["click", target]
+        if button:
+            command.append(button)
+        result = _playwright_exec(command, args)
+        return result.get("output")
+
+    if func_name == "playwright_type":
+        text = str(args.get("text") or args.get("value") or "").strip()
+        if not text:
+            return "playwright_type requires text."
+        target = str(args.get("target") or args.get("selector") or "").strip()
+        if target:
+            result = _playwright_exec(["fill", target, text], args)
+        else:
+            result = _playwright_exec(["type", text], args)
+        return result.get("output")
+
+    if func_name == "playwright_scroll":
+        dx = int(args.get("dx") or 0)
+        dy_arg = args.get("dy")
+        if dy_arg is None:
+            direction = str(args.get("direction") or "down").strip().lower()
+            amount = int(args.get("amount") or 1200)
+            dy = -abs(amount) if direction in {"up", "top"} else abs(amount)
+        else:
+            dy = int(dy_arg)
+        result = _playwright_exec(["mousewheel", str(dx), str(dy)], args)
+        return result.get("output")
+
+    if func_name == "playwright_screenshot":
+        target = str(args.get("target") or args.get("selector") or "").strip()
+        command = ["screenshot"]
+        if target:
+            command.append(target)
+        result = _playwright_exec(command, args)
+        return result.get("output")
+
     if func_name == "get_p_notebook_catalog":
         catalog_path = "/Users/emmanuelhaddad/P-notebook-catalog-2026-04-03.md"
         if os.path.exists(catalog_path):
             with open(catalog_path, "r") as f:
                 return f.read()
         return "Catalog file not found locally. Consult Master Systems Brief for IDs."
+
+    if func_name == "bigquery_query":
+        sql = (
+            str(args.get("query") or "").strip()
+            or str(args.get("sql") or "").strip()
+            or str(args.get("statement") or "").strip()
+        )
+        if not sql:
+            return json.dumps({"status": "error", "error": "Missing SQL query. Provide 'query' or 'sql'."})
+        return _bigquery_query(sql, get_token_fn=get_token_fn)
 
     # Github tools
     if func_name == "github_clone_repo":

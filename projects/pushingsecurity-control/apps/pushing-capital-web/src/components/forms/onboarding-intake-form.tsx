@@ -110,44 +110,27 @@ export function OnboardingIntakeForm() {
             <motion.div key="auth" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center">
               <div className="mb-20 flex justify-center"><LogoMiniO size="lg" /></div>
               <h1 className="text-3xl font-extralight tracking-[0.3em] uppercase mb-12">Sanctuary Gate</h1>
-              <div className="max-w-xs mx-auto mb-8 space-y-4">
-                 <input 
-                   type="text" 
-                   placeholder="FIRST NAME" 
-                   value={formData.firstName}
-                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                   className="w-full bg-transparent border-b border-white/10 px-2 py-4 text-center font-mono tracking-[0.2em] text-xs outline-none focus:border-[#00FFAA] transition-colors" 
-                 />
-                 <input 
-                   type="text" 
-                   placeholder="LAST NAME" 
-                   value={formData.lastName}
-                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                   className="w-full bg-transparent border-b border-white/10 px-2 py-4 text-center font-mono tracking-[0.2em] text-xs outline-none focus:border-[#00FFAA] transition-colors" 
-                 />
-                 <input 
-                   type="email" 
-                   placeholder="EMAIL ADDRESS" 
-                   value={formData.email}
-                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                   className="w-full bg-transparent border-b border-white/10 px-2 py-4 text-center font-mono tracking-[0.2em] text-xs outline-none focus:border-[#00FFAA] transition-colors" 
-                 />
-                 <input 
-                   type="tel" 
-                   placeholder="PHONE NUMBER" 
-                   value={formData.phone}
-                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                   className="w-full bg-transparent border-b border-white/10 px-2 py-4 text-center font-mono tracking-[0.2em] text-xs outline-none focus:border-[#00FFAA] transition-colors" 
-                 />
-                 <input 
-                   type="password" 
-                   placeholder="ACCESS KEY" 
-                   value={formData.accessKey}
-                   onChange={(e) => setFormData({ ...formData, accessKey: e.target.value })}
-                   className="w-full bg-transparent border-b border-white/10 px-2 py-4 text-center font-mono tracking-[0.5em] text-sm outline-none focus:border-[#00FFAA] transition-colors" 
-                 />
+              <div className="max-w-md mx-auto mb-12 space-y-6">
+                 {[
+                   { label: "FIRST NAME", value: formData.firstName, key: "firstName", type: "text" },
+                   { label: "LAST NAME", value: formData.lastName, key: "lastName", type: "text" },
+                   { label: "EMAIL ADDRESS", value: formData.email, key: "email", type: "email" },
+                   { label: "PHONE NUMBER", value: formData.phone, key: "phone", type: "tel" },
+                   { label: "ACCESS KEY", value: formData.accessKey, key: "accessKey", type: "password", tracking: "tracking-[0.8em]" }
+                 ].map((field) => (
+                   <div key={field.key} className="relative group">
+                     <div className="absolute inset-0 bg-white/[0.01] rounded-2xl border border-white/5 group-focus-within:border-[#00FFAA]/20 transition-all blur-[2px]" />
+                     <input 
+                       type={field.type} 
+                       placeholder={field.label} 
+                       value={field.value as string}
+                       onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
+                       className={`relative w-full bg-transparent border-none px-6 py-5 text-center font-mono ${field.tracking || 'tracking-[0.2em]'} text-xs outline-none text-white/80 placeholder:text-white/10 transition-colors`} 
+                     />
+                   </div>
+                 ))}
               </div>
-              <button onClick={() => advance("biometric")} className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 hover:text-white transition-all">Initialize_Handshake →</button>
+              <button onClick={() => advance("biometric")} className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 hover:text-[#00FFAA] transition-all py-4 px-8 rounded-full border border-white/5 hover:bg-[#00FFAA]/5">Initialize_Handshake →</button>
             </motion.div>
           )}
 

@@ -1,0 +1,13 @@
+🚀 Antigravity Hands Worker Started. Watching: /Users/emmanuelhaddad/Desktop/VOICE_INBOX.md
+Traceback (most recent call last):
+  File "/Users/emmanuelhaddad/pushing-platform/bin/hands_worker.py", line 95, in <module>
+    main()
+    ~~~~^^
+  File "/Users/emmanuelhaddad/pushing-platform/bin/hands_worker.py", line 63, in main
+    last_processed_line_idx = len(VOICE_INBOX_PATH.read_text().splitlines())
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 788, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd5 in position 5118: invalid continuation byte

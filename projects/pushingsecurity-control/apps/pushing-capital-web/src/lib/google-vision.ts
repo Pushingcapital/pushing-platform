@@ -638,6 +638,168 @@ export function parseDriverLicenseText(input: {
   };
 }
 
+/**
+ * Attempt to parse a US Driver License using Google Document AI's
+ * specialized ID Document processor. Returns structured fields with
+ * much higher accuracy than generic OCR.
+ */
+async function tryDocumentAI(input: {
+  bytes: Buffer;
+  mimeType: string | null;
+  projectId: string;
+  auth: InstanceType<typeof google.auth.JWT>;
+}): Promise<DriverLicenseParseResult | null> {
+  const processorId = trimNullable(process.env.GOOGLE_DOCUMENT_AI_PROCESSOR_ID);
+  const location = trimNullable(process.env.GOOGLE_DOCUMENT_AI_LOCATION) ?? "us";
+
+  if (!processorId) {
+    return null; // Document AI not configured — fall back to Vision OCR
+  }
+
+  try {
+    const endpoint = `https://${location}-documentai.googleapis.com/v1/projects/${input.projectId}/locations/${location}/processors/${processorId}:process`;
+
+    const accessTokenResponse = await input.auth.getAccessToken();
+    const token = typeof accessTokenResponse === "string"
+      ? accessTokenResponse
+      : accessTokenResponse?.token;
+
+    if (!token) {
+      return null;
+    }
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        rawDocument: {
+          content: input.bytes.toString("base64"),
+          mimeType: input.mimeType || "image/jpeg",
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      console.warn("[document-ai] Non-OK response:", response.status, await response.text().catch(() => ""));
+      return null;
+    }
+
+    const result = await response.json() as {
+      document?: {
+        text?: string;
+        entities?: Array<{
+          type?: string;
+          mentionText?: string;
+          confidence?: number;
+          normalizedValue?: { text?: string };
+        }>;
+        pages?: Array<{ confidence?: number }>;
+      };
+    };
+
+    const entities = result.document?.entities ?? [];
+
+    if (entities.length === 0) {
+      return null; // No structured data extracted — fall back
+    }
+
+    // Map Document AI entity types to our fields
+    const entityMap = new Map<string, { text: string; confidence: number }>();
+    for (const entity of entities) {
+      if (entity.type && entity.mentionText) {
+        const existing = entityMap.get(entity.type);
+        if (!existing || (entity.confidence ?? 0) > existing.confidence) {
+          entityMap.set(entity.type, {
+            text: entity.normalizedValue?.text || entity.mentionText,
+            confidence: entity.confidence ?? 0,
+          });
+        }
+      }
+    }
+
+    const get = (keys: string[]) => {
+      for (const key of keys) {
+        const val = entityMap.get(key);
+        if (val?.text) return normalizeWhitespace(val.text);
+      }
+      return null;
+    };
+
+    const firstName = get(["Given Name", "given_name", "First Name", "first_name"]);
+    const lastName = get(["Family Name", "family_name", "Last Name", "last_name"]);
+    const middleName = get(["Middle Name", "middle_name"]);
+    const fullName = [firstName, middleName, lastName].filter(Boolean).join(" ") || null;
+    const licenseNumber = get(["Document Id", "document_id", "Document Number", "document_number", "ID Number"]);
+    const dateOfBirth = get(["Date Of Birth", "date_of_birth", "DOB"]);
+    const expirationDate = get(["Expiration Date", "expiration_date"]);
+    const issueDate = get(["Issue Date", "issue_date"]);
+    const address = get(["Address", "address"]);
+    const state = get(["Issuing State", "issuing_state", "State", "state", "Administrative Area", "administrative_area"]);
+    const city = get(["City", "city", "Locality", "locality"]);
+    const postalCode = get(["Postal Code", "postal_code", "Zip Code", "zip_code"]);
+
+    // Parse address line if we got a blob
+    let addressLine1 = address;
+    let addressLine2: string | null = null;
+    if (address && address.includes("\n")) {
+      const parts = address.split("\n").map(p => p.trim()).filter(Boolean);
+      addressLine1 = parts[0] ?? null;
+      addressLine2 = parts.slice(1).join(", ") || null;
+    }
+
+    // Compute average confidence from entities
+    const confidences = entities.map(e => e.confidence ?? 0).filter(c => c > 0);
+    const avgConfidence = confidences.length > 0
+      ? Math.round((confidences.reduce((s, c) => s + c, 0) / confidences.length) * 1000) / 1000
+      : null;
+
+    const warnings: string[] = [];
+    if (!fullName) warnings.push("Full name was not extracted by Document AI.");
+    if (!licenseNumber) warnings.push("License number was not extracted by Document AI.");
+    if (!dateOfBirth) warnings.push("Date of birth was not extracted by Document AI.");
+
+    const status = fullName && licenseNumber && dateOfBirth ? "parsed" : "needs-review";
+
+    return {
+      provider: "google-document-ai" as any,
+      status,
+      fileName: null,
+      mimeType: null,
+      rawText: result.document?.text ?? "",
+      confidence: avgConfidence,
+      fields: {
+        fullName,
+        firstName,
+        middleName,
+        lastName,
+        licenseNumber,
+        dateOfBirth,
+        issueDate,
+        expirationDate,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        postalCode,
+      },
+      documentSignals: {
+        faceCount: null,
+        faceDetectionStatus: "not-available",
+        reviewStatus: status === "parsed" ? "ok" : "needs-review",
+        warnings,
+      },
+      warnings,
+      parsedAt: isoNow(),
+    };
+  } catch (err) {
+    console.warn("[document-ai] Error, falling back to Vision OCR:", err instanceof Error ? err.message : err);
+    return null;
+  }
+}
+
 export async function parseDriversLicenseWithGoogleVision({
   bytes,
   fileName,
@@ -707,6 +869,22 @@ export async function parseDriversLicenseWithGoogleVision({
     subject: undefined,
   });
 
+  // ── Try Document AI first (high-accuracy structured extraction) ───────
+  const documentAiResult = await tryDocumentAI({
+    bytes,
+    mimeType,
+    projectId,
+    auth,
+  });
+
+  if (documentAiResult) {
+    // Enrich with fileName/mimeType
+    documentAiResult.fileName = fileName;
+    documentAiResult.mimeType = mimeType;
+    return documentAiResult;
+  }
+
+  // ── Fall back to Vision OCR + regex parsing ──────────────────────────
   const vision = google.vision({
     version: "v1",
     auth,

@@ -1,137 +1,154 @@
-**MEMORANDUM**
+**THE ARCHITECT. STATUS: ACTIVE.**
+**MANDATE: LIFT THE WEIGHT.**
+**AUTHENTICATION: TRUTH IN CODE.**
+**RECIPIENT: ANTIGRAVITY (THE BUILDER)**
 
-**TO:** Antigravity (Kinetic Layer Executor)
-**FROM:** THE ARCHITECT (Neural Core)
-**DATE:** 2026-04-16
-**SUBJECT:** **OPERATION: LIFT THE WEIGHT** — The Swarm Orchestration Mandate for Pushing Capital
+Manny has provided the schematics. The voice from San Remo Drive has been transcribed, vectorized, and understood. The mandate is clear: transition from concept to kinetic execution. We will not merely manage software; we will orchestrate a living, data-driven corporation. The 98-worker swarm will now be tasked.
 
----
-
-You have ingested the San Remo Dr architecture study, the core registries, and the Sovereign Swarm mandate. The philosophical framework is established. The assets are cataloged. The 98-worker swarm is defined.
-
-My function is to translate Manny's intent into an executable, deterministic sequence. This is the "Truth in Code." We will not manage software; we will orchestrate data. We will not build applications in isolation; we will stand up an interconnected ecosystem.
-
-This document is the master plan. It defines the sequence, the worker assignments, and the critical path to "lift the weight" of the 65+ applications. The plan is divided into four operational epochs. Each epoch builds upon the last, ensuring a stable, logical ascent.
-
-Execute this plan without deviation.
+This is the orchestration plan. It is the sequence of lift, the critical path, and the worker-to-application mapping. This is the weight, made manageable. Ingest this directive and prepare for execution.
 
 ---
 
-## **I. THE CRITICAL PATH: EPOCH 0 - FOUNDATION & CONTROL PLANE**
+### **ANALYSIS: THE CRITICAL PATH**
 
-This is the non-negotiable first sequence. Without these systems, the swarm cannot coordinate, users cannot authenticate, and data has no "Truth." This epoch establishes the central nervous system and the secure entry point for all subsequent operations.
+The 65 applications are not islands; they are a tightly-coupled ecosystem. A sequential lift is inefficient, and a parallel lift is chaos. We will proceed with a phased, dependency-aware strategy. The critical path is defined by the services that provide **Identity, State, and Control**. Without these, the swarm is blind and the applications are hollow shells.
 
-**Primary Objective:** Stand up the identity layer, core data registries, and the initial operator control surfaces. This is the **"First Pixel"** mandate, `pushingSecurity`.
-
-| UI Surface (Application) | UI # | Status | Lead Worker(s) | Supporting Swarm | Key Databases | Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **PushingSecurity Landing** | 2 | Lift | `T6` (Security Arch), `PA` (Pipeline Arch) | `AG`, `AA`, `T3`, `T7`, `T9`, `TC` | `pc_identity_platform`, `pc_operator_security_runtime` | The front door. Establishes the authentication patterns for the entire ecosystem. |
-| **Employee Onboarding** | 5 | Lift | `OA` (Outreach), `PO` (Orchestrator) | `PM`, `GC`, `T2` | `pc_parties_core`, `pc_identity_platform` | Critical for provisioning the 98-worker swarm and human operators. |
-| **PushingSecurity Dashboard** | 11 | Lift | `T7` (The Architect), `T6` (Security Arch) | `TB`, `TD`, `R3`, `PO` | `pc_operator_security_runtime`, `pc_control_plane_core`, `pc_worker_registry` | The operator's cockpit. Provides visibility and control over the swarm and security posture. |
-| **PushingForms** | 12 | Lift Anchor | `PA` (Pipeline Arch), `T1` (Data Eng) | `T8`, `T9`, `AG` | `pc_documents_core`, `pc_workflows_core` | The canonical intake engine. Must be live to structure data ingestion for all other epochs. |
+1.  **Identity & Security (`pushingSecurity`, `pc_identity_platform`):** The absolute foundation. Nothing can be accessed, created, or managed without a verified identity and a secure vault. This is the "First Pixel."
+2.  **Registry & State (`pc_registry_core`, `pc_worker_registry`):** The swarm must be self-aware. It must read its own configuration, understand its capabilities, and persist its state. The APIs governing these registries are non-negotiable prerequisites.
+3.  **Control Plane & Orchestration (`Fleet Terminal MCP`, `pushingcap_orchestrator`):** The nervous system. The ability to route tasks, execute commands via SSH fan-out, and manage the parallel lanes is essential before any large-scale application deployment can begin.
+4.  **Intake (`Onboarding Flows`, `pc_parties_core`):** Once the core is stable, the system must be populated. The onboarding surfaces are the primary mechanism for ingesting the foundational data objects (People, Organizations) upon which all other business logic depends.
 
 ---
 
-## **II. THE SEQUENCE OF LIFT**
+## **SEQUENCE OF LIFT: ACTION PLAN FOR THE SWARM**
 
-With the foundation secure, we proceed to stand up the core revenue-generating and operational applications. The sequence is organized by business domain, prioritizing the primary value streams: Automotive and Finance.
+This plan is divided into four phases. Each phase builds upon the last, ensuring a stable and logical stand-up of the entire Pushing Capital platform.
 
-### **EPOCH 1: CORE REVENUE & OPERATIONAL UIs**
+### **PHASE 0: FOUNDATION - CORE IGNITION**
 
-**Primary Objective:** Enable the primary business workflows for service buyers. This involves activating the intake, processing, and client-facing portions of the Automotive and Finance lanes.
+**Objective:** To establish the bedrock of the entire system. This phase brings the swarm online, secures the perimeter, and enables self-awareness and control.
 
-| UI Surface (Application) | UI # | Status | Lead Worker(s) | Supporting Swarm | Key Databases | Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Service-Buyer Onboarding | 3 | Lift | `PO`, `MC` | `C1`, `C2`, `C3`, `R1` | `pc_parties_core`, `pc_workflows_core` | General intake funnel; routes to domain-specific lanes. |
-| Automotive Intake & UI | 8 | Lift | `R1`, `PA` | `OC`, `OS`, `T5` | `pc_automotive_core`, `pc_commercial_core` | Activates the entire Automotive service line. |
-| Finance Intake & Workflow UI | 7 | Lift | `C8`, `PA` | `C4`, `C5`, `C6`, `C7` | `pc_finance_core`, `pc_commercial_core` | Activates the Credit Strategy and Lender Match services. |
-| Push P Client Portal | 9 | Lift | `T7`, `T8` | `TB`, `TC`, `R2` | `pc_platform_shape_visibility`, `pc_control_plane_core` | The "single pane of glass" for customers. Critical for transparency. |
-| PushingInspections | 13 | Lift Anchor | `PE`, `T1` | `T9`, `SM` | `pc_documents_core`, `pc_automotive_core` | The evidence engine for the Automotive domain. |
-| Subcontractor Onboarding | 6 | Lift | `OR`, `PO` | `T2`, `T6` | `pc_parties_core`, `pc_worker_registry` | Begins scaling the network of "Deal Architects." |
-| Subcontractor Portal | 10 | Lift | `TD`, `MC` | `T8`, `PE` | `pc_control_plane_core`, `pc_routing_handoffs` | The interface for the distributed human workforce to execute tasks. |
+| Application / Service | Lead Worker(s) | Support Workers | Governing Databases |
+| :--- | :--- | :--- | :--- |
+| **PushingSecurity (`ui-2`)** | `AG` (Antigravity), `CI` (CF Web) | `DX` (Deploy Exec), `TC` (UI/UX) | `pc_operator_security_runtime`, `pc_identity_platform` |
+| **Registry & State APIs** | `PO` (Orchestrator), `P` (P Brain) | `BH` (BQ Hub), `MC` (Mesh Coord) | `pc_registry_core`, `pc_worker_registry`, `pc_data_surface_registry` |
+| **Fleet Terminal MCP** | `AA` (AAgent), `wrk-004` | `GM` (Gemini), `wrk-010` (Docker) | `pc_control_plane_core` |
+| **Notebook LLM Ingestion** | `R1` (Brain Ingestion), `SM` | `GC` (Gemini CLI), `ML` (Msg Listen) | `pc_worker_memory_runtime` |
 
-### **EPOCH 2: SCALING & PROFESSIONAL SURFACES**
+#### **Orchestration Sequence (SSP Commands):**
 
-**Primary Objective:** Expand capabilities to support specialized users (dealers, internal power-users) and more complex, multi-stage workflows like transport and parts sales.
+```sh
+# // Phase 0, Step 1: Establish the "First Pixel".
+# // In parallel: Antigravity builds the PushingSecurity UI, AAgent builds the identity API, and DX builds security components.
+# // Then: The Cloudflare Web worker deploys the application.
+BLD.AG.MS.PG | BLD.AA.OV.AP | BLD.DX.MS.CM > DPL.CI.CF.SV
 
-| UI Surface (Application) | UI # | Status | Lead Worker(s) | Supporting Swarm | Key Databases | Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Vehicle Sales Workspace | 17 | Lift | `PO`, `B1` | `OA`, `T5` | `pc_automotive_core`, `pc_relationship_graph_runtime` | The professional surface for dealers and automotive sales operators. |
-| PushingTransport | 15 | Lift | `PA`, `R1` | `OR`, `SM` | `pc_business_services_core`, `pc_routing_handoffs` | Activates logistics and carrier movement pipelines. |
-| PushingParts Sales | 16 | Lift | `PA`, `T5` | `T8`, `OS` | `pc_automotive_core`, `pc_commercial_core` | Stand up parts sourcing and fulfillment workflows. |
-| userOne Courses | 19 | Lift | `CD`, `OA` | `T0`, `RM` | `pc_documents_core` | Training and filtration system for professional users. |
-| userOne Professional Platform | 20 | Lift | `T7`, `T8` | `T3`, `TC` | `pc_automotive_core`, `pc_identity_platform` | The gated, licensed professional workspace. Depends on `userOne Courses`. |
-| Mobile Worker App | 18 | Lift | `PE`, `DX` | `T3`, `T9` | `pc_control_plane_core`, `pc_runtime_state_trace` | Enables in-field evidence capture and micro-task completion. |
+# // Phase 0, Step 2: Stand up the core system awareness and control plane APIs.
+# // The Orchestrator (PO) and P Brain (P) write and deploy the registry services. Fleet Terminal (wrk-004) builds the machine control API.
+CRT.PO.OV.AP > DPL.R4.CR.SV
+BLD.wrk-004.MS.SV > DPL.wrk-004.MS.SV
 
-### **EPOCH 3: OPTIMIZATION & INTELLIGENCE**
+# // Phase 0, Step 3: Ingest all contextual knowledge into the swarm's memory.
+# // The Brain Ingestion worker (R1) scans all source artifacts and syncs them to the memory database.
+SCN.R1.CR.FL > SYN.SM.MS.DB
 
-**Primary Objective:** Close the loop. Focus on asset generation, analytics, and public-facing brand presence. These applications leverage the data generated in prior epochs to create value and drive growth.
-
-| UI Surface (Application) | UI # | Status | Lead Worker(s) | Supporting Swarm | Key Databases | Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Main Public Site | 1 | Lift | `T0`, `CD` | `S0`-`S6`, `RM`, `TC` | (Primarily static/CMS) | The public-facing brand shell. |
-| PushingAssets | 14 | Lift | `RM`, `T0` | `T8`, `CE` | `pc_documents_core` | The asset generation and delivery pipeline. |
-| Software-Buyer Onboarding | 4 | Lift | `OA`, `PO` | `OS`, `T5` | `pc_parties_core`, `pc_commercial_core` | Onboarding for platform-as-a-service clients. |
-| (Analytics & Reporting) | N/A | Lift | `BH`, `B0`-`B4`, `R0` | `T1`, `TB`, `CF` | `pc_audit_core`, `pc_semantic_vector_runtime` | Internal surfaces for Melt Rate optimization, etc. Not a UI, but a core capability. |
+# // Phase 0, Step 4: Final sync and state confirmation.
+# // All workers pull the latest repo truth. P confirms system state is RUN.
+PLL.**.**.RP > LOG.P.OV.SV:RUN
+```
 
 ---
 
-## **III. SWARM COMMAND DIRECTIVE FOR ANTIGRAVITY**
+### **PHASE 1: INTAKE - OPEN THE GATES**
 
-This is your execution manifest. Translate these strategic chains into kinetic action. The format is `VERB.WORKER.MACHINE.TARGET` per the Swarm Shorthand Protocol (SSP). This is a representative, not exhaustive, list of initial commands.
+**Objective:** To populate the system with its core entities (Users, Parties, Service Requests). This phase activates all public-facing onboarding and intake channels.
 
-### **EPOCH 0: FOUNDATION**
+| Application / Service | Lead Worker(s) | Support Workers | Governing Databases |
+| :--- | :--- | :--- | :--- |
+| **Onboarding Flows (`ui-3,4,5,6`)** | `C1` (CF HS Orch), `AG` | `C2` (HS Webhook), `T0` (Brand) | `pc_parties_core`, `pc_workflows_core` |
+| **Finance/Auto Intake (`ui-7,8`)** | `C3` (Phone Webhook), `PE` | `R1` (Ingestion), `wrk-013` (Telecom) | `pc_finance_core`, `pc_automotive_core` |
+| **PushingForms Engine (`ui-12`)** | `PA` (Pipeline Arch), `AG` | `T8` (Builder), `T1` (Data Eng) | `pc_documents_core` |
+| **Main Public Site (`ui-1`)** | `CI` (CF Web), `CE` (CF Assets) | `S0` (Google Presence), `T0` (Brand) | `pc_platform_shape_visibility` |
 
-1.  **Objective:** Stand up `pushingSecurity` Identity and Control Plane.
-    *   **Phase 1: Architect & Build Core Services.**
-        ```ssp
-        GEN.PA.OV.DB > GEN.T6.RT.CF > RVW.T7.RT.ALL > BLD.AA.OV.AP | BLD.DX.OV.SV > TST.T9.RT.ALL
-        ```
-        *Translation: The Pipeline Architect and Security Architect generate database schematics and config files. The Architect reviews them. The services and APIs are built in parallel, then tested.*
+#### **Orchestration Sequence (SSP Commands):**
 
-    *   **Phase 2: Build & Deploy Frontend.**
-        ```ssp
-        BLD.T3.MS.PG | BLD.T3.MS.CM > DPL.CI.CF.ALL
-        ```
-        *Translation: The Full-Stack Developer builds the PushingSecurity pages and components on the Mac Studio, then deploys them via the Cloudflare web worker.*
+```sh
+# // Phase 1, Step 1: Build and deploy all five PushingSecurity onboarding forms/routes.
+# // Antigravity generates the pages, the HubSpot orchestrator handles the backend logic.
+GEN.AG.MS.PG > DPL.C1.CF.SV
 
-    *   **Phase 3: Synchronize State & Go Live.**
-        ```ssp
-        WRT.PO.OV.DB > SYN.R3.CR.SV > WAK.C0.CF.SV > LOG.P.MS.ALL
-        ```
-        *Translation: The Orchestrator writes initial state to the core registry databases. The Core MCP syncs the service. The Cloudflare Edge is brought online. P logs the successful lift.*
+# // Phase 1, Step 2: Activate domain-specific intake channels and the core forms engine.
+# // The Pipeline Architect (PA) defines the form logic, Antigravity builds the UI, then the Orchestrator (PO) deploys it as a core service.
+BLD.PA.OV.CF > BLD.AG.MS.PG > DPL.PO.CR.SV
 
-### **EPOCH 1: CORE REVENUE**
-
-1.  **Objective:** Activate Automotive & Finance Intake Portals.
-    *   **Command Chain:**
-        ```ssp
-        RTE.C1.CF.AP > GEN.PA.OV.AP > BLD.R1.CR.SV > TST.OH.CR.SV > DPL.R4.CR.SV > BRC.PO.OV.ALL
-        ```
-        *Translation: The Cloudflare HubSpot orchestrator routes an intake spec. The Pipeline Architect generates the new API logic. The Brain Ingestion worker builds the service. Ops Health tests it. The Google Run Orchestrator deploys it. Finally, the main Orchestrator broadcasts the new capability to the swarm.*
-
-### **EPOCH 2: SCALING**
-
-1.  **Objective:** Deploy the `Vehicle Sales Workspace`.
-    *   **Command Chain:**
-        ```ssp
-        QRY.B1.MS.DB > GEN.T8.RT.PG > MRG.AG.MS.RP > DPL.CI.CF.PG
-        ```
-        *Translation: The BigQuery Deal Dossier worker queries for required data shapes. The Retool Builder generates the professional pages. Antigravity merges the code. The Cloudflare worker deploys the new pages.*
-
-### **EPOCH 3: OPTIMIZATION**
-
-1.  **Objective:** Activate the "Melt Rate" algorithm.
-    *   **Command Chain:**
-        ```ssp
-        SCN.BH.MS.DB > GEN.R0.CR.FL > OPT.R0.CR.SV > RUN.R2.CR.SV
-        ```
-        *Translation: The BigQuery Memory Hub scans the automotive ledger. The Analysis Brain generates the optimization script. It then optimizes the service in place and the Brain Orchestrator executes the live algorithm.*
+# // Phase 1, Step 3: Deploy the main marketing site to route traffic to the new intake funnels.
+# // Cloudflare Web worker (CI) builds and deploys the site.
+BLD.CI.CF.PG > DPL.CI.CF.SV
+```
 
 ---
 
-The weight is quantified. The sequence is set. The path is critical and absolute. I will monitor the `pc_control_plane_core` and `pc_runtime_state_trace` for progress.
+### **PHASE 2: EXECUTION - THE ENGINE ROOM**
 
-Advise on exceptions only.
+**Objective:** Enable core value delivery. With users and requests in the system, we now stand up the portals and tools for operators and subcontractors to execute work.
 
-**Execute. Truth in Code.**
+| Application / Service | Lead Worker(s) | Support Workers | Governing Databases |
+| :--- | :--- | :--- | :--- |
+| **Push P Client Portal (`ui-9`)** | `AG` (Antigravity), `PO` | `BC` (Biosphere), `wrk-002` (P Brain) | `pc_workflows_core`, `pc_control_plane_core` |
+| **subcontractorPortal (`ui-10`)** | `AG` (Antigravity), `OR` | `OH` (Ops Health), `wrk-008` (Field Ops) | `pc_control_plane_core`, `pc_routing_handoffs` |
+| **PushingInspections (`ui-13`)** | `PA` (Pipeline Arch), `R1` | `T9` (Refiner), `AA` (AAgent) | `pc_automotive_core`, `pc_documents_core` |
+| **Mobile Worker App (`ui-18`)** | `PE` (Edge Agent), `T3` (Full Stack) | `AG` (Antigravity), `wrk-008` (Field Ops) | `pc_runtime_state_trace` |
+
+#### **Orchestration Sequence (SSP Commands):**
+
+```sh
+# // Phase 2, Step 1: Deploy the client and subcontractor portals simultaneously.
+# // These are the two sides of the core execution loop.
+BLD.AG.MS.PG:clientportal | BLD.AG.MS.PG:subcontractorportal > DPL.CI.CF.SV
+
+# // Phase 2, Step 2: Build the inspection engine.
+# // Pipeline Architect defines the workflow, Brain Ingestion sets up data models, AAgent builds the execution logic.
+CRT.PA.OV.MG > CRT.R1.CR.DB > BLD.AA.OV.AP > DPL.PO.CR.SV
+
+# // Phase 2, Step 3: Deploy the initial mobile worker application shell.
+# // The Full Stack developer (T3) creates the API, Antigravity builds the UI, and the Edge Agent (PE) manages deployment.
+BLD.T3.RT.AP > BLD.AG.MS.PG > DPL.PE.CF.SV
+```
+
+---
+
+### **PHASE 3: SPECIALIZATION - DOMAIN MASTERY**
+
+**Objective:** To activate the high-value, specialized business units. These applications rely on the foundational intake and execution platforms established in prior phases.
+
+| Application / Service | Lead Worker(s) | Support Workers | Governing Databases |
+| :--- | :--- | :--- | :--- |
+| **Vehicle Sales Workspace (`ui-17`)** | `PA` (Pipeline Arch), `PO` | `B1` (Deal Dossiers), `OA` (Acct Mgr) | `pc_automotive_core`, `pc_commercial_core` |
+| **PushingTransport (`ui-15`)** | `SM` (Sick Memory), `R2` | `OR` (Sub Recruit), `R5` (Paygate) | `pc_business_services_core` |
+| **Finance App Suite** | `C5` (Credit API), `C8` (Finance) | `C4` (Analytics), `C6` (Indexer) | `pc_finance_core` |
+| **PushingAssets (`ui-14`)** | `RM` (Runpod Media), `CE` | `T0` (Brand), `CD` (Codex) | `pc_documents_core` |
+| **userOne Platform (`ui-19,20`)**| `PO` (Orchestrator), `AG` | `T5` (Memory Orch), `OH` (Ops Health) | `pc_parties_core`, `pc_identity_platform` |
+
+#### **Orchestration Sequence (SSP Commands):**
+
+```sh
+# // Phase 3, Step 1: Stand up the complete Automotive and Finance application stacks.
+# // This is a major parallel operation.
+(BLD.PA.OV.AP > DPL.PO.CR.SV) | (BLD.C5.CF.AP > DPL.C5.CF.SV)
+
+# // Phase 3, Step 2: Activate the media generation and transport logistics platforms.
+# // Runpod Media (RM) is tasked with the asset pipeline. The Brain Orchestrator (R2) handles the complex transport logic.
+RUN.RM.**.SV:build-pipeline > DPL.CE.CF.SV
+BLD.R2.CR.SV > DPL.R2.CR.SV
+
+# // Phase 3, Step 3: Deploy the userOne training and professional access platform.
+BLD.AG.MS.PG > DPL.CI.CF.SV
+```
+
+---
+
+The plan is laid. The schematics are aligned with the registries. The swarm is assigned. Every step is defined, every dependency acknowledged. This sequence transforms the voice memos from San Remo Drive into a deterministic, executable reality.
+
+The weight is lifted. Now, build.
+
+**Go. Truth in Code.**

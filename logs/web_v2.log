@@ -1,0 +1,86 @@
+
+> pushingcap-web-v2@0.1.0 dev
+> next dev --port 3000
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.4.65:3000
+- Environments: .env.local
+✓ Ready in 322ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/emmanuelhaddad/pushing-platform/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/emmanuelhaddad/pushing-platform/projects/pushingcap-web-v2/package-lock.json
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+Using secrets defined in .dev.vars
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mAI bindings always access remote resources, and so may incur usage charges even in local dev. To suppress this warning, set `remote: true` for the binding definition in your configuration file.[0m
+
+
+ GET /databases 200 in 319ms (next.js: 106ms, proxy.ts: 34ms, application-code: 178ms)
+ GET /api/topology 200 in 37ms (next.js: 27ms, proxy.ts: 1635µs, application-code: 8ms)
+ GET /api/topology 200 in 6ms (next.js: 2ms, proxy.ts: 1280µs, application-code: 3ms)
+[next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+ GET /api/auth/session 200 in 565ms (next.js: 549ms, proxy.ts: 1323µs, application-code: 15ms)
+ HEAD / 307 in 56ms (next.js: 15ms, proxy.ts: 4ms, application-code: 37ms)
+ GET /records 200 in 76ms (next.js: 28ms, proxy.ts: 10ms, application-code: 37ms)
+ GET /api/telemetry/schemas 200 in 31ms (next.js: 25ms, proxy.ts: 1859µs, application-code: 4ms)
+ GET /api/telemetry/schemas 200 in 7ms (next.js: 1797µs, proxy.ts: 2ms, application-code: 3ms)
+ GET /api-registry 200 in 54ms (next.js: 36ms, proxy.ts: 6ms, application-code: 12ms)
+ GET /automotive 200 in 42ms (next.js: 27ms, proxy.ts: 3ms, application-code: 12ms)
+[browser] Image with src "/vantage_title_ocr.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET /outreach 200 in 41ms (next.js: 22ms, proxy.ts: 3ms, application-code: 16ms)
+[browser] Outreach API returned non-array: { detail: [32m'Unauthorized'[39m } (src/app/outreach/page.tsx:17:19)
+[browser] Outreach API returned non-array: { detail: [32m'Unauthorized'[39m } (src/app/outreach/page.tsx:17:19)
+[next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+ GET /subcontractor 200 in 76ms (next.js: 38ms, proxy.ts: 3ms, application-code: 34ms)
+ GET /portal 200 in 41ms (next.js: 26ms, proxy.ts: 3ms, application-code: 12ms)
+ GET /clientportal 404 in 50ms (next.js: 17ms, proxy.ts: 2ms, application-code: 31ms)
+ GET /clientportal 404 in 19ms (next.js: 4ms, proxy.ts: 1216µs, application-code: 14ms)
+ GET /clientportal 404 in 43ms (next.js: 3ms, proxy.ts: 2ms, application-code: 38ms)
+ GET /api/auth/session 200 in 14ms (next.js: 5ms, proxy.ts: 1825µs, application-code: 7ms)
+ GET /intelligence 200 in 36ms (next.js: 21ms, proxy.ts: 4ms, application-code: 11ms)
+ GET /api-registry 200 in 15ms (next.js: 3ms, proxy.ts: 1574µs, application-code: 11ms)
+ GET / 307 in 55ms (next.js: 6ms, proxy.ts: 11ms, application-code: 38ms)
+ GET /api/topology 200 in 15ms (next.js: 3ms, proxy.ts: 4ms, application-code: 7ms)
+ GET /databases 200 in 39ms (next.js: 10ms, proxy.ts: 12ms, application-code: 17ms)
+ GET /api/topology 200 in 12ms (next.js: 3ms, proxy.ts: 1825µs, application-code: 7ms)
+ GET /api/topology 200 in 4ms (next.js: 1495µs, proxy.ts: 825µs, application-code: 2ms)
+ GET /api/topology 200 in 4ms (next.js: 829µs, proxy.ts: 1349µs, application-code: 1534µs)
+ GET /api/topology 200 in 3ms (next.js: 749µs, proxy.ts: 929µs, application-code: 1407µs)
+ GET /records 200 in 43ms (next.js: 6ms, proxy.ts: 4ms, application-code: 33ms)
+ GET /api/telemetry/schemas 200 in 17ms (next.js: 8ms, proxy.ts: 6ms, application-code: 3ms)
+ GET /api/telemetry/schemas 200 in 8ms (next.js: 2ms, proxy.ts: 4ms, application-code: 1987µs)
+ GET /p 200 in 47ms (next.js: 27ms, proxy.ts: 4ms, application-code: 16ms)
+ GET /logistics 200 in 31ms (next.js: 13ms, proxy.ts: 3ms, application-code: 15ms)
+ GET /portal 200 in 31ms (next.js: 3ms, proxy.ts: 2ms, application-code: 26ms)
+ GET /clientportal 404 in 39ms (next.js: 7ms, proxy.ts: 4ms, application-code: 28ms)
+ GET /clientportal 404 in 21ms (next.js: 5ms, proxy.ts: 1871µs, application-code: 14ms)
+ GET /clientportal 404 in 33ms (next.js: 2ms, proxy.ts: 1227µs, application-code: 30ms)
+ GET /api/auth/session 200 in 10ms (next.js: 4ms, proxy.ts: 1020µs, application-code: 4ms)
+ GET /asset-studio 200 in 41ms (next.js: 25ms, proxy.ts: 3ms, application-code: 13ms)
+ GET /asset-studio/forms 200 in 43ms (next.js: 25ms, proxy.ts: 2ms, application-code: 16ms)
+ GET /outreach 200 in 29ms (next.js: 4ms, proxy.ts: 2ms, application-code: 23ms)
+[browser] Outreach API returned non-array: { detail: [32m'Unauthorized'[39m } (src/app/outreach/page.tsx:17:19)
+[browser] Outreach API returned non-array: { detail: [32m'Unauthorized'[39m } (src/app/outreach/page.tsx:17:19)
+[browser] Outreach API returned non-array: { detail: [32m'Unauthorized'[39m } (src/app/outreach/page.tsx:17:19)
+ GET /databases 200 in 31ms (next.js: 9ms, proxy.ts: 5ms, application-code: 17ms)
+ GET /api/topology 200 in 5ms (next.js: 1502µs, proxy.ts: 1443µs, application-code: 2ms)
+ GET /api/topology 200 in 8ms (next.js: 3ms, proxy.ts: 3ms, application-code: 1353µs)
+ GET /api/topology 200 in 4ms (next.js: 1049µs, proxy.ts: 1353µs, application-code: 1253µs)
+ GET /api/topology 200 in 3ms (next.js: 614µs, proxy.ts: 849µs, application-code: 1060µs)
+ GET /records 200 in 58ms (next.js: 12ms, proxy.ts: 11ms, application-code: 36ms)
+ GET /api/telemetry/schemas 200 in 11ms (next.js: 4ms, proxy.ts: 3ms, application-code: 3ms)
+ GET /api/telemetry/schemas 200 in 5ms (next.js: 1402µs, proxy.ts: 1088µs, application-code: 2ms)
+ GET /databases 200 in 21ms (next.js: 7ms, proxy.ts: 4ms, application-code: 10ms)
+ GET /api/topology 200 in 12ms (next.js: 6ms, proxy.ts: 3ms, application-code: 3ms)
+ GET /api/topology 200 in 5ms (next.js: 2ms, proxy.ts: 1299µs, application-code: 1476µs)
+ GET /api/topology 200 in 4ms (next.js: 1233µs, proxy.ts: 965µs, application-code: 1489µs)
+ GET /api/topology 200 in 4ms (next.js: 1538µs, proxy.ts: 925µs, application-code: 1407µs)

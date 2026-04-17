@@ -1,0 +1,27 @@
+{
+  "nodes": {
+    "macbook_pro": {
+      "ip": "100.102.41.1",
+      "user": "Emmanuel",
+      "pass": "4229",
+      "tools": ["gemini", "gcloud", "wrangler", "node"],
+      "role": "command_anchor"
+    },
+    "gcp_vm": {
+      "ip": "100.73.193.101",
+      "user": "manny",
+      "pass": "google_compute_engine_key",
+      "tools": ["docker", "psql", "gsutil", "fastapi"],
+      "role": "spinal_cord"
+    },
+    "hp_tower": {
+      "ip": "100.121.100.10",
+      "user": "manny",
+      "pass": "administrators_auth_needed",
+      "tools": ["python3", "terminal"],
+      "role": "compute_node"
+    }
+  },
+  "protocol": "APC_MESH_V1",
+  "bus": "https://agent-path-coordinator-sgwnxn6kdq-uc.a.run.app"
+}

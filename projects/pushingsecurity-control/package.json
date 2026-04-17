@@ -15,7 +15,9 @@
     "dev:web": "turbo dev --filter=@pushingcap/pushing-capital-web",
     "build:web": "turbo build --filter=@pushingcap/pushing-capital-web",
     "lint:web": "turbo lint --filter=@pushingcap/pushing-capital-web",
-    "typecheck:web": "turbo typecheck --filter=@pushingcap/pushing-capital-web"
+    "typecheck:web": "turbo typecheck --filter=@pushingcap/pushing-capital-web",
+    "dev:mobile": "turbo dev --filter=@pushingcap/pushing-security-mobile",
+    "build:mobile": "turbo build --filter=@pushingcap/pushing-security-mobile"
   },
   "devDependencies": {
     "turbo": "^2.8.3"
