@@ -11,13 +11,19 @@
     "provision:document-templates": "node --experimental-strip-types scripts/provision-document-templates.ts"
   },
   "dependencies": {
+    "@google-cloud/bigquery": "^8.1.1",
+    "@google-cloud/vision": "^5.3.5",
     "@pushingcap/integrations": "*",
+    "framer-motion": "^12.38.0",
     "googleapis": "^171.4.0",
+    "lucide-react": "^1.8.0",
     "mongodb": "^7.1.1",
     "next": "16.2.1",
+    "puppeteer-core": "^24.41.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "ws": "^8.20.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
