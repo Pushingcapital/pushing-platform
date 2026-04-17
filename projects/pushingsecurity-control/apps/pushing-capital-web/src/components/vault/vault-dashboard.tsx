@@ -1,441 +1,252 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
+
+// --- MiniO Design System Components ---
+
+function LogoMiniO({ size = "md", glow = true }: { size?: "sm" | "md" | "lg", glow?: boolean }) {
+  const dimensions = size === "sm" ? "h-10 w-10" : size === "md" ? "h-20 w-20" : "h-32 w-32";
+  const pSize = size === "sm" ? 20 : size === "md" ? 40 : 80;
+  return (
+    <div className={`relative ${dimensions} flex items-center justify-center`}>
+      <div className={`absolute inset-0 rounded-full border border-white/5`} />
+      <motion.div 
+        animate={glow ? { scale: [1, 1.02, 1], opacity: [0.1, 0.2, 0.1] } : {}}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute inset-0 rounded-full border-[0.5px] border-[#00FFAA]/20 ${glow ? 'shadow-[0_0_30px_rgba(0,255,170,0.1)]' : ''}`}
+      />
+      <div className="relative z-10 flex items-center justify-center">
+        <Image src="/brand/p-glass-mark.png" alt="P" width={pSize} height={pSize} className="opacity-80 brightness-110 grayscale" />
+      </div>
+    </div>
+  );
+}
+
+function IconCurrency() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} className="h-6 w-6">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v10M9 12h6" strokeLinecap="round" />
+      <path d="M10 9.5a2.5 2.5 0 0 1 4 0M10 14.5a2.5 2.5 0 0 0 4 0" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconAutomotive() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} className="h-6 w-6">
+      <path d="M4 11h16M4 15h16M2 13h20M7 8l2-3h6l2 3M5 18h2M17 18h2" strokeLinecap="round" />
+      <rect x="3" y="8" width="18" height="9" rx="1" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconIdentity() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} className="h-6 w-6">
+      <path d="M15 5H9a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 11h10M11 15h2" strokeLinecap="round" />
+      <circle cx="12" cy="8" r="1.5" />
+    </svg>
+  );
+}
+
+function IconLegal() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} className="h-6 w-6">
+      <path d="M3 10h18M7 10l-2 5h4l-2-5M17 10l-2 5h4l-2-5M12 3v18m-5 0h10" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-type VaultCategory = "passwords" | "documents" | "insurance" | "automotive" | "financial";
+type VaultCategory = "financialCore" | "identityVault" | "vehicleHub" | "enterpriseNode";
 
-type VaultItem = {
-  id: string;
-  category: VaultCategory;
-  label: string;
-  detail: string;
-  icon: string;
-  masked?: boolean;
-};
-
-// ── Secure-categories for onboarding ───────────────────────────────────────
+// ── Secure-categories for adaptive display ────────────────────────────────
 
 const SECURE_CATEGORIES = [
-  { key: "passwords", icon: "🔑", label: "Passwords", desc: "Logins & credentials" },
-  { key: "documents", icon: "🪪", label: "IDs & Documents", desc: "License, passport, SSN" },
-  { key: "insurance", icon: "🛡️", label: "Insurance", desc: "Health, auto, home" },
-  { key: "automotive", icon: "🚗", label: "Automotive", desc: "Registration, title, VIN" },
-  { key: "financial", icon: "📊", label: "Financial", desc: "Tax returns, W-2s, 1099s" },
-  { key: "legal", icon: "⚖️", label: "Legal", desc: "Contracts, NDAs, agreements" },
+  { key: "financialCore", icon: <IconCurrency />, label: "financialCore", desc: "Sovereign financial telemetry" },
+  { key: "identityVault", icon: <IconIdentity />, label: "identityVault", desc: "Encrypted credential repository" },
+  { key: "vehicleHub", icon: <IconAutomotive />, label: "vehicleHub", desc: "Automotive VIN orchestration" },
+  { key: "enterpriseNode", icon: <IconLegal />, label: "enterpriseNode", desc: "High-end legal orchestration" },
 ];
 
-const TABS: { key: VaultCategory | "all"; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "passwords", label: "Passwords" },
-  { key: "documents", label: "IDs" },
-  { key: "insurance", label: "Insurance" },
-  { key: "automotive", label: "Auto" },
-  { key: "financial", label: "Finance" },
-];
+function SignalPulse() {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00FFAA] opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00FFAA]"></span>
+      </div>
+      <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#00FFAA]/60">Sovereign_Link_Active</span>
+    </div>
+  );
+}
 
 // ── Component ──────────────────────────────────────────────────────────────
 
 export default function VaultDashboard({ userName }: { userName?: string }) {
   const [started, setStarted] = useState(false);
-  const [vaultItems, setVaultItems] = useState<VaultItem[]>([]);
-  const [filter, setFilter] = useState<VaultCategory | "all">("all");
-  const [revealed, setRevealed] = useState<Set<string>>(new Set());
-  const name = userName || "there";
+  const [logs, setLogs] = useState([
+    "AUTH_SUCCESS: Session established via Sanctuary Gate",
+    "CORE_SYNC: Synchronizing Financial Telemetry...",
+    "SECURE_LINK: Sovereign Hub handshake verified"
+  ]);
+  const router = useRouter();
+  const name = userName || "Manny";
 
-  const items = filter === "all" ? vaultItems : vaultItems.filter((i) => i.category === filter);
-
-  const toggle = (id: string) => {
-    setRevealed((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
-
-  // ── Welcome / Get Started ────────────────────────────────────────────────
-
-  if (!started) {
-    return (
-      <div
-        style={{
-          minHeight: "100vh",
-          backgroundColor: "#0a0f1a",
-          color: "#fff",
-          fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-        }}
-      >
-        {/* Header */}
-        <header
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "14px 20px",
-            borderBottom: "1px solid rgba(255,255,255,0.04)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <Image src="/brand/p-glass-mark.png" alt="P" width={22} height={22} style={{ borderRadius: "5px" }} />
-            <span style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)" }}>
-              pushingSecurity
-            </span>
-          </div>
-        </header>
-
-        <div style={{ maxWidth: "420px", margin: "0 auto", padding: "48px 20px 40px", textAlign: "center" }}>
-          {/* Shield animation */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "80px",
-              height: "80px",
-              borderRadius: "24px",
-              background: "linear-gradient(135deg, rgba(52,211,153,0.15), rgba(6,182,212,0.1))",
-              border: "1px solid rgba(52,211,153,0.2)",
-              fontSize: "36px",
-              marginBottom: "24px",
-              animation: "pulse-shield 2s ease-in-out infinite",
-            }}
-          >
-            🔐
-          </div>
-
-          <h1 style={{ fontSize: "24px", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
-            Welcome{name !== "there" ? `, ${name}` : ""}!
-          </h1>
-          <p style={{ marginTop: "8px", fontSize: "28px", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.2 }}>
-            Let&apos;s secure your data.
-          </p>
-
-          <p style={{ marginTop: "16px", fontSize: "14px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6, maxWidth: "320px", margin: "16px auto 0" }}>
-            Your vault stores passwords, IDs, insurance cards, vehicle docs, and more — all encrypted, all in one place.
-          </p>
-
-          {/* Category preview cards */}
-          <div style={{ marginTop: "32px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", textAlign: "left" }}>
-            {SECURE_CATEGORIES.map((cat) => (
-              <div
-                key={cat.key}
-                style={{
-                  padding: "16px 14px",
-                  borderRadius: "14px",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  backgroundColor: "rgba(255,255,255,0.02)",
-                  transition: "background-color 0.15s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(255,255,255,0.04)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(255,255,255,0.02)";
-                }}
-              >
-                <span style={{ fontSize: "22px" }}>{cat.icon}</span>
-                <p style={{ marginTop: "8px", fontSize: "13px", fontWeight: 600, color: "#fff" }}>{cat.label}</p>
-                <p style={{ marginTop: "2px", fontSize: "11px", color: "rgba(255,255,255,0.3)" }}>{cat.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <button
-            onClick={() => setStarted(true)}
-            type="button"
-            style={{
-              width: "100%",
-              marginTop: "28px",
-              padding: "16px",
-              borderRadius: "9999px",
-              border: "none",
-              background: "linear-gradient(135deg, #34d399, #06b6d4)",
-              color: "#04111d",
-              fontSize: "13px",
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              cursor: "pointer",
-              boxShadow: "0 12px 40px rgba(52,211,153,0.25)",
-              transition: "transform 0.15s, box-shadow 0.15s",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 16px 48px rgba(52,211,153,0.35)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 12px 40px rgba(52,211,153,0.25)";
-            }}
-          >
-            Get Started
-          </button>
-
-          <p style={{ marginTop: "16px", fontSize: "11px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.1em" }}>
-            256-bit encrypted · Zero-knowledge · Your data never leaves your vault
-          </p>
-
-          <style>{`
-            @keyframes pulse-shield {
-              0%, 100% { transform: scale(1); opacity: 1; }
-              50% { transform: scale(1.05); opacity: 0.9; }
-            }
-          `}</style>
-        </div>
-      </div>
-    );
-  }
-
-  // ── Main Vault ───────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (started) {
+      const interval = setInterval(() => {
+        const newLogs = [
+          "HEARTBEAT: Sovereign node 100.102.41.1 verified",
+          "ORCHESTRATION: Re-indexing AES-256 Vault...",
+          "SECURITY: No intrusion detected in past 60s",
+          "DATA_HUB: vehicleHub VIN cross-reference stable",
+          "CLARITY_SYNC: FICO telemetry refresh requested"
+        ];
+        const randomLog = newLogs[Math.floor(Math.random() * newLogs.length)];
+        setLogs(prev => [randomLog, ...prev.slice(0, 4)]);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [started]);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#0a0f1a",
-        color: "#fff",
-        fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-      }}
-    >
-      {/* Header */}
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "12px 20px",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
-          backgroundColor: "rgba(10,15,26,0.92)",
-          backdropFilter: "blur(16px)",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <Image src="/brand/p-glass-mark.png" alt="P" width={24} height={24} style={{ borderRadius: "6px" }} />
-          <span style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
-            pushingSecurity
-          </span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "5px 12px 5px 6px",
-            borderRadius: "9999px",
-            backgroundColor: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.06)",
-          }}
-        >
-          <div
-            style={{
-              width: "22px",
-              height: "22px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #34d399, #06b6d4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "10px",
-              fontWeight: 700,
-              color: "#04111d",
-            }}
-          >
-            {name[0]?.toUpperCase()}
-          </div>
-          <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)" }}>{name}</span>
-        </div>
-      </header>
-
-      {/* Content */}
-      <div style={{ maxWidth: "480px", margin: "0 auto", padding: "24px 16px 100px" }}>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, letterSpacing: "-0.02em" }}>Your Vault</h1>
-        <p style={{ marginTop: "4px", fontSize: "13px", color: "rgba(255,255,255,0.3)" }}>
-          {items.length} item{items.length !== 1 ? "s" : ""} secured
-        </p>
-
-        {/* Tabs */}
-        <div
-          style={{
-            display: "flex",
-            gap: "4px",
-            marginTop: "20px",
-            overflowX: "auto",
-            WebkitOverflowScrolling: "touch",
-            scrollbarWidth: "none",
-            paddingBottom: "2px",
-          }}
-        >
-          {TABS.map((tab) => {
-            const active = filter === tab.key;
-            return (
-              <button
-                key={tab.key}
-                onClick={() => setFilter(tab.key)}
-                type="button"
-                style={{
-                  padding: "7px 14px",
-                  borderRadius: "9999px",
-                  border: active ? "1px solid rgba(52,211,153,0.3)" : "1px solid rgba(255,255,255,0.06)",
-                  backgroundColor: active ? "rgba(52,211,153,0.1)" : "transparent",
-                  color: active ? "#6ee7b7" : "rgba(255,255,255,0.35)",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  transition: "all 0.15s",
-                  flexShrink: 0,
-                }}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Empty state */}
-        {items.length === 0 && (
-          <div style={{ textAlign: "center", padding: "48px 16px" }}>
-            <div style={{ fontSize: "40px", opacity: 0.3, marginBottom: "12px" }}>🔐</div>
-            <p style={{ fontSize: "15px", fontWeight: 500, color: "rgba(255,255,255,0.5)" }}>
-              {filter === "all" ? "Your vault is empty" : `No ${filter} items yet`}
-            </p>
-            <p style={{ marginTop: "6px", fontSize: "12px", color: "rgba(255,255,255,0.25)", lineHeight: 1.5 }}>
-              Add your first item below to start securing your data.
-            </p>
-          </div>
-        )}
-
-        {/* Items */}
-        {items.length > 0 && (
-          <div style={{ marginTop: "16px", display: "grid", gap: "6px" }}>
-            {items.map((item) => {
-              const isRevealed = revealed.has(item.id);
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => item.masked && toggle(item.id)}
-                  role={item.masked ? "button" : undefined}
-                  tabIndex={item.masked ? 0 : undefined}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "14px 16px",
-                    borderRadius: "14px",
-                    border: "1px solid rgba(255,255,255,0.05)",
-                    backgroundColor: "rgba(255,255,255,0.02)",
-                    cursor: item.masked ? "pointer" : "default",
-                    transition: "background-color 0.12s",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(255,255,255,0.04)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(255,255,255,0.02)";
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "10px",
-                      backgroundColor: "rgba(255,255,255,0.04)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "18px",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {item.icon}
-                  </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: "14px", fontWeight: 500, color: "#fff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      {item.label}
-                    </p>
-                    <p style={{ marginTop: "2px", fontSize: "12px", color: "rgba(255,255,255,0.3)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      {item.detail}
-                    </p>
-                  </div>
-                  {item.masked && (
-                    <div style={{ fontSize: "10px", color: isRevealed ? "#6ee7b7" : "rgba(255,255,255,0.2)", letterSpacing: "0.1em", textTransform: "uppercase", flexShrink: 0 }}>
-                      {isRevealed ? "Visible" : "Tap"}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Add button */}
-        <button
-          type="button"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            width: "100%",
-            marginTop: "12px",
-            padding: "14px",
-            borderRadius: "14px",
-            border: "2px dashed rgba(255,255,255,0.06)",
-            backgroundColor: "transparent",
-            color: "rgba(255,255,255,0.25)",
-            fontSize: "13px",
-            cursor: "pointer",
-          }}
-        >
-          + Add to vault
-        </button>
+    <div className="relative min-h-screen bg-[#000000] text-white/70 font-sans selection:bg-[#00FFAA]/20 overflow-hidden flex flex-col items-center">
+      
+      {/* ── UNIFIED VOID ── */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-cyan-950/10 rounded-full blur-[160px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-white/[0.005] rounded-full blur-[140px]" />
       </div>
 
-      {/* Bottom nav */}
-      <nav
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          display: "flex",
-          justifyContent: "space-around",
-          padding: "10px 0 env(safe-area-inset-bottom, 10px)",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          backgroundColor: "rgba(10,15,26,0.95)",
-          backdropFilter: "blur(16px)",
-        }}
-      >
-        {[
-          { icon: "🔐", label: "Vault", href: "/vault", active: true },
-          { icon: "🌐", label: "Browse", href: "/browse", active: false },
-          { icon: "⚙️", label: "Settings", href: "/settings", active: false },
-        ].map((n) => (
-          <a
-            key={n.label}
-            href={n.href}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "4px",
-              color: n.active ? "#6ee7b7" : "rgba(255,255,255,0.25)",
-              fontSize: "18px",
-              textDecoration: "none",
-              padding: "4px 16px",
-            }}
-          >
-            <span>{n.icon}</span>
-            <span style={{ fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase" }}>{n.label}</span>
-          </a>
-        ))}
-      </nav>
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
+        
+        {/* Nav (CamelCase Refinement) */}
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-10">
+          <div className="flex items-center gap-6" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
+            <LogoMiniO size="sm" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/30">pushingSecurity</span>
+          </div>
+          <div className="flex items-center gap-12">
+            <a href="/exit-node" className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/20 transition hover:text-[#00FFAA]">sovereignHub</a>
+            <a href="/vault" className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#00FFAA] transition">vaultAccess</a>
+          </div>
+        </nav>
+
+        {!started ? (
+          /* ── Welcome Area ──────────────────────────────────────────────── */
+          <section className="flex-1 flex flex-col items-center justify-center px-6 pt-32 pb-48 text-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5 }}
+              className="w-full max-w-4xl"
+            >
+              <div className="mb-20 flex justify-center">
+                <LogoMiniO size="lg" />
+              </div>
+
+              <h1 className="text-[clamp(2rem,6vw,4rem)] font-extralight tracking-[0.3em] uppercase text-white leading-tight mb-8">
+                Welcome, {name}
+              </h1>
+              <p className="mx-auto max-w-xl text-[10px] font-light leading-relaxed text-white/20 tracking-[0.4em] uppercase mb-24 italic">
+                Initialize your secure data sanctuary
+              </p>
+
+              {/* Adaptive Categories (CamelCase & Technical Icons) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-20 text-left">
+                {SECURE_CATEGORIES.map((cat) => (
+                  <div key={cat.key} className="p-10 bg-white/[0.01] border border-white/5 rounded-[48px] backdrop-blur-3xl group hover:bg-white/[0.02] transition-all">
+                    <div className="flex justify-between items-start mb-10">
+                      <div className="text-white/20 group-hover:text-[#00FFAA]/60 transition-colors">
+                        {cat.icon}
+                      </div>
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#00FFAA]/40" />
+                    </div>
+                    <h3 className="text-sm font-light tracking-[0.2em] uppercase text-white/80 mb-2">{cat.label}</h3>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/20 leading-relaxed">{cat.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <button 
+                onClick={() => setStarted(true)}
+                className="group text-[10px] font-bold uppercase tracking-[0.6em] text-white/40 hover:text-[#00FFAA] transition-all"
+              >
+                Establish_Secure_Session <span className="transition-transform group-hover:translate-x-2 inline-block">→</span>
+              </button>
+            </motion.div>
+          </section>
+        ) : (
+          /* ── Main Vault Area ─────────────────────────────────────────── */
+          <section className="flex-1 flex flex-col items-center px-6 pt-48 pb-32 w-full max-w-5xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="w-full"
+            >
+               <div className="flex justify-between items-end mb-16 px-4">
+                  <div>
+                    <h2 className="text-4xl font-extralight tracking-[0.3em] uppercase text-white/90 mb-4">vaultAccess</h2>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-white/30 italic">AES-256 Sovereign Repository</p>
+                  </div>
+                  <div className="text-right flex flex-col items-end gap-3">
+                    <SignalPulse />
+                    <span className="text-[8px] font-mono text-white/10 uppercase tracking-[0.4em]">Node // 100.102.41.1</span>
+                  </div>
+               </div>
+
+               {/* Orchestration Log Overlay */}
+               <div className="mb-12 mx-4 p-8 bg-white/[0.01] border border-white/5 rounded-3xl backdrop-blur-md">
+                  <div className="flex items-center gap-4 mb-6 opacity-30">
+                     <div className="h-[1px] flex-1 bg-white/20" />
+                     <span className="text-[8px] font-bold uppercase tracking-[0.4em]">System_Telemetry_Log</span>
+                     <div className="h-[1px] flex-1 bg-white/20" />
+                  </div>
+                  <div className="space-y-3 font-mono text-[9px] tracking-widest">
+                     {logs.map((log, idx) => (
+                       <motion.div 
+                         key={log + idx} 
+                         initial={{ opacity: 0, x: -5 }} 
+                         animate={{ opacity: 1 - (idx * 0.2), x: 0 }} 
+                         className="flex gap-4"
+                       >
+                         <span className="text-[#00FFAA]/40">[{new Date().toLocaleTimeString()}]</span>
+                         <span className={idx === 0 ? "text-white/80" : "text-white/30"}>{log}</span>
+                       </motion.div>
+                     ))}
+                  </div>
+               </div>
+
+               <div className="grid grid-cols-1 gap-4 px-4">
+                  {/* Empty state for demo */}
+                  <div className="p-20 border border-dashed border-white/5 rounded-[56px] flex flex-col items-center justify-center text-center gap-8 bg-white/[0.005]">
+                     <div className="h-12 w-12 rounded-full border border-white/5 flex items-center justify-center opacity-20">
+                        <LogoMiniO size="sm" glow={false} />
+                     </div>
+                     <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">The Vault is currently empty.</span>
+                     <button className="text-[9px] font-bold uppercase tracking-[0.5em] text-[#00FFAA]/60 hover:text-[#00FFAA] transition-colors border border-[#00FFAA]/10 px-8 py-3 rounded-full hover:bg-[#00FFAA]/5">
+                        Add_New_Claim →
+                     </button>
+                  </div>
+               </div>
+            </motion.div>
+          </section>
+        )}
+
+        <footer className="px-12 py-12 flex justify-between items-end opacity-20 border-t border-white/5 mt-auto">
+          <div className="flex flex-col gap-2">
+            <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white/60">pushingSecurity by Pushing Capital LLC</span>
+            <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white/40">Identity // {name.toUpperCase()}_ACTIVE</span>
+          </div>
+          <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white/40">Sovereign Layer V3.9</span>
+        </footer>
+      </div>
     </div>
   );
 }

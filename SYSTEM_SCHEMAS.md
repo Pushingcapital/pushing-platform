@@ -98,6 +98,18 @@ Universal identity and security layer for the Pushing Capital ecosystem.
 
 ---
 
+## 🧊 Intelligence Layer: The Melt Rate Algorithm
+Deployed at: `/api/platform/intelligence/melt-rate`
+
+### Objective
+Dynamically calculate the daily depreciation (Melt Rate) of automotive assets to prioritize swarm actions.
+
+### Data Model
+- **Input:** VIN, Purchase Price, Purchase Date, Mileage, Condition.
+- **Output:** `daily_melt_rate`, `total_depreciation`, `melt_index`, `recommendation`.
+
+---
+
 ## 📊 BigQuery Warehouse: `brain-481809`
 
 The BigQuery warehouse is the durable truth layer. All operational state eventually resolves here.
