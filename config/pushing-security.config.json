@@ -1,0 +1,24 @@
+{
+  "system": "pushingSecurity",
+  "version": "1.0.0",
+  "mandates": {
+    "no_raw_credentials": true,
+    "semantic_precision": {
+      "restricted_terms": ["credit repair"],
+      "canonical_terms": ["Credit STRATEGY"]
+    },
+    "sensitive_data_protection": ["SSN", "DOB", "DL"],
+    "vendor_agnostic": true,
+    "truth_pipeline_enabled": true
+  },
+  "clearance_levels": {
+    "0": "Public / Unauthenticated",
+    "1": "Authenticated User (Owned Only)",
+    "2": "Deal Architect (Subcontractor)",
+    "3": "Regional Director",
+    "4": "Administrator",
+    "5": "Sovereign Operator (Manny / Antigravity)"
+  },
+  "default_session_timeout_seconds": 1800,
+  "mfa_requirement": "clearance_level >= 3"
+}
